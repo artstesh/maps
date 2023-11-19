@@ -1,31 +1,18 @@
 import { NgModule } from '@angular/core';
-import { ChartBarComponent, ChartLineComponent, ChartPlateComponent } from './chart-plate';
 import { CommonModule } from '@angular/common';
-import { XLinearAxisComponent } from './chart-plate/chart-elements/axes';
-import { ChartLegendComponent } from './chart-plate/chart-elements/legend';
 import { DestructibleComponent } from './common/destructible.component';
-import { XCategoryAxisComponent } from './chart-plate/chart-elements/axes/x-category-axis/x-category-axis.component';
-import { XTimelineAxisComponent } from './chart-plate/chart-elements/axes/x-timeline-axis/x-timeline-axis.component';
+import { MapPlateComponent } from './map-plate/map-plate.component';
+import { TileLayerComponent } from './map-plate/layers/tile-layer/tile-layer.component';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    ChartPlateComponent,
-    ChartLineComponent,
-    ChartBarComponent,
-    XLinearAxisComponent,
-    ChartLegendComponent,
     DestructibleComponent,
-    XCategoryAxisComponent,
-    XTimelineAxisComponent,
+    MapPlateComponent,
+    TileLayerComponent,
   ],
   exports: [
-    ChartPlateComponent,
-    ChartLineComponent,
-    ChartBarComponent,
-    XLinearAxisComponent,
-    ChartLegendComponent,
-    XCategoryAxisComponent,
+    MapPlateComponent,
   ],
 })
-export class ChartModule {}
+export class MapModule {}
