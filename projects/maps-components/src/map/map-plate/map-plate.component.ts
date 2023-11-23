@@ -1,112 +1,82 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, NgZone, OnDestroy, OnInit } from "@angular/core";
-import { MapSettings, MapLyrs, MapLyrsLabel } from "../models";
-import { Subscription } from "rxjs";
-import {Group} from "ol/layer";
-import Map from "ol/Map";
-import View from "ol/View";
-import OSM from "ol/source/OSM";
-import {useGeographic} from "ol/proj";
-import TileLayer from "ol/layer/Tile";
-import { DestructibleComponent } from "../common/destructible.component";
-import { TileLayerSettings } from "./layers";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  NgZone,
+  OnInit,
+} from '@angular/core';
+import { MapLyrsLabel, MapSettings } from '../models';
+import { Subscription } from 'rxjs';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import { useGeographic } from 'ol/proj';
+import { DestructibleComponent } from '../common/destructible.component';
+import { MessageRegistratorService } from '../../services/message-registrator.service';
+import { MapPostboyService } from "../../services/map-postboy.service";
+import { MapRenderedEvent } from "../../messages/events/map-rendered.event";
 
 @Component({
   selector: 'lib-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MessageRegistratorService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   _settings: MapSettings = new MapSettings();
+  osmUrl = '';
 
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
     this._settings = value;
-    this.setAxis();
+    this.setOsm();
   }
 
   map!: Map;
-  layerGroup!: Group;
   private activeMapViewSub?: Subscription;
 
-  constructor(
-    private zone: NgZone,
-    private interactManager: OlMapInteractionService,
-    private elementRef: ElementRef
-  ) {
+  constructor(private zone: NgZone, private elementRef: ElementRef,
+              private postboy: MapPostboyService,
+              private detector: ChangeDetectorRef) {
     super();
   }
 
-  private getMainLayerUrl = () =>
-    `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${this._settings.language}&x={x}&y={y}&z={z}`;
+  private setOsm(): void {
+    this.osmUrl = `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
+      this._settings.language
+    }&x={x}&y={y}&z={z}`;
+    this.detector.detectChanges();
+  }
 
   ngOnInit(): void {
     useGeographic();
     this.zone.runOutsideAngular(() => {
-
-      const mainLayer = new TileLayer({
-        source: new OSM({
-          url: this.getMainLayerUrl()
-        }),
-        visible: false
-      });
-
-      this.layerGroup = new Group({
-        layers: [mainLayer]
-      });
-
       this.map = new Map({
         controls: [],
         view: new View({
           center: this._settings?.center || [0, 0],
           zoom: this._settings?.zoom || 4,
           minZoom: this._settings?.minZoom || 0,
-          maxZoom: this._settings?.maxZoom || 19
+          maxZoom: this._settings?.maxZoom || 19,
         }),
-        layers: []
+        layers: [],
       });
     });
 
     this.map.setTarget(this.elementRef.nativeElement);
-    this.map.getLayers().push(this.layerGroup);
 
-    this.map.on('singleclick', e => {
-      this.zone.run(() => {
-        this.interactManager.setMap(this.map);
-        this.interactManager.onClick(e);
-      });
+    this.map.on('singleclick', (e) => {
+      this.zone.run(() => this.service.onClick(e));
     });
-    this.interactManager.setMap(this.map);
     this.map.once('postrender', () => {
       this.map.updateSize();
-      this.interactManager.mapRendered(true);
+      this.postboy.fire(new MapRenderedEvent(this.map));
     });
-    this.activeMapViewSub = this.observeAvtiveMapView();
   }
 
   ngOnDestroy(): void {
     this.activeMapViewSub?.unsubscribe();
-  }
-
-  private observeLanguageChange(): Subscription {
-    return this.translate.onLangChange.subscribe(language => {
-      this.layerGroup.getLayersArray().forEach(layer => {
-        const source = layer.getSource() as OSM;
-        const newUrls = source.getUrls()?.map(url => url.replace(/hl=../, `hl=${this.currentLanguage}`));
-        source.setUrls(newUrls || []);
-      });
-    });
-  }
-
-  private getLanguageCode(lang: string): string {
-    return lang.substr(0, 2);
-  }
-
-  private observeAvtiveMapView(): Subscription {
-    return this.interactManager.activeMapView.subscribe(view => {
-      this.layerGroup.getLayersArray().forEach(layer => {
-        layer.setVisible(layer.get('name') == view);
-      });
-    });
   }
 }
