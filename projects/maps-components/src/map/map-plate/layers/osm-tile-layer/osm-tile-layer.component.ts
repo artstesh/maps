@@ -23,17 +23,19 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
     this.initLayer();
   }
 
+  @Input() set map(value: Map | undefined) {
+    if (!value || this._map === value) return;
+    this._map = value;
+    this.initLayer();
+  }
+
   public layer?: TileLayer<TileSource>;
 
-  constructor(private postboy: MapPostboyService) {
+  constructor() {
     super();
   }
 
   ngOnInit(): void {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
-      this._map = m.map;
-      this.initLayer();
-    });
   }
 
   ngOnDestroy(): void {
@@ -50,8 +52,7 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
     this.layer = new TileLayer({
       source: new OSM({
         url: this._url,
-      }),
-      visible: true,
+      })
     });
     this.layer.set('name', 'osm-tile-layer');
     this._map.addLayer(this.layer);

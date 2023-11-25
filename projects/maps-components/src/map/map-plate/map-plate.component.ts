@@ -36,6 +36,7 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
     this._settings = value;
+    this.setOsm();
   }
 
   map!: Map;
@@ -52,14 +53,8 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.osmUrl = `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
       this._settings.language
     }&x={x}&y={y}&z={z}`;
-    const osmLayer = new TileLayer({
-      source: new OSM({url: this.osmUrl})
-    });
-    osmLayer.set('name', 'osm-tile-layer');
-    this.map.getLayers().push(new Group({
-      layers: [osmLayer]
-    }))
     this.detector.detectChanges();
+    this.map.updateSize();
   }
 
   ngOnInit(): void {
@@ -76,8 +71,8 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
         layers: [],
       });
     });
-
     this.map.setTarget(this.elementRef.nativeElement);
+    this.detector.detectChanges();
     this.map.once('postrender', () => {
       this.map.updateSize();
       this.postboy.fire(new MapRenderedEvent(this.map));

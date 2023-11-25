@@ -4,6 +4,7 @@ import { DestructibleComponent } from './common/destructible.component';
 import { MapPlateComponent } from './map-plate/map-plate.component';
 import { TileLayerComponent } from './map-plate/layers/tile-layer/tile-layer.component';
 import { OsmTileLayerComponent } from './map-plate/layers/osm-tile-layer/osm-tile-layer.component';
+import { FeatureLayerComponent } from './map-plate/layers/feature-layer/feature-layer.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -12,6 +13,7 @@ import { OsmTileLayerComponent } from './map-plate/layers/osm-tile-layer/osm-til
     MapPlateComponent,
     TileLayerComponent,
     OsmTileLayerComponent,
+    FeatureLayerComponent,
   ],
   exports: [
     MapPlateComponent,

@@ -1,13 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MapStateService } from './map-state.service';
+import { instance, mock, reset } from "ts-mockito";
+import { MapPostboyService } from "./map-postboy.service";
 
-describe('MapInteractionServiceService', () => {
+describe('MapStateService', () => {
+  const postboy = mock(MapPostboyService);
   let service: MapStateService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(MapStateService);
+    service = new MapStateService(instance(postboy));
+  });
+
+  afterEach(() => {
+    reset(postboy);
+    expect().nothing();
   });
 
   it('should be created', () => {

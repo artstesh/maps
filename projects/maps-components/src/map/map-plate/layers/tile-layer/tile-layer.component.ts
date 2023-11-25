@@ -52,8 +52,7 @@ export class TileLayerComponent extends DestructibleComponent implements OnInit 
       minZoom: this._settings.minZoom,
       projection: get('EPSG:3857')!,
       tileUrlFunction: this.getTileFunc(),
-      // SIXGB-1359. crossOrigin = Anonymous is needed to convert maps into images for export.
-      // Thanks https://stackoverflow.com/questions/22710627/tainted-canvases-may-not-be-exported/46637963#46637963
+      // https://stackoverflow.com/questions/22710627/tainted-canvases-may-not-be-exported/46637963#46637963
       crossOrigin: 'Anonymous',
     });
     this.layer = new TileLayer({
@@ -85,12 +84,10 @@ export class TileLayerComponent extends DestructibleComponent implements OnInit 
     if (y < 0 || y >= tileRange) {
       return null;
     }
-
     // repeat across x-axis
     if (x < 0 || x >= tileRange) {
       x = ((x % tileRange) + tileRange) % tileRange;
     }
-
     return { x: x, y: y };
   }
 }
