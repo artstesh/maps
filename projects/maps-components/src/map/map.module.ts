@@ -15,7 +15,6 @@ import { OsmTileLayerComponent } from './map-plate/layers/osm-tile-layer/osm-til
   ],
   exports: [
     MapPlateComponent,
-    TileLayerComponent,
   ],
 })
 export class MapModule {}

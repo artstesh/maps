@@ -13,16 +13,21 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import { useGeographic } from 'ol/proj';
 import { DestructibleComponent } from '../common/destructible.component';
-import { MessageRegistratorService } from '../../services/message-registrator.service';
-import { MapPostboyService } from "../../services/map-postboy.service";
-import { MapRenderedEvent } from "../../messages/events/map-rendered.event";
+import { MessageRegistratorService } from "../services/message-registrator.service";
+import { MapPostboyService } from "../services/map-postboy.service";
+import { MapRenderedEvent } from "../messages";
+import { MapStateService } from "../services/map-state.service";
+import { MapManagementService } from "../services/map-management.service";
+import TileLayer from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import { Group } from "ol/layer";
 
 @Component({
   selector: 'lib-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService],
+  providers: [MessageRegistratorService, MapStateService, MapManagementService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   _settings: MapSettings = new MapSettings();
@@ -31,7 +36,6 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
     this._settings = value;
-    this.setOsm();
   }
 
   map!: Map;
@@ -39,6 +43,7 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
 
   constructor(private zone: NgZone, private elementRef: ElementRef,
               private postboy: MapPostboyService,
+              registrator: MessageRegistratorService,
               private detector: ChangeDetectorRef) {
     super();
   }
@@ -47,6 +52,13 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.osmUrl = `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
       this._settings.language
     }&x={x}&y={y}&z={z}`;
+    const osmLayer = new TileLayer({
+      source: new OSM({url: this.osmUrl})
+    });
+    osmLayer.set('name', 'osm-tile-layer');
+    this.map.getLayers().push(new Group({
+      layers: [osmLayer]
+    }))
     this.detector.detectChanges();
   }
 
@@ -66,14 +78,11 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     });
 
     this.map.setTarget(this.elementRef.nativeElement);
-
-    this.map.on('singleclick', (e) => {
-      this.zone.run(() => this.service.onClick(e));
-    });
     this.map.once('postrender', () => {
       this.map.updateSize();
       this.postboy.fire(new MapRenderedEvent(this.map));
     });
+    this.setOsm();
   }
 
   ngOnDestroy(): void {

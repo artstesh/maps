@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Map } from 'ol';
-import { MapPostboyService } from "./map-postboy.service";
 import { MapRenderedEvent } from "../messages";
+import { MapPostboyService } from "./map-postboy.service";
 
 @Injectable()
-export class MapManagementService {
+export class MapStateService {
   map?: Map;
 
   constructor(private postboy: MapPostboyService) {
-    postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => (this.map = m.map));
+    postboy.subscribe<Map>(MapRenderedEvent.ID).subscribe((m) => (this.map = m));
   }
 }

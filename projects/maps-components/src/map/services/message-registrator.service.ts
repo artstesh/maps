@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MapPostboyService } from "./map-postboy.service";
-import { MapRenderedEvent } from "../messages/events/map-rendered.event";
 import { ReplaySubject } from "rxjs";
+import { MapRenderedEvent } from "../messages";
+import { MapStateService } from "./map-state.service";
+import { MapManagementService } from "./map-management.service";
 
 @Injectable()
 export class MessageRegistratorService {

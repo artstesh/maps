@@ -1,6 +1,11 @@
 /*
- * Public API Surface of charts
+ * Public API Surface of maps
  */
 
 export * from './map.module';
 export * from './models/index';
+export * from './map-plate/map-plate.component'
+export * from './services/map-postboy.service'
+export * from './messages/index';
+export * from './services/map-postboy.service'
+export * from './services/message-registrator.service';

@@ -25,10 +25,10 @@
       "./*"
     ],
     "@themes/*": [
-      "src/chart/themes/*"
+      "src/map/themes/*"
     ],
-    "@chart-plate/*": [
-      "chart/chart-plate/*"
+    "@map-plate/*": [
+      "src/map/map-plate/*"
     ],
     "paths": {
       "@angular/*": [ "./node_modules/@angular/*" ]

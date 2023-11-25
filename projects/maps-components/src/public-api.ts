@@ -3,5 +3,3 @@
  */
 
 export * from './map/public-api';
-export * from './services/map-postboy.service'
-export * from './messages/index';

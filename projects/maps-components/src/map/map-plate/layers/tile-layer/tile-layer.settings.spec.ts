@@ -34,16 +34,6 @@ describe('#map-models TileLayerSettings', () => {
     });
   });
 
-  describe('setZoom()', () => {
-    it('success', () => {
-      const expected = Forger.create<number>()!;
-      //
-      model = model.setZoom(expected);
-      //
-      should().true(model.zoom === expected);
-    });
-  });
-
   describe('setName()', () => {
     it('success', () => {
       const expected = Forger.create<string>()!;

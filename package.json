@@ -1,10 +1,10 @@
 {
-  "name": "@artstesh/charts",
+  "name": "@artstesh/maps",
   "version": "1.0.5",
   "author": "artstesh",
   "license": "MIT",
   "description": "Let's draw a map ;)",
-  "homepage": "https://charts.artstesh.ru",
+  "homepage": "https://maps.artstesh.ru",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -36,7 +36,7 @@
   "types": "dist/public-api.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/artstesh/charts.git"
+    "url": "git+https://github.com/artstesh/maps.git"
   },
   "dependencies": {
     "@angular/common": "^12.0.0",
