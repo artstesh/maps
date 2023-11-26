@@ -2,6 +2,7 @@ export class TileLayerSettings {
   name: string = 'tiles';
   maxZoom: number = 19;
   minZoom: number = 0;
+  opacity: number = 1;
   url: string = '';
 
   setUrl(url: string): TileLayerSettings {

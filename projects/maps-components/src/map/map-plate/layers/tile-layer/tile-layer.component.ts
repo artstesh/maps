@@ -22,8 +22,6 @@ export class TileLayerComponent extends DestructibleComponent implements OnInit 
     this._settings = value;
     this.initLayer();
   }
-
-  private _opacity = 1;
   public source?: XYZ;
   public layer?: TileLayer<TileSource>;
 
@@ -58,7 +56,7 @@ export class TileLayerComponent extends DestructibleComponent implements OnInit 
     this.layer = new TileLayer({
       preload: 0,
       source: this.source,
-      opacity: (this._opacity = null ? 1 : this._opacity),
+      opacity: this._settings.opacity,
     });
     this.layer.set('name', this._settings.name);
     this.parent.map.addLayer(this.layer);

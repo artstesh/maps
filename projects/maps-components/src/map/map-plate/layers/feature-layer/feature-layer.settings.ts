@@ -1,5 +1,5 @@
-import Style, { StyleFunction } from "ol/style/Style";
-import { IdGenerator } from "../../../common/id.generator";
+import Style, { StyleFunction } from 'ol/style/Style';
+import { IdGenerator } from '../../../common/id.generator';
 
 export class FeatureLayerSettings {
   name: string = IdGenerator.get();
