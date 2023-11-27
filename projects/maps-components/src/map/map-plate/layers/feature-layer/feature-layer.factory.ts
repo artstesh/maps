@@ -3,12 +3,14 @@ import { FeatureLayerSettings } from "./feature-layer.settings";
 import BaseLayer from "ol/layer/Base";
 import { Vector as Source } from "ol/source";
 import { Vector as Layer } from "ol/layer";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureLayerFactory {
-  public build(settings: FeatureLayerSettings): BaseLayer {
+  public build(settings: FeatureLayerSettings): VectorLayer<VectorSource<any>> {
     const source = new Source({});
     const layer = new Layer({
       source: source,

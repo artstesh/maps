@@ -21,16 +21,18 @@ import { MapManagementService } from "../services/map-management.service";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import { Group } from "ol/layer";
+import { ServiceCollector } from "../services/service.collector";
 
 @Component({
   selector: 'lib-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService, MapStateService, MapManagementService],
+  providers: [MessageRegistratorService, MapStateService, MapManagementService,ServiceCollector],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   _settings: MapSettings = new MapSettings();
+  map!: Map;
   osmUrl = '';
 
   @Input() set settings(value: MapSettings | undefined) {
@@ -39,12 +41,9 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.setOsm();
   }
 
-  map!: Map;
-  private activeMapViewSub?: Subscription;
-
   constructor(private zone: NgZone, private elementRef: ElementRef,
               private postboy: MapPostboyService,
-              registrator: MessageRegistratorService,
+              registrator: ServiceCollector,
               private detector: ChangeDetectorRef) {
     super();
   }
@@ -78,9 +77,5 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
       this.postboy.fire(new MapRenderedEvent(this.map));
     });
     this.setOsm();
-  }
-
-  ngOnDestroy(): void {
-    this.activeMapViewSub?.unsubscribe();
   }
 }
