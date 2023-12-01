@@ -8,6 +8,17 @@ export class MapSettings {
   lyrs: MapLyrs = MapLyrs.Hybrid;
   language = 'en';
 
+  public static copy(model: MapSettings): MapSettings {
+    const result = new MapSettings();
+    result.center = model.center;
+    result.maxZoom = model.maxZoom;
+    result.minZoom = model.minZoom;
+    result.zoom = model.zoom;
+    result.lyrs = model.lyrs;
+    result.language = model.language;
+    return result;
+  }
+
   setCenter(center: number[]): MapSettings {
     return MapSettings.copy({ ...this, center });
   }
@@ -38,18 +49,6 @@ export class MapSettings {
     if (this.zoom !== model.zoom) return false;
     if (this.lyrs !== model.lyrs) return false;
     if (this.language !== model.language) return false;
-    return this.center.length !== model.center.length
-      || !!this.center.filter((c, i) => c !== model.center[i]);
-  }
-
-  public static copy(model: MapSettings): MapSettings {
-    const result = new MapSettings();
-    result.center = model.center;
-    result.maxZoom = model.maxZoom;
-    result.minZoom = model.minZoom;
-    result.zoom = model.zoom;
-    result.lyrs = model.lyrs;
-    result.language = model.language;
-    return result;
+    return this.center.length !== model.center.length || !!this.center.filter((c, i) => c !== model.center[i]);
   }
 }

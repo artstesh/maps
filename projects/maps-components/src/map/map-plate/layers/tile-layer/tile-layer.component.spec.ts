@@ -8,9 +8,8 @@ describe('TileLayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TileLayerComponent ]
-    })
-    .compileComponents();
+      declarations: [TileLayerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

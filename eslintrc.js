@@ -12,9 +12,9 @@ module.exports = {
       },
       extends: [
         "plugin:@angular-eslint/recommended",
-        'airbnb-typescript/base',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended'
+        "airbnb-typescript/base",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
       ],
       rules: {
         ...
@@ -32,16 +32,16 @@ module.exports = {
       extends: ["plugin:@angular-eslint/template/process-inline-templates"]
     },
     {
-      files: ['src/**/*.spec.ts', 'src/**/*.d.ts'],
+      files: ["src/**/*.spec.ts", "src/**/*.d.ts"],
       parserOptions: {
-        project: './src/tsconfig.spec.json',
+        project: "./src/tsconfig.spec.json"
       },
-      extends: ['plugin:jasmine/recommended'],
-      plugins: ['jasmine'],
+      extends: ["plugin:jasmine/recommended"],
+      plugins: ["jasmine"],
       env: { jasmine: true },
       rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
+        "@typescript-eslint/no-unused-vars": "off"
+      }
     }
   ]
-}
+};

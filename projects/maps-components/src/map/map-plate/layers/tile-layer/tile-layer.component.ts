@@ -15,18 +15,19 @@ import { TileLayerSettings } from './tile-layer.settings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TileLayerComponent extends DestructibleComponent implements OnInit {
+  public source?: XYZ;
+  public layer?: TileLayer<TileSource>;
+
+  constructor(private parent: MapPlateComponent, private detector: ChangeDetectorRef) {
+    super();
+  }
+
   _settings: TileLayerSettings = new TileLayerSettings();
 
   @Input() set settings(value: TileLayerSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
     this._settings = value;
     this.initLayer();
-  }
-  public source?: XYZ;
-  public layer?: TileLayer<TileSource>;
-
-  constructor(private parent: MapPlateComponent, private detector: ChangeDetectorRef) {
-    super();
   }
 
   ngOnInit(): void {

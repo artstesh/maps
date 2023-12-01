@@ -5,6 +5,15 @@ export class TileLayerSettings {
   opacity: number = 1;
   url: string = '';
 
+  public static copy(model: TileLayerSettings): TileLayerSettings {
+    const result = new TileLayerSettings();
+    result.name = model.name;
+    result.maxZoom = model.maxZoom;
+    result.minZoom = model.minZoom;
+    result.url = model.url;
+    return result;
+  }
+
   setUrl(url: string): TileLayerSettings {
     return TileLayerSettings.copy({ ...this, url });
   }
@@ -27,14 +36,5 @@ export class TileLayerSettings {
     if (this.url !== model.url) return false;
     if (this.name !== model.name) return false;
     return true;
-  }
-
-  public static copy(model: TileLayerSettings): TileLayerSettings {
-    const result = new TileLayerSettings();
-    result.name = model.name;
-    result.maxZoom = model.maxZoom;
-    result.minZoom = model.minZoom;
-    result.url = model.url;
-    return result;
   }
 }

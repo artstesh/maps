@@ -1,10 +1,10 @@
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject } from 'rxjs';
 
 export abstract class GenericMessage {
   public abstract id: string;
 }
 
-export abstract class CallbackMessage<T> extends GenericMessage{
+export abstract class CallbackMessage<T> extends GenericMessage {
   protected result$ = new Subject<T>();
   public result: Observable<T> = this.result$.asObservable();
 

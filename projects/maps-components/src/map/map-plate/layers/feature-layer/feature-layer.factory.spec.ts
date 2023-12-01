@@ -1,8 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { FeatureLayerFactory } from "./feature-layer.factory";
+import { FeatureLayerFactory } from './feature-layer.factory';
 
 describe('FeatureLayerFactory', () => {
-  let service:FeatureLayerFactory;
+  let service: FeatureLayerFactory;
 
   beforeEach(() => {
     service = new FeatureLayerFactory();

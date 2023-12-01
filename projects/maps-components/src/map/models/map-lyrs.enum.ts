@@ -1,19 +1,16 @@
-
 export enum MapLyrs {
   Hybrid = 1,
   Satellite,
   Streets,
-  Terrain
+  Terrain,
 }
-
-
 
 export class MapLyrsLabel {
   private static lyrs = {
     [MapLyrs.Hybrid]: 's,h',
     [MapLyrs.Satellite]: 's',
     [MapLyrs.Streets]: 'm',
-    [MapLyrs.Terrain]: 'p'
+    [MapLyrs.Terrain]: 'p',
   };
 
   public static get(lyrs: MapLyrs): string {

@@ -17,8 +17,6 @@ import { MarkersComponent } from './map-plate/features/markers/markers.component
     FeatureLayerComponent,
     MarkersComponent,
   ],
-  exports: [
-    MapPlateComponent,
-  ],
+  exports: [MapPlateComponent, FeatureLayerComponent, MarkersComponent],
 })
 export class MapModule {}

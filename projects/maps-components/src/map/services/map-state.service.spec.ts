@@ -1,8 +1,6 @@
-import { TestBed } from '@angular/core/testing';
-
 import { MapStateService } from './map-state.service';
-import { instance, mock, reset } from "ts-mockito";
-import { MapPostboyService } from "./map-postboy.service";
+import { instance, mock, reset } from 'ts-mockito';
+import { MapPostboyService } from './map-postboy.service';
 
 describe('MapStateService', () => {
   const postboy = mock(MapPostboyService);

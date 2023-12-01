@@ -8,9 +8,8 @@ describe('OsmTileLayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OsmTileLayerComponent ]
-    })
-    .compileComponents();
+      declarations: [OsmTileLayerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

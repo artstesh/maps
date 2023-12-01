@@ -1,6 +1,6 @@
 import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
-import { TileLayerSettings } from "./tile-layer.settings";
+import { TileLayerSettings } from './tile-layer.settings';
 
 describe('#map-models TileLayerSettings', () => {
   let model: TileLayerSettings;

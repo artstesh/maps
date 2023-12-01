@@ -4,8 +4,6 @@ import TileLayer from 'ol/layer/Tile';
 import TileSource from 'ol/source/Tile';
 import OSM from 'ol/source/OSM';
 import { Map } from 'ol';
-import { MapRenderedEvent } from "../../../messages";
-import { MapPostboyService } from "../../../services/map-postboy.service";
 
 @Component({
   selector: 'lib-osm-tile-layer',
@@ -14,8 +12,13 @@ import { MapPostboyService } from "../../../services/map-postboy.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OsmTileLayerComponent extends DestructibleComponent implements OnInit {
+  public layer?: TileLayer<TileSource>;
+
+  constructor() {
+    super();
+  }
+
   private _url: string = '';
-  private _map?: Map;
 
   @Input() set url(value: string | undefined) {
     if (!value || this._url === value) return;
@@ -23,20 +26,15 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
     this.initLayer();
   }
 
+  private _map?: Map;
+
   @Input() set map(value: Map | undefined) {
     if (!value || this._map === value) return;
     this._map = value;
     this.initLayer();
   }
 
-  public layer?: TileLayer<TileSource>;
-
-  constructor() {
-    super();
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     if (this.layer) {
@@ -52,7 +50,7 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
     this.layer = new TileLayer({
       source: new OSM({
         url: this._url,
-      })
+      }),
     });
     this.layer.set('name', 'osm-tile-layer');
     this._map.addLayer(this.layer);
