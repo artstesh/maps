@@ -1,17 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { MapPlateComponent } from '../../map-plate.component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DestructibleComponent } from '../../../common/destructible.component';
 import { XYZ } from 'ol/source';
-import { get } from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
-import { TileCoord } from 'ol/tilecoord';
 import TileSource from 'ol/source/Tile';
-import { TileLayerSettings } from './tile-layer.settings';
-import { MapPostboyService } from "../../../services/map-postboy.service";
-import { FeatureLayerFactory } from "../feature-layer/feature-layer.factory";
-import { MapRenderedEvent } from "../../../messages";
-import { filter, first } from "rxjs/operators";
-import { AddLayerCommand } from "../../../messages/commands/add-layer.command";
 
 @Component({
   selector: 'lib-tile-layer',

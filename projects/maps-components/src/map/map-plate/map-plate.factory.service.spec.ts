@@ -37,8 +37,8 @@ describe('MapPlateFactory', () => {
     });
 
     it('center is correct', () => {
-      should().number(map!.getView().getCenter()![0]).approximately(settings.center[0],.001);
-      should().number(map!.getView().getCenter()![1]).approximately(settings.center[1],.001);
+      should().number(map!.getView().getCenter()![0]).approximately(settings.center[0], 0.001);
+      should().number(map!.getView().getCenter()![1]).approximately(settings.center[1], 0.001);
     });
 
     it('minZoom is correct', () => {

@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 
 import { MapPlateComponent } from './map-plate.component';
-import { anything, instance, mock, reset, when } from "ts-mockito";
-import Map from "ol/Map";
-import { MockBuilder, MockProvider, MockRender } from "ng-mocks";
-import { ElementRef } from "@angular/core";
-import { MapModule } from "../map.module";
-import { MapPostboyService } from "../services/map-postboy.service";
-import { MapPlateFactory } from "./map-plate.factory.service";
-import { ServiceCollector } from "../services/service.collector";
+import { anything, instance, mock, reset, when } from 'ts-mockito';
+import Map from 'ol/Map';
+import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { ElementRef } from '@angular/core';
+import { MapModule } from '../map.module';
+import { MapPostboyService } from '../services/map-postboy.service';
+import { MapPlateFactory } from './map-plate.factory.service';
+import { ServiceCollector } from '../services/service.collector';
 
 describe('MapPlateComponent', () => {
   let fixture: ComponentFixture<MapPlateComponent>;

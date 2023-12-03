@@ -4,7 +4,7 @@ import { MapManagementService } from './map-management.service';
 import { anything, instance, mock, reset, verify, when } from 'ts-mockito';
 import { MapPostboyService } from './map-postboy.service';
 import Map from 'ol/Map';
-import { ReplaySubject, Subject } from "rxjs";
+import { ReplaySubject, Subject } from 'rxjs';
 import { MapRenderedEvent } from '../messages';
 import { Vector as Source } from 'ol/source';
 import { Vector as Layer } from 'ol/layer';
@@ -41,7 +41,7 @@ describe('MapManagementService', () => {
     const layer = mock(Layer);
     const source = mock(Source);
     let layerName: string;
-    let clearEvent$:Subject<ClearLayerCommand>;
+    let clearEvent$: Subject<ClearLayerCommand>;
     let addLayerEvent$: Subject<AddLayerCommand>;
 
     beforeEach(() => {
