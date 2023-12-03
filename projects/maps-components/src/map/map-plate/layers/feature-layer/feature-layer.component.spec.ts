@@ -13,16 +13,17 @@ import { Vector as Layer } from 'ol/layer';
 import { should } from '@artstesh/it-should';
 import { FeatureLayerSettings } from './feature-layer.settings';
 import { Forger } from '@artstesh/forger';
-import { RemoveLayerCommand } from "../../../messages/commands/remove-layer.command";
+import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.command';
 
 describe('FeatureLayerComponent', () => {
   const layer = mock(Layer);
   let fixture: ComponentFixture<FeatureLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(FeatureLayerFactory);
-  let mapRendered$ = new Subject<MapRenderedEvent>();
+  let mapRendered$: Subject<MapRenderedEvent>;
 
   beforeEach(async () => {
+    mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything())).thenReturn(instance(layer));
     return MockBuilder(FeatureLayerComponent, MapModule)
@@ -59,7 +60,7 @@ describe('FeatureLayerComponent', () => {
       fixture.detectChanges();
     });
 
-    afterEach(() =>{
+    afterEach(() => {
       reset(otherLayer);
     });
 

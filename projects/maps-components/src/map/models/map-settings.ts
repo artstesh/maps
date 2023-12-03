@@ -6,7 +6,7 @@ export class MapSettings {
   minZoom: number = 0;
   zoom: number = 4;
   lyrs: MapLyrs = MapLyrs.Hybrid;
-  language = 'en';
+  language: string = 'en';
 
   public static copy(model: MapSettings): MapSettings {
     const result = new MapSettings();

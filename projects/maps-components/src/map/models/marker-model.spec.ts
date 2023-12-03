@@ -1,8 +1,7 @@
 import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
-import { MapLyrs } from './map-lyrs.enum';
-import { MarkerModel } from "./marker-model";
-import { Point } from "ol/geom";
+import { MarkerModel } from './marker-model';
+import { Point } from 'ol/geom';
 
 describe('#map-models MarkerModel', () => {
   let model: MarkerModel;
@@ -19,7 +18,6 @@ describe('#map-models MarkerModel', () => {
   });
 
   describe('creation', () => {
-
     it('lat is correct', () => {
       //
       should().number(model.lat).equals(lat);
@@ -32,19 +30,22 @@ describe('#map-models MarkerModel', () => {
 
     it('id is generated', () => {
       //
-      should().string(model.id as string).not.empty();
+      should()
+        .string(model.id as string)
+        .not.empty();
     });
 
     it('id is correct', () => {
       const expected = Forger.create<string>()!;
       const unit = new MarkerModel(model.lat, model.lng, expected);
       //
-      should().string(unit.id as string).equals(expected);
+      should()
+        .string(unit.id as string)
+        .equals(expected);
     });
   });
 
   describe('feature()', () => {
-
     it('feature is defined', () => {
       //
       should().true(model.feature);
@@ -52,7 +53,9 @@ describe('#map-models MarkerModel', () => {
 
     it('id is correct', () => {
       //
-      should().string(model.feature.getId() as string).equals(model.id as string);
+      should()
+        .string(model.feature.getId() as string)
+        .equals(model.id as string);
     });
 
     it('coordinates are correct', () => {
@@ -63,7 +66,7 @@ describe('#map-models MarkerModel', () => {
     });
 
     it('info is correct', () => {
-      const expected = Forger.create<{f1: number, f2: string}>()!;
+      const expected = Forger.create<{ f1: number; f2: string }>()!;
       const unit = new MarkerModel(model.lat, model.lng, model.id, expected);
       //
       should().number(unit.feature.get('f1')).equals(expected.f1);

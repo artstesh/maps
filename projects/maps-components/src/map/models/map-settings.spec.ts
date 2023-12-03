@@ -60,7 +60,7 @@ describe('#map-models MapSettings', () => {
       //
       model = model.setLyrs(expected);
       //
-      should().true(model.zoom === expected);
+      should().true(model.lyrs === expected);
     });
   });
 
@@ -76,11 +76,8 @@ describe('#map-models MapSettings', () => {
 
   describe('copy()', () => {
     it('success', () => {
-      const other = MapSettings.copy(model);
-      console.log(model);
-      console.log(other);
       //
-      should().objects(model, other).equal();
+      should().objects(model, MapSettings.copy(model)).equal();
     });
   });
 

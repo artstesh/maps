@@ -1,15 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  NgZone,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
 import Map from 'ol/Map';
-import View from 'ol/View';
 import { useGeographic } from 'ol/proj';
 import { DestructibleComponent } from '../common/destructible.component';
 import { MessageRegistratorService } from '../services/message-registrator.service';
@@ -18,7 +9,7 @@ import { MapRenderedEvent } from '../messages';
 import { MapStateService } from '../services/map-state.service';
 import { MapManagementService } from '../services/map-management.service';
 import { ServiceCollector } from '../services/service.collector';
-import { MapPlateFactory } from "./map-plate.factory.service";
+import { MapPlateFactory } from './map-plate.factory.service';
 
 @Component({
   selector: 'lib-map-plate',

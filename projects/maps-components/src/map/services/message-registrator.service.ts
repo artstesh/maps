@@ -4,8 +4,8 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { MapRenderedEvent } from '../messages';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
-import { RemoveLayerCommand } from "../messages/commands/remove-layer.command";
-import { ClearLayerCommand } from "../messages/commands/clear-layer.command";
+import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
+import { ClearLayerCommand } from '../messages/commands/clear-layer.command';
 
 @Injectable()
 export class MessageRegistratorService {

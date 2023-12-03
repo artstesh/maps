@@ -6,7 +6,7 @@ import { Vector as Layer } from 'ol/layer';
 import { FeatureLayerSettings } from './feature-layer.settings';
 import { DestructibleComponent } from '../../../common/destructible.component';
 import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
-import { filter, first } from "rxjs/operators";
+import { filter, first } from 'rxjs/operators';
 import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.command';
 import { FeatureLayerFactory } from './feature-layer.factory';
 
@@ -23,7 +23,10 @@ export class FeatureLayerComponent extends DestructibleComponent {
     super();
     postboy
       .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
-      .pipe(filter(m => !!m),first())
+      .pipe(
+        filter((m) => !!m),
+        first(),
+      )
       .subscribe((m) => this.initLayer());
   }
 

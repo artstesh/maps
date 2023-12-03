@@ -36,9 +36,7 @@ export class MapManagementService {
 
   private observeAddLayer() {
     this.postboy.subscribe<AddLayerCommand>(AddLayerCommand.ID).subscribe((c) => {
-      console.log('dddd');
       if (!this.map) return;
-      console.log('aaaaaaaaa');
       this.layers[c.layer.get('name')] = c.layer;
       this.map.addLayer(c.layer);
     });

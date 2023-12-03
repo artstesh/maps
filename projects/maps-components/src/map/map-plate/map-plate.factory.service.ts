@@ -1,13 +1,12 @@
-import { Injectable, NgZone } from "@angular/core";
+import { Injectable } from '@angular/core';
 import Map from 'ol/Map';
-import { MapSettings } from "../models";
-import View from "ol/View";
+import { MapSettings } from '../models';
+import View from 'ol/View';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class MapPlateFactory{
-
+export class MapPlateFactory {
   public build(settings: MapSettings): Map {
     return new Map({
       controls: [],

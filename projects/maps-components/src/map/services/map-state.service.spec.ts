@@ -1,9 +1,9 @@
 import { MapStateService } from './map-state.service';
-import { instance, mock, reset, when } from "ts-mockito";
+import { instance, mock, reset, when } from 'ts-mockito';
 import { MapPostboyService } from './map-postboy.service';
 import Map from 'ol/Map';
-import { Subject, Subscription } from "rxjs";
-import { MapRenderedEvent } from "../messages";
+import { Subject } from 'rxjs';
+import { MapRenderedEvent } from '../messages';
 
 describe('MapStateService', () => {
   const postboy = mock(MapPostboyService);

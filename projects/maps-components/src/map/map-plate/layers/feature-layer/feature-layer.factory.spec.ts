@@ -1,9 +1,9 @@
 import { FeatureLayerFactory } from './feature-layer.factory';
-import { FeatureLayerSettings } from "./feature-layer.settings";
-import { Forger } from "@artstesh/forger";
+import { FeatureLayerSettings } from './feature-layer.settings';
+import { Forger } from '@artstesh/forger';
 import { Vector as Layer } from 'ol/layer';
-import { should } from "@artstesh/it-should";
-import Style from "ol/style/Style";
+import { should } from '@artstesh/it-should';
+import Style from 'ol/style/Style';
 
 describe('FeatureLayerFactory', () => {
   let service: FeatureLayerFactory;
@@ -17,7 +17,7 @@ describe('FeatureLayerFactory', () => {
     layer = service.build(settings);
   });
 
-  afterEach(() =>{
+  afterEach(() => {
     expect().nothing();
   });
 
