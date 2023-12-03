@@ -8,7 +8,6 @@ describe('#map-models FeatureLayerSettings', () => {
 
   beforeEach(() => {
     model = FeatureLayerSettings.copy(Forger.create<FeatureLayerSettings>()!);
-    console.log(model);
   });
 
   afterEach(() => {

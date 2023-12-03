@@ -7,7 +7,6 @@ describe('#map-models TileLayerSettings', () => {
 
   beforeEach(() => {
     model = TileLayerSettings.copy(Forger.create<TileLayerSettings>()!);
-    console.log(model);
   });
 
   afterEach(() => {

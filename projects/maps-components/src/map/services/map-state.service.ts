@@ -5,7 +5,7 @@ import { MapPostboyService } from './map-postboy.service';
 
 @Injectable()
 export class MapStateService {
-  map?: Map;
+  private map?: Map;
 
   constructor(private postboy: MapPostboyService) {
     postboy.subscribe<Map>(MapRenderedEvent.ID).subscribe((m) => (this.map = m));

@@ -30,7 +30,6 @@ export class MarkersComponent extends DestructibleComponent implements OnInit{
 
   private putMarkers(): void {
     if (!this._markers?.length) return;
-    console.log(this._markers);
     this.postboy.fire(
       new PlaceLayerFeaturesCommand(
         this.layerName,

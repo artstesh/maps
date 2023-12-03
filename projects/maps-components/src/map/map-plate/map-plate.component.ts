@@ -18,6 +18,7 @@ import { MapRenderedEvent } from '../messages';
 import { MapStateService } from '../services/map-state.service';
 import { MapManagementService } from '../services/map-management.service';
 import { ServiceCollector } from '../services/service.collector';
+import { MapPlateFactory } from "./map-plate.factory.service";
 
 @Component({
   selector: 'lib-map-plate',
@@ -31,9 +32,9 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   osmUrl = '';
 
   constructor(
-    private zone: NgZone,
     private elementRef: ElementRef,
     private postboy: MapPostboyService,
+    private mapFactory: MapPlateFactory,
     registrator: ServiceCollector,
     private detector: ChangeDetectorRef,
   ) {
@@ -50,18 +51,7 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
 
   ngOnInit(): void {
     useGeographic();
-    this.zone.runOutsideAngular(() => {
-      this.map = new Map({
-        controls: [],
-        view: new View({
-          center: this._settings?.center || [0, 0],
-          zoom: this._settings?.zoom || 4,
-          minZoom: this._settings?.minZoom || 0,
-          maxZoom: this._settings?.maxZoom || 19,
-        }),
-        layers: [],
-      });
-    });
+    this.map = this.mapFactory.build(this._settings);
     this.map.setTarget(this.elementRef.nativeElement);
     this.detector.detectChanges();
     this.map.once('postrender', () => {

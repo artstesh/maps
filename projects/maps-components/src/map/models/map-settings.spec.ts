@@ -8,7 +8,6 @@ describe('#map-models MapSettings', () => {
 
   beforeEach(() => {
     model = MapSettings.copy(Forger.create<MapSettings>()!);
-    console.log(model);
   });
 
   afterEach(() => {
@@ -78,6 +77,8 @@ describe('#map-models MapSettings', () => {
   describe('copy()', () => {
     it('success', () => {
       const other = MapSettings.copy(model);
+      console.log(model);
+      console.log(other);
       //
       should().objects(model, other).equal();
     });

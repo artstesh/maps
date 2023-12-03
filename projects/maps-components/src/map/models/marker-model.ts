@@ -1,18 +1,17 @@
 import { IdGenerator } from '../common/id.generator';
 import { Feature } from 'ol';
 import { Geometry, Point } from "ol/geom";
-import { WKT } from 'ol/format';
 
 export class MarkerModel {
   constructor(
-    public lat: number,
-    public lng: number,
-    public id?: string | number,
+    public readonly lat: number,
+    public readonly lng: number,
+    public readonly id?: string | number,
     public info?: {
       [id: string]: any;
     },
   ) {
-    if (!id) this.id = IdGenerator.get();
+    if (id == null) this.id = IdGenerator.get();
     this._feature = this.getFeature();
   }
 

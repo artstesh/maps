@@ -39,7 +39,8 @@ export class FeatureLayerComponent extends DestructibleComponent {
 
   private initLayer() {
     this.removeLayer();
-    this.postboy.fire(new AddLayerCommand(this.factory.build(this._settings)));
+    this.layer = this.factory.build(this._settings);
+    this.postboy.fire(new AddLayerCommand(this.layer));
   }
 
   private removeLayer() {
