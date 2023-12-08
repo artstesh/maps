@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { MapRenderedEvent } from '../../../messages';
 import VectorSource from 'ol/source/Vector';
@@ -16,12 +16,15 @@ import { FeatureLayerFactory } from './feature-layer.factory';
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeatureLayerComponent extends DestructibleComponent {
+export class FeatureLayerComponent extends DestructibleComponent implements OnInit {
   public layer: Layer<VectorSource<any>> | null = null;
 
   constructor(private postboy: MapPostboyService, private factory: FeatureLayerFactory) {
     super();
-    postboy
+  }
+
+  ngOnInit(): void {
+    this.postboy
       .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
       .pipe(
         filter((m) => !!m),
