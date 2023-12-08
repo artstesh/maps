@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { MapRenderedEvent } from '../../../messages';
 import VectorSource from 'ol/source/Vector';
