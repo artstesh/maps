@@ -11,12 +11,12 @@ import { Vector as Layer } from 'ol/layer';
 import { should } from '@artstesh/it-should';
 import { Forger } from '@artstesh/forger';
 import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.command';
-import { TileLayerFactory } from "./tile-layer.factory";
-import TileLayer from "ol/layer/Tile";
-import { AddTileCommand } from "../../../messages/commands/add-tile.command";
-import { TileLayerSettings } from "./tile-layer.settings";
-import { TileLayerComponent } from "./tile-layer.component";
-import { RemoveTileCommand } from "../../../messages/commands/remove-tile.command";
+import { TileLayerFactory } from './tile-layer.factory';
+import TileLayer from 'ol/layer/Tile';
+import { AddTileCommand } from '../../../messages/commands/add-tile.command';
+import { TileLayerSettings } from './tile-layer.settings';
+import { TileLayerComponent } from './tile-layer.component';
+import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
 
 describe('TileLayerComponent', () => {
   const layer = mock(TileLayer);
