@@ -7,7 +7,8 @@ import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import { MapRenderedEvent } from '../messages';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
-import { ClearLayerCommand } from '../messages/commands/clear-layer.command';
+import { AddTileCommand } from '../messages/commands/add-tile.command';
+import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
 
 @Injectable()
 export class MapManagementService {
@@ -19,18 +20,27 @@ export class MapManagementService {
     this.observeAddLayer();
     this.observeRemoveLayer();
     this.observePlaceFeatures();
-    this.observeClearLayer();
+    this.observeAddTile();
+    this.observeRemoveTile();
+  }
+
+  private observeRemoveTile() {
+    this.postboy.subscribe<RemoveTileCommand>(RemoveTileCommand.ID).subscribe((c) => {
+      if (!this.map) return;
+      this.map.removeLayer(c.layer);
+    });
+  }
+
+  private observeAddTile() {
+    this.postboy.subscribe<AddTileCommand>(AddTileCommand.ID).subscribe((c) => {
+      if (!this.map) return;
+      this.map.addLayer(c.layer);
+    });
   }
 
   private observeMapRender() {
     this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
       this.map = m.map;
-    });
-  }
-
-  private observeClearLayer() {
-    this.postboy.subscribe<ClearLayerCommand>(ClearLayerCommand.ID).subscribe((c) => {
-      this.layers[c.layer]?.getSource()?.clear();
     });
   }
 
