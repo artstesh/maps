@@ -9,9 +9,7 @@ import { MapRenderedEvent } from '../messages';
 import { Vector as Source } from 'ol/source';
 import { Vector as Layer } from 'ol/layer';
 import { Forger } from '@artstesh/forger';
-import { ClearLayerCommand } from '../messages/commands/clear-layer.command';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
-import { should } from '@artstesh/it-should';
 
 describe('MapManagementService', () => {
   const postboy = mock(MapPostboyService);
@@ -41,15 +39,12 @@ describe('MapManagementService', () => {
     const layer = mock(Layer);
     const source = mock(Source);
     let layerName: string;
-    let clearEvent$: Subject<ClearLayerCommand>;
     let addLayerEvent$: Subject<AddLayerCommand>;
 
     beforeEach(() => {
       layerName = Forger.create<string>()!;
-      clearEvent$ = new Subject<ClearLayerCommand>();
       addLayerEvent$ = new Subject<AddLayerCommand>();
       when(layer.get('name')).thenReturn(layerName);
-      when(postboy.subscribe<ClearLayerCommand>(ClearLayerCommand.ID)).thenReturn(clearEvent$.asObservable());
       when(postboy.subscribe<AddLayerCommand>(AddLayerCommand.ID)).thenReturn(addLayerEvent$.asObservable());
       when(layer.getSource()).thenReturn(instance(source));
       service = new MapManagementService(instance(postboy));
@@ -58,14 +53,6 @@ describe('MapManagementService', () => {
     afterEach(() => {
       reset(postboy);
       reset(map);
-    });
-
-    it('clear not existing layer ok', () => {
-      const name = Forger.create<string>()!;
-      //
-      clearEvent$.next(new ClearLayerCommand(name));
-      //
-      should().true(true);
     });
 
     it('add without map ok', () => {
