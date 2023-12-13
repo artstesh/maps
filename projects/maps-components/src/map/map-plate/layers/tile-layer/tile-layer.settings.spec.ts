@@ -33,13 +33,13 @@ describe('#map-models TileLayerSettings', () => {
     });
   });
 
-  describe('setName()', () => {
+  describe('setProjection()', () => {
     it('success', () => {
       const expected = Forger.create<string>()!;
       //
-      model = model.setName(expected);
+      model = model.setProjection(expected);
       //
-      should().true(model.name === expected);
+      should().true(model.projection === expected);
     });
   });
 
@@ -49,7 +49,17 @@ describe('#map-models TileLayerSettings', () => {
       //
       model = model.setUrl(expected);
       //
-      should().true(model.url === expected);
+      should().string(model.url).equals(expected);
+    });
+  });
+
+  describe('setOpacity()', () => {
+    it('success', () => {
+      const expected = Forger.create<number>()!;
+      //
+      model = model.setOpacity(expected);
+      //
+      should().number(model.opacity).equals(expected);
     });
   });
 
@@ -89,9 +99,16 @@ describe('#map-models TileLayerSettings', () => {
       should().false(model.isSame(other));
     });
 
-    it('different name', () => {
+    it('different url', () => {
       const other = TileLayerSettings.copy(model);
-      other.name = Forger.create<string>()!;
+      other.projection = Forger.create<string>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different url', () => {
+      const other = TileLayerSettings.copy(model);
+      other.opacity = Forger.create<number>()!;
       //
       should().false(model.isSame(other));
     });
