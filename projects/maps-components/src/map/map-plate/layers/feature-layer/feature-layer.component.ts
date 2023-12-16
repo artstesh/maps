@@ -50,6 +50,7 @@ export class FeatureLayerComponent extends DestructibleComponent implements OnIn
   }
 
   private removeLayer() {
+    console.log('removeLayer');
     if (this.layer) this.postboy.fire(new RemoveLayerCommand(this.layer));
   }
 }
