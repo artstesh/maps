@@ -3,15 +3,16 @@ import { Feature } from 'ol';
 import { Geometry, Point } from 'ol/geom';
 
 export class MarkerModel {
+  public readonly id: string | number;
   constructor(
     public readonly lat: number,
     public readonly lng: number,
-    public readonly id?: string | number,
+    id?: string | number,
     public info?: {
       [id: string]: any;
     },
   ) {
-    if (id == null) this.id = IdGenerator.get();
+    this.id = id == null ? IdGenerator.get() : id;
     this._feature = this.getFeature();
   }
 
@@ -24,9 +25,7 @@ export class MarkerModel {
   private getFeature(): Feature<Geometry> {
     const feature = new Feature(new Point([this.lng, this.lat]));
     feature.setId(this.id);
-    if (this.info) {
-      Object.keys(this.info).forEach((k) => feature.set(k, this.info![k]));
-    }
+    if (this.info) feature.set('info', this.info);
     return feature;
   }
 }
