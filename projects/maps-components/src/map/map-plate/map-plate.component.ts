@@ -9,7 +9,7 @@ import { MapRenderedEvent } from '../messages';
 import { MapStateService } from '../services/map-state.service';
 import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
-import { MapClickService } from "../services/map-click.service";
+import { MapClickService } from '../services/map-click.service';
 
 @Component({
   selector: 'lib-map-plate',
