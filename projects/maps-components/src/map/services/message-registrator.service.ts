@@ -7,15 +7,27 @@ import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-feat
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
 import { AddTileCommand } from '../messages/commands/add-tile.command';
 import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
+import { PostboyAbstractRegistrator } from "@artstesh/postboy";
+import { MapManagementService } from "./map-management.service";
+import { MapStateService } from "./map-state.service";
+import { MapClickService } from "./map-click.service";
+import { MapClickEvent } from "../messages/events/map-click.event";
 
 @Injectable()
-export class MessageRegistratorService {
-  constructor(service: MapPostboyService) {
-    service.register(MapRenderedEvent.ID, new ReplaySubject<MapRenderedEvent>(1));
-    service.register(AddLayerCommand.ID, new Subject<AddLayerCommand>());
-    service.register(PlaceLayerFeaturesCommand.ID, new ReplaySubject<PlaceLayerFeaturesCommand>(1));
-    service.register(RemoveLayerCommand.ID, new Subject<RemoveLayerCommand>());
-    service.register(AddTileCommand.ID, new Subject<AddTileCommand>());
-    service.register(RemoveTileCommand.ID, new Subject<RemoveTileCommand>());
+export class MessageRegistratorService extends PostboyAbstractRegistrator {
+  constructor(service: MapPostboyService, management: MapManagementService,
+              state: MapStateService,
+              interaction: MapClickService) {
+    super(service);
+    this.registerServices([management, state,interaction])
+  }
+  protected _up(): void {
+    this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
+    this.registerReplay<PlaceLayerFeaturesCommand>(PlaceLayerFeaturesCommand.ID);
+    this.registerSubject<AddLayerCommand>(AddLayerCommand.ID);
+    this.registerSubject<RemoveLayerCommand>(RemoveLayerCommand.ID);
+    this.registerSubject<AddTileCommand>(AddTileCommand.ID);
+    this.registerSubject<RemoveTileCommand>(RemoveTileCommand.ID);
+    this.registerSubject<MapClickEvent>(MapClickEvent.ID);
   }
 }
