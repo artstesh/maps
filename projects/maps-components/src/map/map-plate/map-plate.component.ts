@@ -8,15 +8,15 @@ import { MapPostboyService } from '../services/map-postboy.service';
 import { MapRenderedEvent } from '../messages';
 import { MapStateService } from '../services/map-state.service';
 import { MapManagementService } from '../services/map-management.service';
-import { ServiceCollector } from '../services/service.collector';
 import { MapPlateFactory } from './map-plate.factory.service';
+import { MapClickService } from "../services/map-click.service";
 
 @Component({
   selector: 'lib-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService, MapStateService, MapManagementService, ServiceCollector],
+  providers: [MessageRegistratorService, MapStateService, MapManagementService, MapClickService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
@@ -26,10 +26,11 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     private elementRef: ElementRef,
     private postboy: MapPostboyService,
     private mapFactory: MapPlateFactory,
-    registrator: ServiceCollector,
+    registrator: MessageRegistratorService,
     private detector: ChangeDetectorRef,
   ) {
     super();
+    registrator.up();
   }
 
   _settings: MapSettings = new MapSettings();

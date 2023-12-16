@@ -23,6 +23,7 @@ describe('MapManagementService', () => {
     when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
     mapRendered$.next(new MapRenderedEvent(instance(map)));
     service = new MapManagementService(instance(postboy));
+    service.up();
   });
 
   afterEach(() => {
@@ -48,6 +49,7 @@ describe('MapManagementService', () => {
       when(postboy.subscribe<AddLayerCommand>(AddLayerCommand.ID)).thenReturn(addLayerEvent$.asObservable());
       when(layer.getSource()).thenReturn(instance(source));
       service = new MapManagementService(instance(postboy));
+      service.up();
     });
 
     afterEach(() => {
