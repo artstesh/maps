@@ -4,7 +4,6 @@ import { anything, capture, instance, mock, reset, when } from 'ts-mockito';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MapPostboyService } from '../../../services/map-postboy.service';
-import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
 import { MapModule } from '../../../map.module';
 import { Vector as Layer } from 'ol/layer';
