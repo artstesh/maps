@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnInit
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
 import Map from 'ol/Map';
 import { useGeographic } from 'ol/proj';
@@ -71,5 +64,5 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
 
   onDestroy = () => {
     this.registrator.down();
-  }
+  };
 }
