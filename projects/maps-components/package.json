@@ -5,7 +5,8 @@
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
     "ol-geocoder": "^4.0.0",
-    "ol": "^6.9.0"
+    "ol": "^6.9.0",
+    "@artstesh/postboy": "^1.0.1"
   },
   "dependencies": {
     "tslib": "^2.2.0"
