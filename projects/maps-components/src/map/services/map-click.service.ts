@@ -19,7 +19,6 @@ export class MapClickService implements IPostboyDependingService {
   private observeMapRender() {
     this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
       this.map = m.map;
-      console.log(m.map);
       this.map?.on('singleclick', (e) => {
         this.postboy.fire(this.onClick(e));
       });
