@@ -30,9 +30,4 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<RemoveTileCommand>(RemoveTileCommand.ID);
     this.registerSubject<MapClickEvent>(MapClickEvent.ID);
   }
-
-  ngOnDestroy() {
-    console.log('ngOnDestroy MessageRegistratorService');
-    //super.ngOnDestroy();
-  }
 }
