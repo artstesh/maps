@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { DestructibleComponent } from '../../../common/destructible.component';
 import { XYZ } from 'ol/source';
 import TileLayer from 'ol/layer/Tile';
-import TileSource from 'ol/source/Tile';
 import { MapPostboyService } from "../../../services/map-postboy.service";
 import { TileLayerFactory } from "./tile-layer.factory";
 import { MapRenderedEvent } from "../../../messages";

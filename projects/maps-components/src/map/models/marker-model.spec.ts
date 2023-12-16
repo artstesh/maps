@@ -69,8 +69,8 @@ describe('#map-models MarkerModel', () => {
       const expected = Forger.create<{ f1: number; f2: string }>()!;
       const unit = new MarkerModel(model.lat, model.lng, model.id, expected);
       //
-      should().number(unit.feature.get('f1')).equals(expected.f1);
-      should().string(unit.feature.get('f2')).equals(expected.f2);
+      should().number(unit.feature.get('info').f1).equals(expected.f1);
+      should().string(unit.feature.get('info').f2).equals(expected.f2);
     });
   });
 });

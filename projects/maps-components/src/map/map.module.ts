@@ -15,7 +15,7 @@ import { MarkersComponent } from './map-plate/features/markers/markers.component
     TileLayerComponent,
     OsmTileLayerComponent,
     FeatureLayerComponent,
-    MarkersComponent,
+    MarkersComponent
   ],
   exports: [MapPlateComponent, FeatureLayerComponent, MarkersComponent,TileLayerComponent],
 })
