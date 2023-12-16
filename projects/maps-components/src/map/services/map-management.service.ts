@@ -9,15 +9,14 @@ import { MapRenderedEvent } from '../messages';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { AddTileCommand } from '../messages/commands/add-tile.command';
 import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
-import { IPostboyDependingService } from "@artstesh/postboy";
+import { IPostboyDependingService } from '@artstesh/postboy';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
   private map?: Map;
   private layers: { [name: string]: Layer<VectorSource<any>> } = {};
 
-  constructor(private postboy: MapPostboyService) {
-  }
+  constructor(private postboy: MapPostboyService) {}
 
   up(): void {
     this.observeMapRender();
