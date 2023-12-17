@@ -40,6 +40,7 @@ describe('MapPlateComponent', () => {
     reset(postboy);
     reset(registrator);
     reset(mapFactory);
+    expect().nothing();
   });
 
   it('should create', () => {

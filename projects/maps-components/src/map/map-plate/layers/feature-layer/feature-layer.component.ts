@@ -18,6 +18,7 @@ import { FeatureLayerFactory } from './feature-layer.factory';
 })
 export class FeatureLayerComponent extends DestructibleComponent implements OnInit {
   public layer: Layer<VectorSource<any>> | null = null;
+  _settings: FeatureLayerSettings = new FeatureLayerSettings();
 
   constructor(private postboy: MapPostboyService, private factory: FeatureLayerFactory) {
     super();
@@ -32,8 +33,6 @@ export class FeatureLayerComponent extends DestructibleComponent implements OnIn
       )
       .subscribe((m) => this.initLayer());
   }
-
-  _settings: FeatureLayerSettings = new FeatureLayerSettings();
 
   @Input() set settings(value: FeatureLayerSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;

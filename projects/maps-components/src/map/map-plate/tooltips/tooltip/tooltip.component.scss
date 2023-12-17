@@ -1,0 +1,28 @@
+@use "sass:math";
+
+$arrow: 8px;
+$popup-width: 250px;
+$padding: 20px;
+
+.tooltip-wrapper {
+  position: absolute;
+  width: $popup-width;
+  left: math.div(-$popup-width, 2);
+  bottom: $arrow;
+  background-color: #fff;
+  padding: $padding;
+  border-radius: 3px;
+  font-family: Nunito, serif;
+
+  &::after {
+    top: 100%;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border: $arrow solid transparent;
+    border-top-color: #fff;
+    left: math.div($popup-width, 2);
+    margin-left: -$arrow;
+  }
+}

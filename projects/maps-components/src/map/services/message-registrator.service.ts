@@ -12,6 +12,7 @@ import { MapManagementService } from "./map-management.service";
 import { MapStateService } from "./map-state.service";
 import { MapClickService } from "./map-click.service";
 import { MapClickEvent } from "../messages/events/map-click.event";
+import { CloseTooltipCommand } from "../messages/commands/close-tooltip.command";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -29,5 +30,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<AddTileCommand>(AddTileCommand.ID);
     this.registerSubject<RemoveTileCommand>(RemoveTileCommand.ID);
     this.registerSubject<MapClickEvent>(MapClickEvent.ID);
+    this.registerSubject<CloseTooltipCommand>(CloseTooltipCommand.ID);
   }
 }
