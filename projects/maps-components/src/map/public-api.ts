@@ -12,3 +12,4 @@ export * from './map-plate/features/index';
 export * from './services/map-postboy.service';
 export * from './services/message-registrator.service';
 export * from './helpers/index';
+export * from './map-plate/tooltips/index';

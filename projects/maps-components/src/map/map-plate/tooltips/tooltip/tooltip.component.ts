@@ -35,7 +35,8 @@ export class TooltipComponent extends DestructibleComponent implements OnInit {
     this._settings = value;
     this.detector.detectChanges();
   }
-  constructor(private postboy: MapPostboyService, private detector: ChangeDetectorRef) {
+  constructor(private postboy: MapPostboyService,
+              private detector: ChangeDetectorRef) {
     super();
   }
 
@@ -48,8 +49,9 @@ export class TooltipComponent extends DestructibleComponent implements OnInit {
   private observeMapClick(): Subscription {
     return this.postboy
       .subscribe<MapClickEvent>(MapClickEvent.ID)
-      .pipe(filter((ev) => this._settings.show(ev)))
-      .subscribe((ev) => this.addOverlay(ev.coordinates));
+      .subscribe((ev) => {
+        this._settings.show(ev) ? this.addOverlay(ev.coordinates) : this.removeOverlay();
+      });
   }
 
   private observeClose(): Subscription {
