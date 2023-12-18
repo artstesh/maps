@@ -8,7 +8,7 @@ import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
 import { MapModule } from '../../../map.module';
 import Map from 'ol/Map';
 import { CloseTooltipCommand } from '../../../messages/commands/close-tooltip.command';
-import { TooltipSettings } from "./tooltip.settings";
+import { TooltipSettings } from './tooltip.settings';
 
 describe('TooltipComponent', () => {
   let fixture: ComponentFixture<TooltipComponent>;

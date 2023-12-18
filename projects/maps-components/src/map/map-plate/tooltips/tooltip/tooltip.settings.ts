@@ -1,5 +1,5 @@
 import { MapClickEvent } from '../../../messages';
-import { IdGenerator } from "../../../common/id.generator";
+import { IdGenerator } from '../../../common/id.generator';
 
 export class TooltipSettings {
   public readonly id: string;
