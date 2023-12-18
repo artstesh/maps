@@ -17,8 +17,8 @@ import { TooltipComponent } from './map-plate/tooltips/tooltip/tooltip.component
     OsmTileLayerComponent,
     FeatureLayerComponent,
     MarkersComponent,
-    TooltipComponent
+    TooltipComponent,
   ],
-  exports: [MapPlateComponent, FeatureLayerComponent, MarkersComponent,TileLayerComponent,TooltipComponent],
+  exports: [MapPlateComponent, FeatureLayerComponent, MarkersComponent, TileLayerComponent, TooltipComponent],
 })
 export class MapModule {}
