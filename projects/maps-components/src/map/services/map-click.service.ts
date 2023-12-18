@@ -29,7 +29,7 @@ export class MapClickService implements IPostboyDependingService {
     const model: MapClickEvent = new MapClickEvent(ev.coordinate, {});
     this.map?.forEachFeatureAtPixel(ev.pixel, (f, l) => {
       this.getFeatureCollectionWithInner([f as Feature<Geometry>])
-        .filter((f) => !!f.getId())
+        .filter((f) => f.getId() != null)
         .forEach((fs: Feature<Geometry>) => {
           let layerName = l.get('name');
           if (!model.entities[layerName]) model.entities[layerName] = [];
