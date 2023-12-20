@@ -5,7 +5,7 @@ import { instance, mock, when } from 'ts-mockito';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
-import { PolygonsComponent } from "./polygons.component";
+import { PolygonsComponent } from './polygons.component';
 
 describe('PolygonsComponent', () => {
   let fixture: ComponentFixture<PolygonsComponent>;
