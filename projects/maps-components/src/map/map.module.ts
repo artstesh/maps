@@ -7,6 +7,7 @@ import { OsmTileLayerComponent } from './map-plate/layers/osm-tile-layer/osm-til
 import { FeatureLayerComponent } from './map-plate/layers/feature-layer/feature-layer.component';
 import { MarkersComponent } from './map-plate/features/markers/markers.component';
 import { TooltipComponent } from './map-plate/tooltips/tooltip/tooltip.component';
+import { PolygonsComponent } from "./map-plate/features/polygons/polygons.component";
 
 @NgModule({
   imports: [CommonModule],
@@ -17,8 +18,9 @@ import { TooltipComponent } from './map-plate/tooltips/tooltip/tooltip.component
     OsmTileLayerComponent,
     FeatureLayerComponent,
     MarkersComponent,
-    TooltipComponent
+    TooltipComponent,
+    PolygonsComponent
   ],
-  exports: [MapPlateComponent, FeatureLayerComponent, MarkersComponent,TileLayerComponent,TooltipComponent],
+  exports: [MapPlateComponent, FeatureLayerComponent, MarkersComponent,TileLayerComponent,TooltipComponent,PolygonsComponent],
 })
 export class MapModule {}
