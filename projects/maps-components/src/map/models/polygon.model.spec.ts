@@ -6,7 +6,6 @@ const geoJson = '{"type":"Feature","geometry":{"coordinates":[[[2,2],[2,-2],[-2,
 const wkt = 'POLYGON ((2 2,2 -2,-2 -2,-2 2, 2 2))';
 
 describe('#map-models PolygonModel', () => {
-
   afterEach(() => {
     expect().nothing();
   });
