@@ -58,7 +58,7 @@ describe('#map-models FeatureLayerSettings', () => {
     });
   });
 
-  describe('setZIndex()', () => {
+  describe('setStyle()', () => {
     it('success', () => {
       const expected = Forger.create<Style>()!;
       //

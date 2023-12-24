@@ -27,7 +27,7 @@ export class ClusterLayerSettings {
     return ClusterLayerSettings.copy({ ...this, zIndex });
   }
 
-  setdDistance(distance: number): ClusterLayerSettings {
+  setDistance(distance: number): ClusterLayerSettings {
     return ClusterLayerSettings.copy({ ...this, distance });
   }
 
@@ -56,6 +56,7 @@ export class ClusterLayerSettings {
     if (this.minZoom !== model.minZoom) return false;
     if (this.zIndex !== model.zIndex) return false;
     if (this.name !== model.name) return false;
+    if (this.distance !== model.distance) return false;
     if (this.bbox !== model.bbox) return false;
     if (this.style !== model.style) return false;
     return true;
