@@ -1,5 +1,5 @@
 import Style from 'ol/style/Style';
-import { Circle, Fill, Icon, Stroke } from 'ol/style';
+import { Circle, Fill, Icon, Stroke, Text } from "ol/style";
 
 export class MarkerStyleHelper {
   public static fromSvg(svg: string, size: [number, number] = [30, 30], zIndex = 400): Style {
@@ -22,5 +22,10 @@ export class MarkerStyleHelper {
         stroke: new Stroke({ color: strokeColor, width: strokeWidth }),
       }),
     });
+  }
+
+  public static withText(style: Style, text: Text): Style {
+    style.setText(text);
+    return style;
   }
 }
