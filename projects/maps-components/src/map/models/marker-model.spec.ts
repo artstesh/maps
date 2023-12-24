@@ -2,7 +2,7 @@ import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
 import { MarkerModel } from './marker-model';
 import { Point } from 'ol/geom';
-import { MapConstants } from "./map.constants";
+import { MapConstants } from './map.constants';
 
 describe('#map-models MarkerModel', () => {
   let model: MarkerModel;

@@ -5,7 +5,7 @@ import { MapPostboyService } from './map-postboy.service';
 import { MapRenderedEvent } from '../messages';
 import { MapClickEvent } from '../messages/events/map-click.event';
 import { Geometry } from 'ol/geom';
-import { MapConstants } from "../models/map.constants";
+import { MapConstants } from '../models/map.constants';
 
 @Injectable()
 export class MapClickService implements IPostboyDependingService {
@@ -35,7 +35,7 @@ export class MapClickService implements IPostboyDependingService {
           let layerName = l.get('name');
           if (!model.entities[layerName]) model.entities[layerName] = [];
           if (!model.features[layerName]) model.features[layerName] = [];
-          model.entities[layerName].push(({id: fs.getId()!, ...fs.get(MapConstants.FeatureInfo)}));
+          model.entities[layerName].push({ id: fs.getId()!, ...fs.get(MapConstants.FeatureInfo) });
           model.features[layerName].push(fs);
         });
     });
