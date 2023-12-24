@@ -8,6 +8,7 @@ import { FeatureLayerComponent } from './map-plate/layers/feature-layer/feature-
 import { MarkersComponent } from './map-plate/features/markers/markers.component';
 import { TooltipComponent } from './map-plate/tooltips/tooltip/tooltip.component';
 import { PolygonsComponent } from './map-plate/features/polygons/polygons.component';
+import { ClusterLayerComponent } from './map-plate/layers/cluster-layer/cluster-layer.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -20,6 +21,7 @@ import { PolygonsComponent } from './map-plate/features/polygons/polygons.compon
     MarkersComponent,
     TooltipComponent,
     PolygonsComponent,
+    ClusterLayerComponent,
   ],
   exports: [
     MapPlateComponent,
@@ -28,6 +30,7 @@ import { PolygonsComponent } from './map-plate/features/polygons/polygons.compon
     TileLayerComponent,
     TooltipComponent,
     PolygonsComponent,
+    ClusterLayerComponent,
   ],
 })
 export class MapModule {}
