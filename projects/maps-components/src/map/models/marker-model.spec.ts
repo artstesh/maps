@@ -2,6 +2,7 @@ import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
 import { MarkerModel } from './marker-model';
 import { Point } from 'ol/geom';
+import { MapConstants } from "./map.constants";
 
 describe('#map-models MarkerModel', () => {
   let model: MarkerModel;
@@ -69,8 +70,8 @@ describe('#map-models MarkerModel', () => {
       const expected = Forger.create<{ f1: number; f2: string }>()!;
       const unit = new MarkerModel(model.lat, model.lng, model.id, expected);
       //
-      should().number(unit.feature.get('info').f1).equals(expected.f1);
-      should().string(unit.feature.get('info').f2).equals(expected.f2);
+      should().number(unit.feature.get(MapConstants.FeatureInfo).f1).equals(expected.f1);
+      should().string(unit.feature.get(MapConstants.FeatureInfo).f2).equals(expected.f2);
     });
   });
 });
