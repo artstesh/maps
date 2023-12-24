@@ -1,6 +1,7 @@
 import { IdGenerator } from '../common/id.generator';
 import { Feature } from 'ol';
 import { Geometry, Point } from 'ol/geom';
+import { MapConstants } from "./map.constants";
 
 export class MarkerModel {
   public readonly id: string | number;
@@ -25,7 +26,7 @@ export class MarkerModel {
   private getFeature(): Feature<Geometry> {
     const feature = new Feature(new Point([this.lng, this.lat]));
     feature.setId(this.id);
-    if (this.info) feature.set('info', this.info);
+    if (this.info) feature.set(MapConstants.FeatureInfo, this.info);
     return feature;
   }
 }
