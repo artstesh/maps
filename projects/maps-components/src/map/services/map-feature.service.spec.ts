@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ClusterLayerManager } from './cluster-layer.manager';
+import { MapFeatureService } from './map-feature.service';
 
-describe('ClusterLayerManagerService', () => {
-  let service: ClusterLayerManager;
+describe('MapFeatureService', () => {
+  let service: MapFeatureService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ClusterLayerManager);
+    service = TestBed.inject(MapFeatureService);
   });
 
   it('should be created', () => {

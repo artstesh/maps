@@ -17,13 +17,15 @@ import { MapStateService } from '../services/map-state.service';
 import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MapClickService } from "../services/map-click.service";
+import { MapFeatureService } from "../services/map-feature.service";
 
 @Component({
   selector: 'lib-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService, MapStateService, MapManagementService, MapClickService],
+  providers: [MessageRegistratorService, MapStateService,
+    MapManagementService, MapClickService,MapFeatureService ],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;

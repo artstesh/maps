@@ -13,14 +13,16 @@ import { MapStateService } from "./map-state.service";
 import { MapClickService } from "./map-click.service";
 import { MapClickEvent } from "../messages/events/map-click.event";
 import { CloseTooltipCommand } from "../messages/commands/close-tooltip.command";
+import { MapFeatureService } from "./map-feature.service";
+import { FitToFeaturesCommand } from "../messages/commands/fit-to-features.command";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
   constructor(service: MapPostboyService, management: MapManagementService,
-              state: MapStateService,
+              state: MapStateService, feature: MapFeatureService,
               interaction: MapClickService) {
     super(service);
-    this.registerServices([management, state,interaction])
+    this.registerServices([management, state,interaction,feature])
   }
   protected _up(): void {
     this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
@@ -31,5 +33,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<RemoveTileCommand>(RemoveTileCommand.ID);
     this.registerSubject<MapClickEvent>(MapClickEvent.ID);
     this.registerSubject<CloseTooltipCommand>(CloseTooltipCommand.ID);
+    this.registerSubject<FitToFeaturesCommand>(FitToFeaturesCommand.ID);
   }
 }
