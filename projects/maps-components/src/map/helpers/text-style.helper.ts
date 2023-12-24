@@ -6,8 +6,8 @@ export class TextStyleHelper {
       font: font,
       textAlign: 'center',
       fill: new Fill({
-        color: color
-      })
-    })
+        color: color,
+      }),
+    });
   }
 }

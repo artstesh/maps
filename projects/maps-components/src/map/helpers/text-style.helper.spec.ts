@@ -1,7 +1,7 @@
-import { Text } from "ol/style";
-import { Forger } from "@artstesh/forger";
-import { TextStyleHelper } from "./text-style.helper";
-import { should } from "@artstesh/it-should";
+import { Text } from 'ol/style';
+import { Forger } from '@artstesh/forger';
+import { TextStyleHelper } from './text-style.helper';
+import { should } from '@artstesh/it-should';
 
 describe('TextStyleHelper', () => {
   let text: Text;
@@ -21,7 +21,9 @@ describe('TextStyleHelper', () => {
   });
 
   it('label is correct', () => {
-    should().string(text.getText() as string).equals(label);
+    should()
+      .string(text.getText() as string)
+      .equals(label);
   });
 
   it('font is correct', () => {
@@ -29,6 +31,8 @@ describe('TextStyleHelper', () => {
   });
 
   it('color is correct', () => {
-    should().string(text.getFill()?.getColor() as string).equals(color);
+    should()
+      .string(text.getFill()?.getColor() as string)
+      .equals(color);
   });
 });
