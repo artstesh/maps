@@ -9,16 +9,15 @@ import { MapRenderedEvent } from '../messages';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { AddTileCommand } from '../messages/commands/add-tile.command';
 import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
-import { IPostboyDependingService } from "@artstesh/postboy";
-import Cluster from "ol/source/Cluster";
+import { IPostboyDependingService } from '@artstesh/postboy';
+import Cluster from 'ol/source/Cluster';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
   private map?: Map;
   private layers: { [name: string]: Layer<VectorSource<any> | Cluster> } = {};
 
-  constructor(private postboy: MapPostboyService) {
-  }
+  constructor(private postboy: MapPostboyService) {}
 
   up(): void {
     this.observeMapRender();
@@ -61,7 +60,7 @@ export class MapManagementService implements IPostboyDependingService {
     this.postboy.subscribe<PlaceLayerFeaturesCommand>(PlaceLayerFeaturesCommand.ID).subscribe((c) => {
       if (!this.layers[c.layer]) return;
       let source = this.layers[c.layer]?.getSource();
-      if (!!(source as any)['getSource']) source =(source as any)?.getSource();
+      if (!!(source as any)['getSource']) source = (source as any)?.getSource();
       source?.clear();
       source?.addFeatures(c.features);
     });

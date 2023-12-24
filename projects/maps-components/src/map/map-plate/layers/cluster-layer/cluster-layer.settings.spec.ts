@@ -1,8 +1,8 @@
 import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
 import Style from 'ol/style/Style';
-import { ClusterLayerSettings } from "./cluster-layer.settings";
-import { IIdentified } from "../../../models/i-identified";
+import { ClusterLayerSettings } from './cluster-layer.settings';
+import { IIdentified } from '../../../models/i-identified';
 
 describe('#map-models ClusterLayerSettings', () => {
   let model: ClusterLayerSettings;
@@ -110,22 +110,19 @@ describe('#map-models ClusterLayerSettings', () => {
     });
 
     it('different maxZoom', () => {
-      const other = ClusterLayerSettings.copy(model)
-        .setMaxZoom(model.maxZoom + Forger.create<number>()!);
+      const other = ClusterLayerSettings.copy(model).setMaxZoom(model.maxZoom + Forger.create<number>()!);
       //
       should().false(model.isSame(other));
     });
 
     it('different minZoom', () => {
-      const other = ClusterLayerSettings.copy(model)
-        .setMinZoom(model.minZoom + Forger.create<number>()!);
+      const other = ClusterLayerSettings.copy(model).setMinZoom(model.minZoom + Forger.create<number>()!);
       //
       should().false(model.isSame(other));
     });
 
     it('different zIndex', () => {
-      const other = ClusterLayerSettings.copy(model)
-        .setZIndex(model.zIndex + Forger.create<number>()!);
+      const other = ClusterLayerSettings.copy(model).setZIndex(model.zIndex + Forger.create<number>()!);
       //
       should().false(model.isSame(other));
     });
@@ -143,8 +140,7 @@ describe('#map-models ClusterLayerSettings', () => {
     });
 
     it('different distance', () => {
-      const other = ClusterLayerSettings.copy(model)
-        .setDistance(model.distance + Forger.create<number>()!);
+      const other = ClusterLayerSettings.copy(model).setDistance(model.distance + Forger.create<number>()!);
       //
       should().false(model.isSame(other));
     });
