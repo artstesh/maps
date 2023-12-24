@@ -1,6 +1,6 @@
 import { IdGenerator } from '../../../common/id.generator';
 import Style, { StyleFunction } from 'ol/style/Style';
-import { IIdentified } from "../../../models/i-identified";
+import { IIdentified } from '../../../models/i-identified';
 
 export class ClusterLayerSettings {
   name: string = IdGenerator.get();
