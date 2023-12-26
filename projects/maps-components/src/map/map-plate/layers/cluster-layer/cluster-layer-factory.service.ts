@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ClusterLayerSettings } from "./cluster-layer.settings";
-import {Vector as Source} from "ol/source";
-import {Vector as Layer} from "ol/layer";
-import { bbox } from "ol/loadingstrategy";
-import Polygon, {fromExtent} from "ol/geom/Polygon";
-import Cluster from "ol/source/Cluster";
-import { Geometry, Point } from "ol/geom";
-import { ClusterLayerManager } from "./cluster-layer.manager";
-import { MapPostboyService } from "../../../services/map-postboy.service";
-import Style, { StyleFunction } from "ol/style/Style";
-import { Feature } from "ol";
-import { MapConstants } from "../../../models/map.constants";
+import { ClusterLayerSettings } from './cluster-layer.settings';
+import { Vector as Source } from 'ol/source';
+import { Vector as Layer } from 'ol/layer';
+import { bbox } from 'ol/loadingstrategy';
+import Polygon, { fromExtent } from 'ol/geom/Polygon';
+import Cluster from 'ol/source/Cluster';
+import { Geometry, Point } from 'ol/geom';
+import { ClusterLayerManager } from './cluster-layer.manager';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { StyleFunction } from 'ol/style/Style';
+import { Feature } from 'ol';
+import { MapConstants } from '../../../models/map.constants';
 
 @Injectable({
   providedIn: 'root'

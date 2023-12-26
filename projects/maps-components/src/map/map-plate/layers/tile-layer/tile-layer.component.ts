@@ -1,17 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DestructibleComponent } from '../../../common/destructible.component';
 import { XYZ } from 'ol/source';
 import TileLayer from 'ol/layer/Tile';
-import { MapPostboyService } from "../../../services/map-postboy.service";
-import { TileLayerFactory } from "./tile-layer.factory";
-import { MapRenderedEvent } from "../../../messages";
-import { filter, first } from "rxjs/operators";
-import { FeatureLayerSettings } from "../feature-layer/feature-layer.settings";
-import { AddLayerCommand } from "../../../messages/commands/add-layer.command";
-import { RemoveLayerCommand } from "../../../messages/commands/remove-layer.command";
-import { TileLayerSettings } from "./tile-layer.settings";
-import { AddTileCommand } from "../../../messages/commands/add-tile.command";
-import { RemoveTileCommand } from "../../../messages/commands/remove-tile.command";
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { TileLayerFactory } from './tile-layer.factory';
+import { MapRenderedEvent } from '../../../messages';
+import { filter, first } from 'rxjs/operators';
+import { TileLayerSettings } from './tile-layer.settings';
+import { AddTileCommand } from '../../../messages/commands/add-tile.command';
+import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
 
 @Component({
   selector: 'lib-tile-layer',

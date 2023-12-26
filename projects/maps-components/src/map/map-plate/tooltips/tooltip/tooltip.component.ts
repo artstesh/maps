@@ -5,16 +5,16 @@ import {
   ElementRef,
   Input,
   OnInit,
-  ViewChild
-} from "@angular/core";
+  ViewChild,
+} from '@angular/core';
 import { TooltipSettings } from './tooltip.settings';
-import { DestructibleComponent } from "../../../common/destructible.component";
-import { MapPostboyService } from "../../../services/map-postboy.service";
-import { MapClickEvent, MapRenderedEvent } from "../../../messages";
-import Map from "ol/Map";
-import { CloseTooltipCommand } from "../../../messages/commands/close-tooltip.command";
-import { Subscription } from "rxjs";
-import { filter } from "rxjs/operators";
+import { DestructibleComponent } from '../../../common/destructible.component';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { MapClickEvent, MapRenderedEvent } from '../../../messages';
+import Map from 'ol/Map';
+import { CloseTooltipCommand } from '../../../messages/commands/close-tooltip.command';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import Overlay, { Options as OverlayOptions } from 'ol/Overlay';
 
 @Component({

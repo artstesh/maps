@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { PostboyService } from '@artstesh/postboy';
-import { Observable } from "rxjs";
+import { StartDrawingCommand } from '../messages/commands/start-drawing.command';
+import { MapClickEvent } from '../messages';
+import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event';
 
 @Injectable()
 export class MapPostboyService extends PostboyService {
-
-  public observe = <T>(id: string): Observable<T> => this.subscribe<T>(id);
+  constructor() {
+    super();
+    this.addLocker({ locker: StartDrawingCommand.ID, unlocker: DrawingFinishedEvent.ID, locking: [MapClickEvent.ID] });
+  }
 }

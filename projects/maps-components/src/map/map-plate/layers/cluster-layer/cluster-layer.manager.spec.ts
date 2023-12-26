@@ -1,15 +1,14 @@
 import { ClusterLayerManager } from './cluster-layer.manager';
-import { anything, capture, instance, mock, reset, verify, when } from "ts-mockito";
+import { anything, capture, instance, mock, reset, verify, when } from 'ts-mockito';
 import { Vector as Layer } from 'ol/layer';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 import { Forger } from '@artstesh/forger';
-import { Subject } from "rxjs";
-import { MapClickEvent } from "../../../messages";
-import { Feature } from "ol";
-import { Geometry, Point } from "ol/geom";
-import { FitToFeaturesCommand } from "../../../messages/commands/fit-to-features.command";
-import { should } from "@artstesh/it-should";
+import { Subject } from 'rxjs';
+import { MapClickEvent } from '../../../messages';
+import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
+import { should } from '@artstesh/it-should';
+import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
 
 describe('ClusterLayerManager', () => {
   let service: ClusterLayerManager;
@@ -17,10 +16,13 @@ describe('ClusterLayerManager', () => {
   let postboy = mock(MapPostboyService);
   let settings: ClusterLayerSettings;
   let clickSub$: Subject<MapClickEvent>;
+  let moveEndEvent$: Subject<MapMoveEndEvent>;
 
   beforeEach(() => {
     clickSub$ = new Subject<MapClickEvent>();
+    moveEndEvent$ = new Subject<MapMoveEndEvent>();
     when(postboy.subscribe(MapClickEvent.ID)).thenReturn(clickSub$);
+    when(postboy.subscribe(MapMoveEndEvent.ID)).thenReturn(moveEndEvent$);
     settings = ClusterLayerSettings.copy(Forger.create<ClusterLayerSettings>()!);
     service = new ClusterLayerManager(settings, instance(layer), instance(postboy));
   });

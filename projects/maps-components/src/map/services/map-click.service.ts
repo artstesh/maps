@@ -5,7 +5,7 @@ import { MapPostboyService } from './map-postboy.service';
 import { MapRenderedEvent } from '../messages';
 import { MapClickEvent } from '../messages/events/map-click.event';
 import { Geometry } from 'ol/geom';
-import { MapConstants } from "../models/map.constants";
+import { MapConstants } from '../models/map.constants';
 
 @Injectable()
 export class MapClickService implements IPostboyDependingService {

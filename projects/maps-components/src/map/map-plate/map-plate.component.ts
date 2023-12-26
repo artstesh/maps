@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnInit
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
 import Map from 'ol/Map';
 import { useGeographic } from 'ol/proj';
@@ -16,8 +9,10 @@ import { MapRenderedEvent } from '../messages';
 import { MapStateService } from '../services/map-state.service';
 import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
-import { MapClickService } from "../services/map-click.service";
-import { MapFeatureService } from "../services/map-feature.service";
+import { MapClickService } from '../services/map-click.service';
+import { MapFeatureService } from '../services/map-feature.service';
+import { FeatureLayerSettings } from "./layers";
+import { MapConstants } from "../models/map.constants";
 
 @Component({
   selector: 'lib-map-plate',
@@ -43,6 +38,7 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   }
 
   _settings: MapSettings = new MapSettings();
+  drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;

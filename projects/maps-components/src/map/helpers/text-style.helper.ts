@@ -1,4 +1,5 @@
 import { Fill, Text } from 'ol/style';
+
 export class TextStyleHelper {
   public static get(text: string, font: string, color: string): Text {
     return new Text({
@@ -6,8 +7,8 @@ export class TextStyleHelper {
       font: font,
       textAlign: 'center',
       fill: new Fill({
-        color: color
-      })
-    })
+        color: color,
+      }),
+    });
   }
 }

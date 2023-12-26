@@ -1,7 +1,7 @@
 import { IdGenerator } from '../common/id.generator';
 import { Feature } from 'ol';
 import { Geometry, Point } from 'ol/geom';
-import { MapConstants } from "./map.constants";
+import { MapConstants } from './map.constants';
 
 export class MarkerModel {
   public readonly id: string | number;
