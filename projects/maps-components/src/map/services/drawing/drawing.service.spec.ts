@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DrawingService } from './drawing.service';
-import { anything, instance, mock, reset, when } from "ts-mockito";
-import { MapPostboyService } from "../map-postboy.service";
-import { ReplaySubject, Subject } from "rxjs";
-import { CancelDrawingCommand, MapRenderedEvent, StartDrawingCommand } from "../../messages";
-import { MapClickService } from "../map-click.service";
+import { anything, instance, mock, reset, when } from 'ts-mockito';
+import { MapPostboyService } from '../map-postboy.service';
+import { ReplaySubject, Subject } from 'rxjs';
+import { CancelDrawingCommand, MapRenderedEvent, StartDrawingCommand } from '../../messages';
+import { MapClickService } from '../map-click.service';
 
 describe('DrawingService', () => {
   const postboy = mock(MapPostboyService);
@@ -28,7 +28,7 @@ describe('DrawingService', () => {
   afterEach(() => {
     reset(postboy);
     expect().nothing();
-  })
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
