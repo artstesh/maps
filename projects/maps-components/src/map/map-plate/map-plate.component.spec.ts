@@ -9,7 +9,6 @@ import { MapModule } from '../map.module';
 import { MapPostboyService } from '../services/map-postboy.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MessageRegistratorService } from '../services/message-registrator.service';
-import { MapManagementService } from '../services/map-management.service';
 
 describe('MapPlateComponent', () => {
   let fixture: ComponentFixture<MapPlateComponent>;
