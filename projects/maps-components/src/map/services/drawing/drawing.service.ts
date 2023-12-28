@@ -17,7 +17,7 @@ import { DrawingType, FeatureOutputFormat } from '../../models';
 import { Map } from 'ol';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { GeoJSON, WKT } from 'ol/format';
-import { Geometry } from "ol/geom";
+import { Geometry } from 'ol/geom';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -37,7 +37,7 @@ export class DrawingService implements IPostboyDependingService {
         this.drawInteraction = new Draw({
           source: l.getSource()!,
           type: DrawingType[ev.type] as any,
-          style: ev.style
+          style: ev.style,
         });
         this.map.addInteraction(this.drawInteraction);
         this.drawInteraction.on('drawend', (evt: DrawEvent) => {
@@ -70,7 +70,7 @@ export class DrawingService implements IPostboyDependingService {
     this.postboy.fire(query);
   }
 
-  private observeCancelation(ev: StartDrawingCommand,layer: Layer<VectorSource<any>> | null): Subscription {
+  private observeCancelation(ev: StartDrawingCommand, layer: Layer<VectorSource<any>> | null): Subscription {
     return this.postboy
       .subscribe<CancelDrawingCommand>(CancelDrawingCommand.ID)
       .pipe(first())
@@ -83,7 +83,7 @@ export class DrawingService implements IPostboyDependingService {
   private clearInteraction(layer: Layer<Source<Geometry>> | null): void {
     if (!!this.drawInteraction) {
       this.map?.removeInteraction(this.drawInteraction);
-      layer?.setSource(new Source({}))
+      layer?.setSource(new Source({}));
     }
     setTimeout(() => this.postboy.fire(new DrawingFinishedEvent()), 300);
   }
