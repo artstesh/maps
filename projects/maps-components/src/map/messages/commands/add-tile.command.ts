@@ -13,4 +13,3 @@ export class AddTileCommand extends PostboyGenericMessage {
     return AddTileCommand.ID;
   }
 }
-
