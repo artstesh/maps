@@ -1,12 +1,12 @@
 import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MapClickEvent, MapRenderedEvent } from "../../../messages";
+import { MapClickEvent, MapRenderedEvent } from '../../../messages';
 import { Vector as Layer } from 'ol/layer';
 import Cluster from 'ol/source/Cluster';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
 import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
 import { auditTime } from 'rxjs/operators';
-import { combineLatest } from "rxjs";
+import { combineLatest } from 'rxjs';
 import { Map } from 'ol';
 
 export class ClusterLayerManager {
@@ -20,11 +20,12 @@ export class ClusterLayerManager {
   }
 
   private observeMapMovement() {
-    combineLatest([this.postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID).pipe(auditTime(250)),
-      this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID)])
-      .subscribe(([movement, renderEvent]) => {
-        this.checkClusterNecessity(renderEvent.map);
-      });
+    combineLatest([
+      this.postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID).pipe(auditTime(250)),
+      this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID),
+    ]).subscribe(([movement, renderEvent]) => {
+      this.checkClusterNecessity(renderEvent.map);
+    });
   }
 
   private observeClick() {
