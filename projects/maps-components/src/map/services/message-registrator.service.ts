@@ -19,6 +19,7 @@ import { CancelDrawingCommand } from "../messages/commands/cancel-drawing.comman
 import { StartDrawingCommand } from "../messages/commands/start-drawing.command";
 import { DrawingService } from "./drawing/drawing.service";
 import { GetLayerQuery } from "../messages/queries/get-layer.query";
+import { DrawingFinishedEvent } from "../messages/events/drawing-finished.event";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -42,5 +43,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<CancelDrawingCommand>(CancelDrawingCommand.ID);
     this.registerSubject<StartDrawingCommand>(StartDrawingCommand.ID);
     this.registerSubject<GetLayerQuery>(GetLayerQuery.ID);
+    this.registerSubject<DrawingFinishedEvent>(DrawingFinishedEvent.ID);
   }
 }

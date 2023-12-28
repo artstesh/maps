@@ -13,6 +13,7 @@ import { MapClickService } from '../services/map-click.service';
 import { MapFeatureService } from '../services/map-feature.service';
 import { FeatureLayerSettings } from "./layers";
 import { MapConstants } from "../models/map.constants";
+import { DrawingService } from "../services/drawing/drawing.service";
 
 @Component({
   selector: 'lib-map-plate',
@@ -20,7 +21,8 @@ import { MapConstants } from "../models/map.constants";
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MessageRegistratorService, MapStateService,
-    MapManagementService, MapClickService,MapFeatureService ],
+    MapManagementService, MapClickService,MapFeatureService,
+    DrawingService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;

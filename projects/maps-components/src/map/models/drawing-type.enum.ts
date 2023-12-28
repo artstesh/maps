@@ -1,3 +1,3 @@
 export enum DrawingType {
-  Circle = 1
+  Polygon = 1
 }

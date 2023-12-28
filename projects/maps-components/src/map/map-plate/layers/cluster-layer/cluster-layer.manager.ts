@@ -1,11 +1,13 @@
 import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MapClickEvent } from '../../../messages';
+import { MapClickEvent, MapRenderedEvent } from "../../../messages";
 import { Vector as Layer } from 'ol/layer';
 import Cluster from 'ol/source/Cluster';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
 import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
 import { auditTime } from 'rxjs/operators';
+import { combineLatest } from "rxjs";
+import { Map } from 'ol';
 
 export class ClusterLayerManager {
   constructor(
@@ -18,14 +20,10 @@ export class ClusterLayerManager {
   }
 
   private observeMapMovement() {
-    this.postboy
-      .subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID)
-      .pipe(
-        auditTime(250),
-        //distinctUntilChanged((x, y) => x?.zoom <= y?.zoom ?? false),
-      )
-      .subscribe((m) => {
-        this.checkClusterNecessity();
+    combineLatest([this.postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID).pipe(auditTime(250)),
+      this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID)])
+      .subscribe(([movement, renderEvent]) => {
+        this.checkClusterNecessity(renderEvent.map);
       });
   }
 
@@ -37,14 +35,9 @@ export class ClusterLayerManager {
     });
   }
 
-  private checkClusterNecessity(): void {
-    this.layer
-      .getSource()
-      ?.getView()
-      .then((v) => {
-        console.log(v.zoom);
-        const distance = (v?.zoom ?? 0) > 14 ? 0 : this.settings.distance;
-        const map = this.layer?.getSource()?.setDistance(distance);
-      });
+  private checkClusterNecessity(map: Map): void {
+    let zoom = map.getView().getZoom() ?? 0;
+    const distance = zoom > this.settings.clusterCancel ? 0 : this.settings.distance;
+    this.layer?.getSource()?.setDistance(distance);
   }
 }
