@@ -11,13 +11,18 @@ import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MapClickService } from '../services/map-click.service';
 import { MapFeatureService } from '../services/map-feature.service';
+import { FeatureLayerSettings } from "./layers";
+import { MapConstants } from "../models/map.constants";
+import { DrawingService } from "../services/drawing/drawing.service";
 
 @Component({
   selector: 'lib-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService, MapStateService, MapManagementService, MapClickService, MapFeatureService],
+  providers: [MessageRegistratorService, MapStateService,
+    MapManagementService, MapClickService,MapFeatureService,
+    DrawingService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
@@ -35,6 +40,7 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   }
 
   _settings: MapSettings = new MapSettings();
+  drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
@@ -65,5 +71,5 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
 
   onDestroy = () => {
     this.registrator.down();
-  };
+  }
 }

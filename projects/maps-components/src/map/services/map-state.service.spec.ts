@@ -14,6 +14,7 @@ describe('MapStateService', () => {
   beforeEach(() => {
     when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
     service = new MapStateService(instance(postboy));
+    service.up();
   });
 
   afterEach(() => {

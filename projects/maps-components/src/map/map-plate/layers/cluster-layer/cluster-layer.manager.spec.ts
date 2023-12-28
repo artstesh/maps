@@ -6,10 +6,9 @@ import { ClusterLayerSettings } from './cluster-layer.settings';
 import { Forger } from '@artstesh/forger';
 import { Subject } from 'rxjs';
 import { MapClickEvent } from '../../../messages';
-import { Feature } from 'ol';
-import { Geometry, Point } from 'ol/geom';
 import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
 import { should } from '@artstesh/it-should';
+import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
 
 describe('ClusterLayerManager', () => {
   let service: ClusterLayerManager;
@@ -17,10 +16,13 @@ describe('ClusterLayerManager', () => {
   let postboy = mock(MapPostboyService);
   let settings: ClusterLayerSettings;
   let clickSub$: Subject<MapClickEvent>;
+  let moveEndEvent$: Subject<MapMoveEndEvent>;
 
   beforeEach(() => {
     clickSub$ = new Subject<MapClickEvent>();
+    moveEndEvent$ = new Subject<MapMoveEndEvent>();
     when(postboy.subscribe(MapClickEvent.ID)).thenReturn(clickSub$);
+    when(postboy.subscribe(MapMoveEndEvent.ID)).thenReturn(moveEndEvent$);
     settings = ClusterLayerSettings.copy(Forger.create<ClusterLayerSettings>()!);
     service = new ClusterLayerManager(settings, instance(layer), instance(postboy));
   });
@@ -31,31 +33,31 @@ describe('ClusterLayerManager', () => {
     expect().nothing();
   });
 
-  [0, 1].forEach((count) => {
+  [0,1].forEach(count => {
     it(`should not fit to ${count}`, () => {
-      const features = Forger.create<number[]>({ arrayLength: count })! as any;
-      clickSub$.next(new MapClickEvent([], {}, { [settings.name]: features }));
+      const features = Forger.create<number[]>({arrayLength:count})! as any;
+      clickSub$.next(new MapClickEvent([], {}, {[settings.name]: features}));
       //
       verify(postboy.fire(anything())).never();
-    });
+    })
   });
 
   it(`should not fit to other layer`, () => {
     const otherName = Forger.create<string>()!;
-    const features = Forger.create<number[]>({ arrayLength: 2 })! as any;
+    const features = Forger.create<number[]>({arrayLength:2})! as any;
     //
-    clickSub$.next(new MapClickEvent([], {}, { [otherName]: features }));
+    clickSub$.next(new MapClickEvent([], {}, {[otherName]: features}));
     //
     verify(postboy.fire(anything())).never();
-  });
+  })
 
   it(`should fit to features`, () => {
-    const features = Forger.create<number[]>({ arrayLength: 2 })! as any;
+    const features = Forger.create<number[]>({arrayLength:2})! as any;
     //
-    clickSub$.next(new MapClickEvent([], {}, { [settings.name]: features }));
+    clickSub$.next(new MapClickEvent([], {}, {[settings.name]: features}));
     //
     const [ev] = capture<FitToFeaturesCommand>(postboy.fire).last();
     verify(postboy.fire(anything())).once();
     should().true(ev.features === features);
-  });
+  })
 });

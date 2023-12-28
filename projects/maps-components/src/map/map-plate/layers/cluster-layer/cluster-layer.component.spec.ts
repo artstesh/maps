@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { anything, capture, instance, mock, reset, when } from 'ts-mockito';
 import { Vector as Layer } from 'ol/layer';
 import { MapPostboyService } from '../../../services/map-postboy.service';
@@ -26,9 +26,9 @@ describe('ClusterLayerComponent', () => {
 
   beforeEach(async () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
-    manager = { layer: new Layer() } as any;
+    manager = {layer: new Layer()} as any;
     when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(factory.build(anything(), anything())).thenReturn(manager);
+    when(factory.build(anything(),anything())).thenReturn(manager);
     return MockBuilder(ClusterLayerComponent, MapModule)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(ClusterLayerFactory, instance(factory)));
@@ -57,14 +57,16 @@ describe('ClusterLayerComponent', () => {
     let settings: ClusterLayerSettings;
 
     beforeEach(() => {
-      otherManager = { layer: new Layer() } as any;
+      otherManager = {layer: new Layer()} as any;
       settings = ClusterLayerSettings.copy(Forger.create<ClusterLayerSettings>()!);
       when(factory.build(settings, anything())).thenReturn(otherManager);
       fixture.componentInstance.settings = settings;
       fixture.detectChanges();
     });
 
-    afterEach(() => {});
+    afterEach(() => {
+
+    });
 
     it('should add layer', () => {
       const [fired] = capture<AddLayerCommand>(postboy.fire).last();

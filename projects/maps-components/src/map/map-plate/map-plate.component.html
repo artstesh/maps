@@ -1,2 +1,3 @@
 <ng-content></ng-content>
 <lib-osm-tile-layer *ngIf="osmUrl && map" [map]="map" [url]="osmUrl"></lib-osm-tile-layer>
+<lib-feature-layer *ngIf="map" [settings]="drawingLayerSettings"></lib-feature-layer>

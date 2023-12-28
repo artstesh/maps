@@ -8,22 +8,22 @@ import Cluster from 'ol/source/Cluster';
 import { Geometry, Point } from 'ol/geom';
 import { ClusterLayerManager } from './cluster-layer.manager';
 import { MapPostboyService } from '../../../services/map-postboy.service';
-import Style, { StyleFunction } from 'ol/style/Style';
+import { StyleFunction } from 'ol/style/Style';
 import { Feature } from 'ol';
 import { MapConstants } from '../../../models/map.constants';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ClusterLayerFactory {
-  public build(settings: ClusterLayerSettings, postboy: MapPostboyService): ClusterLayerManager {
+  public build(settings: ClusterLayerSettings, postboy: MapPostboyService): ClusterLayerManager{
     const source = new Source({
-      strategy: settings.bbox ? bbox : undefined,
+      strategy: settings.bbox ? bbox : undefined
     });
     const cluster = new Cluster({
       distance: settings.distance,
       source: source,
-      geometryFunction: (feature) => {
+      geometryFunction: feature => {
         const geom = feature.getGeometry();
         if (geom?.getType() == 'Point') {
           return geom as Point;
@@ -33,13 +33,13 @@ export class ClusterLayerFactory {
           return fromExtent(geom.getExtent())?.getInteriorPoint();
         }
         return undefined as any;
-      },
+      }
     });
     const layer = new Layer({
       source: cluster,
       maxZoom: settings.maxZoom || undefined,
       minZoom: settings.minZoom || undefined,
-      zIndex: settings.zIndex || 0,
+      zIndex: settings.zIndex || 0
     });
     layer.setStyle(this.styleFunc(settings));
     layer.set('name', settings.name);
@@ -50,7 +50,7 @@ export class ClusterLayerFactory {
     return (feature) => {
       const features = feature.get('features') as Feature<Geometry>[];
       if (!settings.style) return undefined;
-      return settings.style(features.map((f) => ({ id: f.getId()!, ...f.get(MapConstants.FeatureInfo) })));
+      return settings.style(features.map(f => ({id: f.getId()!, ...f.get(MapConstants.FeatureInfo)})));
     };
-  }
+  };
 }

@@ -11,6 +11,7 @@ import { AddTileCommand } from '../messages/commands/add-tile.command';
 import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
 import { IPostboyDependingService } from '@artstesh/postboy';
 import Cluster from 'ol/source/Cluster';
+import { GetLayerQuery } from '../messages/queries/get-layer.query';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -26,6 +27,7 @@ export class MapManagementService implements IPostboyDependingService {
     this.observePlaceFeatures();
     this.observeAddTile();
     this.observeRemoveTile();
+    this.observeLayerQuery();
   }
 
   private observeRemoveTile() {
@@ -33,6 +35,10 @@ export class MapManagementService implements IPostboyDependingService {
       if (!this.map) return;
       this.map.removeLayer(c.layer);
     });
+  }
+
+  private observeLayerQuery() {
+    this.postboy.subscribe<GetLayerQuery>(GetLayerQuery.ID).subscribe((ev) => ev.finish(this.layers[ev.name] ?? null));
   }
 
   private observeAddTile() {
