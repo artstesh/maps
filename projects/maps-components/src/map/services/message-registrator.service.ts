@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MapPostboyService } from './map-postboy.service';
-import { ReplaySubject, Subject } from 'rxjs';
 import { MapRenderedEvent } from '../messages';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
@@ -15,18 +14,20 @@ import { MapClickEvent } from '../messages/events/map-click.event';
 import { CloseTooltipCommand } from '../messages/commands/close-tooltip.command';
 import { MapFeatureService } from './map-feature.service';
 import { FitToFeaturesCommand } from '../messages/commands/fit-to-features.command';
+import { MapMoveEndEvent } from '../messages/events/map-move-end.event';
+import { CancelDrawingCommand } from "../messages/commands/cancel-drawing.command";
+import { StartDrawingCommand } from "../messages/commands/start-drawing.command";
+import { DrawingService } from "./drawing/drawing.service";
+import { GetLayerQuery } from "../messages/queries/get-layer.query";
+import { DrawingFinishedEvent } from "../messages/events/drawing-finished.event";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
-  constructor(
-    service: MapPostboyService,
-    management: MapManagementService,
-    state: MapStateService,
-    feature: MapFeatureService,
-    interaction: MapClickService,
-  ) {
+  constructor(service: MapPostboyService, management: MapManagementService,
+              state: MapStateService, feature: MapFeatureService,
+              interaction: MapClickService, drawing: DrawingService) {
     super(service);
-    this.registerServices([management, state, interaction, feature]);
+    this.registerServices([management, state,interaction,feature, drawing]);
   }
   protected _up(): void {
     this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
@@ -38,5 +39,10 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<MapClickEvent>(MapClickEvent.ID);
     this.registerSubject<CloseTooltipCommand>(CloseTooltipCommand.ID);
     this.registerSubject<FitToFeaturesCommand>(FitToFeaturesCommand.ID);
+    this.registerSubject<MapMoveEndEvent>(MapMoveEndEvent.ID);
+    this.registerSubject<CancelDrawingCommand>(CancelDrawingCommand.ID);
+    this.registerSubject<StartDrawingCommand>(StartDrawingCommand.ID);
+    this.registerSubject<GetLayerQuery>(GetLayerQuery.ID);
+    this.registerSubject<DrawingFinishedEvent>(DrawingFinishedEvent.ID);
   }
 }

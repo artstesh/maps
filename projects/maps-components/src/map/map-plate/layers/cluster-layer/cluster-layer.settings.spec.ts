@@ -39,6 +39,16 @@ describe('#map-models ClusterLayerSettings', () => {
     });
   });
 
+  describe('setClusterCancel()', () => {
+    it('success', () => {
+      const expected = Forger.create<number>()!;
+      //
+      model = model.setClusterCancel(expected);
+      //
+      should().true(model.clusterCancel === expected);
+    });
+  });
+
   describe('setName()', () => {
     it('success', () => {
       const expected = Forger.create<string>()!;
@@ -141,6 +151,12 @@ describe('#map-models ClusterLayerSettings', () => {
 
     it('different distance', () => {
       const other = ClusterLayerSettings.copy(model).setDistance(model.distance + Forger.create<number>()!);
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different clusterCancel', () => {
+      const other = ClusterLayerSettings.copy(model).setDistance(model.clusterCancel + Forger.create<number>()!);
       //
       should().false(model.isSame(other));
     });
