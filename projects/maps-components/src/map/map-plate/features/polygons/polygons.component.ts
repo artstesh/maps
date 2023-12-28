@@ -37,7 +37,7 @@ export class PolygonsComponent extends DestructibleComponent implements OnInit {
   }
 
   private putPolygons(): void {
-    if (!this._polygons?.length) return;
+    if (!this._polygons) return;
     this.postboy.fire(
       new PlaceLayerFeaturesCommand(
         this.layerName,
