@@ -15,19 +15,24 @@ import { CloseTooltipCommand } from '../messages/commands/close-tooltip.command'
 import { MapFeatureService } from './map-feature.service';
 import { FitToFeaturesCommand } from '../messages/commands/fit-to-features.command';
 import { MapMoveEndEvent } from '../messages/events/map-move-end.event';
-import { CancelDrawingCommand } from "../messages/commands/cancel-drawing.command";
-import { StartDrawingCommand } from "../messages/commands/start-drawing.command";
-import { DrawingService } from "./drawing/drawing.service";
-import { GetLayerQuery } from "../messages/queries/get-layer.query";
-import { DrawingFinishedEvent } from "../messages/events/drawing-finished.event";
+import { CancelDrawingCommand } from '../messages/commands/cancel-drawing.command';
+import { StartDrawingCommand } from '../messages/commands/start-drawing.command';
+import { DrawingService } from './drawing/drawing.service';
+import { GetLayerQuery } from '../messages/queries/get-layer.query';
+import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
-  constructor(service: MapPostboyService, management: MapManagementService,
-              state: MapStateService, feature: MapFeatureService,
-              interaction: MapClickService, drawing: DrawingService) {
+  constructor(
+    service: MapPostboyService,
+    management: MapManagementService,
+    state: MapStateService,
+    feature: MapFeatureService,
+    interaction: MapClickService,
+    drawing: DrawingService,
+  ) {
     super(service);
-    this.registerServices([management, state,interaction,feature, drawing]);
+    this.registerServices([management, state, interaction, feature, drawing]);
   }
   protected _up(): void {
     this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);

@@ -33,31 +33,31 @@ describe('ClusterLayerManager', () => {
     expect().nothing();
   });
 
-  [0,1].forEach(count => {
+  [0, 1].forEach((count) => {
     it(`should not fit to ${count}`, () => {
-      const features = Forger.create<number[]>({arrayLength:count})! as any;
-      clickSub$.next(new MapClickEvent([], {}, {[settings.name]: features}));
+      const features = Forger.create<number[]>({ arrayLength: count })! as any;
+      clickSub$.next(new MapClickEvent([], {}, { [settings.name]: features }));
       //
       verify(postboy.fire(anything())).never();
-    })
+    });
   });
 
   it(`should not fit to other layer`, () => {
     const otherName = Forger.create<string>()!;
-    const features = Forger.create<number[]>({arrayLength:2})! as any;
+    const features = Forger.create<number[]>({ arrayLength: 2 })! as any;
     //
-    clickSub$.next(new MapClickEvent([], {}, {[otherName]: features}));
+    clickSub$.next(new MapClickEvent([], {}, { [otherName]: features }));
     //
     verify(postboy.fire(anything())).never();
-  })
+  });
 
   it(`should fit to features`, () => {
-    const features = Forger.create<number[]>({arrayLength:2})! as any;
+    const features = Forger.create<number[]>({ arrayLength: 2 })! as any;
     //
-    clickSub$.next(new MapClickEvent([], {}, {[settings.name]: features}));
+    clickSub$.next(new MapClickEvent([], {}, { [settings.name]: features }));
     //
     const [ev] = capture<FitToFeaturesCommand>(postboy.fire).last();
     verify(postboy.fire(anything())).once();
     should().true(ev.features === features);
-  })
+  });
 });

@@ -9,8 +9,7 @@ import { MapMoveEndEvent } from '../messages/events/map-move-end.event';
 export class MapStateService implements IPostboyDependingService {
   private map?: Map;
 
-  constructor(private postboy: MapPostboyService) {
-  }
+  constructor(private postboy: MapPostboyService) {}
 
   up(): void {
     this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((ev) => {
