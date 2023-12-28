@@ -9,6 +9,7 @@ export class ClusterLayerSettings {
   minZoom: number = 0;
   distance: number = 20;
   bbox: boolean = false;
+  clusterCancel: number = 14;
   style?: (features: IIdentified[]) => Style;
 
   public static copy(model: ClusterLayerSettings): ClusterLayerSettings {
@@ -18,6 +19,7 @@ export class ClusterLayerSettings {
     result.minZoom = model.minZoom;
     result.zIndex = model.zIndex;
     result.bbox = model.bbox;
+    result.clusterCancel = model.clusterCancel;
     result.distance = model.distance;
     result.style = model.style;
     return result;
@@ -43,6 +45,10 @@ export class ClusterLayerSettings {
     return ClusterLayerSettings.copy({ ...this, minZoom });
   }
 
+  setClusterCancel(clusterCancel: number): ClusterLayerSettings {
+    return ClusterLayerSettings.copy({ ...this, clusterCancel });
+  }
+
   setBbox(bbox: boolean): ClusterLayerSettings {
     return ClusterLayerSettings.copy({ ...this, bbox });
   }
@@ -57,6 +63,7 @@ export class ClusterLayerSettings {
     if (this.zIndex !== model.zIndex) return false;
     if (this.name !== model.name) return false;
     if (this.distance !== model.distance) return false;
+    if (this.clusterCancel !== model.clusterCancel) return false;
     if (this.bbox !== model.bbox) return false;
     if (this.style !== model.style) return false;
     return true;
