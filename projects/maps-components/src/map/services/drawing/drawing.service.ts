@@ -12,12 +12,13 @@ import { MapConstants } from '../../models/map.constants';
 import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import { Vector as Source } from 'ol/source';
-import { Draw, Snap } from 'ol/interaction';
-import { DrawingType, FeatureOutputFormat } from '../../models';
+import { Draw } from 'ol/interaction';
+import { DrawingType } from '../../models';
 import { Map } from 'ol';
-import { DrawEvent } from 'ol/interaction/Draw';
-import { GeoJSON, WKT } from 'ol/format';
-import { Geometry } from "ol/geom";
+import { createRegularPolygon, DrawEvent } from "ol/interaction/Draw";
+import { Geometry } from 'ol/geom';
+import Polygon from "ol/geom/Polygon";
+import { Coordinate } from "ol/coordinate";
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -37,9 +38,11 @@ export class DrawingService implements IPostboyDependingService {
         this.drawInteraction = new Draw({
           source: l.getSource()!,
           type: DrawingType[ev.type] as any,
-          style: ev.style
+          style: ev.style,
+          geometryFunction: ev.type !== DrawingType.Circle ? undefined :
+            createRegularPolygon(32)
         });
-        this.map.addInteraction(this.drawInteraction);
+          this.map.addInteraction(this.drawInteraction);
         this.drawInteraction.on('drawend', (evt: DrawEvent) => {
           cancelSub.unsubscribe();
           this.onEnd(evt, ev, l);
@@ -50,11 +53,7 @@ export class DrawingService implements IPostboyDependingService {
   }
 
   private onEnd(evt: DrawEvent, command: StartDrawingCommand, layer: Layer<VectorSource<Geometry>>): void {
-    command.finish(
-      command.format === FeatureOutputFormat.GeoJson
-        ? new GeoJSON().writeFeature(evt.feature)
-        : new WKT().writeFeature(evt.feature),
-    );
+    command.finish(evt.feature);
     this.clearInteraction(layer);
   }
 
@@ -70,7 +69,7 @@ export class DrawingService implements IPostboyDependingService {
     this.postboy.fire(query);
   }
 
-  private observeCancelation(ev: StartDrawingCommand,layer: Layer<VectorSource<any>> | null): Subscription {
+  private observeCancelation(ev: StartDrawingCommand, layer: Layer<VectorSource<any>> | null): Subscription {
     return this.postboy
       .subscribe<CancelDrawingCommand>(CancelDrawingCommand.ID)
       .pipe(first())
@@ -83,7 +82,7 @@ export class DrawingService implements IPostboyDependingService {
   private clearInteraction(layer: Layer<Source<Geometry>> | null): void {
     if (!!this.drawInteraction) {
       this.map?.removeInteraction(this.drawInteraction);
-      layer?.setSource(new Source({}))
+      layer?.setSource(new Source({}));
     }
     setTimeout(() => this.postboy.fire(new DrawingFinishedEvent()), 300);
   }
