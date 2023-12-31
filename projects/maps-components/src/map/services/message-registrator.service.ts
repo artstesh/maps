@@ -25,12 +25,17 @@ import { DrawingGenerationService } from './drawing/drawing-generation.service';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
-  constructor(service: MapPostboyService, management: MapManagementService,
-              state: MapStateService, feature: MapFeatureService,
-              interaction: MapClickService, drawing: DrawingService,
-              drawGenerator: DrawingGenerationService) {
+  constructor(
+    service: MapPostboyService,
+    management: MapManagementService,
+    state: MapStateService,
+    feature: MapFeatureService,
+    interaction: MapClickService,
+    drawing: DrawingService,
+    drawGenerator: DrawingGenerationService,
+  ) {
     super(service);
-    this.registerServices([management, state,interaction,feature, drawing, drawGenerator]);
+    this.registerServices([management, state, interaction, feature, drawing, drawGenerator]);
   }
   protected _up(): void {
     this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
