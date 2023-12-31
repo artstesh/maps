@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DrawingGenerationService } from './drawing-generation.service';
-import { instance, mock, reset, when } from "ts-mockito";
-import { MapPostboyService } from "../map-postboy.service";
-import { ReplaySubject, Subject } from "rxjs";
-import { CancelDrawingCommand, MapRenderedEvent, StartDrawingCommand } from "../../messages";
-import { GenerateDrawQuery } from "../../messages/queries/generate-draw.query";
-import { DrawingService } from "./drawing.service";
+import { instance, mock, reset, when } from 'ts-mockito';
+import { MapPostboyService } from '../map-postboy.service';
+import { ReplaySubject, Subject } from 'rxjs';
+import { CancelDrawingCommand, MapRenderedEvent, StartDrawingCommand } from '../../messages';
+import { GenerateDrawQuery } from '../../messages/queries/generate-draw.query';
+import { DrawingService } from './drawing.service';
 
 describe('DrawingGenerationService', () => {
   const postboy = mock(MapPostboyService);
