@@ -20,19 +20,17 @@ import { StartDrawingCommand } from '../messages/commands/start-drawing.command'
 import { DrawingService } from './drawing/drawing.service';
 import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event';
+import { GenerateDrawQuery } from '../messages/queries/generate-draw.query';
+import { DrawingGenerationService } from './drawing/drawing-generation.service';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
-  constructor(
-    service: MapPostboyService,
-    management: MapManagementService,
-    state: MapStateService,
-    feature: MapFeatureService,
-    interaction: MapClickService,
-    drawing: DrawingService,
-  ) {
+  constructor(service: MapPostboyService, management: MapManagementService,
+              state: MapStateService, feature: MapFeatureService,
+              interaction: MapClickService, drawing: DrawingService,
+              drawGenerator: DrawingGenerationService) {
     super(service);
-    this.registerServices([management, state, interaction, feature, drawing]);
+    this.registerServices([management, state,interaction,feature, drawing, drawGenerator]);
   }
   protected _up(): void {
     this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
@@ -49,5 +47,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<StartDrawingCommand>(StartDrawingCommand.ID);
     this.registerSubject<GetLayerQuery>(GetLayerQuery.ID);
     this.registerSubject<DrawingFinishedEvent>(DrawingFinishedEvent.ID);
+    this.registerSubject<GenerateDrawQuery>(GenerateDrawQuery.ID);
   }
 }
