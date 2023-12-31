@@ -13,12 +13,12 @@ import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import { Vector as Source } from 'ol/source';
 import { Draw } from 'ol/interaction';
-import { DrawingType } from '../../models';
+import { FeatureOutputFormat } from '../../models';
 import { Map } from 'ol';
-import { createRegularPolygon, DrawEvent } from "ol/interaction/Draw";
+import { DrawEvent } from 'ol/interaction/Draw';
 import { Geometry } from 'ol/geom';
-import Polygon from "ol/geom/Polygon";
-import { Coordinate } from "ol/coordinate";
+import { GeoJSON, WKT } from 'ol/format';
+import { GenerateDrawQuery } from '../../messages/queries/generate-draw.query';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -34,26 +34,28 @@ export class DrawingService implements IPostboyDependingService {
           this.clearInteraction(l);
           return;
         }
-        const cancelSub = this.observeCancelation(ev, l);
-        this.drawInteraction = new Draw({
-          source: l.getSource()!,
-          type: DrawingType[ev.type] as any,
-          style: ev.style,
-          geometryFunction: ev.type !== DrawingType.Circle ? undefined :
-            createRegularPolygon(32)
+        const drawQuery = new GenerateDrawQuery(l, ev.style, ev.type);
+        drawQuery.result.subscribe((draw) => {
+          const cancelSub = this.observeCancelation(ev, l);
+          this.drawInteraction = draw;
+          this.map?.addInteraction(this.drawInteraction);
+          this.drawInteraction.on('drawend', (evt: DrawEvent) => {
+            cancelSub.unsubscribe();
+            this.onEnd(evt, ev, l);
+          });
         });
-          this.map.addInteraction(this.drawInteraction);
-        this.drawInteraction.on('drawend', (evt: DrawEvent) => {
-          cancelSub.unsubscribe();
-          this.onEnd(evt, ev, l);
-        });
+        this.postboy.fire(drawQuery);
       });
     });
     this.observeMapRender();
   }
 
   private onEnd(evt: DrawEvent, command: StartDrawingCommand, layer: Layer<VectorSource<Geometry>>): void {
-    command.finish(evt.feature);
+    command.finish(
+      command.format === FeatureOutputFormat.GeoJson
+        ? new GeoJSON().writeFeature(evt.feature)
+        : new WKT().writeFeature(evt.feature),
+    );
     this.clearInteraction(layer);
   }
 

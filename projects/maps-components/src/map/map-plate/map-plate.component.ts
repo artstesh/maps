@@ -11,9 +11,10 @@ import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MapClickService } from '../services/map-click.service';
 import { MapFeatureService } from '../services/map-feature.service';
-import { FeatureLayerSettings } from "./layers";
-import { MapConstants } from "../models/map.constants";
-import { DrawingService } from "../services/drawing/drawing.service";
+import { FeatureLayerSettings } from './layers';
+import { MapConstants } from '../models/map.constants';
+import { DrawingService } from '../services/drawing/drawing.service';
+import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
 
 @Component({
   selector: 'lib-map-plate',
@@ -22,7 +23,7 @@ import { DrawingService } from "../services/drawing/drawing.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MessageRegistratorService, MapStateService,
     MapManagementService, MapClickService,MapFeatureService,
-    DrawingService],
+    DrawingService,DrawingGenerationService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
