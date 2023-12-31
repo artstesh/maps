@@ -21,9 +21,15 @@ import { DrawingGenerationService } from '../services/drawing/drawing-generation
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService, MapStateService,
-    MapManagementService, MapClickService,MapFeatureService,
-    DrawingService,DrawingGenerationService],
+  providers: [
+    MessageRegistratorService,
+    MapStateService,
+    MapManagementService,
+    MapClickService,
+    MapFeatureService,
+    DrawingService,
+    DrawingGenerationService,
+  ],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
@@ -72,5 +78,5 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
 
   onDestroy = () => {
     this.registrator.down();
-  }
+  };
 }
