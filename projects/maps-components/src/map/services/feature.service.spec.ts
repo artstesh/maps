@@ -1,17 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
 import { FeatureService } from './feature.service';
-import { anything, instance, mock, reset, when } from "ts-mockito";
-import { MapPostboyService } from "./map-postboy.service";
-import Map from "ol/Map";
-import { ReplaySubject, Subject } from "rxjs";
-import { MapRenderedEvent } from "../messages";
-import { MapClickService } from "./map-click.service";
-import { FilterFeaturesInAreaQuery } from "../messages/queries/filter-features-in-area.query";
-import { PolygonModel } from "../models";
-import { Feature } from "ol";
-import { Circle, Geometry, Point } from "ol/geom";
-import { should } from "@artstesh/it-should";
+import { anything, instance, mock, reset, when } from 'ts-mockito';
+import { MapPostboyService } from './map-postboy.service';
+import Map from 'ol/Map';
+import { ReplaySubject, Subject } from 'rxjs';
+import { MapRenderedEvent } from '../messages';
+import { MapClickService } from './map-click.service';
+import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
+import { PolygonModel } from '../models';
+import { Feature } from 'ol';
+import { Circle, Geometry, Point } from 'ol/geom';
+import { should } from '@artstesh/it-should';
 
 describe('FeatureService', () => {
   const postboy = mock(MapPostboyService);
@@ -38,73 +38,73 @@ describe('FeatureService', () => {
       query.features = [];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
       should().array(result).empty();
-    })
+    });
 
     it('point no intersection', () => {
-      query.features = [new Feature<Geometry>(new Point([10,10]))];
+      query.features = [new Feature<Geometry>(new Point([10, 10]))];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
       should().array(result).empty();
-    })
+    });
 
     it('circle no intersection', () => {
-      query.features = [new Feature<Geometry>(new Circle([10,10], 10))];
+      query.features = [new Feature<Geometry>(new Circle([10, 10], 10))];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
       should().array(result).empty();
-    })
+    });
 
     it('polygon no intersection', () => {
       query.features = [PolygonModel.fromWKT(1, 'POLYGON ((15 20, 15 23, 19 23, 19 20, 15 20))').feature];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
       should().array(result).empty();
-    })
+    });
 
     it('point with intersection', () => {
-      query.features = [new Feature<Geometry>(new Point([20,25]))];
+      query.features = [new Feature<Geometry>(new Point([20, 25]))];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
-      should().array(result).length(1)
+      should().array(result).length(1);
       should().true(result[0] === query.features[0]);
-    })
+    });
 
     it('circle with intersection', () => {
-      query.features = [new Feature<Geometry>(new Circle([20,25], 10))];
+      query.features = [new Feature<Geometry>(new Circle([20, 25], 10))];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
-      should().array(result).length(1)
+      should().array(result).length(1);
       should().true(result[0] === query.features[0]);
-    })
+    });
 
     it('polygon no intersection', () => {
       query.features = [PolygonModel.fromWKT(1, 'POLYGON ((20 21, 20 24, 23 24, 23 21, 20 21))').feature];
       let result: Feature<Geometry>[] = [];
       //
-      query.result.subscribe(f => result = f);
+      query.result.subscribe((f) => (result = f));
       featuresInArea$.next(query);
       //
-      should().array(result).length(1)
+      should().array(result).length(1);
       should().true(result[0] === query.features[0]);
-    })
-  })
+    });
+  });
 });
