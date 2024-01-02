@@ -15,7 +15,7 @@ import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
 import { IIdentified } from '../models/i-identified';
 import { Dictionary } from '../models';
-import { combineLatest, forkJoin, Observable } from "rxjs";
+import { combineLatest, forkJoin, Observable } from 'rxjs';
 import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
 import { tap } from 'rxjs/operators';
 import { MapConstants } from '../models/map.constants';
@@ -112,7 +112,7 @@ export class MapManagementService implements IPostboyDependingService {
         queries.push(query);
       });
       forkJoin(queue).subscribe(() => qr.finish(result));
-      queries.forEach(q => this.postboy.fire(q));
+      queries.forEach((q) => this.postboy.fire(q));
     });
   }
 }
