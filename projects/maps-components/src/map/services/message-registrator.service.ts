@@ -22,6 +22,10 @@ import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event';
 import { GenerateDrawQuery } from '../messages/queries/generate-draw.query';
 import { DrawingGenerationService } from './drawing/drawing-generation.service';
+import { FeatureService } from './feature.service';
+import { FilterFeaturesInAreaQuery } from "../messages/queries/filter-features-in-area.query";
+import { GetFeaturesInAreaQuery } from "../messages/queries/get-features-in-area.query";
+import { DrawSelectionAreaCommand } from "../messages/commands/draw-selection-area.command";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -29,14 +33,16 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     service: MapPostboyService,
     management: MapManagementService,
     state: MapStateService,
-    feature: MapFeatureService,
+    mapFeature: MapFeatureService,
     interaction: MapClickService,
     drawing: DrawingService,
     drawGenerator: DrawingGenerationService,
+    feature: FeatureService,
   ) {
     super(service);
-    this.registerServices([management, state, interaction, feature, drawing, drawGenerator]);
+    this.registerServices([management, state, interaction, mapFeature, drawing, drawGenerator, feature]);
   }
+
   protected _up(): void {
     this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
     this.registerReplay<PlaceLayerFeaturesCommand>(PlaceLayerFeaturesCommand.ID);
@@ -53,5 +59,8 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<GetLayerQuery>(GetLayerQuery.ID);
     this.registerSubject<DrawingFinishedEvent>(DrawingFinishedEvent.ID);
     this.registerSubject<GenerateDrawQuery>(GenerateDrawQuery.ID);
+    this.registerSubject<FilterFeaturesInAreaQuery>(FilterFeaturesInAreaQuery.ID);
+    this.registerSubject<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID);
+    this.registerSubject<DrawSelectionAreaCommand>(DrawSelectionAreaCommand.ID);
   }
 }
