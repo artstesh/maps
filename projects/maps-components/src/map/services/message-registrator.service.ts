@@ -23,9 +23,9 @@ import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event'
 import { GenerateDrawQuery } from '../messages/queries/generate-draw.query';
 import { DrawingGenerationService } from './drawing/drawing-generation.service';
 import { FeatureService } from './feature.service';
-import { FilterFeaturesInAreaQuery } from "../messages/queries/filter-features-in-area.query";
-import { GetFeaturesInAreaQuery } from "../messages/queries/get-features-in-area.query";
-import { DrawSelectionAreaCommand } from "../messages/commands/draw-selection-area.command";
+import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
+import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
+import { DrawSelectionAreaCommand } from '../messages/commands/draw-selection-area.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {

@@ -13,15 +13,15 @@ import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import { Vector as Source } from 'ol/source';
 import { Draw } from 'ol/interaction';
-import { Dictionary, FeatureOutputFormat, PolygonModel } from "../../models";
+import { Dictionary, FeatureOutputFormat, PolygonModel } from '../../models';
 import { Map } from 'ol';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
 import { GenerateDrawQuery } from '../../messages/queries/generate-draw.query';
-import { DrawSelectionAreaCommand } from "../../messages/commands/draw-selection-area.command";
-import { GetFeaturesInAreaQuery } from "../../messages/queries/get-features-in-area.query";
-import { IIdentified } from "../../models/i-identified";
+import { DrawSelectionAreaCommand } from '../../messages/commands/draw-selection-area.command';
+import { GetFeaturesInAreaQuery } from '../../messages/queries/get-features-in-area.query';
+import { IIdentified } from '../../models/i-identified';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -39,14 +39,14 @@ export class DrawingService implements IPostboyDependingService {
   private observeSelectArea() {
     this.postboy.subscribe<DrawSelectionAreaCommand>(DrawSelectionAreaCommand.ID).subscribe((ev) => {
       const drawingCommand = new StartDrawingCommand(ev.type, ev.style);
-      drawingCommand.result.subscribe(r => {
+      drawingCommand.result.subscribe((r) => {
         if (!r) {
           ev.finish(new Dictionary<IIdentified[]>());
           return;
         }
-        const area = PolygonModel.fromGeoJson(1,r).feature.getGeometry()!;
+        const area = PolygonModel.fromGeoJson(1, r).feature.getGeometry()!;
         const getFeaturesCommand = new GetFeaturesInAreaQuery(area, ev.ignore);
-        getFeaturesCommand.result.subscribe(result => ev.finish(result));
+        getFeaturesCommand.result.subscribe((result) => ev.finish(result));
         this.postboy.fire(getFeaturesCommand);
       });
       this.postboy.fire(drawingCommand);
