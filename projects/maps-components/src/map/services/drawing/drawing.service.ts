@@ -13,12 +13,15 @@ import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import { Vector as Source } from 'ol/source';
 import { Draw } from 'ol/interaction';
-import { FeatureOutputFormat } from '../../models';
+import { Dictionary, FeatureOutputFormat, PolygonModel } from "../../models";
 import { Map } from 'ol';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
 import { GenerateDrawQuery } from '../../messages/queries/generate-draw.query';
+import { DrawSelectionAreaCommand } from "../../messages/commands/draw-selection-area.command";
+import { GetFeaturesInAreaQuery } from "../../messages/queries/get-features-in-area.query";
+import { IIdentified } from "../../models/i-identified";
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -28,6 +31,29 @@ export class DrawingService implements IPostboyDependingService {
   constructor(private postboy: MapPostboyService) {}
 
   up(): void {
+    this.observeDrawing();
+    this.observeSelectArea();
+    this.observeMapRender();
+  }
+
+  private observeSelectArea() {
+    this.postboy.subscribe<DrawSelectionAreaCommand>(DrawSelectionAreaCommand.ID).subscribe((ev) => {
+      const drawingCommand = new StartDrawingCommand(ev.type, ev.style);
+      drawingCommand.result.subscribe(r => {
+        if (!r) {
+          ev.finish(new Dictionary<IIdentified[]>());
+          return;
+        }
+        const area = PolygonModel.fromGeoJson(1,r).feature.getGeometry()!;
+        const getFeaturesCommand = new GetFeaturesInAreaQuery(area, ev.ignore);
+        getFeaturesCommand.result.subscribe(result => ev.finish(result));
+        this.postboy.fire(getFeaturesCommand);
+      });
+      this.postboy.fire(drawingCommand);
+    });
+  }
+
+  private observeDrawing() {
     this.postboy.subscribe<StartDrawingCommand>(StartDrawingCommand.ID).subscribe((ev) => {
       this.draw((l) => {
         if (!l || !this.map) {
@@ -47,7 +73,6 @@ export class DrawingService implements IPostboyDependingService {
         this.postboy.fire(drawQuery);
       });
     });
-    this.observeMapRender();
   }
 
   private onEnd(evt: DrawEvent, command: StartDrawingCommand, layer: Layer<VectorSource<Geometry>>): void {
