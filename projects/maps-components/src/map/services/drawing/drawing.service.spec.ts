@@ -2,7 +2,7 @@ import { DrawingService } from './drawing.service';
 import { instance, mock, reset, when } from 'ts-mockito';
 import { MapPostboyService } from '../map-postboy.service';
 import { ReplaySubject, Subject } from 'rxjs';
-import { CancelDrawingCommand, DrawSelectionAreaCommand, MapRenderedEvent, StartDrawingCommand } from "../../messages";
+import { CancelDrawingCommand, DrawSelectionAreaCommand, MapRenderedEvent, StartDrawingCommand } from '../../messages';
 
 describe('DrawingService', () => {
   const postboy = mock(MapPostboyService);
