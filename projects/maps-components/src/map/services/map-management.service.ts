@@ -12,11 +12,18 @@ import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
 import { IPostboyDependingService } from '@artstesh/postboy';
 import Cluster from 'ol/source/Cluster';
 import { GetLayerQuery } from '../messages/queries/get-layer.query';
+import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
+import { IIdentified } from '../models/i-identified';
+import { Dictionary } from '../models';
+import { combineLatest, forkJoin, Observable } from "rxjs";
+import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
+import { tap } from 'rxjs/operators';
+import { MapConstants } from '../models/map.constants';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
   private map?: Map;
-  private layers: { [name: string]: Layer<VectorSource<any> | Cluster> } = {};
+  private layers = new Dictionary<Layer<VectorSource<any> | Cluster>>();
 
   constructor(private postboy: MapPostboyService) {}
 
@@ -28,6 +35,7 @@ export class MapManagementService implements IPostboyDependingService {
     this.observeAddTile();
     this.observeRemoveTile();
     this.observeLayerQuery();
+    this.observeFeaturesInArea();
   }
 
   private observeRemoveTile() {
@@ -38,7 +46,7 @@ export class MapManagementService implements IPostboyDependingService {
   }
 
   private observeLayerQuery() {
-    this.postboy.subscribe<GetLayerQuery>(GetLayerQuery.ID).subscribe((ev) => ev.finish(this.layers[ev.name] ?? null));
+    this.postboy.subscribe<GetLayerQuery>(GetLayerQuery.ID).subscribe((ev) => ev.finish(this.layers.take(ev.name)));
   }
 
   private observeAddTile() {
@@ -57,15 +65,15 @@ export class MapManagementService implements IPostboyDependingService {
   private observeAddLayer() {
     this.postboy.subscribe<AddLayerCommand>(AddLayerCommand.ID).subscribe((c) => {
       if (!this.map) return;
-      this.layers[c.layer.get('name')] = c.layer;
+      this.layers.put(c.layer.get('name'), c.layer);
       this.map.addLayer(c.layer);
     });
   }
 
   private observePlaceFeatures() {
     this.postboy.subscribe<PlaceLayerFeaturesCommand>(PlaceLayerFeaturesCommand.ID).subscribe((c) => {
-      if (!this.layers[c.layer]) return;
-      let source = this.layers[c.layer]?.getSource();
+      if (!this.layers.has(c.layer)) return;
+      let source = this.layers.take(c.layer)!.getSource();
       if (!!(source as any)['getSource']) source = (source as any)?.getSource();
       source?.clear();
       source?.addFeatures(c.features);
@@ -75,8 +83,36 @@ export class MapManagementService implements IPostboyDependingService {
   private observeRemoveLayer() {
     this.postboy.subscribe<RemoveLayerCommand>(RemoveLayerCommand.ID).subscribe((c) => {
       if (!this.map) return;
-      delete this.layers[c.layer.get('name')];
+      this.layers.rmv(c.layer.get('name'));
       this.map.removeLayer(c.layer);
+    });
+  }
+
+  private observeFeaturesInArea() {
+    this.postboy.subscribe<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID).subscribe((qr) => {
+      let result = new Dictionary<IIdentified[]>();
+      const queue: Observable<any>[] = [];
+      const queries: FilterFeaturesInAreaQuery[] = [];
+      this.layers.forEach((l) => {
+        let layerName = l.get('name');
+        if (qr.ignore.has(layerName) || layerName === MapConstants.DrawingLayerId) return;
+        let source = l.getSource();
+        if (!!(source as any)['getSource']) source = (source as any)?.getSource();
+        const query = new FilterFeaturesInAreaQuery(qr.area, source?.getFeatures() ?? []);
+        queue.push(
+          query.result.pipe(
+            tap((r) => {
+              result.put(
+                l.get('name'),
+                r.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
+              );
+            }),
+          ),
+        );
+        queries.push(query);
+      });
+      forkJoin(queue).subscribe(() => qr.finish(result));
+      queries.forEach(q => this.postboy.fire(q));
     });
   }
 }
