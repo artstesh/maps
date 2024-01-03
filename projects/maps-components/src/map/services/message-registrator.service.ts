@@ -20,12 +20,15 @@ import { StartDrawingCommand } from '../messages/commands/start-drawing.command'
 import { DrawingService } from './drawing/drawing.service';
 import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event';
-import { GenerateDrawQuery } from '../messages/queries/generate-draw.query';
 import { DrawingGenerationService } from './drawing/drawing-generation.service';
 import { FeatureService } from './feature.service';
-import { FilterFeaturesInAreaQuery } from "../messages/queries/filter-features-in-area.query";
-import { GetFeaturesInAreaQuery } from "../messages/queries/get-features-in-area.query";
-import { DrawSelectionAreaCommand } from "../messages/commands/draw-selection-area.command";
+import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
+import { DrawSelectionAreaCommand } from '../messages/commands/draw-selection-area.command';
+import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
+import { GenerateDrawExecutor } from "../messages/executors/generate-draw.executor";
+import { FeatureModificationService } from "./drawing/feature-modification.service";
+import { CancelFeatureModificationCommand } from "../messages/commands/cancel-feature-modification.command";
+import { ModifyFeatureCommand } from "../messages/commands/modify-feature.command";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -36,11 +39,10 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     mapFeature: MapFeatureService,
     interaction: MapClickService,
     drawing: DrawingService,
-    drawGenerator: DrawingGenerationService,
-    feature: FeatureService,
+    featureModification: FeatureModificationService,
   ) {
     super(service);
-    this.registerServices([management, state, interaction, mapFeature, drawing, drawGenerator, feature]);
+    this.registerServices([management, state, interaction, mapFeature, drawing, featureModification]);
   }
 
   protected _up(): void {
@@ -58,9 +60,19 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject<StartDrawingCommand>(StartDrawingCommand.ID);
     this.registerSubject<GetLayerQuery>(GetLayerQuery.ID);
     this.registerSubject<DrawingFinishedEvent>(DrawingFinishedEvent.ID);
-    this.registerSubject<GenerateDrawQuery>(GenerateDrawQuery.ID);
-    this.registerSubject<FilterFeaturesInAreaQuery>(FilterFeaturesInAreaQuery.ID);
     this.registerSubject<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID);
     this.registerSubject<DrawSelectionAreaCommand>(DrawSelectionAreaCommand.ID);
+    this.registerSubject<CancelFeatureModificationCommand>(CancelFeatureModificationCommand.ID);
+    this.registerSubject<ModifyFeatureCommand>(ModifyFeatureCommand.ID);
+    this.setExecutors();
+  }
+
+  private setExecutors() {
+    this.registerExecutor(FilterFeaturesInAreaExecutor.ID, (e: FilterFeaturesInAreaExecutor) =>
+      FeatureService.filterFeaturesInArea(e),
+    );
+    this.registerExecutor(GenerateDrawExecutor.ID, (e: GenerateDrawExecutor) =>
+      DrawingGenerationService.getDraw(e),
+    );
   }
 }

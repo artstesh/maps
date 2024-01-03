@@ -18,10 +18,10 @@ import { Map } from 'ol';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
-import { GenerateDrawQuery } from '../../messages/queries/generate-draw.query';
 import { DrawSelectionAreaCommand } from "../../messages/commands/draw-selection-area.command";
 import { GetFeaturesInAreaQuery } from "../../messages/queries/get-features-in-area.query";
-import { IIdentified } from "../../models/i-identified";
+import { IIdentified } from '../../models/i-identified';
+import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -60,17 +60,13 @@ export class DrawingService implements IPostboyDependingService {
           this.clearInteraction(l);
           return;
         }
-        const drawQuery = new GenerateDrawQuery(l, ev.style, ev.type);
-        drawQuery.result.subscribe((draw) => {
-          const cancelSub = this.observeCancelation(ev, l);
-          this.drawInteraction = draw;
-          this.map?.addInteraction(this.drawInteraction);
-          this.drawInteraction.on('drawend', (evt: DrawEvent) => {
-            cancelSub.unsubscribe();
-            this.onEnd(evt, ev, l);
-          });
+        const cancelSub = this.observeCancelation(ev, l);
+        this.drawInteraction = this.postboy.execute(new GenerateDrawExecutor(l, ev.style, ev.type))!;
+        this.map?.addInteraction(this.drawInteraction);
+        this.drawInteraction.on('drawend', (evt: DrawEvent) => {
+          cancelSub.unsubscribe();
+          this.onEnd(evt, ev, l);
         });
-        this.postboy.fire(drawQuery);
       });
     });
   }

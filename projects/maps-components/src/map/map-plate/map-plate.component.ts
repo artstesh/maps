@@ -16,6 +16,7 @@ import { MapConstants } from '../models/map.constants';
 import { DrawingService } from '../services/drawing/drawing.service';
 import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
 import { FeatureService } from "../services/feature.service";
+import { FeatureModificationService } from "../services/drawing/feature-modification.service";
 
 @Component({
   selector: 'lib-map-plate',
@@ -24,7 +25,7 @@ import { FeatureService } from "../services/feature.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MessageRegistratorService, MapStateService,
     MapManagementService, MapClickService,MapFeatureService,
-    DrawingService,DrawingGenerationService,FeatureService],
+    DrawingService,DrawingGenerationService,FeatureService,FeatureModificationService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;

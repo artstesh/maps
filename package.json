@@ -47,7 +47,7 @@
     "zone.js": "^0.11.4",
     "ol-geocoder": "^4.0.0",
     "ol": "^6.9.0",
-    "@artstesh/postboy": "^1.0.4"
+    "@artstesh/postboy": "1.0.8"
   },
   "devDependencies": {
     "@angular/forms": "^12.1.3",

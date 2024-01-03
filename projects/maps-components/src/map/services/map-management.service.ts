@@ -15,10 +15,8 @@ import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
 import { IIdentified } from '../models/i-identified';
 import { Dictionary } from '../models';
-import { combineLatest, forkJoin, Observable } from "rxjs";
-import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
-import { tap } from 'rxjs/operators';
 import { MapConstants } from '../models/map.constants';
+import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -91,28 +89,17 @@ export class MapManagementService implements IPostboyDependingService {
   private observeFeaturesInArea() {
     this.postboy.subscribe<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID).subscribe((qr) => {
       let result = new Dictionary<IIdentified[]>();
-      const queue: Observable<any>[] = [];
-      const queries: FilterFeaturesInAreaQuery[] = [];
       this.layers.forEach((l) => {
         let layerName = l.get('name');
         if (qr.ignore.has(layerName) || layerName === MapConstants.DrawingLayerId) return;
         let source = l.getSource();
         if (!!(source as any)['getSource']) source = (source as any)?.getSource();
-        const query = new FilterFeaturesInAreaQuery(qr.area, source?.getFeatures() ?? []);
-        queue.push(
-          query.result.pipe(
-            tap((r) => {
-              result.put(
-                l.get('name'),
-                r.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
-              );
-            }),
-          ),
+        result.put(
+          layerName,
+          this.postboy.execute(new FilterFeaturesInAreaExecutor(qr.area, source?.getFeatures() ?? [])),
         );
-        queries.push(query);
       });
-      forkJoin(queue).subscribe(() => qr.finish(result));
-      queries.forEach(q => this.postboy.fire(q));
+      qr.finish(result);
     });
   }
 }
