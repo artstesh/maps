@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Map } from 'ol';
+import { Feature, Map } from 'ol';
 import { MapPostboyService } from './map-postboy.service';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
@@ -15,10 +15,9 @@ import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
 import { IIdentified } from '../models/i-identified';
 import { Dictionary } from '../models';
-import { combineLatest, forkJoin, Observable } from 'rxjs';
-import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
-import { tap } from 'rxjs/operators';
 import { MapConstants } from '../models/map.constants';
+import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
+import { Geometry } from 'ol/geom';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -91,28 +90,20 @@ export class MapManagementService implements IPostboyDependingService {
   private observeFeaturesInArea() {
     this.postboy.subscribe<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID).subscribe((qr) => {
       let result = new Dictionary<IIdentified[]>();
-      const queue: Observable<any>[] = [];
-      const queries: FilterFeaturesInAreaQuery[] = [];
       this.layers.forEach((l) => {
         let layerName = l.get('name');
         if (qr.ignore.has(layerName) || layerName === MapConstants.DrawingLayerId) return;
         let source = l.getSource();
         if (!!(source as any)['getSource']) source = (source as any)?.getSource();
-        const query = new FilterFeaturesInAreaQuery(qr.area, source?.getFeatures() ?? []);
-        queue.push(
-          query.result.pipe(
-            tap((r) => {
-              result.put(
-                l.get('name'),
-                r.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
-              );
-            }),
-          ),
+        let features = this.postboy.execute<FilterFeaturesInAreaExecutor, Feature<Geometry>[]>(
+          new FilterFeaturesInAreaExecutor(qr.area, source?.getFeatures() ?? []),
         );
-        queries.push(query);
+        result.put(
+          layerName,
+          features.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
+        );
       });
-      forkJoin(queue).subscribe(() => qr.finish(result));
-      queries.forEach((q) => this.postboy.fire(q));
+      qr.finish(result);
     });
   }
 }
