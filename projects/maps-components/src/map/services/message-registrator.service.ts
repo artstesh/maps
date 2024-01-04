@@ -25,10 +25,10 @@ import { FeatureService } from './feature.service';
 import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
 import { DrawSelectionAreaCommand } from '../messages/commands/draw-selection-area.command';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
-import { GenerateDrawExecutor } from "../messages/executors/generate-draw.executor";
-import { FeatureModificationService } from "./drawing/feature-modification.service";
-import { CancelFeatureModificationCommand } from "../messages/commands/cancel-feature-modification.command";
-import { ModifyFeatureCommand } from "../messages/commands/modify-feature.command";
+import { GenerateDrawExecutor } from '../messages/executors/generate-draw.executor';
+import { FeatureModificationService } from './drawing/feature-modification.service';
+import { CancelFeatureModificationCommand } from '../messages/commands/cancel-feature-modification.command';
+import { ModifyFeatureCommand } from '../messages/commands/modify-feature.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -71,8 +71,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerExecutor(FilterFeaturesInAreaExecutor.ID, (e: FilterFeaturesInAreaExecutor) =>
       FeatureService.filterFeaturesInArea(e),
     );
-    this.registerExecutor(GenerateDrawExecutor.ID, (e: GenerateDrawExecutor) =>
-      DrawingGenerationService.getDraw(e),
-    );
+    this.registerExecutor(GenerateDrawExecutor.ID, (e: GenerateDrawExecutor) => DrawingGenerationService.getDraw(e));
   }
 }
