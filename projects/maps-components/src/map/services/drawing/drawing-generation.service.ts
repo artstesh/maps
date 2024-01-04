@@ -1,13 +1,13 @@
-import { Draw } from 'ol/interaction';
-import { DrawingType } from '../../models';
-import { createRegularPolygon, GeometryFunction } from 'ol/interaction/Draw';
-import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
+import { Draw } from "ol/interaction";
+import { DrawingType } from "../../models";
+import { createRegularPolygon, GeometryFunction } from "ol/interaction/Draw";
+import { GenerateDrawExecutor } from "../../messages/executors/generate-draw.executor";
 
 export class DrawingGenerationService {
   public static getDraw(ev: GenerateDrawExecutor) {
     return new Draw({
       source: ev.layer.getSource()!,
-      type: DrawingType[ev.type] as any,
+      type: ev.type === DrawingType.Polygon ? 'Polygon' : 'Circle',
       style: ev.style,
       geometryFunction: DrawingGenerationService.geometryFunc(ev.type),
     });

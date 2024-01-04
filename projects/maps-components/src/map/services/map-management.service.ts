@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Map } from 'ol';
+import { Feature, Map } from 'ol';
 import { MapPostboyService } from './map-postboy.service';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
@@ -17,6 +17,7 @@ import { IIdentified } from '../models/i-identified';
 import { Dictionary } from '../models';
 import { MapConstants } from '../models/map.constants';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
+import { Geometry } from 'ol/geom';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -94,9 +95,12 @@ export class MapManagementService implements IPostboyDependingService {
         if (qr.ignore.has(layerName) || layerName === MapConstants.DrawingLayerId) return;
         let source = l.getSource();
         if (!!(source as any)['getSource']) source = (source as any)?.getSource();
+        let features = this.postboy.execute<FilterFeaturesInAreaExecutor, Feature<Geometry>[]>(
+          new FilterFeaturesInAreaExecutor(qr.area, source?.getFeatures() ?? []),
+        );
         result.put(
           layerName,
-          this.postboy.execute(new FilterFeaturesInAreaExecutor(qr.area, source?.getFeatures() ?? [])),
+          features.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
         );
       });
       qr.finish(result);
