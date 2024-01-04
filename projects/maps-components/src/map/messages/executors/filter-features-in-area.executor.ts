@@ -1,4 +1,4 @@
-import { PostboyExecutor } from "@artstesh/postboy";
+import { PostboyExecutor } from '@artstesh/postboy';
 import { Feature } from 'ol';
 import { Geometry } from 'ol/geom';
 
