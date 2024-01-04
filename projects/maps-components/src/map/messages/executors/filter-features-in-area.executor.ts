@@ -1,8 +1,8 @@
-import { PostboyCallbackMessage } from '@artstesh/postboy';
+import { PostboyExecutor } from "@artstesh/postboy";
 import { Feature } from 'ol';
 import { Geometry } from 'ol/geom';
 
-export class FilterFeaturesInAreaQuery extends PostboyCallbackMessage<Feature<Geometry>[]> {
+export class FilterFeaturesInAreaExecutor extends PostboyExecutor<Feature<Geometry>[]> {
   public static readonly ID: string = '36bb2d94-8028-4512-90dd-2386af3fc67c';
 
   constructor(public area: Geometry, public features: Feature<Geometry>[]) {
@@ -10,6 +10,6 @@ export class FilterFeaturesInAreaQuery extends PostboyCallbackMessage<Feature<Ge
   }
 
   public get id(): string {
-    return FilterFeaturesInAreaQuery.ID;
+    return FilterFeaturesInAreaExecutor.ID;
   }
 }
