@@ -3,16 +3,14 @@ import { IPostboyDependingService } from '@artstesh/postboy';
 import { MapPostboyService } from './map-postboy.service';
 import { Circle, Geometry, Point } from 'ol/geom';
 import Polygon from 'ol/geom/Polygon';
-import { FilterFeaturesInAreaQuery } from '../messages/queries/filter-features-in-area.query';
+import { Feature } from "ol";
+import { FilterFeaturesInAreaExecutor } from "../messages/executors/filter-features-in-area.executor";
 
-@Injectable()
-export class FeatureService implements IPostboyDependingService {
-  constructor(private postboy: MapPostboyService) {}
+export class FeatureService {
+  constructor() {}
 
-  up(): void {
-    this.postboy.subscribe<FilterFeaturesInAreaQuery>(FilterFeaturesInAreaQuery.ID).subscribe((qr) => {
-      qr.finish(qr.features.filter((f) => FeatureService.booleanIntersects(qr.area, f.getGeometry()!)));
-    });
+  public static filterFeaturesInArea(query: FilterFeaturesInAreaExecutor): Feature<Geometry>[] {
+    return query.features.filter((f) => FeatureService.booleanIntersects(query.area, f.getGeometry()!));
   }
 
   private static booleanIntersects(g1: Geometry, g2: Geometry): boolean {
