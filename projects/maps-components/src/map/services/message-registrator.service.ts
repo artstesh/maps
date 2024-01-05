@@ -29,6 +29,8 @@ import { GenerateDrawExecutor } from "../messages/executors/generate-draw.execut
 import { FeatureModificationService } from "./drawing/feature-modification.service";
 import { CancelFeatureModificationCommand } from "../messages/commands/cancel-feature-modification.command";
 import { ModifyFeatureCommand } from "../messages/commands/modify-feature.command";
+import { GenerateZoomControlExecutor } from "../messages/executors/generate-zoom-control.executor";
+import { ZoomControlFactory } from "../map-plate/controls/map-control-zoom/zoom-control.factory";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -73,6 +75,9 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     );
     this.registerExecutor(GenerateDrawExecutor.ID, (e: GenerateDrawExecutor) =>
       DrawingGenerationService.getDraw(e),
+    );
+    this.registerExecutor(GenerateZoomControlExecutor.ID, (e: GenerateZoomControlExecutor) =>
+      ZoomControlFactory.build(e.settings),
     );
   }
 }
