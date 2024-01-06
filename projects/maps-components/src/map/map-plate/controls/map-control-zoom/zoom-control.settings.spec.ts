@@ -1,6 +1,6 @@
 import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
-import { ZoomControlSettings } from "./zoom-control.settings";
+import { ZoomControlSettings } from './zoom-control.settings';
 
 describe('#map-models ZoomControlSettings', () => {
   let model: ZoomControlSettings;
@@ -56,9 +56,7 @@ describe('#map-models ZoomControlSettings', () => {
   it('copy()', () => {
     const other = ZoomControlSettings.copy(model);
     //
-    should()
-      .objects(model, other)
-      .equal();
+    should().objects(model, other).equal();
   });
 
   describe('isSame()', () => {
