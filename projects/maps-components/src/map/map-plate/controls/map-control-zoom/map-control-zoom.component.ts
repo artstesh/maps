@@ -1,18 +1,18 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
-import { MapPostboyService } from "../../../services/map-postboy.service";
-import { DestructibleComponent } from "../../../common/destructible.component";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { DestructibleComponent } from '../../../common/destructible.component';
 import Map from 'ol/Map';
-import { ZoomControlSettings } from "./zoom-control.settings";
-import { MapRenderedEvent } from "../../../messages";
-import { filter, first } from "rxjs/operators";
-import { Zoom } from "ol/control";
-import { GenerateZoomControlExecutor } from "../../../messages/executors/generate-zoom-control.executor";
+import { ZoomControlSettings } from './zoom-control.settings';
+import { MapRenderedEvent } from '../../../messages';
+import { filter, first } from 'rxjs/operators';
+import { Zoom } from 'ol/control';
+import { GenerateZoomControlExecutor } from '../../../messages/executors/generate-zoom-control.executor';
 
 @Component({
   selector: 'lib-map-control-zoom',
   template: '',
   styleUrls: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapControlZoomComponent extends DestructibleComponent implements OnInit {
   private _settings: ZoomControlSettings = new ZoomControlSettings();
@@ -50,7 +50,7 @@ export class MapControlZoomComponent extends DestructibleComponent implements On
 
   onDestroy = () => {
     this.eliminate();
-  }
+  };
 
   private eliminate = () => !!this.map && !!this.control && this.map.removeControl(this.control);
 }

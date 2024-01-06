@@ -3,7 +3,7 @@ export class ZoomControlSettings {
   zoomInClass: string = 'ol-zoom-in';
   zoomOutClass: string = 'ol-zoom-out';
   zoomInLabel: string = 'Zoom In';
- zoomOutLabel: string = 'Zoom Out';
+  zoomOutLabel: string = 'Zoom Out';
 
   public static copy(model: ZoomControlSettings): ZoomControlSettings {
     const result = new ZoomControlSettings();
