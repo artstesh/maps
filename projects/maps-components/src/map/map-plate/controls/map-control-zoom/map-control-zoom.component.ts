@@ -9,7 +9,7 @@ import { Zoom } from 'ol/control';
 import { GenerateZoomControlExecutor } from '../../../messages/executors/generate-zoom-control.executor';
 
 @Component({
-  selector: 'lib-map-control-zoom',
+  selector: 'art-map-control-zoom',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
