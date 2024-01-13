@@ -1,3 +1,6 @@
 export enum DrawingType {
-  Polygon = 1, Circle, Square , Box
+  Polygon = 1,
+  Circle,
+  Square,
+  Box,
 }
