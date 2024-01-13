@@ -1,5 +1,4 @@
 import { PostboyCallbackMessage } from '@artstesh/postboy';
-import { Feature } from 'ol';
 import { Geometry } from 'ol/geom';
 import { Dictionary } from '../../models';
 import { IIdentified } from '../../models/i-identified';

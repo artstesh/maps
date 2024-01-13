@@ -6,7 +6,7 @@ import OSM from 'ol/source/OSM';
 import { Map } from 'ol';
 
 @Component({
-  selector: 'lib-osm-tile-layer',
+  selector: 'art-osm-tile-layer',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

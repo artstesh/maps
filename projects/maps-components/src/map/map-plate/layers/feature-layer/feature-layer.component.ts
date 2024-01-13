@@ -11,7 +11,7 @@ import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.comm
 import { FeatureLayerFactory } from './feature-layer.factory';
 
 @Component({
-  selector: 'lib-feature-layer',
+  selector: 'art-feature-layer',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
