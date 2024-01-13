@@ -13,13 +13,13 @@ import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import { Vector as Source } from 'ol/source';
 import { Draw } from 'ol/interaction';
-import { Dictionary, FeatureOutputFormat, PolygonModel } from "../../models";
+import { Dictionary, FeatureOutputFormat, PolygonModel } from '../../models';
 import { Map } from 'ol';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
-import { DrawSelectionAreaCommand } from "../../messages/commands/draw-selection-area.command";
-import { GetFeaturesInAreaQuery } from "../../messages/queries/get-features-in-area.query";
+import { DrawSelectionAreaCommand } from '../../messages/commands/draw-selection-area.command';
+import { GetFeaturesInAreaQuery } from '../../messages/queries/get-features-in-area.query';
 import { IIdentified } from '../../models/i-identified';
 import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
 

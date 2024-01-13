@@ -7,7 +7,7 @@ import { MapRenderedEvent } from '../../../messages';
 import { filter, first } from 'rxjs/operators';
 
 @Component({
-  selector: 'lib-markers',
+  selector: 'art-markers',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

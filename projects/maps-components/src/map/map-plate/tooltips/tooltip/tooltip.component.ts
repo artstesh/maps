@@ -18,7 +18,7 @@ import { filter } from 'rxjs/operators';
 import Overlay, { Options as OverlayOptions } from 'ol/Overlay';
 
 @Component({
-  selector: 'lib-tooltip',
+  selector: 'art-tooltip',
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

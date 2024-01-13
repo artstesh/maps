@@ -7,7 +7,7 @@ import { PlaceLayerFeaturesCommand } from '../../../messages/commands/place-laye
 import { PolygonModel } from '../../../models/polygon.model';
 
 @Component({
-  selector: 'lib-polygons',
+  selector: 'art-polygons',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

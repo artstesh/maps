@@ -1,7 +1,7 @@
-import { Draw } from "ol/interaction";
-import { DrawingType } from "../../models";
-import { createRegularPolygon, GeometryFunction } from "ol/interaction/Draw";
-import { GenerateDrawExecutor } from "../../messages/executors/generate-draw.executor";
+import { Draw } from 'ol/interaction';
+import { DrawingType } from '../../models';
+import { createBox, createRegularPolygon, GeometryFunction } from 'ol/interaction/Draw';
+import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
 
 export class DrawingGenerationService {
   public static getDraw(ev: GenerateDrawExecutor) {
@@ -17,6 +17,8 @@ export class DrawingGenerationService {
     switch (type) {
       case DrawingType.Circle:
         return createRegularPolygon(32);
+      case DrawingType.Box:
+        return createBox();
       case DrawingType.Square:
         return createRegularPolygon(4);
     }

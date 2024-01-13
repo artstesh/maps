@@ -25,12 +25,12 @@ import { FeatureService } from './feature.service';
 import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
 import { DrawSelectionAreaCommand } from '../messages/commands/draw-selection-area.command';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
-import { GenerateDrawExecutor } from "../messages/executors/generate-draw.executor";
-import { FeatureModificationService } from "./drawing/feature-modification.service";
-import { CancelFeatureModificationCommand } from "../messages/commands/cancel-feature-modification.command";
-import { ModifyFeatureCommand } from "../messages/commands/modify-feature.command";
-import { GenerateZoomControlExecutor } from "../messages/executors/generate-zoom-control.executor";
-import { ZoomControlFactory } from "../map-plate/controls/map-control-zoom/zoom-control.factory";
+import { GenerateDrawExecutor } from '../messages/executors/generate-draw.executor';
+import { FeatureModificationService } from './drawing/feature-modification.service';
+import { CancelFeatureModificationCommand } from '../messages/commands/cancel-feature-modification.command';
+import { ModifyFeatureCommand } from '../messages/commands/modify-feature.command';
+import { GenerateZoomControlExecutor } from '../messages/executors/generate-zoom-control.executor';
+import { ZoomControlFactory } from '../map-plate/controls/map-control-zoom/zoom-control.factory';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {

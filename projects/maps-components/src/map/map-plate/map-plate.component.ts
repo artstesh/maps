@@ -15,11 +15,11 @@ import { FeatureLayerSettings } from './layers';
 import { MapConstants } from '../models/map.constants';
 import { DrawingService } from '../services/drawing/drawing.service';
 import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
-import { FeatureService } from "../services/feature.service";
-import { FeatureModificationService } from "../services/drawing/feature-modification.service";
+import { FeatureService } from '../services/feature.service';
+import { FeatureModificationService } from '../services/drawing/feature-modification.service';
 
 @Component({
-  selector: 'lib-map-plate',
+  selector: 'art-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

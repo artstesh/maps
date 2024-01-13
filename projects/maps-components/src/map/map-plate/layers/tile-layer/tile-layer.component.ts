@@ -11,7 +11,7 @@ import { AddTileCommand } from '../../../messages/commands/add-tile.command';
 import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
 
 @Component({
-  selector: 'lib-tile-layer',
+  selector: 'art-tile-layer',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

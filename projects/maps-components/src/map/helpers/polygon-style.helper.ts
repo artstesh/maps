@@ -1,5 +1,5 @@
 import Style from 'ol/style/Style';
-import { Circle, Fill, Stroke } from "ol/style";
+import { Circle, Fill, Stroke } from 'ol/style';
 
 export class PolygonStyleHelper {
   public static simple(fill: string, stroke: string, strokeWidth: number = 1): Style {
@@ -17,9 +17,9 @@ export class PolygonStyleHelper {
     return new Style({
       image: new Circle({
         fill: new Fill({
-          color: stroke
+          color: stroke,
         }),
-        radius: pinRadius
+        radius: pinRadius,
       }),
       fill: new Fill({
         color: fill,

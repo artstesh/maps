@@ -1,10 +1,7 @@
-import { Injectable } from '@angular/core';
-import { IPostboyDependingService } from '@artstesh/postboy';
-import { MapPostboyService } from './map-postboy.service';
 import { Circle, Geometry, Point } from 'ol/geom';
 import Polygon from 'ol/geom/Polygon';
-import { Feature } from "ol";
-import { FilterFeaturesInAreaExecutor } from "../messages/executors/filter-features-in-area.executor";
+import { Feature } from 'ol';
+import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
 
 export class FeatureService {
   constructor() {}
