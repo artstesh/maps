@@ -10,7 +10,7 @@ import { ClusterLayerSettings } from './cluster-layer.settings';
 import { ClusterLayerFactory } from './cluster-layer-factory.service';
 
 @Component({
-  selector: 'lib-cluster-layer',
+  selector: 'art-cluster-layer',
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
