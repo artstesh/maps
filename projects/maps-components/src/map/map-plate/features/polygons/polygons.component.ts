@@ -22,7 +22,7 @@ export class PolygonsComponent extends DestructibleComponent implements OnInit {
   _polygons: PolygonModel[] = [];
 
   @Input() set polygons(value: PolygonModel[]) {
-    this._polygons = value;
+    this._polygons = value ?? [];
     this.putPolygons();
   }
 
