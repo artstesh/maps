@@ -22,7 +22,7 @@ export class MarkersComponent extends DestructibleComponent implements OnInit {
   _markers: MarkerModel[] = [];
 
   @Input() set markers(value: MarkerModel[]) {
-    this._markers = value;
+    this._markers = value ?? [];
     this.putMarkers();
   }
 
@@ -37,7 +37,7 @@ export class MarkersComponent extends DestructibleComponent implements OnInit {
   }
 
   private putMarkers(): void {
-    if (!this._markers?.length) return;
+    if (!this._markers) return;
     this.postboy.fire(
       new PlaceLayerFeaturesCommand(
         this.layerName,

@@ -75,7 +75,7 @@ export class MapManagementService implements IPostboyDependingService {
       let source = this.layers.take(c.layer)!.getSource();
       if (!!(source as any)['getSource']) source = (source as any)?.getSource();
       source?.clear();
-      source?.addFeatures(c.features);
+      !!c.features?.length && source?.addFeatures(c.features);
     });
   }
 
