@@ -1,5 +1,5 @@
-import { Control } from "ol/control";
-import { Options } from "ol/control/Control";
+import { Control } from 'ol/control';
+import { Options } from 'ol/control/Control';
 
 /**
  *
@@ -10,7 +10,6 @@ import { Options } from "ol/control/Control";
  * You can also extend this base for your own control class. See examples/custom-controls for an example of how to do this.
  */
 export class MapControl extends Control {
-
   constructor(options: Options) {
     super(options);
   }
