@@ -31,6 +31,10 @@ import { CancelFeatureModificationCommand } from '../messages/commands/cancel-fe
 import { ModifyFeatureCommand } from '../messages/commands/modify-feature.command';
 import { GenerateZoomControlExecutor } from '../messages/executors/generate-zoom-control.executor';
 import { ZoomControlFactory } from '../map-plate/controls/map-control-zoom/zoom-control.factory';
+import { RemoveControlCommand } from '../messages/commands/remove-control.command';
+import { AddControlCommand } from '../messages/commands/add-control.command';
+import { ControlsService } from './controls/controls.service';
+import { SetMapCenterCommand } from "../messages/commands/set-map-center.command";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -42,30 +46,34 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     interaction: MapClickService,
     drawing: DrawingService,
     featureModification: FeatureModificationService,
+    controls: ControlsService,
   ) {
     super(service);
-    this.registerServices([management, state, interaction, mapFeature, drawing, featureModification]);
+    this.registerServices([management, state, interaction, mapFeature, drawing, featureModification, controls]);
   }
 
   protected _up(): void {
-    this.registerReplay<MapRenderedEvent>(MapRenderedEvent.ID);
-    this.registerReplay<PlaceLayerFeaturesCommand>(PlaceLayerFeaturesCommand.ID);
-    this.registerSubject<AddLayerCommand>(AddLayerCommand.ID);
-    this.registerSubject<RemoveLayerCommand>(RemoveLayerCommand.ID);
-    this.registerSubject<AddTileCommand>(AddTileCommand.ID);
-    this.registerSubject<RemoveTileCommand>(RemoveTileCommand.ID);
-    this.registerSubject<MapClickEvent>(MapClickEvent.ID);
-    this.registerSubject<CloseTooltipCommand>(CloseTooltipCommand.ID);
-    this.registerSubject<FitToFeaturesCommand>(FitToFeaturesCommand.ID);
-    this.registerSubject<MapMoveEndEvent>(MapMoveEndEvent.ID);
-    this.registerSubject<CancelDrawingCommand>(CancelDrawingCommand.ID);
-    this.registerSubject<StartDrawingCommand>(StartDrawingCommand.ID);
-    this.registerSubject<GetLayerQuery>(GetLayerQuery.ID);
-    this.registerSubject<DrawingFinishedEvent>(DrawingFinishedEvent.ID);
-    this.registerSubject<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID);
-    this.registerSubject<DrawSelectionAreaCommand>(DrawSelectionAreaCommand.ID);
-    this.registerSubject<CancelFeatureModificationCommand>(CancelFeatureModificationCommand.ID);
-    this.registerSubject<ModifyFeatureCommand>(ModifyFeatureCommand.ID);
+    this.registerReplay(MapRenderedEvent.ID);
+    this.registerReplay(PlaceLayerFeaturesCommand.ID);
+    this.registerReplay(RemoveControlCommand.ID);
+    this.registerReplay(AddControlCommand.ID);
+    this.registerReplay(SetMapCenterCommand.ID);
+    this.registerSubject(AddLayerCommand.ID);
+    this.registerSubject(RemoveLayerCommand.ID);
+    this.registerSubject(AddTileCommand.ID);
+    this.registerSubject(RemoveTileCommand.ID);
+    this.registerSubject(MapClickEvent.ID);
+    this.registerSubject(CloseTooltipCommand.ID);
+    this.registerSubject(FitToFeaturesCommand.ID);
+    this.registerSubject(MapMoveEndEvent.ID);
+    this.registerSubject(CancelDrawingCommand.ID);
+    this.registerSubject(StartDrawingCommand.ID);
+    this.registerSubject(GetLayerQuery.ID);
+    this.registerSubject(DrawingFinishedEvent.ID);
+    this.registerSubject(GetFeaturesInAreaQuery.ID);
+    this.registerSubject(DrawSelectionAreaCommand.ID);
+    this.registerSubject(CancelFeatureModificationCommand.ID);
+    this.registerSubject(ModifyFeatureCommand.ID);
     this.setExecutors();
   }
 
