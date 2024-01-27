@@ -34,7 +34,7 @@ import { ZoomControlFactory } from '../map-plate/controls/map-control-zoom/zoom-
 import { RemoveControlCommand } from '../messages/commands/remove-control.command';
 import { AddControlCommand } from '../messages/commands/add-control.command';
 import { ControlsService } from './controls/controls.service';
-import { SetMapCenterCommand } from "../messages/commands/set-map-center.command";
+import { SetMapCenterCommand } from '../messages/commands/set-map-center.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
