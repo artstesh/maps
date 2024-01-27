@@ -17,23 +17,17 @@ import { DrawingService } from '../services/drawing/drawing.service';
 import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
 import { FeatureService } from '../services/feature.service';
 import { FeatureModificationService } from '../services/drawing/feature-modification.service';
+import { ControlsService } from "../services/controls/controls.service";
 
 @Component({
   selector: 'art-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    MessageRegistratorService,
-    MapStateService,
-    MapManagementService,
-    MapClickService,
-    MapFeatureService,
-    DrawingService,
-    DrawingGenerationService,
-    FeatureService,
-    FeatureModificationService,
-  ],
+  providers: [MessageRegistratorService, MapStateService,
+    MapManagementService, MapClickService,MapFeatureService,
+    DrawingService,DrawingGenerationService,FeatureService,FeatureModificationService,
+    ControlsService],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
@@ -82,5 +76,5 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
 
   onDestroy = () => {
     this.registrator.down();
-  };
+  }
 }
