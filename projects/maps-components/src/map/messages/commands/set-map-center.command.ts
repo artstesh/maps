@@ -1,4 +1,4 @@
-import { PostboyGenericMessage } from "@artstesh/postboy";
+import { PostboyGenericMessage } from '@artstesh/postboy';
 
 /**
  * Forces map to move to a specific point
