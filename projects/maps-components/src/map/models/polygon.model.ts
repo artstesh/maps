@@ -3,7 +3,7 @@ import { Feature } from 'ol';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
 import { getCenter } from 'ol/extent';
-import { MapConstants } from "./map.constants";
+import { MapConstants } from './map.constants';
 
 export class PolygonModel {
   public readonly id: string | number;
