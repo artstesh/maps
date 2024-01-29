@@ -3,6 +3,7 @@ import { Feature } from 'ol';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
 import { getCenter } from 'ol/extent';
+import { MapConstants } from "./map.constants";
 
 export class PolygonModel {
   public readonly id: string | number;
@@ -25,6 +26,7 @@ export class PolygonModel {
   private constructor(feature: Feature<Geometry>, id?: string | number, public info?: { [id: string]: any }) {
     this.id = id == null ? IdGenerator.get() : id;
     this._feature = feature;
+    if (this.info) this._feature?.set(MapConstants.FeatureInfo, this.info);
     [this.lng, this.lat] = getCenter(this._feature.getGeometry()?.getExtent()!);
   }
 
