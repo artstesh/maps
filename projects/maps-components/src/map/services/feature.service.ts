@@ -3,7 +3,7 @@ import Polygon from 'ol/geom/Polygon';
 import { Feature } from 'ol';
 import * as Sphere from 'ol/sphere';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
-import { PolygonModel } from "../models";
+import { PolygonModel } from '../models';
 
 export class FeatureService {
   constructor() {}
