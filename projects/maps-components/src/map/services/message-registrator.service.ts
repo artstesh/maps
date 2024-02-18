@@ -34,7 +34,8 @@ import { ZoomControlFactory } from '../map-plate/controls/map-control-zoom/zoom-
 import { RemoveControlCommand } from '../messages/commands/remove-control.command';
 import { AddControlCommand } from '../messages/commands/add-control.command';
 import { ControlsService } from './controls/controls.service';
-import { SetMapCenterCommand } from "../messages/commands/set-map-center.command";
+import { SetMapCenterCommand } from '../messages/commands/set-map-center.command';
+import { CalculateAreaExecutor } from '../messages/executors/calculate-area.executor';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -80,6 +81,9 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
   private setExecutors() {
     this.registerExecutor(FilterFeaturesInAreaExecutor.ID, (e: FilterFeaturesInAreaExecutor) =>
       FeatureService.filterFeaturesInArea(e),
+    );
+    this.registerExecutor(CalculateAreaExecutor.ID, (e: CalculateAreaExecutor) =>
+      FeatureService.calculateArea(e.polygon?.feature?.getGeometry()),
     );
     this.registerExecutor(GenerateDrawExecutor.ID, (e: GenerateDrawExecutor) => DrawingGenerationService.getDraw(e));
     this.registerExecutor(GenerateZoomControlExecutor.ID, (e: GenerateZoomControlExecutor) =>
