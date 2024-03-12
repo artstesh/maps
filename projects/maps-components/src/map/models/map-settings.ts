@@ -49,6 +49,6 @@ export class MapSettings {
     if (this.zoom !== model.zoom) return false;
     if (this.lyrs !== model.lyrs) return false;
     if (this.language !== model.language) return false;
-    return this.center.length !== model.center.length || !!this.center.filter((c, i) => c !== model.center[i]);
+    return this.center.length === model.center.length && !this.center.filter((c, i) => c !== model.center[i]).length;
   }
 }
