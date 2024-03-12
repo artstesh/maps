@@ -123,5 +123,12 @@ describe('#map-models MapSettings', () => {
       //
       should().false(model.isSame(other));
     });
+
+    it('different center', () => {
+      const other = MapSettings.copy(model);
+      model.center = Forger.create<number[]>()!;
+      //
+      should().false(model.isSame(other));
+    });
   });
 });
