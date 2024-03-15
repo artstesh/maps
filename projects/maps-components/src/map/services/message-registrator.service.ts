@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MapPostboyService } from './map-postboy.service';
-import { MapRenderedEvent } from '../messages';
+import { FitToPolygonsCommand, MapRenderedEvent } from "../messages";
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
@@ -66,6 +66,7 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject(MapClickEvent.ID);
     this.registerSubject(CloseTooltipCommand.ID);
     this.registerSubject(FitToFeaturesCommand.ID);
+    this.registerSubject(FitToPolygonsCommand.ID);
     this.registerSubject(MapMoveEndEvent.ID);
     this.registerSubject(CancelDrawingCommand.ID);
     this.registerSubject(StartDrawingCommand.ID);
