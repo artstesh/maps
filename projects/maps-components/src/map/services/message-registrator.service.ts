@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MapPostboyService } from './map-postboy.service';
-import { FitToPolygonsCommand, MapRenderedEvent } from "../messages";
+import { FitToPolygonsCommand, MapRenderedEvent } from '../messages';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';

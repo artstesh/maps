@@ -22,7 +22,7 @@ import { DrawSelectionAreaCommand } from '../../messages/commands/draw-selection
 import { GetFeaturesInAreaQuery } from '../../messages/queries/get-features-in-area.query';
 import { IIdentified } from '../../models/i-identified';
 import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
-import { Dictionary } from "@artstesh/collections";
+import { Dictionary } from '@artstesh/collections';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {

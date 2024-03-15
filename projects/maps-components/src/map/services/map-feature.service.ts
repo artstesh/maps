@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IPostboyDependingService, PostboyGenericMessage } from '@artstesh/postboy';
 import { Map } from 'ol';
 import { MapPostboyService } from './map-postboy.service';
-import { FitToPolygonsCommand, MapRenderedEvent } from "../messages";
+import { FitToPolygonsCommand, MapRenderedEvent } from '../messages';
 import { FitToFeaturesCommand } from '../messages/commands/fit-to-features.command';
 import { Geometry } from 'ol/geom';
 import { createEmpty, extend } from 'ol/extent';
