@@ -14,10 +14,10 @@ import Cluster from 'ol/source/Cluster';
 import { GetLayerQuery } from '../messages/queries/get-layer.query';
 import { GetFeaturesInAreaQuery } from '../messages/queries/get-features-in-area.query';
 import { IIdentified } from '../models/i-identified';
-import { Dictionary } from '../models';
 import { MapConstants } from '../models/map.constants';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
 import { Geometry } from 'ol/geom';
+import { Dictionary } from "@artstesh/collections";
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
