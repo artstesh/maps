@@ -41,6 +41,7 @@ yarn-error.log
 testem.log
 /typings
 /projects/maps-components/node_modules
+/projects/maps-components/dist
 
 # System Files
 .DS_Store
