@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DestructibleComponent } from '../../../common/destructible.component';
-import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MapRenderedEvent } from '../../../messages';
-import { filter, first } from 'rxjs/operators';
-import { PlaceLayerFeaturesCommand } from '../../../messages/commands/place-layer-features.command';
-import { PolygonModel } from '../../../models/polygon.model';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { DestructibleComponent } from "../../../common/destructible.component";
+import { MapPostboyService } from "../../../services/map-postboy.service";
+import { MapRenderedEvent } from "../../../messages";
+import { filter, first } from "rxjs/operators";
+import { PlaceLayerFeaturesCommand } from "../../../messages/commands/place-layer-features.command";
+import { PolygonModel } from "../../../models/polygon.model";
 
+/**
+ * Component for rendering polygons on a map.
+ * It listens for changes in the `polygons` input property and
+ * automatically puts the polygons on the map using the MapPostboyService.
+ */
 @Component({
   selector: 'art-polygons',
   template: '',
@@ -21,6 +26,11 @@ export class PolygonsComponent extends DestructibleComponent implements OnInit {
 
   _polygons: PolygonModel[] = [];
 
+  /**
+   * Sets the value of polygons.
+   *
+   * @param {PolygonModel[]} value - The new value for polygons.
+   */
   @Input() set polygons(value: PolygonModel[]) {
     this._polygons = value ?? [];
     this.putPolygons();
