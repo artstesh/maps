@@ -1,4 +1,4 @@
-import { Fill, Text } from "ol/style";
+import { Fill, Text } from 'ol/style';
 
 /**
  * Helper class for creating text styles.

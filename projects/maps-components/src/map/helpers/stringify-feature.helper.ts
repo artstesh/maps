@@ -1,11 +1,11 @@
-import { Feature } from "ol";
-import { Circle, Geometry } from "ol/geom";
-import { FeatureOutputFormat } from "../models";
-import { GeoJSON, WKT } from "ol/format";
-import Polygon from "ol/geom/Polygon";
-import { Coordinate } from "ol/coordinate";
-import { transform } from "ol/proj";
-import { METERS_PER_UNIT } from "ol/proj/epsg4326";
+import { Feature } from 'ol';
+import { Circle, Geometry } from 'ol/geom';
+import { FeatureOutputFormat } from '../models';
+import { GeoJSON, WKT } from 'ol/format';
+import Polygon from 'ol/geom/Polygon';
+import { Coordinate } from 'ol/coordinate';
+import { transform } from 'ol/proj';
+import { METERS_PER_UNIT } from 'ol/proj/epsg4326';
 
 /**
  * A helper class for converting and stringify features.
