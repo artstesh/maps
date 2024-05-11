@@ -1,5 +1,5 @@
-import Style from "ol/style/Style";
-import { Circle, Fill, Stroke } from "ol/style";
+import Style from 'ol/style/Style';
+import { Circle, Fill, Stroke } from 'ol/style';
 
 /**
  * A helper class for creating polygon styles.
