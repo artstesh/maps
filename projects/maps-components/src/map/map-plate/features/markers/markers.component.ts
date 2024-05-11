@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DestructibleComponent } from '../../../common/destructible.component';
-import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MarkerModel } from '../../../models/marker-model';
-import { PlaceLayerFeaturesCommand } from '../../../messages/commands/place-layer-features.command';
-import { MapRenderedEvent } from '../../../messages';
-import { filter, first } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { DestructibleComponent } from "../../../common/destructible.component";
+import { MapPostboyService } from "../../../services/map-postboy.service";
+import { MarkerModel } from "../../../models/marker-model";
+import { PlaceLayerFeaturesCommand } from "../../../messages/commands/place-layer-features.command";
+import { MapRenderedEvent } from "../../../messages";
+import { filter, first } from "rxjs/operators";
 
+/**
+ * MarkersComponent is a component that displays markers on a map.
+ * It listens for changes in the `markers` input property and
+ * automatically puts the markers on the map using the MapPostboyService.
+ */
 @Component({
   selector: 'art-markers',
   template: '',
@@ -21,6 +26,11 @@ export class MarkersComponent extends DestructibleComponent implements OnInit {
 
   _markers: MarkerModel[] = [];
 
+  /**
+   * Sets the markers property.
+   *
+   * @param {MarkerModel[]} value - The array of MarkerModel objects to set as markers.
+   */
   @Input() set markers(value: MarkerModel[]) {
     this._markers = value ?? [];
     this.putMarkers();
