@@ -23,6 +23,14 @@ export class TileLayerComponent extends DestructibleComponent {
     super();
   }
 
+  _settings: TileLayerSettings = new TileLayerSettings();
+
+  @Input() set settings(value: TileLayerSettings | undefined) {
+    if (!value || this._settings.isSame(value)) return;
+    this._settings = value;
+    this.initLayer();
+  }
+
   ngOnInit(): void {
     this.postboy
       .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
@@ -31,14 +39,6 @@ export class TileLayerComponent extends DestructibleComponent {
         first(),
       )
       .subscribe((m) => this.initLayer());
-  }
-
-  _settings: TileLayerSettings = new TileLayerSettings();
-
-  @Input() set settings(value: TileLayerSettings | undefined) {
-    if (!value || this._settings.isSame(value)) return;
-    this._settings = value;
-    this.initLayer();
   }
 
   onDestroy = () => this.removeLayer();
