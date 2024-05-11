@@ -1,6 +1,4 @@
 import { PostboyGenericMessage } from '@artstesh/postboy';
-import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
 import { PolygonModel } from '../../models';
 
 export class FitToPolygonsCommand extends PostboyGenericMessage {

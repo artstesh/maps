@@ -1,14 +1,17 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DestructibleComponent } from '../../../common/destructible.component';
-import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MapRenderedEvent } from '../../../messages';
-import { filter, first } from 'rxjs/operators';
-import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
-import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.command';
-import { ClusterLayerManager } from './cluster-layer.manager';
-import { ClusterLayerSettings } from './cluster-layer.settings';
-import { ClusterLayerFactory } from './cluster-layer-factory.service';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { DestructibleComponent } from "../../../common/destructible.component";
+import { MapPostboyService } from "../../../services/map-postboy.service";
+import { MapRenderedEvent } from "../../../messages";
+import { filter, first } from "rxjs/operators";
+import { AddLayerCommand } from "../../../messages/commands/add-layer.command";
+import { RemoveLayerCommand } from "../../../messages/commands/remove-layer.command";
+import { ClusterLayerManager } from "./cluster-layer.manager";
+import { ClusterLayerSettings } from "./cluster-layer.settings";
+import { ClusterLayerFactory } from "./cluster-layer-factory.service";
 
+/**
+ * Represents a cluster layer component.
+ */
 @Component({
   selector: 'art-cluster-layer',
   template: '',
@@ -17,10 +20,22 @@ import { ClusterLayerFactory } from './cluster-layer-factory.service';
 })
 export class ClusterLayerComponent extends DestructibleComponent implements OnInit {
   public manager: ClusterLayerManager | null = null;
-  _settings: ClusterLayerSettings = new ClusterLayerSettings();
 
   constructor(private postboy: MapPostboyService, private factory: ClusterLayerFactory) {
     super();
+  }
+
+  _settings: ClusterLayerSettings = new ClusterLayerSettings();
+
+  /**
+   * Sets the settings for the cluster layer.
+   *
+   * @param {ClusterLayerSettings | undefined} value - The settings for the cluster layer.
+   */
+  @Input() set settings(value: ClusterLayerSettings | undefined) {
+    if (!value || this._settings.isSame(value)) return;
+    this._settings = value;
+    this.initLayer();
   }
 
   ngOnInit(): void {
@@ -31,12 +46,6 @@ export class ClusterLayerComponent extends DestructibleComponent implements OnIn
         first(),
       )
       .subscribe((m) => this.initLayer());
-  }
-
-  @Input() set settings(value: ClusterLayerSettings | undefined) {
-    if (!value || this._settings.isSame(value)) return;
-    this._settings = value;
-    this.initLayer();
   }
 
   onDestroy = () => this.removeLayer();
