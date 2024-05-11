@@ -18,10 +18,17 @@ import { FeatureLayerFactory } from './feature-layer.factory';
 })
 export class FeatureLayerComponent extends DestructibleComponent implements OnInit {
   public layer: Layer<VectorSource<any>> | null = null;
-  _settings: FeatureLayerSettings = new FeatureLayerSettings();
 
   constructor(private postboy: MapPostboyService, private factory: FeatureLayerFactory) {
     super();
+  }
+
+  _settings: FeatureLayerSettings = new FeatureLayerSettings();
+
+  @Input() set settings(value: FeatureLayerSettings | undefined) {
+    if (!value || this._settings.isSame(value)) return;
+    this._settings = value;
+    this.initLayer();
   }
 
   ngOnInit(): void {
@@ -32,12 +39,6 @@ export class FeatureLayerComponent extends DestructibleComponent implements OnIn
         first(),
       )
       .subscribe((m) => this.initLayer());
-  }
-
-  @Input() set settings(value: FeatureLayerSettings | undefined) {
-    if (!value || this._settings.isSame(value)) return;
-    this._settings = value;
-    this.initLayer();
   }
 
   onDestroy = () => this.removeLayer();

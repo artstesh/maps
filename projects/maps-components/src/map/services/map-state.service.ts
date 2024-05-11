@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Map } from 'ol';
-import { MapRenderedEvent, SetMapCenterCommand } from '../messages';
+import { MapMoveEndEvent, MapRenderedEvent, SetMapCenterCommand } from '../messages';
 import { MapPostboyService } from './map-postboy.service';
 import { IPostboyDependingService } from '@artstesh/postboy';
-import { MapMoveEndEvent } from '../messages';
 import { first } from 'rxjs/operators';
 
 @Injectable()

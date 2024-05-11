@@ -40,6 +40,7 @@ import { ControlsService } from '../services/controls/controls.service';
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
   osmUrl = '';
+  drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
   constructor(
     private elementRef: ElementRef,
@@ -53,7 +54,6 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   }
 
   _settings: MapSettings = new MapSettings();
-  drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
@@ -73,6 +73,10 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.setOsm();
   }
 
+  onDestroy = () => {
+    this.registrator.down();
+  };
+
   private setOsm(): void {
     if (!this.map) return;
     this.osmUrl = `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
@@ -81,8 +85,4 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.detector.detectChanges();
     this.map.updateSize();
   }
-
-  onDestroy = () => {
-    this.registrator.down();
-  };
 }

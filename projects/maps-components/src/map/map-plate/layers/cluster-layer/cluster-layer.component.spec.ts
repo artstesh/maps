@@ -17,7 +17,6 @@ import { ClusterLayerManager } from './cluster-layer.manager';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 
 describe('ClusterLayerComponent', () => {
-  const layer = mock(Layer);
   let fixture: ComponentFixture<ClusterLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(ClusterLayerFactory);
