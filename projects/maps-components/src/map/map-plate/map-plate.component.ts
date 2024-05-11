@@ -17,21 +17,30 @@ import { DrawingService } from '../services/drawing/drawing.service';
 import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
 import { FeatureService } from '../services/feature.service';
 import { FeatureModificationService } from '../services/drawing/feature-modification.service';
-import { ControlsService } from "../services/controls/controls.service";
+import { ControlsService } from '../services/controls/controls.service';
 
 @Component({
   selector: 'art-map-plate',
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MessageRegistratorService, MapStateService,
-    MapManagementService, MapClickService,MapFeatureService,
-    DrawingService,DrawingGenerationService,FeatureService,FeatureModificationService,
-    ControlsService],
+  providers: [
+    MessageRegistratorService,
+    MapStateService,
+    MapManagementService,
+    MapClickService,
+    MapFeatureService,
+    DrawingService,
+    DrawingGenerationService,
+    FeatureService,
+    FeatureModificationService,
+    ControlsService,
+  ],
 })
 export class MapPlateComponent extends DestructibleComponent implements OnInit {
   map!: Map;
   osmUrl = '';
+  drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
   constructor(
     private elementRef: ElementRef,
@@ -45,7 +54,6 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
   }
 
   _settings: MapSettings = new MapSettings();
-  drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
   @Input() set settings(value: MapSettings | undefined) {
     if (!value || this._settings.isSame(value)) return;
@@ -65,6 +73,10 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.setOsm();
   }
 
+  onDestroy = () => {
+    this.registrator.down();
+  };
+
   private setOsm(): void {
     if (!this.map) return;
     this.osmUrl = `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
@@ -72,9 +84,5 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     }&x={x}&y={y}&z={z}`;
     this.detector.detectChanges();
     this.map.updateSize();
-  }
-
-  onDestroy = () => {
-    this.registrator.down();
   }
 }

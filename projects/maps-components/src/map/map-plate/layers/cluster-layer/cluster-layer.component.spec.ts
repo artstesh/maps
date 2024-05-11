@@ -17,7 +17,6 @@ import { ClusterLayerManager } from './cluster-layer.manager';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 
 describe('ClusterLayerComponent', () => {
-  const layer = mock(Layer);
   let fixture: ComponentFixture<ClusterLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(ClusterLayerFactory);
@@ -26,9 +25,9 @@ describe('ClusterLayerComponent', () => {
 
   beforeEach(async () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
-    manager = {layer: new Layer()} as any;
+    manager = { layer: new Layer() } as any;
     when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(factory.build(anything(),anything())).thenReturn(manager);
+    when(factory.build(anything(), anything())).thenReturn(manager);
     return MockBuilder(ClusterLayerComponent, MapModule)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(ClusterLayerFactory, instance(factory)));
@@ -57,16 +56,14 @@ describe('ClusterLayerComponent', () => {
     let settings: ClusterLayerSettings;
 
     beforeEach(() => {
-      otherManager = {layer: new Layer()} as any;
+      otherManager = { layer: new Layer() } as any;
       settings = ClusterLayerSettings.copy(Forger.create<ClusterLayerSettings>()!);
       when(factory.build(settings, anything())).thenReturn(otherManager);
       fixture.componentInstance.settings = settings;
       fixture.detectChanges();
     });
 
-    afterEach(() => {
-
-    });
+    afterEach(() => {});
 
     it('should add layer', () => {
       const [fired] = capture<AddLayerCommand>(postboy.fire).last();

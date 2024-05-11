@@ -20,11 +20,12 @@ export class ClusterLayerManager {
   }
 
   private observeMapMovement() {
-    combineLatest([this.postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID).pipe(auditTime(250)),
-      this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID)])
-      .subscribe(([movement, renderEvent]) => {
-        this.checkClusterNecessity(renderEvent.map);
-      });
+    combineLatest([
+      this.postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID).pipe(auditTime(250)),
+      this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID),
+    ]).subscribe(([movement, renderEvent]) => {
+      this.checkClusterNecessity(renderEvent.map);
+    });
   }
 
   private observeClick() {

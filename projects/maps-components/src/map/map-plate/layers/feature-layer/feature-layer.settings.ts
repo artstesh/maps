@@ -1,5 +1,5 @@
-import Style, { StyleFunction } from 'ol/style/Style';
-import { IdGenerator } from '../../../common/id.generator';
+import Style, { StyleFunction } from "ol/style/Style";
+import { IdGenerator } from "../../../common/id.generator";
 
 /**
  * A layer that is responsible for showing and styling main features on the map, such as markers and polygons
@@ -14,11 +14,16 @@ export class FeatureLayerSettings {
    */
   zIndex: number = 1;
   /**
-   * The maximum zoom at which the layer is visible. 19 by default
+   The maximum view zoom level (inclusive) at which this layer will be visible.
+
+   @type {number}
+   @default 19
    */
   maxZoom: number = 19;
   /**
-   * The minimum zoom at which the layer is visible. 0 by default
+   The minimum view zoom level (exclusive) at which this layer will be visible.
+
+   @type {number}
    */
   minZoom: number = 0;
   /**
@@ -27,8 +32,10 @@ export class FeatureLayerSettings {
   style?: Style | StyleFunction;
 
   /**
-   * Creates a clone of the existing settings
-   * @param model
+   * Copies the given FeatureLayerSettings object
+   *
+   * @param {FeatureLayerSettings} model - The FeatureLayerSettings object to be copied
+   * @returns {FeatureLayerSettings} - A copy of the FeatureLayerSettings object
    */
   public static copy(model: FeatureLayerSettings): FeatureLayerSettings {
     const result = new FeatureLayerSettings();
@@ -41,48 +48,61 @@ export class FeatureLayerSettings {
   }
 
   /**
-   Setter for {@link FeatureLayerSettings.zIndex}
-   * @param zIndex
+   * Sets the z-index value for the FeatureLayerSettings object.
+   *
+   * @param {number} zIndex - The new z-index value.
+   * @return {FeatureLayerSettings} - The updated FeatureLayerSettings object.
    */
   setZIndex(zIndex: number): FeatureLayerSettings {
     return FeatureLayerSettings.copy({ ...this, zIndex });
   }
 
   /**
-   * Setter for {@link FeatureLayerSettings.name}
-   * @param name
+   * Sets the name of the FeatureLayerSettings.
+   *
+   * @param {string} name - The name to set for the FeatureLayerSettings.
+   *
+   * @return {FeatureLayerSettings} - The updated FeatureLayerSettings object with the new name.
    */
   setName(name: string): FeatureLayerSettings {
     return FeatureLayerSettings.copy({ ...this, name });
   }
 
   /**
-   * Setter for {@link FeatureLayerSettings.maxZoom}
-   * @param maxZoom
+   * Sets the maximum zoom level for the FeatureLayerSettings.
+   *
+   * @param {number} maxZoom - The maximum zoom level.
+   * @return {FeatureLayerSettings} - The updated FeatureLayerSettings object.
    */
   setMaxZoom(maxZoom: number): FeatureLayerSettings {
     return FeatureLayerSettings.copy({ ...this, maxZoom });
   }
 
   /**
-   * Setter for {@link FeatureLayerSettings.minZoom}
-   * @param minZoom
+   * Sets the minimum zoom level for the feature layer.
+   *
+   * @param {number} minZoom The minimum zoom level to be set.
+   * @returns {FeatureLayerSettings} The updated feature layer settings object.
    */
   setMinZoom(minZoom: number): FeatureLayerSettings {
     return FeatureLayerSettings.copy({ ...this, minZoom });
   }
 
   /**
-   * Setter for {@link FeatureLayerSettings.style}
-   * @param style
+   * Sets the style for the FeatureLayerSettings object.
+   *
+   * @param {Style | StyleFunction} style - The new style to set. It can be either a Style object or a StyleFunction.
+   * @return {FeatureLayerSettings} - The updated FeatureLayerSettings object with the new style.
    */
   setStyle(style: Style | StyleFunction): FeatureLayerSettings {
     return FeatureLayerSettings.copy({ ...this, style });
   }
 
   /**
-   * Checks if the model has the same content
-   * @param model - the object to compare
+   * Checks if the given FeatureLayerSettings object is identical to the current object.
+   *
+   * @param {FeatureLayerSettings} model - The FeatureLayerSettings object to compare with.
+   * @return {boolean} - Returns true if the given object is identical to the current object, otherwise false.
    */
   public isSame(model: FeatureLayerSettings): boolean {
     if (this.maxZoom !== model.maxZoom) return false;

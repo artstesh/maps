@@ -17,15 +17,6 @@ export class MapClickService implements IPostboyDependingService {
     this.observeMapRender();
   }
 
-  private observeMapRender() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
-      this.map = m.map;
-      this.map?.on('singleclick', (e) => {
-        this.postboy.fire(this.onClick(e));
-      });
-    });
-  }
-
   onClick(ev: MapBrowserEvent<UIEvent>): MapClickEvent {
     const model: MapClickEvent = new MapClickEvent(ev.coordinate, {}, {});
     this.map?.forEachFeatureAtPixel(ev.pixel, (f, l) => {
@@ -35,11 +26,20 @@ export class MapClickService implements IPostboyDependingService {
           let layerName = l.get('name');
           if (!model.entities[layerName]) model.entities[layerName] = [];
           if (!model.features[layerName]) model.features[layerName] = [];
-          model.entities[layerName].push(({id: fs.getId()!, ...fs.get(MapConstants.FeatureInfo)}));
+          model.entities[layerName].push({ id: fs.getId()!, ...fs.get(MapConstants.FeatureInfo) });
           model.features[layerName].push(fs);
         });
     });
     return model;
+  }
+
+  private observeMapRender() {
+    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
+      this.map = m.map;
+      this.map?.on('singleclick', (e) => {
+        this.postboy.fire(this.onClick(e));
+      });
+    });
   }
 
   private getFeatureCollectionWithInner(features: Feature<Geometry>[]): Feature<Geometry>[] {

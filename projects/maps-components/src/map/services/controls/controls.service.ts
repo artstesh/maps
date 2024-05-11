@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Map } from 'ol';
 import { MapPostboyService } from '../map-postboy.service';
 import { AddControlCommand, MapRenderedEvent, RemoveControlCommand } from '../../messages';
-import { IPostboyDependingService } from "@artstesh/postboy";
-import { first } from "rxjs/operators";
+import { IPostboyDependingService } from '@artstesh/postboy';
+import { first } from 'rxjs/operators';
 
 @Injectable()
-export class ControlsService implements IPostboyDependingService{
+export class ControlsService implements IPostboyDependingService {
   private map?: Map;
 
   constructor(private postboy: MapPostboyService) {}
@@ -16,11 +16,14 @@ export class ControlsService implements IPostboyDependingService{
   }
 
   private observeMapRender() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).pipe(first()).subscribe((m) => {
-      this.map = m.map;
-      this.observeAdding();
-      this.observeRemoving();
-    });
+    this.postboy
+      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .pipe(first())
+      .subscribe((m) => {
+        this.map = m.map;
+        this.observeAdding();
+        this.observeRemoving();
+      });
   }
 
   private observeAdding() {

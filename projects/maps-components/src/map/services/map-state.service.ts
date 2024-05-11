@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Map } from 'ol';
-import { MapRenderedEvent, SetMapCenterCommand } from '../messages';
+import { MapMoveEndEvent, MapRenderedEvent, SetMapCenterCommand } from '../messages';
 import { MapPostboyService } from './map-postboy.service';
 import { IPostboyDependingService } from '@artstesh/postboy';
-import { MapMoveEndEvent } from "../messages";
-import { first } from "rxjs/operators";
+import { first } from 'rxjs/operators';
 
 @Injectable()
 export class MapStateService implements IPostboyDependingService {
@@ -18,14 +17,17 @@ export class MapStateService implements IPostboyDependingService {
   }
 
   private observeMapRendering() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).pipe(first()).subscribe((ev) => {
-      this.map = ev.map;
-      this.map?.on('moveend', () => {
-        const zoom = Math.floor(this.map?.getView().getZoom() || -1);
-        const extent = this.map?.getView().calculateExtent() || [];
-        this.postboy.fire(new MapMoveEndEvent(zoom, extent));
+    this.postboy
+      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .pipe(first())
+      .subscribe((ev) => {
+        this.map = ev.map;
+        this.map?.on('moveend', () => {
+          const zoom = Math.floor(this.map?.getView().getZoom() || -1);
+          const extent = this.map?.getView().calculateExtent() || [];
+          this.postboy.fire(new MapMoveEndEvent(zoom, extent));
+        });
       });
-    });
   }
 
   private observeCenter() {
