@@ -1,5 +1,5 @@
-import Style from "ol/style/Style";
-import { Circle, Fill, Icon, Stroke, Text } from "ol/style";
+import Style from 'ol/style/Style';
+import { Circle, Fill, Icon, Stroke, Text } from 'ol/style';
 
 /**
  * Helper class to create and modify marker styles.
