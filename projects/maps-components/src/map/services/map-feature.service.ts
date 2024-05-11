@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IPostboyDependingService, PostboyGenericMessage } from '@artstesh/postboy';
+import { IPostboyDependingService } from '@artstesh/postboy';
 import { Map } from 'ol';
 import { MapPostboyService } from './map-postboy.service';
 import { FitToPolygonsCommand, MapRenderedEvent } from '../messages';

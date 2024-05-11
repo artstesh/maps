@@ -5,6 +5,7 @@ import { MapConstants } from './map.constants';
 
 export class MarkerModel {
   public readonly id: string | number;
+
   constructor(
     public readonly lat: number,
     public readonly lng: number,

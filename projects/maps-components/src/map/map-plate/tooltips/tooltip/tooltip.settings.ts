@@ -4,7 +4,6 @@ import { IdGenerator } from '../../../common/id.generator';
 export class TooltipSettings {
   public readonly id: string;
   containerClass: string = 'custom-tooltip-class';
-  show: (ev: MapClickEvent) => boolean = (e) => true;
 
   public constructor(id?: string) {
     this.id = id ?? IdGenerator.get();
@@ -16,6 +15,8 @@ export class TooltipSettings {
     result.containerClass = model.containerClass;
     return result;
   }
+
+  show: (ev: MapClickEvent) => boolean = (e) => true;
 
   setShow(show: (ev: MapClickEvent) => boolean): TooltipSettings {
     return TooltipSettings.copy({ ...this, show });
