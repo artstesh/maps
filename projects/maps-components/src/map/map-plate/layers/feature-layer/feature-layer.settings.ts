@@ -1,5 +1,5 @@
-import Style, { StyleFunction } from "ol/style/Style";
-import { IdGenerator } from "../../../common/id.generator";
+import Style, { StyleFunction } from 'ol/style/Style';
+import { IdGenerator } from '../../../common/id.generator';
 
 /**
  * A layer that is responsible for showing and styling main features on the map, such as markers and polygons
