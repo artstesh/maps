@@ -5,7 +5,7 @@ import { MapPostboyService } from '../../../services/map-postboy.service';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 import { Forger } from '@artstesh/forger';
 import { Subject } from 'rxjs';
-import {MapClickEvent, MapRenderedEvent} from '../../../messages';
+import { MapClickEvent, MapRenderedEvent } from '../../../messages';
 import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
 import { should } from '@artstesh/it-should';
 import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';

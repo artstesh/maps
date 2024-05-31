@@ -7,7 +7,7 @@ import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features
 import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
 import { auditTime } from 'rxjs/operators';
 import { Map } from 'ol';
-import {combineLatest} from "rxjs";
+import { combineLatest } from 'rxjs';
 
 export class ClusterLayerManager {
   constructor(
