@@ -5,7 +5,7 @@ import { MapPostboyService } from '../../../services/map-postboy.service';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 import { Forger } from '@artstesh/forger';
 import { Subject } from 'rxjs';
-import { MapClickEvent } from '../../../messages';
+import {MapClickEvent, MapRenderedEvent} from '../../../messages';
 import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
 import { should } from '@artstesh/it-should';
 import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
@@ -17,12 +17,15 @@ describe('ClusterLayerManager', () => {
   let settings: ClusterLayerSettings;
   let clickSub$: Subject<MapClickEvent>;
   let moveEndEvent$: Subject<MapMoveEndEvent>;
+  let mapRenderedEvent$: Subject<MapRenderedEvent>;
 
   beforeEach(() => {
+    mapRenderedEvent$ = new Subject<MapRenderedEvent>();
     clickSub$ = new Subject<MapClickEvent>();
     moveEndEvent$ = new Subject<MapMoveEndEvent>();
-    when(postboy.subscribe(MapClickEvent.ID)).thenReturn(clickSub$);
-    when(postboy.subscribe(MapMoveEndEvent.ID)).thenReturn(moveEndEvent$);
+    when(postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID)).thenReturn(mapRenderedEvent$);
+    when(postboy.subscribe<MapClickEvent>(MapClickEvent.ID)).thenReturn(clickSub$);
+    when(postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID)).thenReturn(moveEndEvent$);
     settings = ClusterLayerSettings.copy(Forger.create<ClusterLayerSettings>()!);
     service = new ClusterLayerManager(settings, instance(layer), instance(postboy));
   });

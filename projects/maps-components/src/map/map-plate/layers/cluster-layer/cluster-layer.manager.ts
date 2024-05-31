@@ -6,8 +6,8 @@ import { ClusterLayerSettings } from './cluster-layer.settings';
 import { FitToFeaturesCommand } from '../../../messages/commands/fit-to-features.command';
 import { MapMoveEndEvent } from '../../../messages/events/map-move-end.event';
 import { auditTime } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
 import { Map } from 'ol';
+import {combineLatest} from "rxjs";
 
 export class ClusterLayerManager {
   constructor(

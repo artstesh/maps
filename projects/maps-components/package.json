@@ -6,11 +6,10 @@
     "@angular/core": "^16.0.0",
     "ol-geocoder": "^4.0.0",
     "ol": "^6.9.0",
-    "@artstesh/postboy": ">=1",
-    "@artstesh/collections": ">=1",
-    "rxjs": ">=6 || >=7"
+    "@artstesh/postboy": "^2.0.0",
+    "@artstesh/collections": "^1.0.1"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   }
 }
