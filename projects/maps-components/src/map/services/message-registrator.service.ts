@@ -36,7 +36,7 @@ import { AddControlCommand } from '../messages/commands/add-control.command';
 import { ControlsService } from './controls/controls.service';
 import { SetMapCenterCommand } from '../messages/commands/set-map-center.command';
 import { CalculateAreaExecutor } from '../messages/executors/calculate-area.executor';
-import { GetMapPositionExecutor } from "../messages/executors/get-map-position.executor";
+import { GetMapPositionExecutor } from '../messages/executors/get-map-position.executor';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -91,6 +91,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerExecutor(GenerateZoomControlExecutor.ID, (e: GenerateZoomControlExecutor) =>
       ZoomControlFactory.build(e.settings),
     );
-    this.registerExecutor(GetMapPositionExecutor.ID, () =>this.state.getMapPosition());
+    this.registerExecutor(GetMapPositionExecutor.ID, () => this.state.getMapPosition());
   }
 }
