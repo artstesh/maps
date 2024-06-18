@@ -4,7 +4,7 @@ import { MapMoveEndEvent, MapRenderedEvent, SetMapCenterCommand } from '../messa
 import { MapPostboyService } from './map-postboy.service';
 import { IPostboyDependingService } from '@artstesh/postboy';
 import { first } from 'rxjs/operators';
-import { MapPosition } from "../models";
+import { MapPosition } from '../models';
 
 @Injectable()
 export class MapStateService implements IPostboyDependingService {
@@ -22,7 +22,7 @@ export class MapStateService implements IPostboyDependingService {
     let [longitude, latitude] = this.map.getView().getCenter()!;
     const zoom = Math.floor(this.map.getView().getZoom()!);
     const extent = this.map.getView().calculateExtent();
-    return {longitude, latitude, zoom, extent};
+    return { longitude, latitude, zoom, extent };
   }
 
   private observeMapRendering() {
