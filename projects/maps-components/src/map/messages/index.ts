@@ -12,3 +12,4 @@ export * from './commands/remove-control.command';
 export * from './commands/set-map-center.command';
 export * from './executors/calculate-area.executor';
 export * from './commands/fit-to-polygons.command';
+export * from './executors/get-map-position.executor';
