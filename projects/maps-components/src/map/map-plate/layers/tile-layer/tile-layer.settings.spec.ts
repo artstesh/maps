@@ -53,6 +53,16 @@ describe('#map-models TileLayerSettings', () => {
     });
   });
 
+  describe('setRequestHeaders()', () => {
+    it('success', () => {
+      const expected = Forger.create<Record<string, string>>()!;
+      //
+      model = model.setRequestHeaders(expected);
+      //
+      should().objects(model.requestHeaders,expected).equal();
+    });
+  });
+
   describe('setOpacity()', () => {
     it('success', () => {
       const expected = Forger.create<number>()!;
@@ -95,6 +105,13 @@ describe('#map-models TileLayerSettings', () => {
     it('different url', () => {
       const other = TileLayerSettings.copy(model);
       other.url = Forger.create<string>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different requestHeaders', () => {
+      const other = TileLayerSettings.copy(model);
+      other.requestHeaders = {};
       //
       should().false(model.isSame(other));
     });
