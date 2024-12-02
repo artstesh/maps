@@ -37,7 +37,13 @@ export class TileLayerSettings {
    * @default 'EPSG:3857'
    */
   projection: string = 'EPSG:3857';
-
+  /**
+   * Additional headers that should be added to each tile request
+   *
+   * @type {Record<string, string>}
+   * @default An empty array
+   */
+  requestHeaders: Record<string, string> | null = null;
   /**
    * Creates a copy of the given tile layer settings.
    *
@@ -51,6 +57,7 @@ export class TileLayerSettings {
     result.projection = model.projection;
     result.opacity = model.opacity;
     result.url = model.url;
+    result.requestHeaders = model.requestHeaders;
     return result;
   }
 
@@ -62,6 +69,16 @@ export class TileLayerSettings {
    */
   setUrl(url: string): TileLayerSettings {
     return TileLayerSettings.copy({ ...this, url });
+  }
+
+  /**
+   * Sets the requestHeaders of the TileLayerSettings object.
+   *
+   * @param {Record<string, string>} requestHeaders - The headers which should be provided.
+   * @return {TileLayerSettings} - The updated TileLayerSettings object.
+   */
+  setRequestHeaders(requestHeaders: Record<string, string>): TileLayerSettings {
+    return TileLayerSettings.copy({ ...this, requestHeaders });
   }
 
   /**
@@ -116,6 +133,7 @@ export class TileLayerSettings {
     if (this.url !== model.url) return false;
     if (this.projection !== model.projection) return false;
     if (this.opacity !== model.opacity) return false;
+    if (this.requestHeaders !== model.requestHeaders) return false;
     return true;
   }
 }
