@@ -4,7 +4,7 @@ import { TileLayerSettings } from './tile-layer.settings';
 import { TileCoord } from 'ol/tilecoord';
 import { get } from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
-import { Tile } from "ol";
+import { Tile } from 'ol';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,9 @@ export class TileLayerFactory {
       projection: get(settings.projection)!,
       tileUrlFunction: this.getTileFunc(settings),
       crossOrigin: 'Anonymous',
-      tileLoadFunction: !!settings.requestHeaders ? (tile, src: string) => this.tileLoader(tile,src,settings.requestHeaders!) : undefined
+      tileLoadFunction: !!settings.requestHeaders
+        ? (tile, src: string) => this.tileLoader(tile, src, settings.requestHeaders!)
+        : undefined,
     });
     return new TileLayer({ source, opacity: settings.opacity });
   }
