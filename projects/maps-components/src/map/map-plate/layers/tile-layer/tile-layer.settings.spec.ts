@@ -59,7 +59,7 @@ describe('#map-models TileLayerSettings', () => {
       //
       model = model.setRequestHeaders(expected);
       //
-      should().objects(model.requestHeaders,expected).equal();
+      should().objects(model.requestHeaders!,expected).equal();
     });
   });
 
