@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MapPostboyService } from './map-postboy.service';
-import { FitToPolygonsCommand, MapRenderedEvent } from '../messages';
+import { FitToPolygonsCommand, GetFeaturesInPointQuery, MapRenderedEvent } from "../messages";
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
@@ -37,6 +37,7 @@ import { ControlsService } from './controls/controls.service';
 import { SetMapCenterCommand } from '../messages/commands/set-map-center.command';
 import { CalculateAreaExecutor } from '../messages/executors/calculate-area.executor';
 import { GetMapPositionExecutor } from "../messages/executors/get-map-position.executor";
+import { FilterFeaturesInPointExecutor } from "../messages/executors/filter-features-in-point.executor";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -77,12 +78,16 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.registerSubject(DrawSelectionAreaCommand.ID);
     this.registerSubject(CancelFeatureModificationCommand.ID);
     this.registerSubject(ModifyFeatureCommand.ID);
+    this.registerSubject(GetFeaturesInPointQuery.ID);
     this.setExecutors();
   }
 
   private setExecutors() {
     this.registerExecutor(FilterFeaturesInAreaExecutor.ID, (e: FilterFeaturesInAreaExecutor) =>
       FeatureService.filterFeaturesInArea(e),
+    );
+    this.registerExecutor(FilterFeaturesInPointExecutor.ID, (e: FilterFeaturesInPointExecutor) =>
+      FeatureService.filterFeaturesInPoint(e),
     );
     this.registerExecutor(CalculateAreaExecutor.ID, (e: CalculateAreaExecutor) =>
       FeatureService.calculateArea(e.polygon?.feature?.getGeometry()),
