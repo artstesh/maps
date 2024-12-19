@@ -3,12 +3,19 @@ import Polygon from 'ol/geom/Polygon';
 import { Feature } from 'ol';
 import * as Sphere from 'ol/sphere';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
+import { FilterFeaturesInPointExecutor } from '../messages';
 
 export class FeatureService {
   constructor() {}
 
   public static filterFeaturesInArea(query: FilterFeaturesInAreaExecutor): Feature<Geometry>[] {
     return query.features.filter((f) => FeatureService.booleanIntersects(query.area, f.getGeometry()!));
+  }
+
+  public static filterFeaturesInPoint(query: FilterFeaturesInPointExecutor): Feature<Geometry>[] {
+    return query.features.filter((f) =>
+      FeatureService.booleanIntersects(f.getGeometry()!, new Point([query.lng, query.lat])),
+    );
   }
 
   public static calculateArea(g: Geometry | undefined): number {
