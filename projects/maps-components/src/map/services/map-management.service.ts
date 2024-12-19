@@ -5,7 +5,7 @@ import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
 import { Vector as Layer } from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
-import { MapRenderedEvent } from '../messages';
+import { FilterFeaturesInPointExecutor, GetFeaturesInPointQuery, MapRenderedEvent } from '../messages';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { AddTileCommand } from '../messages/commands/add-tile.command';
 import { RemoveTileCommand } from '../messages/commands/remove-tile.command';
@@ -35,6 +35,7 @@ export class MapManagementService implements IPostboyDependingService {
     this.observeRemoveTile();
     this.observeLayerQuery();
     this.observeFeaturesInArea();
+    this.observeFeaturesInPoint();
   }
 
   private observeRemoveTile() {
@@ -90,20 +91,45 @@ export class MapManagementService implements IPostboyDependingService {
   private observeFeaturesInArea() {
     this.postboy.subscribe<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID).subscribe((qr) => {
       let result = new Dictionary<IIdentified[]>();
-      this.layers.forEach((l) => {
-        let layerName = l.get('name');
-        if (qr.ignore.has(layerName) || layerName === MapConstants.DrawingLayerId) return;
-        let source = l.getSource();
-        if (!!(source as any)['getSource']) source = (source as any)?.getSource();
+      this.forEachLayer((l, s) => {
         let features = this.postboy.execute<FilterFeaturesInAreaExecutor, Feature<Geometry>[]>(
-          new FilterFeaturesInAreaExecutor(qr.area, source?.getFeatures() ?? []),
+          new FilterFeaturesInAreaExecutor(qr.area, s?.getFeatures() ?? []),
         );
         result.put(
-          layerName,
+          l.get('name'),
           features.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
         );
-      });
+      }, qr.ignore);
       qr.finish(result);
+    });
+  }
+
+  private observeFeaturesInPoint() {
+    this.postboy.subscribe<GetFeaturesInPointQuery>(GetFeaturesInPointQuery.ID).subscribe((qr) => {
+      let result = new Dictionary<IIdentified[]>();
+      this.forEachLayer((l, s) => {
+        let features = this.postboy.execute<FilterFeaturesInPointExecutor, Feature<Geometry>[]>(
+          new FilterFeaturesInPointExecutor(qr.lat, qr.lng, s?.getFeatures() ?? []),
+        );
+        result.put(
+          l.get('name'),
+          features.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
+        );
+      }, qr.ignore);
+      qr.finish(result);
+    });
+  }
+
+  private forEachLayer(
+    action: (l: Layer<any>, s: VectorSource<any> | Cluster | null) => void,
+    ignore: Set<string>,
+  ): void {
+    this.layers.forEach((l) => {
+      let layerName = l.get('name');
+      if (ignore.has(layerName) || layerName === MapConstants.DrawingLayerId) return;
+      let source = l.getSource();
+      if (!!(source as any)['getSource']) source = (source as any)?.getSource();
+      action(l, source);
     });
   }
 }
