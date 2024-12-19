@@ -14,3 +14,4 @@ export * from './executors/calculate-area.executor';
 export * from './commands/fit-to-polygons.command';
 export * from './executors/get-map-position.executor';
 export * from './queries/get-features-in-area.query';
+export * from './executors/filter-features-in-area.executor';
