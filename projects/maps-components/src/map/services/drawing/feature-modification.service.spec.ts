@@ -17,9 +17,9 @@ describe('FeatureModificationService', () => {
     mapRendered$ = new ReplaySubject<MapRenderedEvent>(1);
     startModify$ = new Subject<ModifyFeatureCommand>();
     cancelModify$ = new Subject<CancelFeatureModificationCommand>();
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(postboy.subscribe(ModifyFeatureCommand.ID)).thenReturn(startModify$.asObservable());
-    when(postboy.subscribe(CancelFeatureModificationCommand.ID)).thenReturn(cancelModify$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(ModifyFeatureCommand)).thenReturn(startModify$.asObservable());
+    when(postboy.sub(CancelFeatureModificationCommand)).thenReturn(cancelModify$.asObservable());
     service = new FeatureModificationService(instance(postboy));
     service.up();
   });

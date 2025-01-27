@@ -14,7 +14,7 @@ describe('PolygonsComponent', () => {
 
   beforeEach(async () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     return MockBuilder(PolygonsComponent, MapModule).provide(MockProvider(MapPostboyService, instance(postboy)));
   });
 
