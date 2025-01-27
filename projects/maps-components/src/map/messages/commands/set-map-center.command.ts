@@ -4,7 +4,6 @@ import { PostboyGenericMessage } from '@artstesh/postboy';
  * Forces map to move to a specific point
  */
 export class SetMapCenterCommand extends PostboyGenericMessage {
-
   /**
    *
    * @param lat - the desired latitude

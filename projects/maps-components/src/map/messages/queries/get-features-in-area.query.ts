@@ -8,7 +8,6 @@ import { Dictionary } from '@artstesh/collections';
  * The query optionally takes a set of layer names to ignore during the operation.
  */
 export class GetFeaturesInAreaQuery extends PostboyCallbackMessage<Dictionary<IIdentified[]>> {
-
   /**
    * Constructor to initialize the object with a Geometry instance and an optional set of strings to ignore.
    *
