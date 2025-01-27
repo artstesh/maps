@@ -5,7 +5,6 @@ import { MapControl } from '../../models/map-control';
  * Represents a command to add a custom control to a map.
  */
 export class AddControlCommand extends PostboyGenericMessage {
-
   /**
    * Creates an instance of the class with the specified MapControl object.
    *
