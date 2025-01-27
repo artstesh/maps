@@ -13,8 +13,8 @@ describe('MapInteractionService', () => {
 
   beforeEach(() => {
     mapRendered$ = new ReplaySubject<MapRenderedEvent>(1);
-    when(postboy.subscribe(anything())).thenReturn(new Subject()); // hide for the initial step
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(anything())).thenReturn(new Subject()); // hide for the initial step
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(map.on).thenReturn((() => {}) as any);
     mapRendered$.next(new MapRenderedEvent(instance(map)));
     service = new MapClickService(instance(postboy));

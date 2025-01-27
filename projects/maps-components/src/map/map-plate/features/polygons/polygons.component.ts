@@ -38,7 +38,7 @@ export class PolygonsComponent extends DestructibleComponent implements OnInit {
 
   ngOnInit(): void {
     this.postboy
-      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .sub(MapRenderedEvent)
       .pipe(
         filter((m) => !!m),
         first(),

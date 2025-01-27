@@ -27,7 +27,7 @@ export class MapStateService implements IPostboyDependingService {
 
   private observeMapRendering() {
     this.postboy
-      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .sub(MapRenderedEvent)
       .pipe(first())
       .subscribe((ev) => {
         this.map = ev.map;
@@ -38,7 +38,7 @@ export class MapStateService implements IPostboyDependingService {
   }
 
   private observeCenter() {
-    this.postboy.subscribe<SetMapCenterCommand>(SetMapCenterCommand.ID).subscribe((c) => {
+    this.postboy.sub(SetMapCenterCommand).subscribe((c) => {
       this.map?.getView().setCenter([c.lng, c.lat]);
       if (c.zoom) this.map?.getView().setZoom(c.zoom);
     });

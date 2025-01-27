@@ -9,10 +9,6 @@ import { MapPosition } from '../../models';
 export class GetMapPositionExecutor extends PostboyExecutor<MapPosition | null> {
   public static readonly ID = '52c95689-d09b-4082-ba58-9183ea96a213';
 
-  public get id(): string {
-    return GetMapPositionExecutor.ID;
-  }
-
   constructor() {
     super();
   }

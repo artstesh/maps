@@ -49,7 +49,7 @@ export class MapControlZoomComponent extends DestructibleComponent implements On
 
   ngOnInit(): void {
     this.postboy
-      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .sub(MapRenderedEvent)
       .pipe(
         filter((m) => !!m),
         first(),
@@ -66,7 +66,7 @@ export class MapControlZoomComponent extends DestructibleComponent implements On
 
   private setControl(): void {
     if (!this.map) return;
-    this.control = this.postboy.execute(new GenerateZoomControlExecutor(this._settings));
+    this.control = this.postboy.exec(new GenerateZoomControlExecutor(this._settings));
     this.map.addControl(this.control!);
   }
 

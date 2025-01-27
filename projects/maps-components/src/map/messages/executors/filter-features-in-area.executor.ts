@@ -1,15 +1,17 @@
-import { PostboyExecutor } from '@artstesh/postboy';
-import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
+import { PostboyExecutor } from "@artstesh/postboy";
+import { Feature } from "ol";
+import { Geometry } from "ol/geom";
 
+/**
+ * A class that extends the PostboyExecutor to filter geographical features within a specified area.
+ * This class is designed to process a list of input features and determine which of them are located inside the provided area geometry.
+ *
+ * Parameters:
+ * - `area`: A Geometry object defining the area to filter geographical features.
+ * - `features`: An array of geographical features, represented as `Feature<Geometry>` objects, to be filtered by their presence within the specified area.
+ */
 export class FilterFeaturesInAreaExecutor extends PostboyExecutor<Feature<Geometry>[]> {
-  public static readonly ID: string = '36bb2d94-8028-4512-90dd-2386af3fc67c';
-
   constructor(public area: Geometry, public features: Feature<Geometry>[]) {
     super();
-  }
-
-  public get id(): string {
-    return FilterFeaturesInAreaExecutor.ID;
   }
 }

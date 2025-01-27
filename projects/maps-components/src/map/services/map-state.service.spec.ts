@@ -20,8 +20,8 @@ describe('MapStateService', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     setCenter$ = new Subject<SetMapCenterCommand>();
     when(map.on).thenReturn((() => {}) as any);
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(postboy.subscribe(SetMapCenterCommand.ID)).thenReturn(setCenter$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(SetMapCenterCommand)).thenReturn(setCenter$.asObservable());
     service = new MapStateService(instance(postboy));
     service.up();
   });

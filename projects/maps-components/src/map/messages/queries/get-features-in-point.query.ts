@@ -7,13 +7,15 @@ import { IIdentified } from '../../models/i-identified';
  * The query is defined by latitude, longitude, and an optional set of features to ignore.
 */
 export class GetFeaturesInPointQuery extends PostboyCallbackMessage<Dictionary<IIdentified[]>> {
-  public static readonly ID: string = '7c051c97-bbf1-47eb-baa3-4d1eef6f281f';
 
+  /**
+   * Constructor for initializing a geographic coordinate object.
+   *
+   * @param {number} lat - The latitude of the location.
+   * @param {number} lng - The longitude of the location.
+   * @param {Set<string>} [ignore=new Set<string>()] - An optional set of strings to ignore during processing.
+   */
   constructor(public lat: number, public lng: number, public ignore: Set<string> = new Set<string>()) {
     super();
-  }
-
-  public get id(): string {
-    return GetFeaturesInPointQuery.ID;
   }
 }
