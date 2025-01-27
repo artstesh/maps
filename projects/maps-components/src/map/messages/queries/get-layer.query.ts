@@ -4,7 +4,6 @@ import VectorSource from 'ol/source/Vector';
 import Cluster from 'ol/source/Cluster';
 
 export class GetLayerQuery extends PostboyCallbackMessage<Layer<VectorSource<any> | Cluster> | null> {
-
   constructor(public name: string) {
     super();
   }

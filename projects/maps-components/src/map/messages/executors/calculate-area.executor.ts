@@ -11,7 +11,6 @@ import { PolygonModel } from '../../models';
  * @return {number} - the spherical area (in square meters)
  */
 export class CalculateAreaExecutor extends PostboyExecutor<Feature<Geometry>[]> {
-
   constructor(public polygon: PolygonModel) {
     super();
   }

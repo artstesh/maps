@@ -10,7 +10,6 @@ import { MapControl } from '../../models/map-control';
  * @extends PostboyGenericMessage
  */
 export class RemoveControlCommand extends PostboyGenericMessage {
-
   /**
    * Constructs an instance of the class.
    *
