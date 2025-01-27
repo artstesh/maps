@@ -18,9 +18,9 @@ describe('ControlsService', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     addControl$ = new Subject<AddControlCommand>();
     removeControl$ = new Subject<RemoveControlCommand>();
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(postboy.subscribe(AddControlCommand.ID)).thenReturn(addControl$.asObservable());
-    when(postboy.subscribe(RemoveControlCommand.ID)).thenReturn(removeControl$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(AddControlCommand)).thenReturn(addControl$.asObservable());
+    when(postboy.sub(RemoveControlCommand)).thenReturn(removeControl$.asObservable());
     service = new ControlsService(instance(postboy));
     service.up();
   });

@@ -1,15 +1,22 @@
-import { PostboyExecutor } from '@artstesh/postboy';
-import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
+import { PostboyExecutor } from "@artstesh/postboy";
+import { Feature } from "ol";
+import { Geometry } from "ol/geom";
 
 /**
- * The FilterFeaturesInPointExecutor class is responsible for filtering features within a given point.
+ * A class responsible for executing filtering of geographical features
+ * based on a specific geographical point (latitude and longitude).
+ *
+ * @template Feature - A geographical feature that is processed by the executor.
+ * @template Geometry - The type of geometry associated with the feature.
  */
-export class FilterFeaturesInPointExecutor extends PostboyExecutor<Feature<Geometry>[]> {
-  public static readonly ID = '5b859282-5d5a-47ca-a6ad-863a66c8b82b';
-  public get id(): string {
-    return FilterFeaturesInPointExecutor.ID;
-  }
+export class FilterFeaturesInPointExecutor extends PostboyExecutor<Feature<Geometry>[]>{
+  /**
+   * Constructs a new instance with the specified latitude, longitude, and features.
+   *
+   * @param {number} lat - The latitude coordinate.
+   * @param {number} lng - The longitude coordinate.
+   * @param {Feature<Geometry>[]} features - The array of features associated with the location.
+   */
   constructor(public lat: number, public lng: number, public features: Feature<Geometry>[]) {
     super();
   }

@@ -31,7 +31,7 @@ export class FeatureModificationService implements IPostboyDependingService {
   }
 
   private observeModification() {
-    this.postboy.subscribe<ModifyFeatureCommand>(ModifyFeatureCommand.ID).subscribe((ev) => {
+    this.postboy.sub(ModifyFeatureCommand).subscribe((ev) => {
       this.defineLayer((l) => {
         if (!l || !this.map) {
           this.clearInteraction(l);
@@ -84,20 +84,18 @@ export class FeatureModificationService implements IPostboyDependingService {
   }
 
   private observeMapRender() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
+    this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
     });
   }
 
   private defineLayer(action: (layer: Layer<VectorSource<any>> | null) => void): void {
-    const query = new GetLayerQuery(MapConstants.DrawingLayerId);
-    query.result.subscribe((l) => action(l));
-    this.postboy.fire(query);
+    this.postboy.fireCallback(new GetLayerQuery(MapConstants.DrawingLayerId), (l) => action(l));
   }
 
   private observeCancelation(ev: ModifyFeatureCommand, layer: Layer<VectorSource<any>> | null): Subscription {
     return this.postboy
-      .subscribe(CancelFeatureModificationCommand.ID)
+      .sub(CancelFeatureModificationCommand)
       .pipe(first())
       .subscribe(() => {
         ev.finish(null);

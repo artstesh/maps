@@ -21,9 +21,9 @@ describe('TooltipComponent', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     closeTip$ = new Subject<CloseTooltipCommand>();
     mapClick$ = new Subject<MapClickEvent>();
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(postboy.subscribe(CloseTooltipCommand.ID)).thenReturn(closeTip$.asObservable());
-    when(postboy.subscribe(MapClickEvent.ID)).thenReturn(mapClick$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(CloseTooltipCommand)).thenReturn(closeTip$.asObservable());
+    when(postboy.sub(MapClickEvent)).thenReturn(mapClick$.asObservable());
     return MockBuilder(TooltipComponent, MapModule).provide(MockProvider(MapPostboyService, instance(postboy)));
   });
 
