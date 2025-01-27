@@ -21,15 +21,15 @@ export class ClusterLayerManager {
 
   private observeMapMovement() {
     combineLatest([
-      this.postboy.subscribe<MapMoveEndEvent>(MapMoveEndEvent.ID).pipe(auditTime(250)),
-      this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID),
+      this.postboy.sub(MapMoveEndEvent).pipe(auditTime(250)),
+      this.postboy.sub(MapRenderedEvent),
     ]).subscribe(([movement, renderEvent]) => {
       this.checkClusterNecessity(renderEvent.map);
     });
   }
 
   private observeClick() {
-    this.postboy.subscribe<MapClickEvent>(MapClickEvent.ID).subscribe((m) => {
+    this.postboy.sub(MapClickEvent).subscribe((m) => {
       if ((m.features[this.settings.name]?.length ?? 0) > 1) {
         this.postboy.fire(new FitToFeaturesCommand(m.features[this.settings.name], -1));
       }

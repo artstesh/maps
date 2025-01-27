@@ -17,10 +17,10 @@ describe('DrawingService', () => {
     startDrawing$ = new Subject<StartDrawingCommand>();
     selectionDrawing$ = new Subject<DrawSelectionAreaCommand>();
     cancelDrawing$ = new Subject<CancelDrawingCommand>();
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(postboy.subscribe(StartDrawingCommand.ID)).thenReturn(startDrawing$.asObservable());
-    when(postboy.subscribe(DrawSelectionAreaCommand.ID)).thenReturn(selectionDrawing$.asObservable());
-    when(postboy.subscribe(CancelDrawingCommand.ID)).thenReturn(cancelDrawing$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(StartDrawingCommand)).thenReturn(startDrawing$.asObservable());
+    when(postboy.sub(DrawSelectionAreaCommand)).thenReturn(selectionDrawing$.asObservable());
+    when(postboy.sub(CancelDrawingCommand)).thenReturn(cancelDrawing$.asObservable());
     service = new DrawingService(instance(postboy));
     service.up();
   });

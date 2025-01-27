@@ -3,18 +3,26 @@ import { Geometry } from 'ol/geom';
 import { IIdentified } from '../../models/i-identified';
 import { PostboyGenericMessage } from '@artstesh/postboy';
 
+/**
+ * Represents an event triggered by a click on a map, containing information about the
+ * click's location, relevant entities, and features present at the clicked position.
+ *
+ * @extends {PostboyGenericMessage}
+ */
 export class MapClickEvent extends PostboyGenericMessage {
-  public static readonly ID: string = '323df526-8d9c-49c6-83e8-6e9a1e7762f7';
 
+  /**
+   * Creates an instance of this class with the provided coordinates, entities, and features.
+   *
+   * @param {number[]} coordinates - An array representing the coordinates.
+   * @param {{ [layer: string]: IIdentified[] }} entities - A mapping of layer names to arrays of IIdentified entities.
+   * @param {{ [layer: string]: Feature<Geometry>[] }} features - A mapping of layer names to arrays of features with geometry.
+   */
   constructor(
     public coordinates: number[],
     public entities: { [layer: string]: IIdentified[] },
     public features: { [layer: string]: Feature<Geometry>[] },
   ) {
     super();
-  }
-
-  public get id(): string {
-    return MapClickEvent.ID;
   }
 }

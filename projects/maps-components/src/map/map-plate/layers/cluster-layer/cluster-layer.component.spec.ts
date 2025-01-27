@@ -26,7 +26,7 @@ describe('ClusterLayerComponent', () => {
   beforeEach(async () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     manager = { layer: new Layer() } as any;
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything(), anything())).thenReturn(manager);
     return MockBuilder(ClusterLayerComponent, MapModule)
       .provide(MockProvider(MapPostboyService, instance(postboy)))

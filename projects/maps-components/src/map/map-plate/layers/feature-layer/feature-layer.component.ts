@@ -33,7 +33,7 @@ export class FeatureLayerComponent extends DestructibleComponent implements OnIn
 
   ngOnInit(): void {
     this.postboy
-      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .sub(MapRenderedEvent)
       .pipe(
         filter((m) => !!m),
         first(),
