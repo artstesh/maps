@@ -10,7 +10,6 @@ import { DrawingType } from '../../models';
  * @return {Dictionary<IIdentified[]>} - a collection of features inside the selected area, grouped by a layer's name
  */
 export class DrawSelectionAreaCommand extends PostboyCallbackMessage<Dictionary<IIdentified[]>> {
-
   /**
    * Constructs a new instance with the specified type, style, and optional set of ignored items.
    *

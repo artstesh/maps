@@ -9,7 +9,6 @@ import Style from 'ol/style/Style';
  * @return {string | null} a string representation of the modified feature in the appropriate format
  */
 export class ModifyFeatureCommand extends PostboyCallbackMessage<string | null> {
-
   /**
    * Constructs an instance of the class.
    *

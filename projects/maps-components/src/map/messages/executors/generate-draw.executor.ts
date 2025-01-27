@@ -6,7 +6,6 @@ import { DrawingType } from '../../models';
 import Style from 'ol/style/Style';
 
 export class GenerateDrawExecutor extends PostboyExecutor<Draw> {
-
   constructor(public layer: Layer<VectorSource<any>>, public style: Style, public type: DrawingType) {
     super();
   }

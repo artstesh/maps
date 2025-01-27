@@ -6,7 +6,6 @@ import { PolygonModel } from '../../models';
  * to the viewable area, optionally applying a zoom transformation afterwards.
  */
 export class FitToPolygonsCommand extends PostboyGenericMessage {
-
   /**
    * Creates an instance of the class with specified polygon features and an optional zoom level.
    *
