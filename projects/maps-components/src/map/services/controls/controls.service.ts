@@ -17,7 +17,7 @@ export class ControlsService implements IPostboyDependingService {
 
   private observeMapRender() {
     this.postboy
-      .subscribe<MapRenderedEvent>(MapRenderedEvent.ID)
+      .sub(MapRenderedEvent)
       .pipe(first())
       .subscribe((m) => {
         this.map = m.map;
@@ -27,12 +27,12 @@ export class ControlsService implements IPostboyDependingService {
   }
 
   private observeAdding() {
-    this.postboy.subscribe<AddControlCommand>(AddControlCommand.ID).subscribe((c) => this.map?.addControl(c.item));
+    this.postboy.sub(AddControlCommand).subscribe((c) => this.map?.addControl(c.item));
   }
 
   private observeRemoving() {
     this.postboy
-      .subscribe<RemoveControlCommand>(RemoveControlCommand.ID)
+      .sub(RemoveControlCommand)
       .subscribe((c) => this.map?.removeControl(c.item));
   }
 }

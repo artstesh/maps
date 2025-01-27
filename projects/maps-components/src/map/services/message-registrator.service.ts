@@ -56,46 +56,46 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
   }
 
   protected _up(): void {
-    this.registerReplay(MapRenderedEvent.ID);
-    this.registerReplay(PlaceLayerFeaturesCommand.ID);
-    this.registerReplay(RemoveControlCommand.ID);
-    this.registerReplay(AddControlCommand.ID);
-    this.registerReplay(SetMapCenterCommand.ID);
-    this.registerSubject(AddLayerCommand.ID);
-    this.registerSubject(RemoveLayerCommand.ID);
-    this.registerSubject(AddTileCommand.ID);
-    this.registerSubject(RemoveTileCommand.ID);
-    this.registerSubject(MapClickEvent.ID);
-    this.registerSubject(CloseTooltipCommand.ID);
-    this.registerSubject(FitToFeaturesCommand.ID);
-    this.registerSubject(FitToPolygonsCommand.ID);
-    this.registerSubject(MapMoveEndEvent.ID);
-    this.registerSubject(CancelDrawingCommand.ID);
-    this.registerSubject(StartDrawingCommand.ID);
-    this.registerSubject(GetLayerQuery.ID);
-    this.registerSubject(DrawingFinishedEvent.ID);
-    this.registerSubject(GetFeaturesInAreaQuery.ID);
-    this.registerSubject(DrawSelectionAreaCommand.ID);
-    this.registerSubject(CancelFeatureModificationCommand.ID);
-    this.registerSubject(ModifyFeatureCommand.ID);
-    this.registerSubject(GetFeaturesInPointQuery.ID);
+    this.recordReplay(MapRenderedEvent);
+    this.recordReplay(PlaceLayerFeaturesCommand);
+    this.recordReplay(RemoveControlCommand);
+    this.recordReplay(AddControlCommand);
+    this.recordReplay(SetMapCenterCommand);
+    this.recordSubject(AddLayerCommand);
+    this.recordSubject(RemoveLayerCommand);
+    this.recordSubject(AddTileCommand);
+    this.recordSubject(RemoveTileCommand);
+    this.recordSubject(MapClickEvent);
+    this.recordSubject(CloseTooltipCommand);
+    this.recordSubject(FitToFeaturesCommand);
+    this.recordSubject(FitToPolygonsCommand);
+    this.recordSubject(MapMoveEndEvent);
+    this.recordSubject(CancelDrawingCommand);
+    this.recordSubject(StartDrawingCommand);
+    this.recordSubject(GetLayerQuery);
+    this.recordSubject(DrawingFinishedEvent);
+    this.recordSubject(GetFeaturesInAreaQuery);
+    this.recordSubject(DrawSelectionAreaCommand);
+    this.recordSubject(CancelFeatureModificationCommand);
+    this.recordSubject(ModifyFeatureCommand);
+    this.recordSubject(GetFeaturesInPointQuery);
     this.setExecutors();
   }
 
   private setExecutors() {
-    this.registerExecutor(FilterFeaturesInAreaExecutor.ID, (e: FilterFeaturesInAreaExecutor) =>
+    this.recordExecutor(FilterFeaturesInAreaExecutor, e =>
       FeatureService.filterFeaturesInArea(e),
     );
-    this.registerExecutor(FilterFeaturesInPointExecutor.ID, (e: FilterFeaturesInPointExecutor) =>
+    this.recordExecutor(FilterFeaturesInPointExecutor, e =>
       FeatureService.filterFeaturesInPoint(e),
     );
-    this.registerExecutor(CalculateAreaExecutor.ID, (e: CalculateAreaExecutor) =>
+    this.recordExecutor(CalculateAreaExecutor, e =>
       FeatureService.calculateArea(e.polygon?.feature?.getGeometry()),
     );
-    this.registerExecutor(GenerateDrawExecutor.ID, (e: GenerateDrawExecutor) => DrawingGenerationService.getDraw(e));
-    this.registerExecutor(GenerateZoomControlExecutor.ID, (e: GenerateZoomControlExecutor) =>
+    this.recordExecutor(GenerateDrawExecutor, e => DrawingGenerationService.getDraw(e));
+    this.recordExecutor(GenerateZoomControlExecutor, e =>
       ZoomControlFactory.build(e.settings),
     );
-    this.registerExecutor(GetMapPositionExecutor.ID, () =>this.state.getMapPosition());
+    this.recordExecutor(GetMapPositionExecutor, () =>this.state.getMapPosition());
   }
 }

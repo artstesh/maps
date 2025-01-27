@@ -19,8 +19,8 @@ describe('MapManagementService', () => {
 
   beforeEach(() => {
     mapRendered$ = new ReplaySubject<MapRenderedEvent>(1);
-    when(postboy.subscribe(anything())).thenReturn(new Subject()); // hide for the initial step
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
+    when(postboy.sub(anything())).thenReturn(new Subject()); // hide for the initial step
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     mapRendered$.next(new MapRenderedEvent(instance(map)));
     service = new MapManagementService(instance(postboy));
     service.up();
@@ -46,7 +46,7 @@ describe('MapManagementService', () => {
       layerName = Forger.create<string>()!;
       addLayerEvent$ = new Subject<AddLayerCommand>();
       when(layer.get('name')).thenReturn(layerName);
-      when(postboy.subscribe<AddLayerCommand>(AddLayerCommand.ID)).thenReturn(addLayerEvent$.asObservable());
+      when(postboy.sub(AddLayerCommand)).thenReturn(addLayerEvent$.asObservable());
       when(layer.getSource()).thenReturn(instance(source));
       service = new MapManagementService(instance(postboy));
       service.up();
