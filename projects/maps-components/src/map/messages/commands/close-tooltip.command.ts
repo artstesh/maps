@@ -1,13 +1,16 @@
 import { PostboyGenericMessage } from '@artstesh/postboy';
 
+/**
+ * A command class that represents the action to close a tooltip.
+ */
 export class CloseTooltipCommand extends PostboyGenericMessage {
-  public static readonly ID: string = '4896d52c-e34f-4994-bcfd-32832d12dbe4';
 
+  /**
+   * Creates an instance of the class with the specified tooltip ID.
+   *
+   * @param {string} tooltipId - The unique identifier for the tooltip.
+   */
   constructor(public tooltipId: string) {
     super();
-  }
-
-  public get id(): string {
-    return CloseTooltipCommand.ID;
   }
 }

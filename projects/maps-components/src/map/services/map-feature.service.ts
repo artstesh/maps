@@ -21,14 +21,14 @@ export class MapFeatureService implements IPostboyDependingService {
   }
 
   private observeMapRender() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
+    this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
       if (this.fitPolygonsWaiting) this.postboy.fire(this.fitPolygonsWaiting);
     });
   }
 
   private observeFitToFeatures() {
-    this.postboy.subscribe<FitToFeaturesCommand>(FitToFeaturesCommand.ID).subscribe((cmd) => {
+    this.postboy.sub(FitToFeaturesCommand).subscribe((cmd) => {
       this.fitToGeometries(
         cmd.features.map((f) => f.getGeometry()!),
         cmd.zoomAfter,
@@ -37,7 +37,7 @@ export class MapFeatureService implements IPostboyDependingService {
   }
 
   private observeFitToPolygons() {
-    this.postboy.subscribe<FitToPolygonsCommand>(FitToPolygonsCommand.ID).subscribe((cmd) => {
+    this.postboy.sub(FitToPolygonsCommand).subscribe((cmd) => {
       if (!this.map) {
         this.fitPolygonsWaiting = cmd;
         return;

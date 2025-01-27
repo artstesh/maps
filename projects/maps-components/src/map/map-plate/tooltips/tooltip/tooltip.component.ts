@@ -65,20 +65,20 @@ export class TooltipComponent extends DestructibleComponent implements OnInit {
   };
 
   private observeMapClick(): Subscription {
-    return this.postboy.subscribe<MapClickEvent>(MapClickEvent.ID).subscribe((ev) => {
+    return this.postboy.sub(MapClickEvent).subscribe((ev) => {
       this._settings.show(ev) ? this.addOverlay(ev.coordinates) : this.removeOverlay();
     });
   }
 
   private observeClose(): Subscription {
     return this.postboy
-      .subscribe<CloseTooltipCommand>(CloseTooltipCommand.ID)
+      .sub(CloseTooltipCommand)
       .pipe(filter((ev) => ev.tooltipId === this._settings.id))
       .subscribe(() => this.removeOverlay());
   }
 
   private observeMapRender() {
-    return this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
+    return this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
     });
   }

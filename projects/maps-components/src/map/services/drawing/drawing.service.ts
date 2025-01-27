@@ -38,31 +38,27 @@ export class DrawingService implements IPostboyDependingService {
   }
 
   private observeSelectArea() {
-    this.postboy.subscribe<DrawSelectionAreaCommand>(DrawSelectionAreaCommand.ID).subscribe((ev) => {
-      const drawingCommand = new StartDrawingCommand(ev.type, ev.style);
-      drawingCommand.result.subscribe((r) => {
+    this.postboy.sub(DrawSelectionAreaCommand).subscribe((ev) => {
+      this.postboy.fireCallback(new StartDrawingCommand(ev.type, ev.style), (r) => {
         if (!r) {
           ev.finish(new Dictionary<IIdentified[]>());
           return;
         }
         const area = PolygonModel.fromGeoJson(1, r).feature.getGeometry()!;
-        const getFeaturesCommand = new GetFeaturesInAreaQuery(area, ev.ignore);
-        getFeaturesCommand.result.subscribe((result) => ev.finish(result));
-        this.postboy.fire(getFeaturesCommand);
+        this.postboy.fireCallback(new GetFeaturesInAreaQuery(area, ev.ignore), (result) => ev.finish(result));
       });
-      this.postboy.fire(drawingCommand);
     });
   }
 
   private observeDrawing() {
-    this.postboy.subscribe<StartDrawingCommand>(StartDrawingCommand.ID).subscribe((ev) => {
+    this.postboy.sub(StartDrawingCommand).subscribe((ev) => {
       this.draw((l) => {
         if (!l || !this.map) {
           this.clearInteraction(l);
           return;
         }
         const cancelSub = this.observeCancelation(ev, l);
-        this.drawInteraction = this.postboy.execute(new GenerateDrawExecutor(l, ev.style, ev.type))!;
+        this.drawInteraction = this.postboy.exec(new GenerateDrawExecutor(l, ev.style, ev.type))!;
         this.map?.addInteraction(this.drawInteraction);
         this.drawInteraction.on('drawend', (evt: DrawEvent) => {
           cancelSub.unsubscribe();
@@ -82,20 +78,18 @@ export class DrawingService implements IPostboyDependingService {
   }
 
   private observeMapRender() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
+    this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
     });
   }
 
   private draw(action: (layer: Layer<VectorSource<any>> | null) => void): void {
-    const query = new GetLayerQuery(MapConstants.DrawingLayerId);
-    query.result.subscribe((l) => action(l));
-    this.postboy.fire(query);
+    this.postboy.fireCallback(new GetLayerQuery(MapConstants.DrawingLayerId), (l) => action(l));
   }
 
   private observeCancelation(ev: StartDrawingCommand, layer: Layer<VectorSource<any>> | null): Subscription {
     return this.postboy
-      .subscribe<CancelDrawingCommand>(CancelDrawingCommand.ID)
+      .sub(CancelDrawingCommand)
       .pipe(first())
       .subscribe(() => {
         ev.finish(null);

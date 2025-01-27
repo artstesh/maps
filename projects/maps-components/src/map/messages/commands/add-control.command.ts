@@ -1,14 +1,17 @@
 import { PostboyGenericMessage } from '@artstesh/postboy';
 import { MapControl } from '../../models/map-control';
 
+/**
+ * Represents a command to add a custom control to a map.
+ */
 export class AddControlCommand extends PostboyGenericMessage {
-  public static readonly ID: string = '8e1c06eb-b395-4fe1-929c-ebf0805eeb49';
 
+  /**
+   * Creates an instance of the class with the specified MapControl object.
+   *
+   * @param {MapControl} item - The MapControl object to be associated with the instance.
+   */
   constructor(public item: MapControl) {
     super();
-  }
-
-  public get id(): string {
-    return AddControlCommand.ID;
   }
 }

@@ -39,31 +39,31 @@ export class MapManagementService implements IPostboyDependingService {
   }
 
   private observeRemoveTile() {
-    this.postboy.subscribe<RemoveTileCommand>(RemoveTileCommand.ID).subscribe((c) => {
+    this.postboy.sub(RemoveTileCommand).subscribe((c) => {
       if (!this.map) return;
       this.map.removeLayer(c.layer);
     });
   }
 
   private observeLayerQuery() {
-    this.postboy.subscribe<GetLayerQuery>(GetLayerQuery.ID).subscribe((ev) => ev.finish(this.layers.take(ev.name)));
+    this.postboy.sub(GetLayerQuery).subscribe((ev) => ev.finish(this.layers.take(ev.name)));
   }
 
   private observeAddTile() {
-    this.postboy.subscribe<AddTileCommand>(AddTileCommand.ID).subscribe((c) => {
+    this.postboy.sub(AddTileCommand).subscribe((c) => {
       if (!this.map) return;
       this.map.addLayer(c.layer);
     });
   }
 
   private observeMapRender() {
-    this.postboy.subscribe<MapRenderedEvent>(MapRenderedEvent.ID).subscribe((m) => {
+    this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
     });
   }
 
   private observeAddLayer() {
-    this.postboy.subscribe<AddLayerCommand>(AddLayerCommand.ID).subscribe((c) => {
+    this.postboy.sub(AddLayerCommand).subscribe((c) => {
       if (!this.map) return;
       this.layers.put(c.layer.get('name'), c.layer);
       this.map.addLayer(c.layer);
@@ -71,7 +71,7 @@ export class MapManagementService implements IPostboyDependingService {
   }
 
   private observePlaceFeatures() {
-    this.postboy.subscribe<PlaceLayerFeaturesCommand>(PlaceLayerFeaturesCommand.ID).subscribe((c) => {
+    this.postboy.sub(PlaceLayerFeaturesCommand).subscribe((c) => {
       if (!this.layers.has(c.layer)) return;
       let source = this.layers.take(c.layer)!.getSource();
       if (!!(source as any)['getSource']) source = (source as any)?.getSource();
@@ -81,7 +81,7 @@ export class MapManagementService implements IPostboyDependingService {
   }
 
   private observeRemoveLayer() {
-    this.postboy.subscribe<RemoveLayerCommand>(RemoveLayerCommand.ID).subscribe((c) => {
+    this.postboy.sub(RemoveLayerCommand).subscribe((c) => {
       if (!this.map) return;
       this.layers.rmv(c.layer.get('name'));
       this.map.removeLayer(c.layer);
@@ -89,10 +89,10 @@ export class MapManagementService implements IPostboyDependingService {
   }
 
   private observeFeaturesInArea() {
-    this.postboy.subscribe<GetFeaturesInAreaQuery>(GetFeaturesInAreaQuery.ID).subscribe((qr) => {
+    this.postboy.sub(GetFeaturesInAreaQuery).subscribe((qr) => {
       let result = new Dictionary<IIdentified[]>();
       this.forEachLayer((l, s) => {
-        let features = this.postboy.execute<FilterFeaturesInAreaExecutor, Feature<Geometry>[]>(
+        let features = this.postboy.exec<Feature<Geometry>[]>(
           new FilterFeaturesInAreaExecutor(qr.area, s?.getFeatures() ?? []),
         );
         result.put(
@@ -105,12 +105,10 @@ export class MapManagementService implements IPostboyDependingService {
   }
 
   private observeFeaturesInPoint() {
-    this.postboy.subscribe<GetFeaturesInPointQuery>(GetFeaturesInPointQuery.ID).subscribe((qr) => {
+    this.postboy.sub(GetFeaturesInPointQuery).subscribe((qr) => {
       let result = new Dictionary<IIdentified[]>();
       this.forEachLayer((l, s) => {
-        let features = this.postboy.execute<FilterFeaturesInPointExecutor, Feature<Geometry>[]>(
-          new FilterFeaturesInPointExecutor(qr.lat, qr.lng, s?.getFeatures() ?? []),
-        );
+        let features = this.postboy.exec<Feature<Geometry>[]>(new FilterFeaturesInPointExecutor(qr.lat, qr.lng, s?.getFeatures() ?? []));
         result.put(
           l.get('name'),
           features.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
