@@ -10,7 +10,6 @@ import { PostboyGenericMessage } from '@artstesh/postboy';
  * @extends {PostboyGenericMessage}
  */
 export class MapClickEvent extends PostboyGenericMessage {
-
   /**
    * Creates an instance of this class with the provided coordinates, entities, and features.
    *

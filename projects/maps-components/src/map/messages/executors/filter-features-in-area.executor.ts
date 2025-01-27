@@ -1,6 +1,6 @@
-import { PostboyExecutor } from "@artstesh/postboy";
-import { Feature } from "ol";
-import { Geometry } from "ol/geom";
+import { PostboyExecutor } from '@artstesh/postboy';
+import { Feature } from 'ol';
+import { Geometry } from 'ol/geom';
 
 /**
  * A class that extends the PostboyExecutor to filter geographical features within a specified area.
