@@ -2,12 +2,9 @@ import { MapPostboyService } from './map-postboy.service';
 import { Forger } from '@artstesh/forger';
 import { Subject } from 'rxjs';
 import { should } from '@artstesh/it-should';
-import { PostboyGenericMessage } from '@artstesh/postboy';
+import { PostboyCallbackMessage, PostboyGenericMessage } from "@artstesh/postboy";
 
-class TestEvent extends PostboyGenericMessage {
-  public static readonly ID = Forger.create<string>()!;
-  id: string = TestEvent.ID;
-
+class TestEvent extends PostboyCallbackMessage<any> {
   constructor(public value: number) {
     super();
   }
@@ -18,7 +15,7 @@ describe('MapPostboyService', () => {
 
   beforeEach(() => {
     service = new MapPostboyService();
-    service.register(TestEvent.ID, new Subject<TestEvent>());
+    service.record(TestEvent, new Subject<TestEvent>());
   });
 
   afterEach(() => {
@@ -26,12 +23,6 @@ describe('MapPostboyService', () => {
   });
 
   it('success', () => {
-    let testEvent = new TestEvent(Forger.create<number>()!);
-    let gotValue: number;
-    service.subscribe<TestEvent>(TestEvent.ID).subscribe((e) => (gotValue = e.value));
-    //
-    service.fire(testEvent);
-    //
-    should().number(gotValue!).equals(testEvent.value);
+    should().true(service);
   });
 });

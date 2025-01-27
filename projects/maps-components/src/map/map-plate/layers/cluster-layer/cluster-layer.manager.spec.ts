@@ -17,15 +17,15 @@ describe('ClusterLayerManager', () => {
   let settings: ClusterLayerSettings;
   let clickSub$: Subject<MapClickEvent>;
   let moveEndEvent$: Subject<MapMoveEndEvent>;
-  let moveRenderedEvent$: Subject<MapRenderedEvent>;
+  let mapRenderedEvent$: Subject<MapRenderedEvent>;
 
   beforeEach(() => {
+    mapRenderedEvent$ = new Subject<MapRenderedEvent>();
     clickSub$ = new Subject<MapClickEvent>();
     moveEndEvent$ = new Subject<MapMoveEndEvent>();
-    moveRenderedEvent$ = new Subject<MapRenderedEvent>();
-    when(postboy.subscribe(MapClickEvent.ID)).thenReturn(clickSub$);
-    when(postboy.subscribe(MapMoveEndEvent.ID)).thenReturn(moveEndEvent$);
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(moveRenderedEvent$);
+    when(postboy.sub<MapRenderedEvent>(MapRenderedEvent)).thenReturn(mapRenderedEvent$);
+    when(postboy.sub(MapClickEvent)).thenReturn(clickSub$);
+    when(postboy.sub(MapMoveEndEvent)).thenReturn(moveEndEvent$);
     settings = ClusterLayerSettings.copy(Forger.create<ClusterLayerSettings>()!);
     service = new ClusterLayerManager(settings, instance(layer), instance(postboy));
   });

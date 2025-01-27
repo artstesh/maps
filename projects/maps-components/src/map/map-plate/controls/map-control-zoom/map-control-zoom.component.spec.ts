@@ -19,8 +19,8 @@ describe('MapControlZoomComponent', () => {
 
   beforeEach(async () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
-    when(postboy.subscribe(MapRenderedEvent.ID)).thenReturn(mapRendered$.asObservable());
-    when(postboy.execute<any, any>(anything())).thenReturn(zoom);
+    when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
+    when(postboy.exec<Zoom>(anything())).thenReturn(zoom);
     return MockBuilder(MapControlZoomComponent, MapModule).provide(MockProvider(MapPostboyService, instance(postboy)));
   });
 
