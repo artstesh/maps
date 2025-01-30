@@ -5,6 +5,7 @@ import { should } from '@artstesh/it-should';
 import { PostboyCallbackMessage, PostboyGenericMessage } from "@artstesh/postboy";
 
 class TestEvent extends PostboyCallbackMessage<any> {
+  public static readonly ID = '4523b33f-606e-43e2-a6b3-c0e4c05276f4';
   constructor(public value: number) {
     super();
   }

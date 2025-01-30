@@ -8,6 +8,7 @@ import { MapPosition } from "../../models";
  * @property {MapPosition | null} position - The final position of the map after movement ends. Can be null.
  */
 export class MapMoveEndEvent extends PostboyGenericMessage {
+  static readonly ID = 'd210ec7e-032f-4ce8-8a39-7b816519eaae'
 
   constructor(public position: MapPosition | null) {
     super();

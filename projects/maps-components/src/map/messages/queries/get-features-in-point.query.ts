@@ -7,6 +7,7 @@ import { IIdentified } from '../../models/i-identified';
  * The query is defined by latitude, longitude, and an optional set of features to ignore.
 */
 export class GetFeaturesInPointQuery extends PostboyCallbackMessage<Dictionary<IIdentified[]>> {
+  public static readonly ID = '99bbc56f-34a2-4064-8300-13bb3d0662c1';
 
   /**
    * Constructor for initializing a geographic coordinate object.

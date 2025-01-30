@@ -11,6 +11,7 @@ import { Geometry } from "ol/geom";
  * - `features`: An array of geographical features, represented as `Feature<Geometry>` objects, to be filtered by their presence within the specified area.
  */
 export class FilterFeaturesInAreaExecutor extends PostboyExecutor<Feature<Geometry>[]> {
+  static readonly ID = '4d26e1e3-e60f-4e49-804b-5b3eadc2adce'
   constructor(public area: Geometry, public features: Feature<Geometry>[]) {
     super();
   }

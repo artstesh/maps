@@ -6,6 +6,7 @@ import Style from 'ol/style/Style';
  * Represents a command to start a drawing operation.
  */
 export class StartDrawingCommand extends PostboyCallbackMessage<string | null> {
+  static readonly ID = '4407e9ee-d6c3-4e77-8000-c1aae7433fb6'
   /**
    * Constructor for creating an instance of the class that represents a drawing feature with specific type, style, and output format.
    *
