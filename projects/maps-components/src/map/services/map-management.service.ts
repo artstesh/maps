@@ -108,9 +108,7 @@ export class MapManagementService implements IPostboyDependingService {
     this.postboy.sub(GetFeaturesInPointQuery).subscribe((qr) => {
       let result = new Dictionary<IIdentified[]>();
       this.forEachLayer((l, s) => {
-        let features = this.postboy.exec<Feature<Geometry>[]>(
-          new FilterFeaturesInPointExecutor(qr.lat, qr.lng, s?.getFeatures() ?? []),
-        );
+        let features = this.postboy.exec<Feature<Geometry>[]>(new FilterFeaturesInPointExecutor(qr.lat, qr.lng, s?.getFeatures() ?? []));
         result.put(
           l.get('name'),
           features.map((e) => ({ id: e.getId(), ...e.get(MapConstants.FeatureInfo) })),
