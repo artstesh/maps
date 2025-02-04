@@ -9,9 +9,9 @@ export class MapPostboyService extends PostboyService {
   constructor() {
     super();
     this.addLocker({
-      locker: StartDrawingCommand.name,
-      unlocker: DrawingFinishedEvent.name,
-      locking: [MapClickEvent.name],
+      locker: StartDrawingCommand.ID,
+      unlocker: DrawingFinishedEvent.ID,
+      locking: [MapClickEvent.ID],
     });
   }
 }
