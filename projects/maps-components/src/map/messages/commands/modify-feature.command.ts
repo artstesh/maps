@@ -9,7 +9,7 @@ import Style from 'ol/style/Style';
  * @return {string | null} a string representation of the modified feature in the appropriate format
  */
 export class ModifyFeatureCommand extends PostboyCallbackMessage<string | null> {
-  static readonly ID = '8f76507e-f18d-4232-bab7-f3d4e3d707bb'
+  static readonly ID = '8f76507e-f18d-4232-bab7-f3d4e3d707bb';
 
   /**
    * Constructs an instance of the class.
