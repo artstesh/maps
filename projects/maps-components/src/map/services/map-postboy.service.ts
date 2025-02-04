@@ -8,6 +8,10 @@ import { DrawingFinishedEvent } from '../messages/events/drawing-finished.event'
 export class MapPostboyService extends PostboyService {
   constructor() {
     super();
-    this.addLocker({ locker: StartDrawingCommand.ID, unlocker: DrawingFinishedEvent.ID, locking: [MapClickEvent.ID] });
+    this.addLocker({
+      locker: StartDrawingCommand.ID,
+      unlocker: DrawingFinishedEvent.ID,
+      locking: [MapClickEvent.ID],
+    });
   }
 }
