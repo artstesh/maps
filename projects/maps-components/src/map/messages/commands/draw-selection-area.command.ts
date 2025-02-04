@@ -10,7 +10,7 @@ import { DrawingType } from '../../models';
  * @return {Dictionary<IIdentified[]>} - a collection of features inside the selected area, grouped by a layer's name
  */
 export class DrawSelectionAreaCommand extends PostboyCallbackMessage<Dictionary<IIdentified[]>> {
-  static readonly ID = '06e43f59-c6ba-41bb-9c5b-f6534d914905'
+  static readonly ID = '06e43f59-c6ba-41bb-9c5b-f6534d914905';
 
   /**
    * Constructs a new instance with the specified type, style, and optional set of ignored items.
