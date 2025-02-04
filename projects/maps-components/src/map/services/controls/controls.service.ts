@@ -31,6 +31,8 @@ export class ControlsService implements IPostboyDependingService {
   }
 
   private observeRemoving() {
-    this.postboy.sub(RemoveControlCommand).subscribe((c) => this.map?.removeControl(c.item));
+    this.postboy
+      .sub(RemoveControlCommand)
+      .subscribe((c) => this.map?.removeControl(c.item));
   }
 }

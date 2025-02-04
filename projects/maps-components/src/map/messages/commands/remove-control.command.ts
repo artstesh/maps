@@ -10,7 +10,7 @@ import { MapControl } from '../../models/map-control';
  * @extends PostboyGenericMessage
  */
 export class RemoveControlCommand extends PostboyGenericMessage {
-  static readonly ID = '73bcb4f5-ce7d-4c71-b70d-e772100136a1';
+  static readonly ID = '73bcb4f5-ce7d-4c71-b70d-e772100136a1'
 
   /**
    * Constructs an instance of the class.

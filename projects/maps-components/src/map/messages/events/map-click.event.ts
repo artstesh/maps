@@ -10,7 +10,7 @@ import { PostboyGenericMessage } from '@artstesh/postboy';
  * @extends {PostboyGenericMessage}
  */
 export class MapClickEvent extends PostboyGenericMessage {
-  static readonly ID = 'ee31a86c-e838-4531-8399-983753a354df';
+  static readonly ID = 'ee31a86c-e838-4531-8399-983753a354df'
 
   /**
    * Creates an instance of this class with the provided coordinates, entities, and features.
