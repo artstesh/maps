@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Map from 'ol/Map';
 import { MapSettings } from '../models';
 import View from 'ol/View';
+import { defaults } from "ol/interaction";
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class MapPlateFactory {
         maxZoom: settings?.maxZoom || 19,
       }),
       layers: [],
+      interactions: defaults(settings.interactionSettings)
     });
   }
 }

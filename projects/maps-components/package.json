@@ -6,7 +6,7 @@
     "@angular/core": "^12.0.0",
     "ol-geocoder": "^4.0.0",
     "ol": "^6.9.0",
-    "@artstesh/postboy": "^1.1.0",
+    "@artstesh/postboy": "^1.1.3",
     "@artstesh/collections": "^1.0.0"
   },
   "dependencies": {
