@@ -2,7 +2,7 @@ import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
 import { MapSettings } from './map-settings';
 import { MapLyrs } from './map-lyrs.enum';
-import { DefaultsOptions } from "ol/interaction";
+import { DefaultsOptions } from 'ol/interaction';
 
 describe('#map-models MapSettings', () => {
   let model: MapSettings;
