@@ -2,6 +2,7 @@ import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
 import { MapSettings } from './map-settings';
 import { MapLyrs } from './map-lyrs.enum';
+import { DefaultsOptions } from "ol/interaction";
 
 describe('#map-models MapSettings', () => {
   let model: MapSettings;
@@ -12,6 +13,16 @@ describe('#map-models MapSettings', () => {
 
   afterEach(() => {
     expect().nothing();
+  });
+
+  describe('setCenter()', () => {
+    it('success', () => {
+      const expected = Forger.create<DefaultsOptions>()!;
+      //
+      model = model.setInteractionSettings(expected);
+      //
+      should().true(model.interactionSettings === expected);
+    });
   });
 
   describe('setCenter()', () => {
@@ -91,6 +102,13 @@ describe('#map-models MapSettings', () => {
     it('different maxZoom', () => {
       const other = MapSettings.copy(model);
       other.maxZoom = Forger.create<number>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different interactionSettings', () => {
+      const other = MapSettings.copy(model);
+      other.interactionSettings = Forger.create<DefaultsOptions>()!;
       //
       should().false(model.isSame(other));
     });
