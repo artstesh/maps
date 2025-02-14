@@ -1,4 +1,5 @@
 import { MapLyrs } from './map-lyrs.enum';
+import { DefaultsOptions } from "ol/interaction";
 
 /**
  * Represents the configurable settings for a map instance, providing
@@ -11,6 +12,7 @@ export class MapSettings {
   zoom: number = 4;
   lyrs: MapLyrs = MapLyrs.Hybrid;
   language: string = 'en';
+  interactionSettings: DefaultsOptions = {};
 
   public static copy(model: MapSettings): MapSettings {
     const result = new MapSettings();
@@ -19,8 +21,20 @@ export class MapSettings {
     result.minZoom = model.minZoom;
     result.zoom = model.zoom;
     result.lyrs = model.lyrs;
+    result.interactionSettings = model.interactionSettings;
     result.language = model.language;
     return result;
+  }
+
+  /**
+   * Updates the interaction settings of the map and returns a new MapSettings instance
+   * with the updated settings.
+   *
+   * @param {DefaultsOptions} interactionSettings - The new interaction settings to be applied.
+   * @return {MapSettings} A new MapSettings instance with the updated interaction settings.
+   */
+  setInteractionSettings(interactionSettings: DefaultsOptions): MapSettings {
+    return MapSettings.copy({ ...this, interactionSettings });
   }
 
   /**
@@ -95,6 +109,7 @@ export class MapSettings {
     if (this.zoom !== model.zoom) return false;
     if (this.lyrs !== model.lyrs) return false;
     if (this.language !== model.language) return false;
+    if (this.interactionSettings !== model.interactionSettings) return false;
     return this.center.length === model.center.length && !this.center.filter((c, i) => c !== model.center[i]).length;
   }
 }
