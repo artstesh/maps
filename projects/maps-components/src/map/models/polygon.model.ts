@@ -1,6 +1,6 @@
 import { IdGenerator } from '../common/id.generator';
 import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
+import { Circle, Geometry } from "ol/geom";
 import { GeoJSON, WKT } from 'ol/format';
 import { getCenter } from 'ol/extent';
 import { MapConstants } from './map.constants';
@@ -31,6 +31,18 @@ export class PolygonModel {
 
   public static fromWKT(id: string | number, wkt: string, info?: { [id: string]: any }): PolygonModel {
     let feature = new WKT().readFeature(wkt);
+    feature.setId(id);
+    return new PolygonModel(feature, id, info);
+  }
+
+  public static circle(
+    id: string | number,
+    lat: number,
+    lng: number,
+    radius: number,
+    info?: { [id: string]: any },
+  ): PolygonModel {
+    let feature = new Feature<Geometry>(new Circle([lng, lat], radius));
     feature.setId(id);
     return new PolygonModel(feature, id, info);
   }
