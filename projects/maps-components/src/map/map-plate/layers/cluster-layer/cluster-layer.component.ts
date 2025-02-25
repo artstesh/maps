@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
-import { DestructibleComponent } from "../../../common/destructible.component";
-import { MapPostboyService } from "../../../services/map-postboy.service";
-import { MapRenderedEvent } from "../../../messages";
-import { filter, first } from "rxjs/operators";
-import { AddLayerCommand } from "../../../messages/commands/add-layer.command";
-import { RemoveLayerCommand } from "../../../messages/commands/remove-layer.command";
-import { ClusterLayerManager } from "./cluster-layer.manager";
-import { ClusterLayerSettings } from "./cluster-layer.settings";
-import { ClusterLayerFactory } from "./cluster-layer-factory.service";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { DestructibleComponent } from '../../../common/destructible.component';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { MapRenderedEvent } from '../../../messages';
+import { filter, first } from 'rxjs/operators';
+import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
+import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.command';
+import { ClusterLayerManager } from './cluster-layer.manager';
+import { ClusterLayerSettings } from './cluster-layer.settings';
+import { ClusterLayerFactory } from './cluster-layer-factory.service';
 
 /**
  * Represents a cluster layer component.

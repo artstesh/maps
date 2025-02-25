@@ -1,5 +1,5 @@
-import { Control } from "ol/control";
-import { Options } from "ol/control/Control";
+import { Control } from 'ol/control';
+import { Options } from 'ol/control/Control';
 
 /**
  *
