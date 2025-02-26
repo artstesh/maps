@@ -4,6 +4,7 @@ import { Circle, Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
 import { getCenter } from 'ol/extent';
 import { MapConstants } from './map.constants';
+import Polygon, { circular } from "ol/geom/Polygon";
 
 export class PolygonModel {
   public readonly id: string | number;
@@ -40,9 +41,10 @@ export class PolygonModel {
     lat: number,
     lng: number,
     radius: number,
+    vertices: number = 32,
     info?: { [id: string]: any },
   ): PolygonModel {
-    let feature = new Feature<Geometry>(new Circle([lng, lat], radius));
+    let feature = new Feature<Geometry>(circular([lng, lat], radius, vertices));
     feature.setId(id);
     return new PolygonModel(feature, id, info);
   }
