@@ -4,7 +4,7 @@ import { Circle, Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
 import { getCenter } from 'ol/extent';
 import { MapConstants } from './map.constants';
-import Polygon, { circular } from "ol/geom/Polygon";
+import Polygon, { circular } from 'ol/geom/Polygon';
 
 export class PolygonModel {
   public readonly id: string | number;
