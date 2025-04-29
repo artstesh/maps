@@ -17,3 +17,4 @@ export * from './executors/calculate-area.executor';
 export * from './executors/get-map-position.executor';
 export * from './queries/get-features-in-area.query';
 export * from './queries/get-features-in-point.query';
+export * from './commands/fit-to-features.command';
