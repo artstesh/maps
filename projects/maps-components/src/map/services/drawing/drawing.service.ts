@@ -6,7 +6,7 @@ import { CancelDrawingCommand } from '../../messages/commands/cancel-drawing.com
 import { first } from 'rxjs/operators';
 import { DrawingFinishedEvent } from '../../messages/events/drawing-finished.event';
 import { Subscription } from 'rxjs';
-import {MapClickEvent, MapRenderedEvent} from '../../messages';
+import { MapClickEvent, MapRenderedEvent } from '../../messages';
 import { GetLayerQuery } from '../../messages/queries/get-layer.query';
 import { MapConstants } from '../../models/map.constants';
 import { Vector as Layer } from 'ol/layer';
