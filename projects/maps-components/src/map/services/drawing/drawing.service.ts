@@ -6,7 +6,7 @@ import { CancelDrawingCommand } from '../../messages/commands/cancel-drawing.com
 import { first } from 'rxjs/operators';
 import { DrawingFinishedEvent } from '../../messages/events/drawing-finished.event';
 import { Subscription } from 'rxjs';
-import { MapRenderedEvent } from '../../messages';
+import {MapClickEvent, MapRenderedEvent} from '../../messages';
 import { GetLayerQuery } from '../../messages/queries/get-layer.query';
 import { MapConstants } from '../../models/map.constants';
 import { Vector as Layer } from 'ol/layer';
@@ -39,6 +39,7 @@ export class DrawingService implements IPostboyDependingService {
 
   private observeSelectArea() {
     this.postboy.sub(DrawSelectionAreaCommand).subscribe((ev) => {
+      this.postboy.lock(MapClickEvent);
       this.postboy.fireCallback(new StartDrawingCommand(ev.type, ev.style), (r) => {
         if (!r) {
           ev.finish(new Dictionary<IIdentified[]>());
@@ -102,6 +103,7 @@ export class DrawingService implements IPostboyDependingService {
       this.map?.removeInteraction(this.drawInteraction);
       layer?.setSource(new Source({}));
     }
+    this.postboy.unlock(MapClickEvent);
     setTimeout(() => this.postboy.fire(new DrawingFinishedEvent()), 300);
   }
 }
