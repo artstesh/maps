@@ -79,7 +79,8 @@ export class FeatureModificationService implements IPostboyDependingService {
     command.next(
       command.format === FeatureOutputFormat.GeoJson
         ? new GeoJSON().writeFeature(command.model.feature)
-        : new WKT().writeFeature(command.model.feature),
+        : command.format === FeatureOutputFormat.WKT ? new WKT().writeFeature(command.model.feature)
+        : new GeoJSON().writeGeometry(command.model.feature.getGeometry()!),
     );
   }
 
