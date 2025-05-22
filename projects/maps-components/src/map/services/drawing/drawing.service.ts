@@ -72,8 +72,9 @@ export class DrawingService implements IPostboyDependingService {
     command.finish(
       command.format === FeatureOutputFormat.GeoJson
         ? new GeoJSON().writeFeature(evt.feature)
-        : command.format === FeatureOutputFormat.WKT ? new WKT().writeFeature(evt.feature)
-          : new GeoJSON().writeGeometry(evt.feature.getGeometry()!),
+        : command.format === FeatureOutputFormat.WKT
+        ? new WKT().writeFeature(evt.feature)
+        : new GeoJSON().writeGeometry(evt.feature.getGeometry()!),
     );
     this.clearInteraction(layer);
   }
