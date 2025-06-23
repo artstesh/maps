@@ -11,6 +11,8 @@ export * from './commands/fit-to-polygons.command';
 export * from './events/map-rendered.event';
 export * from './events/map-click.event';
 export * from './events/map-move-end.event';
+export * from './events/map-pointer-move.event';
+export * from './events/map-feature-hovered.event';
 export * from './executors/filter-features-in-point.executor';
 export * from './executors/filter-features-in-area.executor';
 export * from './executors/calculate-area.executor';

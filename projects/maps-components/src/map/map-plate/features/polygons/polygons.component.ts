@@ -5,6 +5,7 @@ import { MapRenderedEvent } from '../../../messages';
 import { filter, first } from 'rxjs/operators';
 import { PlaceLayerFeaturesCommand } from '../../../messages/commands/place-layer-features.command';
 import { PolygonModel } from '../../../models/polygon.model';
+import { MapConstants } from '../../../models';
 
 /**
  * Component for rendering polygons on a map.
@@ -51,7 +52,10 @@ export class PolygonsComponent extends DestructibleComponent implements OnInit {
     this.postboy.fire(
       new PlaceLayerFeaturesCommand(
         this.layerName,
-        this._polygons.map((m) => m.feature),
+        this._polygons.map((m) => {
+          m.feature.set(MapConstants.FeatureLayerName, this.layerName);
+          return m.feature;
+        }),
       ),
     );
   }
