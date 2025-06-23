@@ -16,7 +16,7 @@ export class MapFeatureHoveredEvent extends PostboyGenericMessage {
    * @param {Feature|null} feature - The feature associated with this instance. Can be null.
    * @param {string|null} layer - The layer associated with this instance. Can be null.
    */
-  constructor(public feature: Feature|null, public layer: string|null) {
+  constructor(public feature: Feature | null, public layer: string | null) {
     super();
   }
 }
