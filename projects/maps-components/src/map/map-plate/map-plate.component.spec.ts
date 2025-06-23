@@ -22,6 +22,7 @@ describe('MapPlateComponent', () => {
     elementRef = new ElementRef<any>('<div></div>');
     when(mapFactory.build(anything())).thenReturn(instance(map));
     instance(map).once = (): any => []; // ToDo WTF???
+    instance(map).on = (): any => []; // ToDo WTF???
     await MockBuilder(MapPlateComponent, MapModule)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .mock(MessageRegistratorService, instance(registrator))

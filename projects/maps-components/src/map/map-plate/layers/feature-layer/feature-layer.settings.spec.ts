@@ -68,6 +68,16 @@ describe('#map-models FeatureLayerSettings', () => {
     });
   });
 
+  describe('setFeatureHoverStyle()', () => {
+    it('success', () => {
+      const expected = Forger.create<Style>()!;
+      //
+      model = model.setFeatureHoverStyle(expected);
+      //
+      should().true(model.featureHoverStyle === expected);
+    });
+  });
+
   describe('copy()', () => {
     it('success', () => {
       const other = FeatureLayerSettings.copy(model);
@@ -75,6 +85,7 @@ describe('#map-models FeatureLayerSettings', () => {
       should()
         .objects(model, other)
         .rule('style', (o1, o2) => o1 === o2)
+        .rule('featureHoverStyle', (o1, o2) => o1 === o2)
         .equal();
     });
   });
@@ -110,6 +121,20 @@ describe('#map-models FeatureLayerSettings', () => {
     it('different name', () => {
       const other = FeatureLayerSettings.copy(model);
       other.name = Forger.create<string>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different style', () => {
+      const other = FeatureLayerSettings.copy(model);
+      other.style = Forger.create<Style>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different featureHoverStyle', () => {
+      const other = FeatureLayerSettings.copy(model);
+      other.featureHoverStyle = Forger.create<Style>()!;
       //
       should().false(model.isSame(other));
     });

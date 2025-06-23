@@ -18,6 +18,7 @@ import { DrawingGenerationService } from '../services/drawing/drawing-generation
 import { FeatureService } from '../services/feature.service';
 import { FeatureModificationService } from '../services/drawing/feature-modification.service';
 import { ControlsService } from '../services/controls/controls.service';
+import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
 
 @Component({
   selector: 'art-map-plate',
@@ -69,6 +70,9 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.map.once('postrender', () => {
       this.map.updateSize();
       this.postboy.fire(new MapRenderedEvent(this.map));
+    });
+    this.map.on('pointermove', (ev) => {
+      this.postboy.fire(new MapPointerMoveEvent(ev.pixel));
     });
     this.setOsm();
   }
