@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IPostboyDependingService } from '@artstesh/postboy';
-import { Map } from 'ol';
+import { Feature, Map } from 'ol';
 import { MapPostboyService } from './map-postboy.service';
-import { FitToPolygonsCommand, MapRenderedEvent } from '../messages';
+import { FitToPolygonsCommand, MapPointerMoveEvent, MapRenderedEvent } from '../messages';
 import { FitToFeaturesCommand } from '../messages/commands/fit-to-features.command';
 import { Geometry } from 'ol/geom';
 import { createEmpty, extend } from 'ol/extent';
+import { MapFeatureHoveredEvent } from '../messages/events/map-feature-hovered.event';
+import { MapConstants } from '../models';
 
 @Injectable()
 export class MapFeatureService implements IPostboyDependingService {
@@ -18,12 +20,28 @@ export class MapFeatureService implements IPostboyDependingService {
     this.observeMapRender();
     this.observeFitToFeatures();
     this.observeFitToPolygons();
+    this.observePointerMove();
   }
 
   private observeMapRender() {
     this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
       if (this.fitPolygonsWaiting) this.postboy.fire(this.fitPolygonsWaiting);
+    });
+  }
+
+  private observePointerMove() {
+    this.postboy.sub(MapPointerMoveEvent).subscribe((ev) => {
+      if (!this.map) return;
+      let featureFound = false;
+      this.map.forEachFeatureAtPixel(ev.point, (f) => {
+        if (f instanceof Feature) {
+          this.postboy.fire(new MapFeatureHoveredEvent(f as Feature<Geometry>, f.get(MapConstants.FeatureLayerName)));
+          featureFound = true;
+        }
+        return true;
+      });
+      if (!featureFound)  this.postboy.fire(new MapFeatureHoveredEvent(null,null));
     });
   }
 

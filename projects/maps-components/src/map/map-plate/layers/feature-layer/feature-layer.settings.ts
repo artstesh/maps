@@ -30,6 +30,21 @@ export class FeatureLayerSettings {
    * The styling definition of layer's features. The easiest way is to use {@link PolygonStyleHelper},{@link MarkerStyleHelper}
    */
   style?: Style | StyleFunction;
+  /**
+   * Defines the style applied to a feature when it is hovered over.
+   *
+   * This property can accept either a static style object or a dynamic style function.
+   * When a `StyleFunction` is provided, it will determine the style dynamically
+   * based on the feature being hovered.
+   *
+   * The style is applied temporarily, specifically for the hovered feature,
+   * and overrides any default or predefined styles for that feature.
+   *
+   * Optional property.
+   *
+   * @type {(Style | StyleFunction)}
+   */
+  featureHoverStyle?: Style | StyleFunction;
 
   /**
    * Copies the given FeatureLayerSettings object
@@ -44,6 +59,7 @@ export class FeatureLayerSettings {
     result.minZoom = model.minZoom;
     result.zIndex = model.zIndex;
     result.style = model.style;
+    result.featureHoverStyle = model.featureHoverStyle;
     return result;
   }
 
@@ -97,6 +113,15 @@ export class FeatureLayerSettings {
   setStyle(style: Style | StyleFunction): FeatureLayerSettings {
     return FeatureLayerSettings.copy({ ...this, style });
   }
+  /**
+   * Sets the style to apply to features when they are hovered over.
+   *
+   * @param {Style | StyleFunction} featureHoverStyle - The style or style function to use for hovered features.
+   * @return {FeatureLayerSettings} A new instance of FeatureLayerSettings with the updated hover style.
+   */
+  setFeatureHoverStyle(featureHoverStyle: Style | StyleFunction): FeatureLayerSettings {
+    return FeatureLayerSettings.copy({ ...this, featureHoverStyle });
+  }
 
   /**
    * Checks if the given FeatureLayerSettings object is identical to the current object.
@@ -110,6 +135,7 @@ export class FeatureLayerSettings {
     if (this.zIndex !== model.zIndex) return false;
     if (this.name !== model.name) return false;
     if (this.style !== model.style) return false;
+    if (this.featureHoverStyle !== model.featureHoverStyle) return false;
     return true;
   }
 }
