@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MapPostboyService } from './map-postboy.service';
-import { FitToPolygonsCommand, GetFeaturesInPointQuery, MapPointerMoveEvent, MapRenderedEvent } from '../messages';
+import {
+  FitToPolygonsCommand,
+  GetFeaturesInPointQuery,
+  MapPointerMoveEvent,
+  MapRenderedEvent,
+  PolygonSelfIntersectionExecutor,
+} from '../messages';
 import { AddLayerCommand } from '../messages/commands/add-layer.command';
 import { PlaceLayerFeaturesCommand } from '../messages/commands/place-layer-features.command';
 import { RemoveLayerCommand } from '../messages/commands/remove-layer.command';
@@ -91,6 +97,7 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.recordExecutor(FilterFeaturesInAreaExecutor, (e) => FeatureService.filterFeaturesInArea(e));
     this.recordExecutor(FilterFeaturesInPointExecutor, (e) => FeatureService.filterFeaturesInPoint(e));
     this.recordExecutor(CalculateAreaExecutor, (e) => FeatureService.calculateArea(e.polygon?.feature?.getGeometry()));
+    this.recordExecutor(PolygonSelfIntersectionExecutor, (e) => FeatureService.polygonSelfIntersects(e.polygon.feature));
     this.recordExecutor(GenerateDrawExecutor, (e) => DrawingGenerationService.getDraw(e));
     this.recordExecutor(GenerateZoomControlExecutor, (e) => ZoomControlFactory.build(e.settings));
     this.recordExecutor(GetMapPositionExecutor, () => this.state.getMapPosition());
