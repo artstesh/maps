@@ -17,6 +17,7 @@ export * from './executors/filter-features-in-point.executor';
 export * from './executors/filter-features-in-area.executor';
 export * from './executors/calculate-area.executor';
 export * from './executors/get-map-position.executor';
+export * from './executors/polygon-self-intersection.executor';
 export * from './queries/get-features-in-area.query';
 export * from './queries/get-features-in-point.query';
 export * from './commands/fit-to-features.command';
