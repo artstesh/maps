@@ -41,7 +41,7 @@ export class MapFeatureService implements IPostboyDependingService {
         }
         return true;
       });
-      if (!featureFound) this.postboy.fire(new MapFeatureHoveredEvent(null, null));
+      if (!featureFound)  this.postboy.fire(new MapFeatureHoveredEvent(null,null));
     });
   }
 
