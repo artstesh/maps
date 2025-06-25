@@ -29,10 +29,7 @@ export class FeatureService {
     const segments = FeatureService.getSegmentsFromCoordinates(feature.getGeometry()!);
     for (let i = 0; i < segments.length; i++) {
       for (let z = i + 1; z < segments.length; z++) {
-        if (
-          !intersections &&
-          this.segmentIntersection(segments[i].getCoordinates(), segments[z].getCoordinates())
-        ) {
+        if (!intersections && this.segmentIntersection(segments[i].getCoordinates(), segments[z].getCoordinates())) {
           intersections++;
         }
       }
