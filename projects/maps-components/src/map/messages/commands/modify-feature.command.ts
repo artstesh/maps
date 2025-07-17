@@ -14,14 +14,16 @@ export class ModifyFeatureCommand extends PostboyCallbackMessage<string | null> 
   /**
    * Constructs an instance of the class.
    *
-   * @param {PolygonModel} model - The polygon model to be used.
-   * @param {Style} style - The style configuration for the polygon.
-   * @param {FeatureOutputFormat} [format=FeatureOutputFormat.GeoJson] - The output format of the features. Default is GeoJson.
+   * @param {PolygonModel} model - The model representing the polygon data.
+   * @param {Style} style - The style to be applied to the polygon.
+   * @param {FeatureOutputFormat} [format=FeatureOutputFormat.GeoJson] - The output format of the feature, defaults to GeoJson.
+   * @param {boolean} [draggable=true] - Determines whether the polygon is draggable, defaults to true.
    */
   constructor(
     public model: PolygonModel,
     public style: Style,
     public format: FeatureOutputFormat = FeatureOutputFormat.GeoJson,
+    public draggable: boolean = true,
   ) {
     super();
   }
