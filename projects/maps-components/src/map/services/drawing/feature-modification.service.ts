@@ -40,7 +40,7 @@ export class FeatureModificationService implements IPostboyDependingService {
         this.observeCancelation(ev, l);
         this.initFeature(l, ev.model.feature);
         this.addModify(ev);
-        this.addDragging(ev);
+        if (ev.draggable) this.addDragging(ev);
       });
     });
   }
