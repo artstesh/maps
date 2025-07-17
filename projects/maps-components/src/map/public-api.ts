@@ -14,4 +14,4 @@ export * from './services/message-registrator.service';
 export * from './helpers/index';
 export * from './map-plate/controls/index';
 export * from './map-plate/tooltips/index';
-export {Style} from 'ol/style';
+export { Style } from 'ol/style';
