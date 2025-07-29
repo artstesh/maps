@@ -18,6 +18,8 @@ import { MapConstants } from '../models/map.constants';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
 import { Geometry } from 'ol/geom';
 import { Dictionary } from '@artstesh/collections';
+import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
+import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -36,6 +38,7 @@ export class MapManagementService implements IPostboyDependingService {
     this.observeLayerQuery();
     this.observeFeaturesInArea();
     this.observeFeaturesInPoint();
+    this.observeImageLayer();
   }
 
   private observeRemoveTile() {
@@ -53,6 +56,17 @@ export class MapManagementService implements IPostboyDependingService {
     this.postboy.sub(AddTileCommand).subscribe((c) => {
       if (!this.map) return;
       this.map.addLayer(c.layer);
+    });
+  }
+
+  private observeImageLayer() {
+    this.postboy.sub(AddImageLayerCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.addLayer(c.layer);
+    });
+    this.postboy.sub(RemoveImageLayerCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.removeLayer(c.layer);
     });
   }
 
