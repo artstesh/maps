@@ -47,6 +47,8 @@ import { FilterFeaturesInPointExecutor } from '../messages/executors/filter-feat
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MapFeatureHoveredEvent } from '../messages/events/map-feature-hovered.event';
+import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
+import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -73,6 +75,8 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.recordSubject(AddLayerCommand);
     this.recordSubject(RemoveLayerCommand);
     this.recordSubject(AddTileCommand);
+    this.recordSubject(RemoveImageLayerCommand);
+    this.recordSubject(AddImageLayerCommand);
     this.recordSubject(RemoveTileCommand);
     this.recordSubject(MapClickEvent);
     this.recordSubject(CloseTooltipCommand);
