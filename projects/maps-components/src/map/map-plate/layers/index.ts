@@ -5,3 +5,5 @@ export * from './feature-layer/feature-layer.settings';
 export * from './feature-layer/feature-layer.component';
 export * from './cluster-layer/cluster-layer.component';
 export * from './cluster-layer/cluster-layer.settings';
+export * from './image-layer/image-layer.component';
+export * from './image-layer/image-layer.settings';
