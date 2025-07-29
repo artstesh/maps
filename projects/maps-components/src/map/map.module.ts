@@ -10,6 +10,7 @@ import { TooltipComponent } from './map-plate/tooltips/tooltip/tooltip.component
 import { PolygonsComponent } from './map-plate/features/polygons/polygons.component';
 import { ClusterLayerComponent } from './map-plate/layers/cluster-layer/cluster-layer.component';
 import { MapControlZoomComponent } from './map-plate/controls/map-control-zoom/map-control-zoom.component';
+import { ImageLayerComponent } from './map-plate/layers/image-layer/image-layer.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -24,6 +25,7 @@ import { MapControlZoomComponent } from './map-plate/controls/map-control-zoom/m
     PolygonsComponent,
     ClusterLayerComponent,
     MapControlZoomComponent,
+    ImageLayerComponent,
   ],
   exports: [
     MapPlateComponent,
@@ -34,6 +36,7 @@ import { MapControlZoomComponent } from './map-plate/controls/map-control-zoom/m
     PolygonsComponent,
     ClusterLayerComponent,
     MapControlZoomComponent,
+    ImageLayerComponent,
   ],
 })
 export class MapModule {}
