@@ -20,6 +20,8 @@ import { Geometry } from 'ol/geom';
 import { Dictionary } from '@artstesh/collections';
 import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
 import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
+import { AddRasterTileCommand } from "../messages/commands/add-raster-tile-command";
+import { RemoveRasterTileCommand } from "../messages/commands/remove-raster-tile.command";
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -34,18 +36,10 @@ export class MapManagementService implements IPostboyDependingService {
     this.observeRemoveLayer();
     this.observePlaceFeatures();
     this.observeAddTile();
-    this.observeRemoveTile();
     this.observeLayerQuery();
     this.observeFeaturesInArea();
     this.observeFeaturesInPoint();
     this.observeImageLayer();
-  }
-
-  private observeRemoveTile() {
-    this.postboy.sub(RemoveTileCommand).subscribe((c) => {
-      if (!this.map) return;
-      this.map.removeLayer(c.layer);
-    });
   }
 
   private observeLayerQuery() {
@@ -56,6 +50,18 @@ export class MapManagementService implements IPostboyDependingService {
     this.postboy.sub(AddTileCommand).subscribe((c) => {
       if (!this.map) return;
       this.map.addLayer(c.layer);
+    });
+    this.postboy.sub(RemoveTileCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.removeLayer(c.layer);
+    });
+    this.postboy.sub(AddRasterTileCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.addLayer(c.layer);
+    });
+    this.postboy.sub(RemoveRasterTileCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.removeLayer(c.layer);
     });
   }
 
