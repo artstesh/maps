@@ -15,7 +15,6 @@ import { Forger } from '@artstesh/forger';
 import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
 import Map from 'ol/Map';
 
-
 describe('RasterTileLayerComponent', () => {
   const layer = mock(ImageLayer);
   let fixture: ComponentFixture<RasterTileLayerComponent>;
