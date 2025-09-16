@@ -75,7 +75,7 @@ describe('#map-models RasterTileLayerSettings', () => {
 
   describe('setOperation()', () => {
     it('success', () => {
-      const expected = (d: (number[][] | ImageData[])) => d[0];
+      const expected = (d: number[][] | ImageData[]) => d[0];
       //
       model = model.setOperation(expected);
       //
@@ -142,7 +142,7 @@ describe('#map-models RasterTileLayerSettings', () => {
 
     it('different operation', () => {
       const other = RasterTileLayerSettings.copy(model);
-      other.operation =  (d: (number[][] | ImageData[])) => d[0];
+      other.operation = (d: number[][] | ImageData[]) => d[0];
       //
       should().false(model.isSame(other));
     });
