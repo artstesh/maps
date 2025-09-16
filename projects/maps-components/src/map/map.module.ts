@@ -39,7 +39,7 @@ import { RasterTileLayerComponent } from './map-plate/layers/raster-tile/raster-
     ClusterLayerComponent,
     MapControlZoomComponent,
     ImageLayerComponent,
-    RasterTileLayerComponent
+    RasterTileLayerComponent,
   ],
 })
 export class MapModule {}
