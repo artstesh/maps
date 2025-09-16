@@ -7,3 +7,5 @@ export * from './cluster-layer/cluster-layer.component';
 export * from './cluster-layer/cluster-layer.settings';
 export * from './image-layer/image-layer.component';
 export * from './image-layer/image-layer.settings';
+export * from './raster-tile/raster-tile-layer.component';
+export * from './raster-tile/raster-tile-layer.settings';
