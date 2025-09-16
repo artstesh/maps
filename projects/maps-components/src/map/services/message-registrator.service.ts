@@ -49,6 +49,8 @@ import { debounceTime } from 'rxjs/operators';
 import { MapFeatureHoveredEvent } from '../messages/events/map-feature-hovered.event';
 import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
 import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
+import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
+import { RemoveRasterTileCommand } from '../messages/commands/remove-raster-tile.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -75,6 +77,8 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.recordSubject(AddLayerCommand);
     this.recordSubject(RemoveLayerCommand);
     this.recordSubject(AddTileCommand);
+    this.recordSubject(AddRasterTileCommand);
+    this.recordSubject(RemoveRasterTileCommand);
     this.recordSubject(RemoveImageLayerCommand);
     this.recordSubject(AddImageLayerCommand);
     this.recordSubject(RemoveTileCommand);
