@@ -44,7 +44,7 @@
     "@angular/compiler": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@artstesh/collections": "^1.0.0",
-    "@artstesh/postboy": "1.1.3",
+    "@artstesh/postboy": "1.2.1",
     "ol": "^6.9.0",
     "ol-geocoder": "^4.0.0",
     "rxjs": "^6.0.0",
