@@ -20,8 +20,8 @@ import { Geometry } from 'ol/geom';
 import { Dictionary } from '@artstesh/collections';
 import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
 import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
-import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
-import { RemoveRasterTileCommand } from '../messages/commands/remove-raster-tile.command';
+import { AddRasterTileCommand } from "../messages/commands/add-raster-tile-command";
+import { RemoveRasterTileCommand } from "../messages/commands/remove-raster-tile.command";
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
