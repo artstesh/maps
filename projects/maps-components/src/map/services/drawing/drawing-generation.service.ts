@@ -7,7 +7,7 @@ export class DrawingGenerationService {
   public static getDraw(ev: GenerateDrawExecutor) {
     return new Draw({
       source: ev.layer.getSource()!,
-      type: ev.type === DrawingType.Polygon ? 'Polygon' : 'Circle',
+      type: ev.type === DrawingType.Polygon ? 'Polygon' : ev.type === DrawingType.LineString ? 'LineString' : 'Circle',
       style: ev.style,
       geometryFunction: DrawingGenerationService.geometryFunc(ev.type),
     });
