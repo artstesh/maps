@@ -8,12 +8,16 @@ describe('TextStyleHelper', () => {
   let font: string;
   let label: string;
   let color: string;
+  let backColor: string;
+  let padding: number[];
 
   beforeEach(() => {
     font = Forger.create<string>()!;
     label = Forger.create<string>()!;
     color = Forger.create<string>()!;
-    text = TextStyleHelper.get(label, font, color);
+    backColor = Forger.create<string>()!;
+    padding = Forger.create<number[]>()!;
+    text = TextStyleHelper.get(label, font, color, backColor, padding);
   });
 
   afterEach(() => {
@@ -30,9 +34,19 @@ describe('TextStyleHelper', () => {
     should().string(text.getFont()).equals(font);
   });
 
+  it('padding is correct', () => {
+    should().array(text.getPadding()).equal(padding);
+  });
+
   it('color is correct', () => {
     should()
       .string(text.getFill()?.getColor() as string)
       .equals(color);
+  });
+
+  it('backColor is correct', () => {
+    should()
+      .string(text.getBackgroundFill()?.getColor() as string)
+      .equals(backColor);
   });
 });
