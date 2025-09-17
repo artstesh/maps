@@ -16,4 +16,5 @@ export enum DrawingType {
   Circle,
   Square,
   Box,
+  LineString
 }
