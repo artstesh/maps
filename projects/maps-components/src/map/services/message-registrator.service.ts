@@ -51,6 +51,7 @@ import { AddImageLayerCommand } from '../messages/commands/add-image-layer.comma
 import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
 import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
 import { RemoveRasterTileCommand } from '../messages/commands/remove-raster-tile.command';
+import { GetGeometryLengthExecutor, GetGeometryLengthExecutorHandler } from '../messages/executors/get-geometry-length.executor';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -111,5 +112,6 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.recordExecutor(GenerateDrawExecutor, (e) => DrawingGenerationService.getDraw(e));
     this.recordExecutor(GenerateZoomControlExecutor, (e) => ZoomControlFactory.build(e.settings));
     this.recordExecutor(GetMapPositionExecutor, () => this.state.getMapPosition());
+    this.recordExecutor(GetGeometryLengthExecutor, (e) => new GetGeometryLengthExecutorHandler().handle(e));
   }
 }
