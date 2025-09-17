@@ -1,6 +1,6 @@
 import { PostboyCallbackMessage } from '@artstesh/postboy';
 import { DrawingType, FeatureOutputFormat } from '../../models';
-import Style from 'ol/style/Style';
+import { StyleLike } from 'ol/style/Style';
 
 /**
  * Represents a command to start a drawing operation.
@@ -16,7 +16,7 @@ export class StartDrawingCommand extends PostboyCallbackMessage<string | null> {
    */
   constructor(
     public type: DrawingType,
-    public style: Style,
+    public style: StyleLike,
     public format: FeatureOutputFormat = FeatureOutputFormat.GeoJson,
   ) {
     super();
