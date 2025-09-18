@@ -42,7 +42,7 @@ export class RasterTileLayerSettings {
    */
   requestHeaders: Record<string, string> | null = null;
 
-  operation: (data: number[][] | ImageData[] ) => (number[] | ImageData) = d => d[0]??[];
+  operation: (data: number[][] | ImageData[]) => number[] | ImageData = (d) => d[0] ?? [];
   /**
    * Creates a copy of the given tile layer settings.
    *
@@ -77,7 +77,7 @@ export class RasterTileLayerSettings {
    * @param {function} operation - A function that takes an input of either a two-dimensional array of numbers or an array of ImageData objects and returns either a one-dimensional array of numbers or an ImageData object.
    * @return {RasterTileLayerSettings} A new instance of RasterTileLayerSettings with the updated operation.
    */
-  setOperation(operation: (data: number[][] | ImageData[] ) => (number[] | ImageData)): RasterTileLayerSettings {
+  setOperation(operation: (data: number[][] | ImageData[]) => number[] | ImageData): RasterTileLayerSettings {
     return RasterTileLayerSettings.copy({ ...this, operation });
   }
 

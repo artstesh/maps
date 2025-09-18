@@ -10,7 +10,7 @@ export class GetGeometryLengthExecutor extends PostboyExecutor<number> {
   }
 }
 
-export class GetGeometryLengthExecutorHandler  {
+export class GetGeometryLengthExecutorHandler {
   public handle(executor: GetGeometryLengthExecutor): number {
     return Math.round(getLength(executor.geometry, { projection: executor.projection }) * 100) / 100;
   }
