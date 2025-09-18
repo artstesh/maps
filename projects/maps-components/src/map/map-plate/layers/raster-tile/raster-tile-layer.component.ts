@@ -19,7 +19,7 @@ import { RemoveRasterTileCommand } from '../../../messages/commands/remove-raste
   selector: 'art-raster-tile-layer',
   template: '',
   styleUrls: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RasterTileLayerComponent extends DestructibleComponent {
   public layer?: ImageLayer<Raster>;
