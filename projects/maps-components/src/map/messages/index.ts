@@ -21,4 +21,4 @@ export * from './executors/polygon-self-intersection.executor';
 export * from './queries/get-features-in-area.query';
 export * from './queries/get-features-in-point.query';
 export * from './commands/fit-to-features.command';
-export {GetGeometryLengthExecutor} from './executors/get-geometry-length.executor'
+export { GetGeometryLengthExecutor } from './executors/get-geometry-length.executor';
