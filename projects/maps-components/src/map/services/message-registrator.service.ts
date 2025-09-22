@@ -51,7 +51,10 @@ import { AddImageLayerCommand } from '../messages/commands/add-image-layer.comma
 import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
 import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
 import { RemoveRasterTileCommand } from '../messages/commands/remove-raster-tile.command';
-import { GetGeometryLengthExecutor, GetGeometryLengthExecutorHandler } from '../messages/executors/get-geometry-length.executor';
+import {
+  GetGeometryLengthExecutor,
+  GetGeometryLengthExecutorHandler,
+} from '../messages/executors/get-geometry-length.executor';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
