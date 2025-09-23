@@ -106,6 +106,7 @@ export class FeatureModificationService implements IPostboyDependingService {
   }
 
   private clearInteraction(layer: Layer<Source<Geometry>> | null): void {
+    layer?.getSource()?.clear();
     if (this.modify) this.map?.removeInteraction(this.modify);
     if (this.translate) this.map?.removeInteraction(this.translate);
   }
