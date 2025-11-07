@@ -45,7 +45,7 @@ import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
     FeatureModificationService,
     ControlsService,
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
   private renderTryCount = 0;
