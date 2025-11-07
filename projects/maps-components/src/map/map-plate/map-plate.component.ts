@@ -94,14 +94,13 @@ export class MapPlateComponent extends DestructibleComponent implements AfterVie
       if (clientWidth > 0 && clientHeight > 0) {
         this.initializeMap();
       } else {
-        console.error('Map\'s container is not rendered yet or has zero size. Trying again in 100 ms.');
-        setTimeout(checkContainerSize, 20 * (++this.renderTryCount)); // Проверка каждые 100 мс
+        console.error("Map's container is not rendered yet or has zero size. Trying again in 100 ms.");
+        setTimeout(checkContainerSize, 20 * ++this.renderTryCount); // Проверка каждые 100 мс
       }
     };
 
     checkContainerSize();
   }
-
 
   onDestroy = () => {
     this.registrator.down();
