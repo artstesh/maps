@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
 import Map from 'ol/Map';
 import { useGeographic } from 'ol/proj';
@@ -38,7 +46,8 @@ import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
     ControlsService,
   ],
 })
-export class MapPlateComponent extends DestructibleComponent implements OnInit {
+export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
+  private renderTryCount = 0;
   map!: Map;
   osmUrl = '';
   drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
@@ -62,7 +71,7 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     this.setOsm();
   }
 
-  ngOnInit(): void {
+  private initializeMap() {
     useGeographic();
     this.map = this.mapFactory.build(this._settings);
     this.map.setTarget(this.elementRef.nativeElement);
@@ -76,6 +85,23 @@ export class MapPlateComponent extends DestructibleComponent implements OnInit {
     });
     this.setOsm();
   }
+
+  ngAfterViewInit() {
+    const mapContainer = this.elementRef.nativeElement;
+
+    const checkContainerSize = () => {
+      const { clientWidth, clientHeight } = mapContainer;
+      if (clientWidth > 0 && clientHeight > 0) {
+        this.initializeMap();
+      } else {
+        console.error('Map\'s container is not rendered yet or has zero size. Trying again in 100 ms.');
+        setTimeout(checkContainerSize, 20 * (++this.renderTryCount)); // Проверка каждые 100 мс
+      }
+    };
+
+    checkContainerSize();
+  }
+
 
   onDestroy = () => {
     this.registrator.down();
