@@ -5,7 +5,7 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
 import Map from 'ol/Map';
@@ -45,6 +45,7 @@ import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
     FeatureModificationService,
     ControlsService,
   ],
+  encapsulation: ViewEncapsulation.None
 })
 export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
   private renderTryCount = 0;
