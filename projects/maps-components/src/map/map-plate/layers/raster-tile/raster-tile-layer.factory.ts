@@ -26,7 +26,7 @@ export class RasterTileLayerFactory {
     const raster = new RasterSource({
       sources: [source],
       operationType: 'image',
-      operation: (arg) => settings.operation(arg),
+      operation: settings.operation,
     });
     return new ImageLayer({ source: raster, opacity: settings.opacity });
   }
