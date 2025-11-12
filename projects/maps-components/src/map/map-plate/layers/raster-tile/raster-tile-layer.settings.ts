@@ -42,7 +42,7 @@ export class RasterTileLayerSettings {
    */
   requestHeaders: Record<string, string> | null = null;
 
-  operation: (data: number[][] | ImageData[]) => number[] | ImageData = (d) => d[0] ?? [];
+  operation: (data: number[][] | ImageData[]) => number[] | ImageData = (d) => (d[0] ?? []);
   /**
    * Creates a copy of the given tile layer settings.
    *
