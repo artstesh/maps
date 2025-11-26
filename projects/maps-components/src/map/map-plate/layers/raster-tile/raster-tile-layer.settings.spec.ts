@@ -33,6 +33,16 @@ describe('#map-models RasterTileLayerSettings', () => {
     });
   });
 
+  describe('setZIndex()', () => {
+    it('success', () => {
+      const expected = Forger.create<number>()!;
+      //
+      model = model.setZIndex(expected);
+      //
+      should().true(model.zIndex === expected);
+    });
+  });
+
   describe('setProjection()', () => {
     it('success', () => {
       const expected = Forger.create<string>()!;
@@ -108,6 +118,13 @@ describe('#map-models RasterTileLayerSettings', () => {
     it('different minZoom', () => {
       const other = RasterTileLayerSettings.copy(model);
       other.minZoom = Forger.create<number>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different zIndex', () => {
+      const other = RasterTileLayerSettings.copy(model);
+      other.zIndex = Forger.create<number>()!;
       //
       should().false(model.isSame(other));
     });
