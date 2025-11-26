@@ -41,6 +41,10 @@ export class RasterTileLayerSettings {
    * @default An empty array
    */
   requestHeaders: Record<string, string> | null = null;
+  /**
+   * The priority of showing - layers with higher zIndex cover others in case of collisions
+   */
+  zIndex: number = 1;
 
   operation: (data: number[][] | ImageData[]) => number[] | ImageData = (d) => d[0] ?? [];
   /**
@@ -53,6 +57,7 @@ export class RasterTileLayerSettings {
     const result = new RasterTileLayerSettings();
     result.maxZoom = model.maxZoom;
     result.minZoom = model.minZoom;
+    result.zIndex = model.zIndex;
     result.projection = model.projection;
     result.opacity = model.opacity;
     result.url = model.url;
@@ -102,6 +107,16 @@ export class RasterTileLayerSettings {
   }
 
   /**
+   * Sets the z-index for the RasterTileLayerSettings.
+   *
+   * @param {number} zIndex - The new z-index to be assigned.
+   * @return {RasterTileLayerSettings} A new RasterTileLayerSettings instance with the updated z-index.
+   */
+  setZIndex(zIndex: number): RasterTileLayerSettings {
+    return RasterTileLayerSettings.copy({ ...this, zIndex });
+  }
+
+  /**
    * Sets the minimum zoom level for the Tile Layer.
    *
    * @param {number} minZoom - The minimum zoom level to be set.
@@ -140,6 +155,7 @@ export class RasterTileLayerSettings {
   public isSame(model: RasterTileLayerSettings): boolean {
     if (this.maxZoom !== model.maxZoom) return false;
     if (this.minZoom !== model.minZoom) return false;
+    if (this.zIndex !== model.zIndex) return false;
     if (this.url !== model.url) return false;
     if (this.projection !== model.projection) return false;
     if (this.opacity !== model.opacity) return false;
