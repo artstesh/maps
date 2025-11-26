@@ -28,7 +28,7 @@ export class RasterTileLayerFactory {
       operationType: 'image',
       operation: settings.operation
     });
-    return new ImageLayer({ source: raster, opacity: settings.opacity });
+    return new ImageLayer({ source: raster, opacity: settings.opacity, zIndex: settings.zIndex });
   }
 
   private getTileFunc(settings: RasterTileLayerSettings): (tileCoord: TileCoord) => string {
