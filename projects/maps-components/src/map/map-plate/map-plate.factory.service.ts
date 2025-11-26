@@ -3,6 +3,7 @@ import Map from 'ol/Map';
 import { MapSettings } from '../models';
 import View from 'ol/View';
 import { defaults } from 'ol/interaction';
+import { get } from 'ol/proj';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class MapPlateFactory {
         zoom: settings?.zoom || 4,
         minZoom: settings?.minZoom || 0,
         maxZoom: settings?.maxZoom || 19,
+        projection: get(settings?.projection) ||undefined,
       }),
       layers: [],
       interactions: defaults(settings.interactionSettings),

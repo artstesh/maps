@@ -1,5 +1,5 @@
 import { MapLyrs } from './map-lyrs.enum';
-import { DefaultsOptions } from 'ol/interaction';
+import { DefaultsOptions } from 'ol/interaction/defaults';
 
 /**
  * Represents the configurable settings for a map instance, providing
@@ -13,6 +13,7 @@ export class MapSettings {
   lyrs: MapLyrs = MapLyrs.Hybrid;
   language: string = 'en';
   interactionSettings: DefaultsOptions = {};
+  projection?: string;
 
   public static copy(model: MapSettings): MapSettings {
     const result = new MapSettings();
@@ -23,6 +24,7 @@ export class MapSettings {
     result.lyrs = model.lyrs;
     result.interactionSettings = model.interactionSettings;
     result.language = model.language;
+    result.projection = model.projection;
     return result;
   }
 
@@ -98,6 +100,16 @@ export class MapSettings {
   }
 
   /**
+   * Sets the projection for the map settings.
+   *
+   * @param {string} projection - The projection to apply to the map settings.
+   * @return {MapSettings} A new instance of MapSettings with the updated projection.
+   */
+  setProjection(projection: string): MapSettings {
+    return MapSettings.copy({ ...this, projection });
+  }
+
+  /**
    * Compares the current MapSettings instance with another to determine if they are identical.
    *
    * @param {MapSettings} model - The MapSettings instance to compare with the current instance.
@@ -109,6 +121,7 @@ export class MapSettings {
     if (this.zoom !== model.zoom) return false;
     if (this.lyrs !== model.lyrs) return false;
     if (this.language !== model.language) return false;
+    if (this.projection !== model.projection) return false;
     if (this.interactionSettings !== model.interactionSettings) return false;
     return this.center.length === model.center.length && !this.center.filter((c, i) => c !== model.center[i]).length;
   }

@@ -25,7 +25,7 @@ export class PolygonModel {
   }
 
   public static fromGeoJson(id: string | number, json: string, info?: { [id: string]: any }): PolygonModel {
-    let feature = new GeoJSON().readFeature(json);
+    let feature = new GeoJSON().readFeature(json) as Feature<Geometry>;
     feature.setId(id);
     return new PolygonModel(feature, id, info);
   }

@@ -17,7 +17,7 @@ export class MapClickService implements IPostboyDependingService {
     this.observeMapRender();
   }
 
-  onClick(ev: MapBrowserEvent<UIEvent>): MapClickEvent {
+  onClick(ev: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>): MapClickEvent {
     const model: MapClickEvent = new MapClickEvent(ev.coordinate, {}, {});
     this.map?.forEachFeatureAtPixel(ev.pixel, (f, l) => {
       this.getFeatureCollectionWithInner([f as Feature<Geometry>])

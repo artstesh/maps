@@ -59,7 +59,6 @@ export class TooltipComponent extends DestructibleComponent implements OnInit {
     return {
       element: this.container?.nativeElement,
       autoPan: false,
-      autoPanAnimation: { duration: 0 },
       position: coordinates,
     };
   };

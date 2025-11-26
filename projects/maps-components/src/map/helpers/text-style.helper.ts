@@ -22,7 +22,7 @@ export class TextStyleHelper {
     color: string,
     backColor?: string | null,
     padding?: number[] | null,
-    textBaseline?: string | null,
+    textBaseline?: CanvasTextBaseline | null,
     offsetY?: number | null,
   ): Text {
     return new Text({

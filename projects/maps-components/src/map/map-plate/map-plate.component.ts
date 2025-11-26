@@ -49,6 +49,7 @@ import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
 })
 export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
   private renderTryCount = 0;
+  private renderTimeout?: ReturnType<typeof setTimeout> | null = null;
   map!: Map;
   osmUrl = '';
   drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
@@ -96,7 +97,7 @@ export class MapPlateComponent extends DestructibleComponent implements AfterVie
         this.initializeMap();
       } else {
         console.error('Map\'s container is not rendered yet or has zero size. Trying again in 100 ms.');
-        setTimeout(checkContainerSize, 20 * (++this.renderTryCount)); // Проверка каждые 100 мс
+        this.renderTimeout = setTimeout(checkContainerSize, 20 * (++this.renderTryCount)); // Проверка каждые 100 мс
       }
     };
 
@@ -106,6 +107,7 @@ export class MapPlateComponent extends DestructibleComponent implements AfterVie
 
   onDestroy = () => {
     this.registrator.down();
+    this.renderTimeout && clearTimeout(this.renderTimeout);
   };
 
   private setOsm(): void {

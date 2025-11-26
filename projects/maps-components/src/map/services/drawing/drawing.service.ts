@@ -14,7 +14,7 @@ import VectorSource from 'ol/source/Vector';
 import { Vector as Source } from 'ol/source';
 import { Draw } from 'ol/interaction';
 import { FeatureOutputFormat, PolygonModel } from '../../models';
-import { Map } from 'ol';
+import { Feature, Map } from 'ol';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { Geometry } from 'ol/geom';
 import { GeoJSON, WKT } from 'ol/format';
@@ -23,6 +23,7 @@ import { GetFeaturesInAreaQuery } from '../../messages/queries/get-features-in-a
 import { IIdentified } from '../../models/i-identified';
 import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
 import { Dictionary } from '@artstesh/collections';
+import { FeatureLike } from 'ol/Feature';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
@@ -68,7 +69,7 @@ export class DrawingService implements IPostboyDependingService {
     });
   }
 
-  private onEnd(evt: DrawEvent, command: StartDrawingCommand, layer: Layer<VectorSource<Geometry>>): void {
+  private onEnd(evt: DrawEvent, command: StartDrawingCommand, layer: Layer<VectorSource<Feature<Geometry>>>): void {
     command.finish(
       command.format === FeatureOutputFormat.GeoJson
         ? new GeoJSON().writeFeature(evt.feature)
@@ -99,7 +100,7 @@ export class DrawingService implements IPostboyDependingService {
       });
   }
 
-  private clearInteraction(layer: Layer<Source<Geometry>> | null): void {
+  private clearInteraction(layer: Layer<Source<Feature<Geometry>>> | null): void {
     if (!!this.drawInteraction) {
       this.map?.removeInteraction(this.drawInteraction);
       layer?.setSource(new Source({}));

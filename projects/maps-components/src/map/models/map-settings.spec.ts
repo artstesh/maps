@@ -2,7 +2,7 @@ import { Forger } from '@artstesh/forger';
 import { should } from '@artstesh/it-should';
 import { MapSettings } from './map-settings';
 import { MapLyrs } from './map-lyrs.enum';
-import { DefaultsOptions } from 'ol/interaction';
+import { DefaultsOptions } from 'ol/interaction/defaults';
 
 describe('#map-models MapSettings', () => {
   let model: MapSettings;
@@ -85,6 +85,16 @@ describe('#map-models MapSettings', () => {
     });
   });
 
+  describe('setProjection()', () => {
+    it('success', () => {
+      const expected = Forger.create<string>()!;
+      //
+      model = model.setProjection(expected);
+      //
+      should().true(model.projection === expected);
+    });
+  });
+
   describe('copy()', () => {
     it('success', () => {
       //
@@ -130,6 +140,13 @@ describe('#map-models MapSettings', () => {
     it('different language', () => {
       const other = MapSettings.copy(model);
       other.language = Forger.create<string>()!;
+      //
+      should().false(model.isSame(other));
+    });
+
+    it('different projection', () => {
+      const other = MapSettings.copy(model);
+      other.projection = Forger.create<string>()!;
       //
       should().false(model.isSame(other));
     });

@@ -24,7 +24,9 @@ describe('MapPlateFactory', () => {
     let map: Map;
 
     beforeEach(() => {
-      settings = MapSettings.copy(Forger.create<MapSettings>({ arrayLength: 2, numberMax: 19 })!);
+      settings = MapSettings.copy(Forger.createWith<MapSettings>({ arrayLength: 2, numberMax: 19 })
+        .with(e => e.projection = Forger.create<'EPSG:3857' | 'EPSG:4326'>())
+        .result()!);
       map = service.build(settings);
     });
 
@@ -47,6 +49,10 @@ describe('MapPlateFactory', () => {
 
     it('maxZoom is correct', () => {
       should().number(map!.getView().getMaxZoom()).equals(settings.maxZoom);
+    });
+
+    it('setProjection is correct', () => {
+      should().string(map!.getView().getProjection()?.getCode()).equals(settings.projection);
     });
   });
 });

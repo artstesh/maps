@@ -55,6 +55,8 @@ import {
   GetGeometryLengthExecutor,
   GetGeometryLengthExecutorHandler,
 } from '../messages/executors/get-geometry-length.executor';
+import { AddCogLayerCommand } from '../messages/commands/add-cog-layer.command';
+import { RemoveCogLayerCommand } from '../messages/commands/remove-cog-layer.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -95,6 +97,8 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.recordSubject(StartDrawingCommand);
     this.recordSubject(GetLayerQuery);
     this.recordSubject(MapFeatureHoveredEvent);
+    this.recordSubject(AddCogLayerCommand);
+    this.recordSubject(RemoveCogLayerCommand);
     this.recordWithPipe(MapPointerMoveEvent, new Subject(), (s) => s.pipe(debounceTime(150)));
     this.recordSubject(DrawingFinishedEvent);
     this.recordSubject(GetFeaturesInAreaQuery);

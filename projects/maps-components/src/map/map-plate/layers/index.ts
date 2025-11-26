@@ -9,3 +9,5 @@ export * from './image-layer/image-layer.component';
 export * from './image-layer/image-layer.settings';
 export * from './raster-tile/raster-tile-layer.component';
 export * from './raster-tile/raster-tile-layer.settings';
+export * from './cog-layer/cog-layer.component';
+export * from './cog-layer/cog-layer.settings';

@@ -16,6 +16,7 @@ import { first } from 'rxjs/operators';
 import { Vector as Source } from 'ol/source';
 import { CancelFeatureModificationCommand } from '../../messages/commands/cancel-feature-modification.command';
 import { ModifyFeatureCommand } from '../../messages/commands/modify-feature.command';
+import { FeatureLike } from 'ol/Feature';
 
 @Injectable()
 export class FeatureModificationService implements IPostboyDependingService {
@@ -45,7 +46,7 @@ export class FeatureModificationService implements IPostboyDependingService {
     });
   }
 
-  private initFeature(layer: Layer<VectorSource<Geometry>>, feature: Feature<Geometry>): void {
+  private initFeature(layer: Layer<VectorSource<Feature<Geometry>>>, feature: Feature<Geometry>): void {
     layer.getSource()?.clear();
     layer.getSource()?.addFeature(feature);
   }
@@ -105,7 +106,7 @@ export class FeatureModificationService implements IPostboyDependingService {
       });
   }
 
-  private clearInteraction(layer: Layer<Source<Geometry>> | null): void {
+  private clearInteraction(layer: Layer<Source<Feature<Geometry>>> | null): void {
     layer?.getSource()?.clear();
     if (this.modify) this.map?.removeInteraction(this.modify);
     if (this.translate) this.map?.removeInteraction(this.translate);

@@ -22,6 +22,8 @@ import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer
 import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
 import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
 import { RemoveRasterTileCommand } from '../messages/commands/remove-raster-tile.command';
+import { AddCogLayerCommand } from '../messages/commands/add-cog-layer.command';
+import { RemoveCogLayerCommand } from '../messages/commands/remove-cog-layer.command';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
@@ -60,6 +62,14 @@ export class MapManagementService implements IPostboyDependingService {
       this.map.addLayer(c.layer);
     });
     this.postboy.sub(RemoveRasterTileCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.removeLayer(c.layer);
+    });
+    this.postboy.sub(AddCogLayerCommand).subscribe((c) => {
+      if (!this.map) return;
+      this.map.addLayer(c.layer);
+    });
+    this.postboy.sub(RemoveCogLayerCommand).subscribe((c) => {
       if (!this.map) return;
       this.map.removeLayer(c.layer);
     });

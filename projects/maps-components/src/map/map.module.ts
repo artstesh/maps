@@ -12,6 +12,7 @@ import { ClusterLayerComponent } from './map-plate/layers/cluster-layer/cluster-
 import { MapControlZoomComponent } from './map-plate/controls/map-control-zoom/map-control-zoom.component';
 import { ImageLayerComponent } from './map-plate/layers/image-layer/image-layer.component';
 import { RasterTileLayerComponent } from './map-plate/layers/raster-tile/raster-tile-layer.component';
+import { CogLayerComponent } from './map-plate/layers/cog-layer/cog-layer.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -28,6 +29,7 @@ import { RasterTileLayerComponent } from './map-plate/layers/raster-tile/raster-
     MapControlZoomComponent,
     ImageLayerComponent,
     RasterTileLayerComponent,
+    CogLayerComponent,
   ],
   exports: [
     MapPlateComponent,
@@ -40,6 +42,7 @@ import { RasterTileLayerComponent } from './map-plate/layers/raster-tile/raster-
     MapControlZoomComponent,
     ImageLayerComponent,
     RasterTileLayerComponent,
+    CogLayerComponent,
   ],
 })
 export class MapModule {}
