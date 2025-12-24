@@ -4,6 +4,7 @@ import TileLayer from 'ol/layer/Tile';
 import TileSource from 'ol/source/Tile';
 import OSM from 'ol/source/OSM';
 import { Map } from 'ol';
+import { MapSettings } from '../../../models';
 
 @Component({
   selector: 'art-osm-tile-layer',
@@ -19,6 +20,8 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
   }
 
   private _url: string = '';
+  private _map?: Map;
+  private _opacity: number = 1;
 
   @Input() set url(value: string | undefined) {
     if (!value || this._url === value) return;
@@ -26,7 +29,11 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
     this.initLayer();
   }
 
-  private _map?: Map;
+  @Input() set opacity(value: number) {
+    if (!value || this._opacity === value) return;
+    this._opacity = value;
+    this.initLayer();
+  }
 
   @Input() set map(value: Map | undefined) {
     if (!value || this._map === value) return;
@@ -51,6 +58,7 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
       source: new OSM({
         url: this._url,
       }),
+      opacity: this._opacity,
     });
     this.layer.set('name', 'osm-tile-layer');
     this._map.addLayer(this.layer);
