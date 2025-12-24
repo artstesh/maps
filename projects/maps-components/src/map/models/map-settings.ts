@@ -12,6 +12,7 @@ export class MapSettings {
   zoom: number = 4;
   lyrs: MapLyrs = MapLyrs.Hybrid;
   language: string = 'en';
+  osmOpacity: number = 1;
   interactionSettings: DefaultsOptions = {};
 
   public static copy(model: MapSettings): MapSettings {
@@ -23,6 +24,7 @@ export class MapSettings {
     result.lyrs = model.lyrs;
     result.interactionSettings = model.interactionSettings;
     result.language = model.language;
+    result.osmOpacity = model.osmOpacity;
     return result;
   }
 
@@ -98,6 +100,16 @@ export class MapSettings {
   }
 
   /**
+   * Sets the opacity level for the OpenStreetMap layer.
+   *
+   * @param {number} osmOpacity - The opacity value for the OpenStreetMap layer, where 0 is fully transparent and 1 is fully opaque.
+   * @return {MapSettings} A new MapSettings instance with the updated OpenStreetMap opacity.
+   */
+  setOsmOpacity(osmOpacity: number): MapSettings {
+    return MapSettings.copy({ ...this, osmOpacity });
+  }
+
+  /**
    * Compares the current MapSettings instance with another to determine if they are identical.
    *
    * @param {MapSettings} model - The MapSettings instance to compare with the current instance.
@@ -110,6 +122,7 @@ export class MapSettings {
     if (this.lyrs !== model.lyrs) return false;
     if (this.language !== model.language) return false;
     if (this.interactionSettings !== model.interactionSettings) return false;
+    if (this.osmOpacity !== model.osmOpacity) return false;
     return this.center.length === model.center.length && !this.center.filter((c, i) => c !== model.center[i]).length;
   }
 }
