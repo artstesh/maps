@@ -14,6 +14,7 @@ import { MapConstants } from '../../../models';
  */
 @Component({
   selector: 'art-polygons',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

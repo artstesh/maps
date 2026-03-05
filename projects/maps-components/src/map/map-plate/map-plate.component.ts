@@ -3,8 +3,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  Input,
+  ElementRef, input,
+  Input, TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
@@ -19,7 +19,7 @@ import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MapClickService } from '../services/map-click.service';
 import { MapFeatureService } from '../services/map-feature.service';
-import { FeatureLayerSettings } from './layers';
+import {FeatureLayerComponent, FeatureLayerSettings, OsmTileLayerComponent} from './layers';
 import { MapConstants } from '../models/map.constants';
 import { DrawingService } from '../services/drawing/drawing.service';
 import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
@@ -27,9 +27,11 @@ import { FeatureService } from '../services/feature.service';
 import { FeatureModificationService } from '../services/drawing/feature-modification.service';
 import { ControlsService } from '../services/controls/controls.service';
 import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
+import {NgIf, NgTemplateOutlet} from "@angular/common";
 
 @Component({
   selector: 'art-map-plate',
+  standalone: true,
   templateUrl: './map-plate.component.html',
   styleUrls: ['./map-plate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,8 +48,15 @@ import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
     ControlsService,
   ],
   encapsulation: ViewEncapsulation.None,
+  imports: [
+    OsmTileLayerComponent,
+    FeatureLayerComponent,
+    NgIf,
+    NgTemplateOutlet
+  ]
 })
 export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
+  contentRef = input.required<TemplateRef<any>>();
   private renderTryCount = 0;
   map!: Map;
   osmUrl = '';

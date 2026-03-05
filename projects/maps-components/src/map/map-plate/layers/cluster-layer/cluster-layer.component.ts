@@ -14,6 +14,7 @@ import { ClusterLayerFactory } from './cluster-layer-factory.service';
  */
 @Component({
   selector: 'art-cluster-layer',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

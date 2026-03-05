@@ -6,7 +6,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
+
 import { should } from '@artstesh/it-should';
 import { AddTileCommand } from '../../../messages/commands/add-tile.command';
 import { RasterTileLayerSettings } from './raster-tile-layer.settings';
@@ -14,6 +14,8 @@ import ImageLayer from 'ol/layer/Image';
 import { Forger } from '@artstesh/forger';
 import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
 import Map from 'ol/Map';
+import {AddRasterTileCommand} from "../../../messages/commands/add-raster-tile-command";
+import {RemoveRasterTileCommand} from "../../../messages/commands/remove-raster-tile.command";
 
 describe('RasterTileLayerComponent', () => {
   const layer = mock(ImageLayer);
@@ -26,7 +28,7 @@ describe('RasterTileLayerComponent', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything())).thenReturn(instance(layer));
-    return MockBuilder(RasterTileLayerComponent, MapModule)
+    return MockBuilder(RasterTileLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(RasterTileLayerFactory, instance(factory)));
   });
@@ -44,7 +46,7 @@ describe('RasterTileLayerComponent', () => {
   });
 
   it('should add layer', () => {
-    const [fired] = capture<AddTileCommand>(postboy.fire).last();
+    const [fired] = capture<AddRasterTileCommand>(postboy.fire).last();
     //
     should().true(fired.layer === instance(layer));
   });
@@ -65,13 +67,13 @@ describe('RasterTileLayerComponent', () => {
     });
 
     it('should add layer', () => {
-      const [fired] = capture<AddTileCommand>(postboy.fire).last();
+      const [fired] = capture<AddRasterTileCommand>(postboy.fire).last();
       //
       should().true(fired.layer === instance(otherLayer));
     });
 
     it('should remove old layer', () => {
-      const [fired] = capture<RemoveTileCommand>(postboy.fire).beforeLast();
+      const [fired] = capture<RemoveRasterTileCommand>(postboy.fire).beforeLast();
       //
       should().true(fired.layer === instance(layer));
     });
