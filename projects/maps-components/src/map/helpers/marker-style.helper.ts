@@ -18,7 +18,7 @@ export class MarkerStyleHelper {
     return new Style({
       image: new Icon({
         img: image,
-        imgSize: size,
+        size: size,
       }),
       zIndex,
     });

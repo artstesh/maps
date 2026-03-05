@@ -5,7 +5,7 @@ import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
+
 import Map from 'ol/Map';
 import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
 import { should } from '@artstesh/it-should';
@@ -28,7 +28,7 @@ describe('ClusterLayerComponent', () => {
     manager = { layer: new Layer() } as any;
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything(), anything())).thenReturn(manager);
-    return MockBuilder(ClusterLayerComponent, MapModule)
+    return MockBuilder(ClusterLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(ClusterLayerFactory, instance(factory)));
   });

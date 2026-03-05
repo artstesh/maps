@@ -16,6 +16,7 @@ import { GenerateZoomControlExecutor } from '../../../messages/executors/generat
  */
 @Component({
   selector: 'art-map-control-zoom',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

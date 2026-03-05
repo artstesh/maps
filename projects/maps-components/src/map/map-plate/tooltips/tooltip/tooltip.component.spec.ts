@@ -5,7 +5,7 @@ import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
 import { MapClickEvent, MapRenderedEvent } from '../../../messages';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
+
 import Map from 'ol/Map';
 import { CloseTooltipCommand } from '../../../messages/commands/close-tooltip.command';
 import { TooltipSettings } from './tooltip.settings';
@@ -24,7 +24,7 @@ describe('TooltipComponent', () => {
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(postboy.sub(CloseTooltipCommand)).thenReturn(closeTip$.asObservable());
     when(postboy.sub(MapClickEvent)).thenReturn(mapClick$.asObservable());
-    return MockBuilder(TooltipComponent, MapModule).provide(MockProvider(MapPostboyService, instance(postboy)));
+    return MockBuilder(TooltipComponent).provide(MockProvider(MapPostboyService, instance(postboy)));
   });
 
   beforeEach(() => {

@@ -17,7 +17,7 @@ export class MapClickService implements IPostboyDependingService {
     this.observeMapRender();
   }
 
-  onClick(ev: MapBrowserEvent<UIEvent>): MapClickEvent {
+  onClick(ev: MapBrowserEvent<PointerEvent>): MapClickEvent {
     const model: MapClickEvent = new MapClickEvent(ev.coordinate, {}, {});
     this.map?.forEachFeatureAtPixel(ev.pixel, (f, l) => {
       this.getFeatureCollectionWithInner([f as Feature<Geometry>])
@@ -37,7 +37,7 @@ export class MapClickService implements IPostboyDependingService {
     this.postboy.sub(MapRenderedEvent).subscribe((m) => {
       this.map = m.map;
       this.map?.on('singleclick', (e) => {
-        this.postboy.fire(this.onClick(e));
+        this.postboy.fire(this.onClick(e as MapBrowserEvent<PointerEvent>));
       });
     });
   }

@@ -5,7 +5,7 @@ import { anything, instance, mock, reset, verify, when } from 'ts-mockito';
 import Map from 'ol/Map';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
 import { ElementRef } from '@angular/core';
-import { MapModule } from '../map.module';
+
 import { MapPostboyService } from '../services/map-postboy.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MessageRegistratorService } from '../services/message-registrator.service';
@@ -23,7 +23,7 @@ describe('MapPlateComponent', () => {
     when(mapFactory.build(anything())).thenReturn(instance(map));
     instance(map).once = (): any => []; // ToDo WTF???
     instance(map).on = (): any => []; // ToDo WTF???
-    await MockBuilder(MapPlateComponent, MapModule)
+    await MockBuilder(MapPlateComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .mock(MessageRegistratorService, instance(registrator))
       .provide(MockProvider(MapPlateFactory, instance(mapFactory)))

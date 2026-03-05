@@ -17,6 +17,7 @@ import { RemoveRasterTileCommand } from '../../../messages/commands/remove-raste
 
 @Component({
   selector: 'art-raster-tile-layer',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

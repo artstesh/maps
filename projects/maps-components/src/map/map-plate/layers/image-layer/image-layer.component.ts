@@ -18,6 +18,7 @@ import { RemoveImageLayerCommand } from '../../../messages/commands/remove-image
 
 @Component({
   selector: 'art-image-layer',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
