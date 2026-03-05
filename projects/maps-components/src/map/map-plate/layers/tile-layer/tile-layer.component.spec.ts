@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
+
 import { should } from '@artstesh/it-should';
 import { Forger } from '@artstesh/forger';
 import { TileLayerFactory } from './tile-layer.factory';
@@ -26,7 +26,7 @@ describe('TileLayerComponent', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything())).thenReturn(instance(layer));
-    return MockBuilder(TileLayerComponent, MapModule)
+    return MockBuilder(TileLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(TileLayerFactory, instance(factory)));
   });

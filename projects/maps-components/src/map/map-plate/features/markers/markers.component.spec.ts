@@ -2,7 +2,6 @@ import { ComponentFixture } from '@angular/core/testing';
 
 import { MarkersComponent } from './markers.component';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
 import { instance, mock, when } from 'ts-mockito';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
@@ -16,7 +15,7 @@ describe('MarkersComponent', () => {
   beforeEach(async () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
-    return MockBuilder(MarkersComponent, MapModule).provide(MockProvider(MapPostboyService, instance(postboy)));
+    return MockBuilder(MarkersComponent).provide(MockProvider(MapPostboyService, instance(postboy)));
   });
 
   beforeEach(() => {
