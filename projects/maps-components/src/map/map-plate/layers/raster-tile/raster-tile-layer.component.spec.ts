@@ -14,8 +14,8 @@ import ImageLayer from 'ol/layer/Image';
 import { Forger } from '@artstesh/forger';
 import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
 import Map from 'ol/Map';
-import {AddRasterTileCommand} from "../../../messages/commands/add-raster-tile-command";
-import {RemoveRasterTileCommand} from "../../../messages/commands/remove-raster-tile.command";
+import { AddRasterTileCommand } from '../../../messages/commands/add-raster-tile-command';
+import { RemoveRasterTileCommand } from '../../../messages/commands/remove-raster-tile.command';
 
 describe('RasterTileLayerComponent', () => {
   const layer = mock(ImageLayer);

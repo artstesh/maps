@@ -16,7 +16,7 @@ import { first } from 'rxjs/operators';
 import { Vector as Source } from 'ol/source';
 import { CancelFeatureModificationCommand } from '../../messages/commands/cancel-feature-modification.command';
 import { ModifyFeatureCommand } from '../../messages/commands/modify-feature.command';
-import {FeatureLike} from "ol/Feature";
+import { FeatureLike } from 'ol/Feature';
 
 @Injectable()
 export class FeatureModificationService implements IPostboyDependingService {

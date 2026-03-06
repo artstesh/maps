@@ -1,5 +1,5 @@
 import { MapLyrs } from './map-lyrs.enum';
-import {DefaultsOptions} from "ol/interaction/defaults";
+import { DefaultsOptions } from 'ol/interaction/defaults';
 
 /**
  * Represents the configurable settings for a map instance, providing

@@ -23,7 +23,7 @@ import { GetFeaturesInAreaQuery } from '../../messages/queries/get-features-in-a
 import { IIdentified } from '../../models/i-identified';
 import { GenerateDrawExecutor } from '../../messages/executors/generate-draw.executor';
 import { Dictionary } from '@artstesh/collections';
-import {FeatureLike} from "ol/Feature";
+import { FeatureLike } from 'ol/Feature';
 
 @Injectable()
 export class DrawingService implements IPostboyDependingService {
