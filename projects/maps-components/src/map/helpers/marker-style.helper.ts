@@ -13,11 +13,9 @@ export class MarkerStyleHelper {
    * @returns {Style} A new Style object.
    */
   public static fromSvg(svg: string, size: [number, number] = [30, 30], zIndex = 400): Style {
-    let image = new Image();
-    image.src = 'data:image/svg+xml,' + escape(svg);
     return new Style({
       image: new Icon({
-        img: image,
+        src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg),
         size: size,
       }),
       zIndex,

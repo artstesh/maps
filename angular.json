@@ -54,6 +54,36 @@
               "path": "./node_modules/@artstesh/forger/lib/webpack.config.js"
             }
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/maps-components/.storybook",
+            "browserTarget": "maps-components:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/maps-components"
+            ],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/maps-components/.storybook",
+            "browserTarget": "maps-components:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/maps-components"
+            ],
+            "outputDir": "storybook-static"
+          }
         }
       }
     }
