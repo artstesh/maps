@@ -35,12 +35,12 @@
     "type": "git",
     "url": "git+https://github.com/artstesh/maps.git"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "@artstesh/postboy": "^3.3.0",
+    "@artstesh/collections": "^1.0.0",
     "@angular/common": "^16.0.0",
     "@angular/compiler": "^16.0.0",
     "@angular/core": "^16.0.0",
-    "@artstesh/collections": "^1.0.1",
-    "@artstesh/postboy": "^3.1.1",
     "ol": "^6.9.0",
     "ol-geocoder": "^4.0.0",
     "rxjs": "^7.0.0",
@@ -48,6 +48,16 @@
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
+    "@angular/common": "^16.0.0",
+    "@angular/compiler": "^16.0.0",
+    "@angular/core": "^16.0.0",
+    "@artstesh/collections": "^1.0.1",
+    "@artstesh/postboy": "^3.3.0",
+    "ol": "^6.9.0",
+    "ol-geocoder": "^4.0.0",
+    "rxjs": "^7.0.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0",
     "@angular-builders/custom-webpack": "^16.0.0",
     "@angular-devkit/build-angular": "^16.0.0",
     "@angular-eslint/builder": "^16.0.0",
