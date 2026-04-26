@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, input,
+  ElementRef,
+  input,
   Input,
-  OnInit, TemplateRef,
+  OnInit,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { TooltipSettings } from './tooltip.settings';
@@ -16,7 +18,7 @@ import { CloseTooltipCommand } from '../../../messages/commands/close-tooltip.co
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import Overlay, { Options as OverlayOptions } from 'ol/Overlay';
-import {NgTemplateOutlet} from "@angular/common";
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'art-tooltip',
@@ -24,9 +26,7 @@ import {NgTemplateOutlet} from "@angular/common";
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    NgTemplateOutlet
-  ]
+  imports: [NgTemplateOutlet],
 })
 export class TooltipComponent extends DestructibleComponent implements OnInit {
   contentRef = input.required<TemplateRef<any>>();
