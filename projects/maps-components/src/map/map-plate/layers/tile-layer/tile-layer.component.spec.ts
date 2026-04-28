@@ -1,19 +1,18 @@
-import { ComponentFixture } from '@angular/core/testing';
+import {ComponentFixture} from '@angular/core/testing';
 import Map from 'ol/Map';
-import { anything, capture, instance, mock, reset, when } from 'ts-mockito';
-import { Subject } from 'rxjs';
-import { MapRenderedEvent } from '../../../messages';
-import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
-import { should } from '@artstesh/it-should';
-import { Forger } from '@artstesh/forger';
-import { TileLayerFactory } from './tile-layer.factory';
+import {anything, capture, instance, mock, reset, when} from 'ts-mockito';
+import {Subject} from 'rxjs';
+import {MapRenderedEvent} from '../../../messages';
+import {MapPostboyService} from '../../../services/map-postboy.service';
+import {MockBuilder, MockProvider, MockRender} from 'ng-mocks';
+import {should} from '@artstesh/it-should';
+import {Forger} from '@artstesh/forger';
+import {TileLayerFactory} from './tile-layer.factory';
 import TileLayer from 'ol/layer/Tile';
-import { AddTileCommand } from '../../../messages/commands/add-tile.command';
-import { TileLayerSettings } from './tile-layer.settings';
-import { TileLayerComponent } from './tile-layer.component';
-import { RemoveTileCommand } from '../../../messages/commands/remove-tile.command';
+import {AddTileCommand} from '../../../messages/commands/add-tile.command';
+import {TileLayerSettings} from './tile-layer.settings';
+import {TileLayerComponent} from './tile-layer.component';
+import {RemoveTileCommand} from '../../../messages/commands/remove-tile.command';
 
 describe('TileLayerComponent', () => {
   const layer = mock(TileLayer);
@@ -26,7 +25,7 @@ describe('TileLayerComponent', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything())).thenReturn(instance(layer));
-    return MockBuilder(TileLayerComponent, MapModule)
+    return MockBuilder(TileLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(TileLayerFactory, instance(factory)));
   });

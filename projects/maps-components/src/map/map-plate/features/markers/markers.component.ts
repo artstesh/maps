@@ -13,6 +13,7 @@ import { filter, first } from 'rxjs/operators';
  */
 @Component({
   selector: 'art-markers',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

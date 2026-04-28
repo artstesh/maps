@@ -12,6 +12,7 @@ import { RemoveTileCommand } from '../../../messages/commands/remove-tile.comman
 
 @Component({
   selector: 'art-tile-layer',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

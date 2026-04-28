@@ -8,6 +8,7 @@ import { MapSettings } from '../../../models';
 
 @Component({
   selector: 'art-osm-tile-layer',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

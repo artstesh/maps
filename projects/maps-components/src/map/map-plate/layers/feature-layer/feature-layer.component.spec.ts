@@ -7,7 +7,6 @@ import { MapRenderedEvent } from '../../../messages';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
 import { FeatureLayerFactory } from './feature-layer.factory';
 import { Vector as Layer } from 'ol/layer';
 import { should } from '@artstesh/it-should';
@@ -26,7 +25,7 @@ describe('FeatureLayerComponent', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything())).thenReturn(instance(layer));
-    return MockBuilder(FeatureLayerComponent, MapModule)
+    return MockBuilder(FeatureLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(FeatureLayerFactory, instance(factory)));
   });

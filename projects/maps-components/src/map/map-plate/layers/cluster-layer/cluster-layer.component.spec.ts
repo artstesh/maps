@@ -1,20 +1,19 @@
-import { ComponentFixture } from '@angular/core/testing';
-import { anything, capture, instance, mock, reset, when } from 'ts-mockito';
-import { Vector as Layer } from 'ol/layer';
-import { MapPostboyService } from '../../../services/map-postboy.service';
-import { Subject } from 'rxjs';
-import { MapRenderedEvent } from '../../../messages';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
+import {ComponentFixture} from '@angular/core/testing';
+import {anything, capture, instance, mock, reset, when} from 'ts-mockito';
+import {Vector as Layer} from 'ol/layer';
+import {MapPostboyService} from '../../../services/map-postboy.service';
+import {Subject} from 'rxjs';
+import {MapRenderedEvent} from '../../../messages';
+import {MockBuilder, MockProvider, MockRender} from 'ng-mocks';
 import Map from 'ol/Map';
-import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
-import { should } from '@artstesh/it-should';
-import { Forger } from '@artstesh/forger';
-import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.command';
-import { ClusterLayerComponent } from './cluster-layer.component';
-import { ClusterLayerFactory } from './cluster-layer-factory.service';
-import { ClusterLayerManager } from './cluster-layer.manager';
-import { ClusterLayerSettings } from './cluster-layer.settings';
+import {AddLayerCommand} from '../../../messages/commands/add-layer.command';
+import {should} from '@artstesh/it-should';
+import {Forger} from '@artstesh/forger';
+import {RemoveLayerCommand} from '../../../messages/commands/remove-layer.command';
+import {ClusterLayerComponent} from './cluster-layer.component';
+import {ClusterLayerFactory} from './cluster-layer-factory.service';
+import {ClusterLayerManager} from './cluster-layer.manager';
+import {ClusterLayerSettings} from './cluster-layer.settings';
 
 describe('ClusterLayerComponent', () => {
   let fixture: ComponentFixture<ClusterLayerComponent>;
@@ -28,7 +27,7 @@ describe('ClusterLayerComponent', () => {
     manager = { layer: new Layer() } as any;
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything(), anything())).thenReturn(manager);
-    return MockBuilder(ClusterLayerComponent, MapModule)
+    return MockBuilder(ClusterLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(ClusterLayerFactory, instance(factory)));
   });

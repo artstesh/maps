@@ -12,6 +12,7 @@ import { FeatureLayerFactory } from './feature-layer.factory';
 
 @Component({
   selector: 'art-feature-layer',
+  standalone: true,
   template: '',
   styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -6,7 +6,6 @@ import { ComponentFixture } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
-import { MapModule } from '../../../map.module';
 import { should } from '@artstesh/it-should';
 import { AddTileCommand } from '../../../messages/commands/add-tile.command';
 import { RasterTileLayerSettings } from './raster-tile-layer.settings';
@@ -26,7 +25,7 @@ describe('RasterTileLayerComponent', () => {
     mapRendered$ = new Subject<MapRenderedEvent>();
     when(postboy.sub(MapRenderedEvent)).thenReturn(mapRendered$.asObservable());
     when(factory.build(anything())).thenReturn(instance(layer));
-    return MockBuilder(RasterTileLayerComponent, MapModule)
+    return MockBuilder(RasterTileLayerComponent)
       .provide(MockProvider(MapPostboyService, instance(postboy)))
       .provide(MockProvider(RasterTileLayerFactory, instance(factory)));
   });

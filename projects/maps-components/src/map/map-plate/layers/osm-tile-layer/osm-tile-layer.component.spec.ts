@@ -1,24 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture} from '@angular/core/testing';
 
-import { OsmTileLayerComponent } from './osm-tile-layer.component';
+import {OsmTileLayerComponent} from './osm-tile-layer.component';
+import {MockBuilder, MockRender} from "ng-mocks";
 
 describe('OsmTileLayerComponent', () => {
-  let component: OsmTileLayerComponent;
   let fixture: ComponentFixture<OsmTileLayerComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [OsmTileLayerComponent],
-    }).compileComponents();
+    return MockBuilder(OsmTileLayerComponent);
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OsmTileLayerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture = MockRender(OsmTileLayerComponent);
   });
 
+  afterEach(() => expect().nothing());
+
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

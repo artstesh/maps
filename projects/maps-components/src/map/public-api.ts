@@ -2,7 +2,6 @@
  * Public API Surface of maps
  */
 
-export * from './map.module';
 export * from './models/index';
 export * from './map-plate/map-plate.component';
 export * from './services/map-postboy.service';
