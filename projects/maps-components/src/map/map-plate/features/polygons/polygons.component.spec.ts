@@ -1,10 +1,10 @@
-import {ComponentFixture} from '@angular/core/testing';
-import {MockBuilder, MockProvider, MockRender} from 'ng-mocks';
-import {instance, mock, when} from 'ts-mockito';
-import {MapPostboyService} from '../../../services/map-postboy.service';
-import {Subject} from 'rxjs';
-import {MapRenderedEvent} from '../../../messages';
-import {PolygonsComponent} from './polygons.component';
+import { ComponentFixture } from '@angular/core/testing';
+import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { instance, mock, when } from 'ts-mockito';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { Subject } from 'rxjs';
+import { MapRenderedEvent } from '../../../messages';
+import { PolygonsComponent } from './polygons.component';
 
 describe('PolygonsComponent', () => {
   let fixture: ComponentFixture<PolygonsComponent>;

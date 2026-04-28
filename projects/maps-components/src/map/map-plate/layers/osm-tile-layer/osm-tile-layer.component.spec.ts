@@ -1,7 +1,7 @@
-import {ComponentFixture} from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 
-import {OsmTileLayerComponent} from './osm-tile-layer.component';
-import {MockBuilder, MockRender} from "ng-mocks";
+import { OsmTileLayerComponent } from './osm-tile-layer.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
 
 describe('OsmTileLayerComponent', () => {
   let fixture: ComponentFixture<OsmTileLayerComponent>;

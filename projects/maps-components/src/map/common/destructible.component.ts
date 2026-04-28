@@ -2,7 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  standalone: true, template: '' })
+  standalone: true,
+  template: '',
+})
 export class DestructibleComponent implements OnDestroy {
   protected subs: Subscription[] = [];
   protected onDestroy?: () => void;

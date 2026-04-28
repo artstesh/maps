@@ -1,11 +1,11 @@
-import {ComponentFixture} from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 
-import {MarkersComponent} from './markers.component';
-import {MockBuilder, MockProvider, MockRender} from 'ng-mocks';
-import {instance, mock, when} from 'ts-mockito';
-import {MapPostboyService} from '../../../services/map-postboy.service';
-import {Subject} from 'rxjs';
-import {MapRenderedEvent} from '../../../messages';
+import { MarkersComponent } from './markers.component';
+import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { instance, mock, when } from 'ts-mockito';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { Subject } from 'rxjs';
+import { MapRenderedEvent } from '../../../messages';
 
 describe('MarkersComponent', () => {
   let fixture: ComponentFixture<MarkersComponent>;

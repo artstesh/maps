@@ -3,8 +3,10 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, input,
-  Input, TemplateRef,
+  ElementRef,
+  input,
+  Input,
+  TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
 import { MapLyrsLabel, MapSettings } from '../models';
@@ -19,7 +21,7 @@ import { MapManagementService } from '../services/map-management.service';
 import { MapPlateFactory } from './map-plate.factory.service';
 import { MapClickService } from '../services/map-click.service';
 import { MapFeatureService } from '../services/map-feature.service';
-import {FeatureLayerComponent, FeatureLayerSettings, OsmTileLayerComponent} from './layers';
+import { FeatureLayerComponent, FeatureLayerSettings, OsmTileLayerComponent } from './layers';
 import { MapConstants } from '../models/map.constants';
 import { DrawingService } from '../services/drawing/drawing.service';
 import { DrawingGenerationService } from '../services/drawing/drawing-generation.service';
@@ -27,7 +29,7 @@ import { FeatureService } from '../services/feature.service';
 import { FeatureModificationService } from '../services/drawing/feature-modification.service';
 import { ControlsService } from '../services/controls/controls.service';
 import { MapPointerMoveEvent } from '../messages/events/map-pointer-move.event';
-import {NgIf, NgTemplateOutlet} from "@angular/common";
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'art-map-plate',
@@ -48,15 +50,10 @@ import {NgIf, NgTemplateOutlet} from "@angular/common";
     ControlsService,
   ],
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    OsmTileLayerComponent,
-    FeatureLayerComponent,
-    NgTemplateOutlet,
-    NgIf
-  ]
+  imports: [OsmTileLayerComponent, FeatureLayerComponent, NgTemplateOutlet, NgIf],
 })
 export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
-  contentRef = input<TemplateRef<any>|null>(null);
+  contentRef = input<TemplateRef<any> | null>(null);
   private renderTryCount = 0;
   map!: Map;
   osmUrl = '';
