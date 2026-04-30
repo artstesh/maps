@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IPostboyDependingService } from '@artstesh/postboy';
+import {IPostboyDependingService, LockMessage, UnlockMessage} from '@artstesh/postboy';
 import { MapPostboyService } from '../map-postboy.service';
 import { StartDrawingCommand } from '../../messages/commands/start-drawing.command';
 import { CancelDrawingCommand } from '../../messages/commands/cancel-drawing.command';
@@ -40,7 +40,7 @@ export class DrawingService implements IPostboyDependingService {
 
   private observeSelectArea() {
     this.postboy.sub(DrawSelectionAreaCommand).subscribe((ev) => {
-      this.postboy.lock(MapClickEvent);
+      this.postboy.fire(new LockMessage(MapClickEvent));
       this.postboy.fireCallback(new StartDrawingCommand(ev.type, ev.style), (r) => {
         if (!r) {
           ev.finish(new Dictionary<IIdentified[]>());
@@ -106,7 +106,7 @@ export class DrawingService implements IPostboyDependingService {
       this.map?.removeInteraction(this.drawInteraction);
       layer?.setSource(new Source({}));
     }
-    this.postboy.unlock(MapClickEvent);
+    this.postboy.fire(new UnlockMessage(MapClickEvent));
     setTimeout(() => this.postboy.fire(new DrawingFinishedEvent()), 300);
   }
 }
