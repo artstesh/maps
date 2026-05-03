@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IPostboyDependingService } from '@artstesh/postboy';
+import { IPostboyDependingService, LockMessage, UnlockMessage } from '@artstesh/postboy';
 import { MapPostboyService } from '../map-postboy.service';
 import { StartDrawingCommand } from '../../messages/commands/start-drawing.command';
 import { CancelDrawingCommand } from '../../messages/commands/cancel-drawing.command';
 import { first } from 'rxjs/operators';
 import { DrawingFinishedEvent } from '../../messages/events/drawing-finished.event';
 import { Subscription } from 'rxjs';
-import { MapRenderedEvent } from '../../messages';
+import { MapClickEvent, MapRenderedEvent } from '../../messages';
 import { GetLayerQuery } from '../../messages/queries/get-layer.query';
 import { MapConstants } from '../../models/map.constants';
 import { Vector as Layer } from 'ol/layer';
@@ -52,6 +52,7 @@ export class DrawingService implements IPostboyDependingService {
 
   private observeDrawing() {
     this.postboy.sub(StartDrawingCommand).subscribe((ev) => {
+      this.postboy.exec(new LockMessage(MapClickEvent));
       this.draw((l) => {
         if (!l || !this.map) {
           this.clearInteraction(l);
@@ -104,6 +105,7 @@ export class DrawingService implements IPostboyDependingService {
       this.map?.removeInteraction(this.drawInteraction);
       layer?.setSource(new Source({}));
     }
+    this.postboy.exec(new UnlockMessage(MapClickEvent));
     setTimeout(() => this.postboy.fire(new DrawingFinishedEvent()), 300);
   }
 }
