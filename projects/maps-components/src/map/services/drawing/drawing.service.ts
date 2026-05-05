@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IPostboyDependingService, LockMessage, UnlockMessage} from '@artstesh/postboy';
+import { IPostboyDependingService, LockMessage, UnlockMessage } from '@artstesh/postboy';
 import { MapPostboyService } from '../map-postboy.service';
 import { StartDrawingCommand } from '../../messages/commands/start-drawing.command';
 import { CancelDrawingCommand } from '../../messages/commands/cancel-drawing.command';
