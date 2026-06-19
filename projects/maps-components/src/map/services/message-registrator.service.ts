@@ -55,6 +55,8 @@ import {
   GetGeometryLengthExecutor,
   GetGeometryLengthExecutorHandler,
 } from '../messages/executors/get-geometry-length.executor';
+import {AddGeotiffTileCommand} from "../messages/commands/add-geotiff-tile.command";
+import {RemoveGeotiffTileCommand} from "../messages/commands/remove-geotiff-tile.command";
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
@@ -81,6 +83,8 @@ export class MessageRegistratorService extends PostboyAbstractRegistrator {
     this.recordSubject(AddLayerCommand);
     this.recordSubject(RemoveLayerCommand);
     this.recordSubject(AddTileCommand);
+    this.recordSubject(AddGeotiffTileCommand);
+    this.recordSubject(RemoveGeotiffTileCommand);
     this.recordSubject(AddRasterTileCommand);
     this.recordSubject(RemoveRasterTileCommand);
     this.recordSubject(RemoveImageLayerCommand);

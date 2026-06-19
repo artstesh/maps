@@ -11,14 +11,24 @@
     "miscellaneous": {
         "variables": [
             {
-                "name": "Large",
+                "name": "CustomMarker",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/button.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\n  ...Primary,\n  args: {\n    ...Primary.args,\n    layerSettings: new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.fromSvg(markerSvg)),\n  } as any,\n}"
+            },
+            {
+                "name": "CustomMarker",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  ...Primary,\r\n  args: {\r\n    ...Primary.args,\r\n    layerSettings: new GeotiffTileLayerSettings()\r\n      .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/growth_rate/TreeHeight_GrowthRate_2019.tif')\r\n      .setMin(-1.5)\r\n      .setMax(3),\r\n  } as any,\r\n}"
             },
             {
                 "name": "layerSettings",
@@ -28,47 +38,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "new FeatureLayerSettings()"
+                "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#ff0000'))"
             },
             {
-                "name": "LoggedIn",
+                "name": "layerSettings",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/header.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/maps-components/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/maps-components/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/maps-components/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
+                "type": "unknown",
+                "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#ff0000'))"
             },
             {
                 "name": "markers",
@@ -78,37 +58,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[new MarkerModel(30, -2, 'marker1'), new MarkerModel(30, -1, 'marker2')]"
+                "defaultValue": "[new MarkerModel(-2, 30, 'marker1'), new MarkerModel(-1, 30, 'marker2')]"
             },
             {
-                "name": "meta",
+                "name": "markers",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/button.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args\n  args: { onClick: fn() },\n}"
+                "type": "[]",
+                "defaultValue": "[new MarkerModel(-2, 30, 'marker1'), new MarkerModel(-1, 30, 'marker2')]"
             },
             {
-                "name": "meta",
+                "name": "markerSvg",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/header.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<HeaderComponent>",
-                "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/maps-components/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<PageComponent>",
-                "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                "type": "unknown",
+                "defaultValue": "`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"28\" viewBox=\"0 0 21 28\">' +\n                    <path data-name=\"pin green\" d=\"M-18.7-9.292a10.112 10.112 0 0 0-10-10.2 10.112 10.112 0 0 0-10 10.2C-38.7-1.3-29.642 6.95-29.256 7.3a.825.825 0 0 0 .554.214.831.831 0 0 0 .554-.212c.386-.348 9.446-8.6 9.446-16.59\" transform=\"translate(39.202 19.99)\" style=\"fill:#fff;stroke:#ff00a0\"/>' +\n                </svg>`"
             },
             {
                 "name": "meta",
@@ -118,17 +88,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<MapPlateComponent>",
-                "defaultValue": "{\r\n  title: 'MarkersComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n  ],\r\n  argTypes: {\r\n  },\r\n}"
+                "defaultValue": "{\n  title: 'MarkersComponent',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MarkersComponent, FeatureLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/button.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\r\n  title: 'GeotiffTileLayerComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [GeotiffTileLayerComponent],\r\n    }),\r\n  ],\r\n  argTypes: {},\r\n}"
             },
             {
                 "name": "Primary",
@@ -138,17 +108,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    markers, layerSettings\r\n  } as any,\r\n  play: async ({ canvas }: any) => {},\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template: '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\r\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\r\n      '         </art-feature-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    settings: settings,\n    markers,\n    layerSettings,\n  } as any,\n  play: async ({ canvas }: any) => {},\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\n      '         </art-feature-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
             },
             {
-                "name": "Secondary",
+                "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/button.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    markers,\r\n    layerSettings,\r\n  } as any,\r\n  play: async ({ canvas }: any) => {},\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template:\r\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\r\n      '         </lib-geotiff-tile-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
             },
             {
                 "name": "settings",
@@ -158,54 +128,21 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
             },
             {
-                "name": "Small",
+                "name": "settings",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/stories/button.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                "type": "unknown",
+                "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8).setOsmOpacity(.2)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
             }
         ],
         "functions": [],
         "typealiases": [
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
-                "file": "projects/maps-components/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<HeaderComponent>",
-                "file": "projects/maps-components/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<PageComponent>",
-                "file": "projects/maps-components/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 184
-            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -216,63 +153,32 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
             }
         ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/maps-components/src/stories/button.stories.ts": [
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args\n  args: { onClick: fn() },\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
-                }
-            ],
             "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts": [
+                {
+                    "name": "CustomMarker",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  ...Primary,\n  args: {\n    ...Primary.args,\n    layerSettings: new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.fromSvg(markerSvg)),\n  } as any,\n}"
+                },
                 {
                     "name": "layerSettings",
                     "ctype": "miscellaneous",
@@ -281,7 +187,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new FeatureLayerSettings()"
+                    "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#ff0000'))"
                 },
                 {
                     "name": "markers",
@@ -291,7 +197,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[new MarkerModel(30, -2, 'marker1'), new MarkerModel(30, -1, 'marker2')]"
+                    "defaultValue": "[new MarkerModel(-2, 30, 'marker1'), new MarkerModel(-1, 30, 'marker2')]"
+                },
+                {
+                    "name": "markerSvg",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"28\" viewBox=\"0 0 21 28\">' +\n                    <path data-name=\"pin green\" d=\"M-18.7-9.292a10.112 10.112 0 0 0-10-10.2 10.112 10.112 0 0 0-10 10.2C-38.7-1.3-29.642 6.95-29.256 7.3a.825.825 0 0 0 .554.214.831.831 0 0 0 .554-.212c.386-.348 9.446-8.6 9.446-16.59\" transform=\"translate(39.202 19.99)\" style=\"fill:#fff;stroke:#ff00a0\"/>' +\n                </svg>`"
                 },
                 {
                     "name": "meta",
@@ -301,7 +217,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<MapPlateComponent>",
-                    "defaultValue": "{\r\n  title: 'MarkersComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n  ],\r\n  argTypes: {\r\n  },\r\n}"
+                    "defaultValue": "{\n  title: 'MarkersComponent',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MarkersComponent, FeatureLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
                 },
                 {
                     "name": "Primary",
@@ -311,7 +227,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    markers, layerSettings\r\n  } as any,\r\n  play: async ({ canvas }: any) => {},\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template: '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\r\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\r\n      '         </art-feature-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    settings: settings,\n    markers,\n    layerSettings,\n  } as any,\n  play: async ({ canvas }: any) => {},\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\n      '         </art-feature-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
                 },
                 {
                     "name": "settings",
@@ -321,116 +237,75 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                    "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
                 }
             ],
-            "projects/maps-components/src/stories/header.stories.ts": [
+            "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts": [
                 {
-                    "name": "LoggedIn",
+                    "name": "CustomMarker",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/header.stories.ts",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+                    "defaultValue": "{\r\n  ...Primary,\r\n  args: {\r\n    ...Primary.args,\r\n    layerSettings: new GeotiffTileLayerSettings()\r\n      .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/growth_rate/TreeHeight_GrowthRate_2019.tif')\r\n      .setMin(-1.5)\r\n      .setMax(3),\r\n  } as any,\r\n}"
                 },
                 {
-                    "name": "LoggedOut",
+                    "name": "layerSettings",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/header.stories.ts",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
+                    "type": "unknown",
+                    "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#ff0000'))"
+                },
+                {
+                    "name": "markers",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[new MarkerModel(-2, 30, 'marker1'), new MarkerModel(-1, 30, 'marker2')]"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/header.stories.ts",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<HeaderComponent>",
-                    "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-                }
-            ],
-            "projects/maps-components/src/stories/page.stories.ts": [
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\r\n  title: 'GeotiffTileLayerComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [GeotiffTileLayerComponent],\r\n    }),\r\n  ],\r\n  argTypes: {},\r\n}"
+                },
                 {
-                    "name": "LoggedIn",
+                    "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/page.stories.ts",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    markers,\r\n    layerSettings,\r\n  } as any,\r\n  play: async ({ canvas }: any) => {},\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template:\r\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\r\n      '         </lib-geotiff-tile-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
                 },
                 {
-                    "name": "LoggedOut",
+                    "name": "settings",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/page.stories.ts",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/maps-components/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<PageComponent>",
-                    "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                    "type": "unknown",
+                    "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8).setOsmOpacity(.2)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/maps-components/src/stories/button.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
-                    "file": "projects/maps-components/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/maps-components/src/stories/header.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<HeaderComponent>",
-                    "file": "projects/maps-components/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/maps-components/src/stories/page.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<PageComponent>",
-                    "file": "projects/maps-components/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts": [
                 {
                     "name": "Story",
@@ -438,6 +313,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<MapPlateComponent>",
                     "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -460,6 +348,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "CustomMarker",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "layerSettings",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -471,6 +369,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "markers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "markerSvg",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -516,17 +424,37 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/maps-components/src/stories/button.stories.ts",
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Large",
+                "name": "CustomMarker",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/maps-components/src/stories/button.stories.ts",
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "layerSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "markers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -536,7 +464,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/maps-components/src/stories/button.stories.ts",
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -546,107 +474,17 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/maps-components/src/stories/button.stories.ts",
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Secondary",
+                "name": "settings",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/maps-components/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/button.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/header.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/maps-components/src/stories/page.stories.ts",
+                "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
