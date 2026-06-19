@@ -25,7 +25,7 @@ const settings = new MapSettings()
   .setZoom(8).setOsmOpacity(.2)
   .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false });
 const layerSettings = new GeotiffTileLayerSettings()
-  .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/growth_rate/TreeHeight_GrowthRate_2019.tif')
+  .setUrl('')
   .setMin(-1.5)
   .setMax(3)
   .setStyle({
