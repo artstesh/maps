@@ -1,15 +1,15 @@
-import {Component, Input} from '@angular/core';
-import {DestructibleComponent} from "../../../common/destructible.component";
-import ImageLayer from "ol/layer/Image";
-import {Raster} from "ol/source";
-import {MapPostboyService} from "../../../services/map-postboy.service";
-import {MapRenderedEvent} from "../../../messages";
-import {filter, first} from "rxjs/operators";
-import {GeotiffTileLayerFactory} from "./geotiff-tile-layer.factory";
-import {GeotiffTileLayerSettings} from "./geotiff-tile-layer.settings";
-import {RemoveGeotiffTileCommand} from "../../../messages/commands/remove-geotiff-tile.command";
-import {AddGeotiffTileCommand} from "../../../messages/commands/add-geotiff-tile.command";
-import TileLayer from "ol/layer/WebGLTile";
+import { Component, Input } from '@angular/core';
+import { DestructibleComponent } from '../../../common/destructible.component';
+import ImageLayer from 'ol/layer/Image';
+import { Raster } from 'ol/source';
+import { MapPostboyService } from '../../../services/map-postboy.service';
+import { MapRenderedEvent } from '../../../messages';
+import { filter, first } from 'rxjs/operators';
+import { GeotiffTileLayerFactory } from './geotiff-tile-layer.factory';
+import { GeotiffTileLayerSettings } from './geotiff-tile-layer.settings';
+import { RemoveGeotiffTileCommand } from '../../../messages/commands/remove-geotiff-tile.command';
+import { AddGeotiffTileCommand } from '../../../messages/commands/add-geotiff-tile.command';
+import TileLayer from 'ol/layer/WebGLTile';
 
 @Component({
   selector: 'lib-geotiff-tile-layer',

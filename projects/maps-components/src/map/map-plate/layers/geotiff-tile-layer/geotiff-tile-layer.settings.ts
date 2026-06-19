@@ -1,4 +1,4 @@
-import {Style} from "ol/layer/WebGLTile";
+import { Style } from 'ol/layer/WebGLTile';
 
 export class GeotiffTileLayerSettings {
   /**
@@ -28,8 +28,7 @@ export class GeotiffTileLayerSettings {
    *
    * @type {Style | undefined}
    */
-  style?:  Style | undefined
-
+  style?: Style | undefined;
 
   /**
    * The opacity of an element.

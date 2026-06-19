@@ -22,8 +22,8 @@ import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer
 import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
 import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
 import { RemoveRasterTileCommand } from '../messages/commands/remove-raster-tile.command';
-import {AddGeotiffTileCommand} from "../messages/commands/add-geotiff-tile.command";
-import {RemoveGeotiffTileCommand} from "../messages/commands/remove-geotiff-tile.command";
+import { AddGeotiffTileCommand } from '../messages/commands/add-geotiff-tile.command';
+import { RemoveGeotiffTileCommand } from '../messages/commands/remove-geotiff-tile.command';
 
 @Injectable()
 export class MapManagementService implements IPostboyDependingService {
