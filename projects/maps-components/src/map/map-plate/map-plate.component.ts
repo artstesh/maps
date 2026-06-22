@@ -117,7 +117,7 @@ export class MapPlateComponent extends DestructibleComponent implements AfterVie
   };
 
   private setOsm(): void {
-    if (!this.map) return;
+    if (!this.map()) return;
     this.osmUrl.set(`https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
       this._settings.language
     }&x={x}&y={y}&z={z}`);

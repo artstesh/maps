@@ -1,3 +1,7 @@
 <ng-container *ngTemplateOutlet="contentRef()"> </ng-container>
-<art-osm-tile-layer *ngIf="osmUrl() && map" [map]="map()!" [url]="osmUrl()" [opacity]="_settings.osmOpacity"></art-osm-tile-layer>
-<art-feature-layer *ngIf="map" [settings]="drawingLayerSettings"></art-feature-layer>
+@if (osmUrl() && map()) {
+  <art-osm-tile-layer [map]="map()!" [url]="osmUrl()" [opacity]="_settings.osmOpacity"></art-osm-tile-layer>
+}
+@if (map()) {
+  <art-feature-layer [settings]="drawingLayerSettings"></art-feature-layer>
+}

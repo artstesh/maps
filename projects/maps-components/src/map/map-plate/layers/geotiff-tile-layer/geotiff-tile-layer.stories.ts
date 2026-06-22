@@ -25,7 +25,7 @@ const settings = new MapSettings()
   .setZoom(8).setOsmOpacity(.2)
   .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false });
 const layerSettings = new GeotiffTileLayerSettings()
-  .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/forest_area/RWA_Forest_2025.tif')
+  .setUrl('')
   .setMin(0)
   .setMax(1)
   .setStyle({
