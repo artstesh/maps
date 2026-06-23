@@ -41,6 +41,14 @@ export class GeotiffTileLayerSettings {
    * The priority of showing - layers with higher zIndex cover others in case of collisions
    */
   zIndex: number = 1;
+  /**
+   * Represents the size of a block in a specific context, typically used to define dimensions or capacity.
+   *
+   * Optional property that, if defined, specifies the numerical value for the block size.
+   *
+   * @type {number|undefined}
+   */
+  blockSize?: number = undefined;
 
   /**
    * Creates a copy of the given tile layer settings.
@@ -54,6 +62,7 @@ export class GeotiffTileLayerSettings {
     result.min = model.min;
     result.zIndex = model.zIndex;
     result.style = model.style;
+    result.blockSize = model.blockSize;
     result.opacity = model.opacity;
     result.url = model.url;
     return result;
@@ -119,6 +128,16 @@ export class GeotiffTileLayerSettings {
   }
 
   /**
+   * Sets the block size for the GeoTIFF tile layer.
+   *
+   * @param {number} blockSize - The size of the block to be set. This value typically defines the number of pixels for determining how data is grouped in tiles.
+   * @return {GeotiffTileLayerSettings} A new instance of `GeotiffTileLayerSettings` with the updated block size.
+   */
+  setBlockSize(blockSize: number): GeotiffTileLayerSettings {
+    return GeotiffTileLayerSettings.copy({ ...this, blockSize });
+  }
+
+  /**
    * Checks if the current instance of GeotiffTileLayerSettings is equal to the given model.
    * @param {GeotiffTileLayerSettings} model - The model to compare against.
    * @return {boolean} - True if all properties of the current instance matches the properties of the model;
@@ -130,6 +149,7 @@ export class GeotiffTileLayerSettings {
     if (this.zIndex !== model.zIndex) return false;
     if (this.url !== model.url) return false;
     if (this.style !== model.style) return false;
+    if (this.blockSize !== model.blockSize) return false;
     if (this.opacity !== model.opacity) return false;
     return true;
   }

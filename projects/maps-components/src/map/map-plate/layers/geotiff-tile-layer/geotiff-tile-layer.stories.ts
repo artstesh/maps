@@ -22,7 +22,7 @@ type Story = StoryObj<MapPlateComponent>;
 
 const settings = new MapSettings()
   .setCenter([30, -2])
-  .setZoom(8).setOsmOpacity(.2)
+  .setZoom(8)
   .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false });
 const layerSettings = new GeotiffTileLayerSettings()
   .setUrl('')
@@ -30,11 +30,6 @@ const layerSettings = new GeotiffTileLayerSettings()
   .setMax(1)
   .setStyle({
     color: [
-      // 'color',
-      // ['*', 255, ['band', 1]],
-      // ['*', 1, ['band', 1]],
-      // ['*', 1, ['band', 1]],
-      // ['band', 1],
       'case',
       ['<=', ['band', 1], 0.1], [0, 0, 0, 0],
       ['<=', ['band', 1], .3], [255, 0, 0, 255],
