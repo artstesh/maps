@@ -55,8 +55,8 @@ import {
   GetGeometryLengthExecutor,
   GetGeometryLengthExecutorHandler,
 } from '../messages/executors/get-geometry-length.executor';
-import {RemoveGeotiffTileCommand} from "../messages/commands/remove-geotiff-tile.command";
-import {AddGeotiffTileCommand} from "../messages/commands/add-geotiff-tile.command";
+import { RemoveGeotiffTileCommand } from '../messages/commands/remove-geotiff-tile.command';
+import { AddGeotiffTileCommand } from '../messages/commands/add-geotiff-tile.command';
 
 @Injectable()
 export class MessageRegistratorService extends PostboyAbstractRegistrator {
