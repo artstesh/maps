@@ -5,7 +5,9 @@ import {
   Component,
   ElementRef,
   input,
-  Input, NgZone, signal,
+  Input,
+  NgZone,
+  signal,
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
@@ -55,7 +57,7 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
 export class MapPlateComponent extends DestructibleComponent implements AfterViewInit {
   contentRef = input.required<TemplateRef<any>>();
   private renderTryCount = 0;
-  map = signal<Map|null>(null);
+  map = signal<Map | null>(null);
   osmUrl = signal<string>('');
   drawingLayerSettings = new FeatureLayerSettings().setName(MapConstants.DrawingLayerId);
 
@@ -65,7 +67,7 @@ export class MapPlateComponent extends DestructibleComponent implements AfterVie
     private mapFactory: MapPlateFactory,
     private registrator: MessageRegistratorService,
     private detector: ChangeDetectorRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
   ) {
     super();
     registrator.up();
@@ -118,9 +120,11 @@ export class MapPlateComponent extends DestructibleComponent implements AfterVie
 
   private setOsm(): void {
     if (!this.map()) return;
-    this.osmUrl.set(`https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
-      this._settings.language
-    }&x={x}&y={y}&z={z}`);
+    this.osmUrl.set(
+      `https://mt{0-3}.google.com/vt/lyrs=${MapLyrsLabel.get(this._settings.lyrs)}&hl=${
+        this._settings.language
+      }&x={x}&y={y}&z={z}`,
+    );
     this.detector.detectChanges();
     this.map()?.updateSize();
   }

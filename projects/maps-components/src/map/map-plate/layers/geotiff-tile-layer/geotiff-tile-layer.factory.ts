@@ -1,6 +1,6 @@
-import {GeoTIFF} from 'ol/source';
-import {Injectable} from '@angular/core';
-import {GeotiffTileLayerSettings} from './geotiff-tile-layer.settings';
+import { GeoTIFF } from 'ol/source';
+import { Injectable } from '@angular/core';
+import { GeotiffTileLayerSettings } from './geotiff-tile-layer.settings';
 import TileLayer from 'ol/layer/WebGLTile';
 
 @Injectable({
@@ -13,9 +13,11 @@ export class GeotiffTileLayerFactory {
         {
           url: settings.url,
           min: settings.min,
-          max: settings.max
+          max: settings.max,
         },
-      ], sourceOptions: {blockSize: settings.blockSize}, normalize: settings.normalize
+      ],
+      sourceOptions: { blockSize: settings.blockSize },
+      normalize: settings.normalize,
     });
     return new TileLayer({
       style: settings.style,
