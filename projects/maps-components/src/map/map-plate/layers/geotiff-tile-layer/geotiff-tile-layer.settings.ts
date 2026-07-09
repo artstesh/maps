@@ -49,6 +49,10 @@ export class GeotiffTileLayerSettings {
    * @type {number|undefined}
    */
   blockSize?: number = undefined;
+  /**
+   * By default, the source data is normalized to values between 0 and 1 with scaling factors based on the raster statistics or min and max properties of each source. If instead you want to work with the raw values in a style expression, set this to false. Setting this option to false will make it so any min and max properties on sources are ignored.
+   */
+  normalize?: boolean = true;
 
   /**
    * Creates a copy of the given tile layer settings.
@@ -65,6 +69,7 @@ export class GeotiffTileLayerSettings {
     result.blockSize = model.blockSize;
     result.opacity = model.opacity;
     result.url = model.url;
+    result.normalize = model.normalize;
     return result;
   }
 
@@ -77,6 +82,17 @@ export class GeotiffTileLayerSettings {
   setUrl(url: string): GeotiffTileLayerSettings {
     return GeotiffTileLayerSettings.copy({ ...this, url });
   }
+
+  /**
+   * Sets the normalize property for the GeotiffTileLayerSettings instance.
+   *
+   * @param {boolean} normalize - Indicates whether the normalization setting should be enabled or disabled.
+   * @return {GeotiffTileLayerSettings} A new instance of GeotiffTileLayerSettings with the updated normalize property.
+   */
+  setNormalize(normalize: boolean): GeotiffTileLayerSettings {
+    return GeotiffTileLayerSettings.copy({ ...this, normalize });
+  }
+
   /**
    * Updates the style settings for the GeotiffTileLayerSettings and returns a new instance with the updated style.
    *
@@ -151,6 +167,7 @@ export class GeotiffTileLayerSettings {
     if (this.style !== model.style) return false;
     if (this.blockSize !== model.blockSize) return false;
     if (this.opacity !== model.opacity) return false;
+    if (this.normalize !== model.normalize) return false;
     return true;
   }
 }

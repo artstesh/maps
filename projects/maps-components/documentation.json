@@ -24,21 +24,21 @@
                 "name": "layerSettings",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "new GeotiffTileLayerSettings()\n  .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/forest_area/RWA_Forest_2025.tif')\n  .setMin(0)\n  .setMax(1)\n  .setOpacity(1)\n  .setStyle({\n    color: [\n      'case',\n      ['<=', ['band', 1], 0.1], [0, 0, 0, 0],\n      ['<=', ['band', 1], .3], [255, 0, 0, 255],\n      ['<=', ['band', 1], 0.7], [255, 255, 0, 255],\n      [0, 255, 0, 255]\n    ],\n  })"
-            },
-            {
-                "name": "layerSettings",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
                 "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#ff0000'))"
+            },
+            {
+                "name": "layerSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new GeotiffTileLayerSettings()\n  .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/forest_area/RWA_Forest_2025.tif')\n  .setMin(0)\n  .setMax(1)\n  .setStyle({\n    color: [\n      'case',\n      ['<=', ['band', 1], 0.1], [0, 0, 0, 0],\n      ['<=', ['band', 1], .3], [255, 0, 0, 255],\n      ['<=', ['band', 1], 0.7], [255, 255, 0, 255],\n      [0, .6, 0, 255]\n    ],\n  })"
             },
             {
                 "name": "markers",
@@ -64,16 +64,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<MapPlateComponent>",
-                "defaultValue": "{\n  title: 'GeotiffTileLayerComponent',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [GeotiffTileLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -81,14 +71,14 @@
                 "defaultValue": "{\n  title: 'MarkersComponent',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MarkersComponent, FeatureLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    settings: settings,layerSettings\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\n      '         </lib-geotiff-tile-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'GeotiffTileLayerComponent',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [GeotiffTileLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
             },
             {
                 "name": "Primary",
@@ -101,14 +91,14 @@
                 "defaultValue": "{\n  args: {\n    settings: settings,\n    markers,\n    layerSettings,\n  } as any,\n  play: async ({ canvas }: any) => {},\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\n      '         </art-feature-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
             },
             {
-                "name": "settings",
+                "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: settings, layerSettings\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\n      '         </lib-geotiff-tile-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
             },
             {
                 "name": "settings",
@@ -119,6 +109,16 @@
                 "deprecationMessage": "",
                 "type": "unknown",
                 "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+            },
+            {
+                "name": "settings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({altShiftDragRotate: false, pinchRotate: false})"
             }
         ],
         "functions": [],
@@ -128,7 +128,7 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<MapPlateComponent>",
-                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -139,7 +139,7 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<MapPlateComponent>",
-                "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -229,7 +229,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new GeotiffTileLayerSettings()\n  .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/forest_area/RWA_Forest_2025.tif')\n  .setMin(0)\n  .setMax(1)\n  .setOpacity(1)\n  .setStyle({\n    color: [\n      'case',\n      ['<=', ['band', 1], 0.1], [0, 0, 0, 0],\n      ['<=', ['band', 1], .3], [255, 0, 0, 255],\n      ['<=', ['band', 1], 0.7], [255, 255, 0, 255],\n      [0, 255, 0, 255]\n    ],\n  })"
+                    "defaultValue": "new GeotiffTileLayerSettings()\n  .setUrl('https://tl.agri.space.gov.rw/tifs/2026-06-07/forest_area/RWA_Forest_2025.tif')\n  .setMin(0)\n  .setMax(1)\n  .setStyle({\n    color: [\n      'case',\n      ['<=', ['band', 1], 0.1], [0, 0, 0, 0],\n      ['<=', ['band', 1], .3], [255, 0, 0, 255],\n      ['<=', ['band', 1], 0.7], [255, 255, 0, 255],\n      [0, .6, 0, 255]\n    ],\n  })"
                 },
                 {
                     "name": "meta",
@@ -249,7 +249,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    settings: settings,layerSettings\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\n      '         </lib-geotiff-tile-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    settings: settings, layerSettings\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\n      '         </lib-geotiff-tile-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
                 },
                 {
                     "name": "settings",
@@ -259,26 +259,13 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                    "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({altShiftDragRotate: false, pinchRotate: false})"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<MapPlateComponent>",
-                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts": [
                 {
                     "name": "Story",
@@ -286,6 +273,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<MapPlateComponent>",
                     "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",

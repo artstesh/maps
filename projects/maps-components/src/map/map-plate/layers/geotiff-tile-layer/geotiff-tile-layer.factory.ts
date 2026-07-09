@@ -13,9 +13,9 @@ export class GeotiffTileLayerFactory {
         {
           url: settings.url,
           min: settings.min,
-          max: settings.max,
+          max: settings.max
         },
-      ], sourceOptions: {blockSize: settings.blockSize}
+      ], sourceOptions: {blockSize: settings.blockSize}, normalize: settings.normalize
     });
     return new TileLayer({
       style: settings.style,
