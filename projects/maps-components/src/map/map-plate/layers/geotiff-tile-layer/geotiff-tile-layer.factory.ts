@@ -14,7 +14,7 @@ export class GeotiffTileLayerFactory {
           url: settings.url,
           min: settings.min,
           max: settings.max,
-          nodata: settings.nodata
+          nodata: settings.nodata,
         },
       ],
       sourceOptions: { blockSize: settings.blockSize },
