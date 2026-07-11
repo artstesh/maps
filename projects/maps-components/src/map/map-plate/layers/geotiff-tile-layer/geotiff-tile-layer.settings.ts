@@ -55,6 +55,11 @@ export class GeotiffTileLayerSettings {
   normalize?: boolean = true;
 
   /**
+   * Values to discard (overriding any nodata values in the metadata). When provided, an additional alpha band will be added to the data. Often the GeoTIFF metadata will include information about nodata values, so you should only need to set this property if you find that it is not already extracted from the metadata.
+   */
+  nodata?: number;
+
+  /**
    * Creates a copy of the given tile layer settings.
    *
    * @param {GeotiffTileLayerSettings} model - The tile layer settings to be copied.
@@ -70,6 +75,7 @@ export class GeotiffTileLayerSettings {
     result.opacity = model.opacity;
     result.url = model.url;
     result.normalize = model.normalize;
+    result.nodata = model.nodata;
     return result;
   }
 
@@ -81,6 +87,10 @@ export class GeotiffTileLayerSettings {
    */
   setUrl(url: string): GeotiffTileLayerSettings {
     return GeotiffTileLayerSettings.copy({ ...this, url });
+  }
+
+  setNodata(nodata: number | undefined): GeotiffTileLayerSettings {
+    return GeotiffTileLayerSettings.copy({ ...this, nodata });
   }
 
   /**
@@ -168,6 +178,7 @@ export class GeotiffTileLayerSettings {
     if (this.blockSize !== model.blockSize) return false;
     if (this.opacity !== model.opacity) return false;
     if (this.normalize !== model.normalize) return false;
+    if (this.nodata !== model.nodata) return false;
     return true;
   }
 }

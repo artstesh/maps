@@ -1,8 +1,8 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { MapSettings } from '../../../models';
-import { MapPlateComponent } from '../../map-plate.component';
-import { GeotiffTileLayerComponent } from './geotiff-tile-layer.component';
-import { GeotiffTileLayerSettings } from './geotiff-tile-layer.settings';
+import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';
+import {MapSettings} from '../../../models';
+import {MapPlateComponent} from '../../map-plate.component';
+import {GeotiffTileLayerComponent} from './geotiff-tile-layer.component';
+import {GeotiffTileLayerSettings} from './geotiff-tile-layer.settings';
 
 const meta: Meta<MapPlateComponent> = {
   title: 'GeotiffTileLayerComponent',
@@ -22,21 +22,28 @@ type Story = StoryObj<MapPlateComponent>;
 const settings = new MapSettings()
   .setCenter([30, -2])
   .setZoom(8)
-  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false });
+  .setInteractionSettings({altShiftDragRotate: false, pinchRotate: false});
 const layerSettings = new GeotiffTileLayerSettings()
   .setUrl('')
-  .setMin(0)
-  .setMax(1)
+  .setOpacity(1)
+  .setNodata(Number.MAX_VALUE)
+  .setNormalize(false)
   .setStyle({
     color: [
-      'case',
-      ['<=', ['band', 1], 0.1],
-      [0, 0, 0, 0],
-      ['<=', ['band', 1], 0.3],
-      [255, 0, 0, 255],
-      ['<=', ['band', 1], 0.7],
-      [255, 255, 0, 255],
-      [0, 0.6, 0, 255],
+      "case",
+      ["<=", ["band", 1], -2],
+      [1, 0.05, 0.1, 255],
+      ["<=", ["band", 1], -0.5],
+      [0.9, 0.4, 0.5, 255],
+      ["<=", ["band", 1], 0.5],
+      [0.7, 0.75, 0.6, 255],
+      ["<=", ["band", 1], 2],
+      [0.25, 0.6, 0.2, 255],
+      ["<=", ["band", 1], 5],
+      [0.1, 0.3, 0.15, 255],
+      ["<=", ["band", 1], Number.MAX_VALUE],
+      [0.5, 0.3, 0.8, 255],
+      [0, 0, 0, 0]
     ],
   });
 export const Primary: Story = {
