@@ -26,23 +26,15 @@ const settings = new MapSettings()
 const layerSettings = new GeotiffTileLayerSettings()
   .setUrl('')
   .setOpacity(1)
-  .setNodata(Number.MAX_VALUE)
+  .setNodata(255)
   .setNormalize(false)
   .setStyle({
     color: [
       'case',
-      ['<=', ['band', 1], -2],
-      [1, 0.05, 0.1, 255],
-      ['<=', ['band', 1], -0.5],
+      ['<=', ['band', 1], 0],
+      [1, 0.05, 0.1, 0],
+      ['<=', ['band', 1], 240],
       [0.9, 0.4, 0.5, 255],
-      ['<=', ['band', 1], 0.5],
-      [0.7, 0.75, 0.6, 255],
-      ['<=', ['band', 1], 2],
-      [0.25, 0.6, 0.2, 255],
-      ['<=', ['band', 1], 5],
-      [0.1, 0.3, 0.15, 255],
-      ['<=', ['band', 1], Number.MAX_VALUE],
-      [0.5, 0.3, 0.8, 255],
       [0, 0, 0, 0],
     ],
   });

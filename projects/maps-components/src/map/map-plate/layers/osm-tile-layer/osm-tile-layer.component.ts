@@ -31,7 +31,7 @@ export class OsmTileLayerComponent extends DestructibleComponent implements OnIn
   }
 
   @Input() set opacity(value: number) {
-    if (!value || this._opacity === value) return;
+    if (value == null || this._opacity === value) return;
     this._opacity = value;
     this.initLayer();
   }
