@@ -40,7 +40,7 @@ export class DrawingService implements IPostboyDependingService {
 
   private observeSelectArea() {
     this.postboy.sub(DrawSelectionAreaCommand).subscribe((ev) => {
-      this.postboy.fire(new LockMessage(MapClickEvent));
+      this.postboy.exec(new LockMessage(MapClickEvent));
       this.postboy.fireCallback(new StartDrawingCommand(ev.type, ev.style), (r) => {
         if (!r) {
           ev.finish(new Dictionary<IIdentified[]>());
@@ -106,7 +106,7 @@ export class DrawingService implements IPostboyDependingService {
       this.map?.removeInteraction(this.drawInteraction);
       layer?.setSource(new Source({}));
     }
-    this.postboy.fire(new UnlockMessage(MapClickEvent));
+    this.postboy.exec(new UnlockMessage(MapClickEvent));
     setTimeout(() => this.postboy.fire(new DrawingFinishedEvent()), 300);
   }
 }
