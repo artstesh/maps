@@ -20,7 +20,7 @@ export class MapStateService implements IPostboyDependingService {
   public getMapPosition(): MapPosition | null {
     if (!this.map) return null;
     let [longitude, latitude] = this.map.getView().getCenter()!;
-    const zoom = Math.floor(this.map.getView().getZoom()!);
+    const zoom = this.map.getView().getZoom()!;
     const extent = this.map.getView().calculateExtent();
     return { longitude, latitude, zoom, extent };
   }
