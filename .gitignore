@@ -50,5 +50,5 @@ Thumbs.db
 
 *storybook.log
 storybook-static
-package-lock.json
+debug-storybook.log
 .nx/
