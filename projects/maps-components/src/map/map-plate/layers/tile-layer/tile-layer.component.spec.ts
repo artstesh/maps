@@ -4,7 +4,7 @@ import { anything, capture, instance, mock, reset, when } from 'ts-mockito';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MapPostboyService } from '../../../services/map-postboy.service';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import { should } from '@artstesh/it-should';
 import { Forger } from '@artstesh/forger';
@@ -17,7 +17,7 @@ import { RemoveTileCommand } from '../../../messages/commands/remove-tile.comman
 
 describe('TileLayerComponent', () => {
   const layer = mock(TileLayer);
-  let fixture: ComponentFixture<TileLayerComponent>;
+  let fixture: MockedComponentFixture<TileLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(TileLayerFactory);
   let mapRendered$: Subject<MapRenderedEvent>;

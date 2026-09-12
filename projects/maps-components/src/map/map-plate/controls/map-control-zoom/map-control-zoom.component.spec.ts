@@ -4,14 +4,14 @@ import { anything, capture, instance, mock, reset, verify, when } from 'ts-mocki
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import Map from 'ol/Map';
 import { should } from '@artstesh/it-should';
 import { Zoom } from 'ol/control';
 
 describe('MapControlZoomComponent', () => {
-  let fixture: ComponentFixture<MapControlZoomComponent>;
+  let fixture: MockedComponentFixture<MapControlZoomComponent>;
   const postboy = mock(MapPostboyService);
   const map = mock(Map);
   let zoom = new Zoom();

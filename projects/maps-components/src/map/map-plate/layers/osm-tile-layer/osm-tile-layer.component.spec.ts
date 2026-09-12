@@ -8,11 +8,11 @@ import { MapPostboyService } from '../../../services/map-postboy.service';
 import { RasterTileLayerFactory } from '../raster-tile/raster-tile-layer.factory';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 import Map from 'ol/Map';
 
 describe('OsmTileLayerComponent', () => {
-  let fixture: ComponentFixture<OsmTileLayerComponent>;
+  let fixture: MockedComponentFixture<OsmTileLayerComponent>;
 
   beforeEach(async () => {
     return MockBuilder(OsmTileLayerComponent);

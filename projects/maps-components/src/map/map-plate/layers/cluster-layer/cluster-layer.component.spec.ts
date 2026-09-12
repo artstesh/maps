@@ -4,7 +4,7 @@ import { Vector as Layer } from 'ol/layer';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import Map from 'ol/Map';
 import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
@@ -17,7 +17,7 @@ import { ClusterLayerManager } from './cluster-layer.manager';
 import { ClusterLayerSettings } from './cluster-layer.settings';
 
 describe('ClusterLayerComponent', () => {
-  let fixture: ComponentFixture<ClusterLayerComponent>;
+  let fixture: MockedComponentFixture<ClusterLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(ClusterLayerFactory);
   let manager: ClusterLayerManager;
