@@ -1,0 +1,50 @@
+# CI for the active lines of @artstesh/maps (backlog/005).
+# The same workflow file lives on every active line branch; it detects the line from
+# the branch name and pins the line's Node version (see AGENTS.md version table).
+#
+# Install note: package-lock.json is gitignored by design, and exact Angular pins clash
+# with transitive ^ ranges on v9/v10 - installs run with --legacy-peer-deps until the
+# pins are aligned (backlog/011). Once locks are committed, switch this to npm ci.
+name: CI
+
+on:
+  push:
+    branches: [v11, v10, v9]
+  pull_request:
+    branches: [v11, v10, v9]
+
+jobs:
+  test:
+    name: test (${{ github.base_ref || github.ref_name }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CHROME_BIN: google-chrome-stable
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve the line's Node version
+        id: line
+        run: |
+          BRANCH="${{ github.base_ref || github.ref_name }}"
+          case "$BRANCH" in
+            v11) NODE='24.19.0' ;;
+            v10) NODE='20.19.6' ;;
+            v9)  NODE='20.19.6' ;;
+            *)   echo "::error::unsupported line branch: $BRANCH"; exit 1 ;;
+          esac
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "node=$NODE" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.line.outputs.node }}
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+
+      - name: Test (Karma, headless Chrome)
+        run: npm test
+
+      - name: Build (ng-packagr)
+        run: npm run build
