@@ -3,7 +3,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { MapPlateComponent } from './map-plate.component';
 import { anything, instance, mock, reset, verify, when } from 'ts-mockito';
 import Map from 'ol/Map';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 import { ElementRef } from '@angular/core';
 
 import { MapPostboyService } from '../services/map-postboy.service';
@@ -11,7 +11,7 @@ import { MapPlateFactory } from './map-plate.factory.service';
 import { MessageRegistratorService } from '../services/message-registrator.service';
 
 describe('MapPlateComponent', () => {
-  let fixture: ComponentFixture<MapPlateComponent>;
+  let fixture: MockedComponentFixture<MapPlateComponent>;
   const postboy = mock(MapPostboyService);
   const mapFactory = mock(MapPlateFactory);
   const registrator = mock(MessageRegistratorService);

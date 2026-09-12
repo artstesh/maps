@@ -1,5 +1,5 @@
 import { ComponentFixture } from '@angular/core/testing';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import { instance, mock, when } from 'ts-mockito';
 import { MapPostboyService } from '../../../services/map-postboy.service';
@@ -8,7 +8,7 @@ import { MapRenderedEvent } from '../../../messages';
 import { PolygonsComponent } from './polygons.component';
 
 describe('PolygonsComponent', () => {
-  let fixture: ComponentFixture<PolygonsComponent>;
+  let fixture: MockedComponentFixture<PolygonsComponent>;
   const postboy = mock(MapPostboyService);
   let mapRendered$: Subject<MapRenderedEvent>;
 

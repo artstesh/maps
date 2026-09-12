@@ -4,14 +4,14 @@ import { instance, mock, reset, when } from 'ts-mockito';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { Subject } from 'rxjs';
 import { MapClickEvent, MapRenderedEvent } from '../../../messages';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import Map from 'ol/Map';
 import { CloseTooltipCommand } from '../../../messages/commands/close-tooltip.command';
 import { TooltipSettings } from './tooltip.settings';
 
 describe('TooltipComponent', () => {
-  let fixture: ComponentFixture<TooltipComponent>;
+  let fixture: MockedComponentFixture<TooltipComponent>;
   const postboy = mock(MapPostboyService);
   let mapRendered$: Subject<MapRenderedEvent>;
   let closeTip$: Subject<CloseTooltipCommand>;

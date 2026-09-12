@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
 import { MapPostboyService } from '../../../services/map-postboy.service';
 import { AddLayerCommand } from '../../../messages/commands/add-layer.command';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import { FeatureLayerFactory } from './feature-layer.factory';
 import { Vector as Layer } from 'ol/layer';
@@ -17,7 +17,7 @@ import { RemoveLayerCommand } from '../../../messages/commands/remove-layer.comm
 
 describe('FeatureLayerComponent', () => {
   const layer = mock(Layer);
-  let fixture: ComponentFixture<FeatureLayerComponent>;
+  let fixture: MockedComponentFixture<FeatureLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(FeatureLayerFactory);
   let mapRendered$: Subject<MapRenderedEvent>;

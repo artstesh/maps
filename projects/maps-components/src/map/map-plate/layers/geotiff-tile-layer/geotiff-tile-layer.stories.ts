@@ -5,7 +5,7 @@ import { GeotiffTileLayerComponent } from './geotiff-tile-layer.component';
 import { GeotiffTileLayerSettings } from './geotiff-tile-layer.settings';
 
 const meta: Meta<MapPlateComponent> = {
-  title: 'GeotiffTileLayerComponent',
+  title: 'Layers/GeoTIFF',
   component: MapPlateComponent,
   tags: ['autodocs'],
   decorators: [

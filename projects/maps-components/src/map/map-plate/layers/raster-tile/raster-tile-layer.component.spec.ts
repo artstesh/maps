@@ -5,7 +5,7 @@ import { RasterTileLayerComponent } from './raster-tile-layer.component';
 import { ComponentFixture } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { MapRenderedEvent } from '../../../messages';
-import { MockBuilder, MockProvider, MockRender } from 'ng-mocks';
+import { MockBuilder, MockProvider, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 import { should } from '@artstesh/it-should';
 import { AddTileCommand } from '../../../messages/commands/add-tile.command';
@@ -19,7 +19,7 @@ import { RemoveRasterTileCommand } from '../../../messages/commands/remove-raste
 
 describe('RasterTileLayerComponent', () => {
   const layer = mock(ImageLayer);
-  let fixture: ComponentFixture<RasterTileLayerComponent>;
+  let fixture: MockedComponentFixture<RasterTileLayerComponent>;
   const postboy = mock(MapPostboyService);
   const factory = mock(RasterTileLayerFactory);
   let mapRendered$: Subject<MapRenderedEvent>;
