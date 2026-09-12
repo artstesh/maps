@@ -33,7 +33,18 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, '../../coverage/maps-components'),
       subdir: '.',
-      reporters: [{ type: 'html' }, { type: 'text-summary' }],
+      reporters: [{ type: 'html' }, { type: 'text' }, { type: 'text-summary' }],
+      // Coverage floor (backlog/007): the 2026-09 baseline is 53.3/36.8/53.3/54.0 -
+      // the thresholds sit ~1pt below it so counting noise cannot fail a run.
+      // Ratchet upwards as coverage grows; never let a change lower it.
+      check: {
+        global: {
+          statements: 52,
+          branches: 36,
+          functions: 52,
+          lines: 53,
+        },
+      },
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
