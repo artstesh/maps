@@ -21,11 +21,34 @@ const meta: Meta<MapPlateComponent> = {
 export default meta;
 type Story = StoryObj<MapPlateComponent>;
 
-const polygon = (rings: number[][][], id: string) => PolygonModel.fromGeoJson(id, JSON.stringify({ type: 'Polygon', coordinates: rings }));
+const polygon = (rings: number[][][], id: string) =>
+  PolygonModel.fromGeoJson(id, JSON.stringify({ type: 'Polygon', coordinates: rings }));
 
 const polygons = [
-  polygon([[[30, -2], [31.5, -2], [31.5, -1], [30, -1], [30, -2]]], 'alpha'),
-  polygon([[[30.4, -3], [32, -3], [32, -2.4], [30.4, -2.4], [30.4, -3]]], 'beta'),
+  polygon(
+    [
+      [
+        [30, -2],
+        [31.5, -2],
+        [31.5, -1],
+        [30, -1],
+        [30, -2],
+      ],
+    ],
+    'alpha',
+  ),
+  polygon(
+    [
+      [
+        [30.4, -3],
+        [32, -3],
+        [32, -2.4],
+        [30.4, -2.4],
+        [30.4, -3],
+      ],
+    ],
+    'beta',
+  ),
 ];
 
 const layerSettings = new FeatureLayerSettings().setStyle(
