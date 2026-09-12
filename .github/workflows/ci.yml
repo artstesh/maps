@@ -3,8 +3,8 @@
 # the branch name and pins the line's Node version (see AGENTS.md version table).
 #
 # Install note: package-lock.json is gitignored by design, and exact Angular pins clash
-# with transitive ^ ranges on v9/v10 - installs run with --legacy-peer-deps until the
-# pins are aligned (backlog/011). Once locks are committed, switch this to npm ci.
+# with transitive ^ ranges on v9/v10 - installs used --legacy-peer-deps. Locks are committed per line now (backlog/011),
+# so CI installs with npm ci; --legacy-peer-deps keeps the resolution identical.
 name: CI
 
 on:
@@ -41,7 +41,7 @@ jobs:
           node-version: ${{ steps.line.outputs.node }}
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund --legacy-peer-deps
+        run: npm ci --no-audit --no-fund --legacy-peer-deps
 
       - name: Test (Karma, headless Chrome)
         run: npm test
