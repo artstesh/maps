@@ -11,7 +11,7 @@ const markerSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="28
                 </svg>`;
 
 const meta: Meta<MapPlateComponent> = {
-  title: 'MarkersComponent',
+  title: 'Features/Markers',
   component: MapPlateComponent,
   tags: ['autodocs'],
   decorators: [

@@ -6,10 +6,166 @@
     "interceptors": [],
     "classes": [],
     "directives": [],
-    "components": [],
+    "components": [
+        {
+            "name": "DrawingToolbarComponent",
+            "id": "component-DrawingToolbarComponent-ff921fc3fe9d14146794ec9142ebfd4ac90e86f3ae7e7bf3087d451a84ac879a2279c03ee1ee6b263d23d3291d66d6bb9d9e28a5e27ebc4c4ed8c1c0006d731e",
+            "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "art-story-drawing-toolbar",
+            "styleUrls": [],
+            "styles": [
+                "\n      .draw-toolbar {\n        position: absolute;\n        bottom: 12px;\n        left: 50%;\n        transform: translateX(-50%);\n        z-index: 5;\n        display: flex;\n        gap: 6px;\n        align-items: center;\n        background: rgba(255, 255, 255, 0.92);\n        border: 1px solid #c8c8c8;\n        border-radius: 6px;\n        padding: 6px 10px;\n        font-family: sans-serif;\n        font-size: 12px;\n      }\n      .draw-toolbar .result {\n        max-width: 260px;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        color: #555;\n      }\n    "
+            ],
+            "template": "<div class=\"draw-toolbar\">\n  <button (click)=\"start(DrawingType.Polygon)\">Polygon</button>\n  <button (click)=\"start(DrawingType.Circle)\">Circle</button>\n  <button (click)=\"start(DrawingType.Square)\">Square</button>\n  <button (click)=\"start(DrawingType.Box)\">Box</button>\n  <button (click)=\"start(DrawingType.LineString)\">Line</button>\n  <button (click)=\"cancel()\">Cancel</button>\n  <span class=\"result\">{{ last }}</span>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "DrawingType",
+                    "defaultValue": "DrawingType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 61
+                },
+                {
+                    "name": "last",
+                    "defaultValue": "'pick a shape and draw on the map'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 62
+                },
+                {
+                    "name": "postboy",
+                    "defaultValue": "inject(MapPostboyService)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 63,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "cancel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "start",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "DrawingType",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 69,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "DrawingType",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "<p>Story-only toolbar: floats over the map, fires drawing commands into the\nplate&#39;s postboy and shows the GeoJSON result of the finished drawing.</p>\n",
+            "rawdescription": "\n\nStory-only toolbar: floats over the map, fires drawing commands into the\nplate's postboy and shows the GeoJSON result of the finished drawing.\n",
+            "type": "component",
+            "sourceCode": "import { Component, inject } from '@angular/core';\nimport { Meta, moduleMetadata, StoryObj } from '@storybook/angular';\nimport Style from 'ol/style/Style';\nimport Fill from 'ol/style/Fill';\nimport Stroke from 'ol/style/Stroke';\nimport { MapSettings } from '../../../models';\nimport { MapPostboyService } from '../../../services/map-postboy.service';\nimport { DrawingFinishedEvent } from '../../../messages/events/drawing-finished.event';\nimport { CancelDrawingCommand } from '../../../messages/commands/cancel-drawing.command';\nimport { StartDrawingCommand } from '../../../messages/commands/start-drawing.command';\nimport { DrawingType } from '../../../models';\nimport { MapPlateComponent } from '../../map-plate.component';\n\n/**\n * Story-only toolbar: floats over the map, fires drawing commands into the\n * plate's postboy and shows the GeoJSON result of the finished drawing.\n */\n@Component({\n  selector: 'art-story-drawing-toolbar',\n  standalone: true,\n  template: `\n    <div class=\"draw-toolbar\">\n      <button (click)=\"start(DrawingType.Polygon)\">Polygon</button>\n      <button (click)=\"start(DrawingType.Circle)\">Circle</button>\n      <button (click)=\"start(DrawingType.Square)\">Square</button>\n      <button (click)=\"start(DrawingType.Box)\">Box</button>\n      <button (click)=\"start(DrawingType.LineString)\">Line</button>\n      <button (click)=\"cancel()\">Cancel</button>\n      <span class=\"result\">{{ last }}</span>\n    </div>\n  `,\n  styles: [\n    `\n      .draw-toolbar {\n        position: absolute;\n        bottom: 12px;\n        left: 50%;\n        transform: translateX(-50%);\n        z-index: 5;\n        display: flex;\n        gap: 6px;\n        align-items: center;\n        background: rgba(255, 255, 255, 0.92);\n        border: 1px solid #c8c8c8;\n        border-radius: 6px;\n        padding: 6px 10px;\n        font-family: sans-serif;\n        font-size: 12px;\n      }\n      .draw-toolbar .result {\n        max-width: 260px;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        color: #555;\n      }\n    `,\n  ],\n})\nexport class DrawingToolbarComponent {\n  DrawingType = DrawingType;\n  last = 'pick a shape and draw on the map';\n  private postboy = inject(MapPostboyService);\n\n  constructor() {\n    this.postboy.sub(DrawingFinishedEvent).subscribe(() => (this.last = 'drawing finished'));\n  }\n\n  start(type: DrawingType): void {\n    const style = new Style({\n      stroke: new Stroke({ color: '#e53935', width: 2 }),\n      fill: new Fill({ color: 'rgba(229, 57, 53, 0.15)' }),\n    });\n    this.postboy.fireCallback(new StartDrawingCommand(type, style), (r) => {\n      this.last = r ? 'result: ' + r.slice(0, 80) + '…' : 'drawing cancelled';\n    });\n  }\n\n  cancel(): void {\n    this.postboy.fire(new CancelDrawingCommand());\n  }\n}\n\nconst meta: Meta<MapPlateComponent> = {\n  title: 'Features/Drawing',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DrawingToolbarComponent],\n    }),\n  ],\n};\n\nexport default meta;\ntype Story = StoryObj<MapPlateComponent>;\n\nexport const Toolbar: Story = {\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-story-drawing-toolbar></art-story-drawing-toolbar></ng-template>' +\n      '</art-map-plate>',\n  }),\n};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "\n      .draw-toolbar {\n        position: absolute;\n        bottom: 12px;\n        left: 50%;\n        transform: translateX(-50%);\n        z-index: 5;\n        display: flex;\n        gap: 6px;\n        align-items: center;\n        background: rgba(255, 255, 255, 0.92);\n        border: 1px solid #c8c8c8;\n        border-radius: 6px;\n        padding: 6px 10px;\n        font-family: sans-serif;\n        font-size: 12px;\n      }\n      .draw-toolbar .result {\n        max-width: 260px;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        color: #555;\n      }\n    \n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 63
+            },
+            "extends": []
+        }
+    ],
     "modules": [],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "ClickTooltip",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n    tipSettings,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-tooltip [settings]=\"tipSettings\" [contentRef]=\"tipContent\">' +\n      '<ng-template #tipContent><div class=\"story-tooltip\">Map clicked</div></ng-template>' +\n      '</art-tooltip>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "ClusteredPoints",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n    clusterSettings,\n    markers: points(80),\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-cluster-layer [settings]=\"clusterSettings\">' +\n      '<art-markers [layerName]=\"clusterSettings.name\" [markers]=\"markers\"></art-markers>' +\n      '</art-cluster-layer>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "clusterSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new ClusterLayerSettings()\n  .setName('clusters')\n  .setDistance(45)\n  .setStyle((features: any[]) => MarkerStyleHelper.circle(features.length > 1 ? 18 : 10, '#fff', '#1976d2'))"
+            },
             {
                 "name": "CustomMarker",
                 "ctype": "miscellaneous",
@@ -18,7 +174,97 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  ...Primary,\r\n  args: {\r\n    ...Primary.args,\r\n    layerSettings: new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.fromSvg(markerSvg)),\r\n  } as any,\r\n}"
+                "defaultValue": "{\n  ...Primary,\n  args: {\n    ...Primary.args,\n    layerSettings: new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.fromSvg(markerSvg)),\n  } as any,\n}"
+            },
+            {
+                "name": "CustomZoomButtons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n    zoomSettings,\n    layerSettings,\n    markers: [new MarkerModel(-1.8, 30.5, 'marker1')],\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-map-control-zoom [settings]=\"zoomSettings\"></art-map-control-zoom>' +\n      '<art-feature-layer [settings]=\"layerSettings\">' +\n      '<art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>' +\n      '</art-feature-layer>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "darkBasemap",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new TileLayerSettings().setUrl('https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png')"
+            },
+            {
+                "name": "DarkBasemap",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9).setOsmOpacity(0),\n    layerSettings: darkBasemap,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-tile-layer [settings]=\"layerSettings\"></art-tile-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "grayscale",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new RasterTileLayerSettings()\n  .setUrl('https://tile.openstreetmap.org/{z}/{x}/{y}.png')\n  .setOpacity(0.9)\n  .setOperation((sources: any) => {\n    const src: ImageData = sources[0];\n    const result = new ImageData(src.width, src.height);\n    for (let i = 0; i < src.data.length; i += 4) {\n      const v = (src.data[i] + src.data[i + 1] + src.data[i + 2]) / 3;\n      result.data[i] = v;\n      result.data[i + 1] = v;\n      result.data[i + 2] = v;\n      result.data[i + 3] = src.data[i + 3];\n    }\n    return result;\n  })"
+            },
+            {
+                "name": "GrayscaleOsm",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9).setOsmOpacity(0),\n    layerSettings: grayscale,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-raster-tile-layer [settings]=\"layerSettings\"></art-raster-tile-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "ImageOverlay",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(7),\n    layerSettings: overlay,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-image-layer [settings]=\"layerSettings\"></art-image-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "LabelsOverOsm",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9),\n    layerSettings: translucent,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-tile-layer [settings]=\"layerSettings\"></art-tile-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "layerSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new GeotiffTileLayerSettings()\n  .setUrl('')\n  .setOpacity(1)\n  .setNodata(255)\n  .setNormalize(false)\n  .setStyle({\n    color: [\n      'case',\n      ['<=', ['band', 1], 0],\n      [1, 0.05, 0.1, 0],\n      ['<=', ['band', 1], 240],\n      [0.9, 0.4, 0.5, 255],\n      [0, 0, 0, 0],\n    ],\n  })"
+            },
+            {
+                "name": "layerSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#1976d2'))"
             },
             {
                 "name": "layerSettings",
@@ -34,11 +280,21 @@
                 "name": "layerSettings",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "new GeotiffTileLayerSettings()\r\n  .setUrl('')\r\n  .setOpacity(1)\r\n  .setNodata(255)\r\n  .setNormalize(false)\r\n  .setStyle({\r\n    color: [\r\n      'case',\r\n      ['<=', ['band', 1], 0],\r\n      [1, 0.05, 0.1, 0],\r\n      ['<=', ['band', 1], 240],\r\n      [0.9, 0.4, 0.5, 255],\r\n      [0, 0, 0, 0],\r\n    ],\r\n  })"
+                "defaultValue": "new FeatureLayerSettings().setStyle(\n  new Style({\n    fill: new Fill({ color: 'rgba(255, 160, 0, 0.25)' }),\n    stroke: new Stroke({ color: '#ff8c00', width: 2 }),\n  }),\n)"
+            },
+            {
+                "name": "LockedInteractions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings()\n      .setCenter([30.5, -1.8])\n      .setZoom(9)\n      .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false, doubleClickZoom: false }),\n  } as any,\n  render: (args: any) => ({ props: args, template }),\n}"
             },
             {
                 "name": "markers",
@@ -58,7 +314,87 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"28\" viewBox=\"0 0 21 28\">' +\r\n                    <path data-name=\"pin green\" d=\"M-18.7-9.292a10.112 10.112 0 0 0-10-10.2 10.112 10.112 0 0 0-10 10.2C-38.7-1.3-29.642 6.95-29.256 7.3a.825.825 0 0 0 .554.214.831.831 0 0 0 .554-.212c.386-.348 9.446-8.6 9.446-16.59\" transform=\"translate(39.202 19.99)\" style=\"fill:#fff;stroke:#ff00a0\"/>' +\r\n                </svg>`"
+                "defaultValue": "`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"28\" viewBox=\"0 0 21 28\">' +\n                    <path data-name=\"pin green\" d=\"M-18.7-9.292a10.112 10.112 0 0 0-10-10.2 10.112 10.112 0 0 0-10 10.2C-38.7-1.3-29.642 6.95-29.256 7.3a.825.825 0 0 0 .554.214.831.831 0 0 0 .554-.212c.386-.348 9.446-8.6 9.446-16.59\" transform=\"translate(39.202 19.99)\" style=\"fill:#fff;stroke:#ff00a0\"/>' +\n                </svg>`"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Map Plate/Map Plate',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({})],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Layers/Cluster',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [ClusterLayerComponent, MarkersComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Layers/GeoTIFF',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [GeotiffTileLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Layers/Image',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [ImageLayerComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Layers/Raster Tile',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [RasterTileLayerComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Layers/Tile',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [TileLayerComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Controls/Zoom Control',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MapControlZoomComponent, FeatureLayerComponent, MarkersComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Features/Drawing',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DrawingToolbarComponent],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -68,27 +404,67 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<MapPlateComponent>",
-                "defaultValue": "{\r\n  title: 'MarkersComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [MarkersComponent, FeatureLayerComponent],\r\n    }),\r\n  ],\r\n  argTypes: {},\r\n}"
+                "defaultValue": "{\n  title: 'Features/Markers',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MarkersComponent, FeatureLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<MapPlateComponent>",
-                "defaultValue": "{\r\n  title: 'GeotiffTileLayerComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [GeotiffTileLayerComponent],\r\n    }),\r\n  ],\r\n  argTypes: {},\r\n}"
+                "defaultValue": "{\n  title: 'Features/Polygons',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [FeatureLayerComponent, PolygonsComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MapPlateComponent>",
+                "defaultValue": "{\n  title: 'Tooltips/Tooltip',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [TooltipComponent],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "overlay",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new ImageLayerSettings()\n  .setUrl('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg))\n  .setExtent([29.5, -3.2, 31.5, -0.4])\n  .setOpacity(0.8)"
+            },
+            {
+                "name": "polygon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "(rings: number[][][], id: string) => PolygonModel.fromGeoJson(id, JSON.stringify({ type: 'Polygon', coordinates: rings }))"
+            },
+            {
+                "name": "polygons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n  polygon([[[30, -2], [31.5, -2], [31.5, -1], [30, -1], [30, -2]]], 'alpha'),\n  polygon([[[30.4, -3], [32, -3], [32, -2.4], [30.4, -2.4], [30.4, -3]]], 'beta'),\n]"
             },
             {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    markers,\r\n    layerSettings,\r\n  } as any,\r\n  play: async ({ canvas }: any) => {},\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template:\r\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\r\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\r\n      '         </art-feature-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9),\n  } as any,\n  render: (args: any) => ({ props: args, template }),\n}"
             },
             {
                 "name": "Primary",
@@ -98,17 +474,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    layerSettings,\r\n  } as any,\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template:\r\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\r\n      '         </lib-geotiff-tile-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    settings: settings,\n    layerSettings,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\n      '         </lib-geotiff-tile-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
             },
             {
-                "name": "settings",
+                "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: settings,\n    markers,\n    layerSettings,\n  } as any,\n  play: async ({ canvas }: any) => {},\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\n      '         </art-feature-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([31, -2.5]).setZoom(8),\n    layerSettings,\n    polygons,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-feature-layer [settings]=\"layerSettings\">' +\n      '<art-polygons [layerName]=\"layerSettings.name\" [polygons]=\"polygons\"></art-polygons>' +\n      '</art-feature-layer>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
             },
             {
                 "name": "settings",
@@ -118,11 +504,209 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+            },
+            {
+                "name": "settings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+            },
+            {
+                "name": "svg",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "'<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\">' +\n  '<rect width=\"400\" height=\"300\" fill=\"#22364f\"/>' +\n  '<text x=\"200\" y=\"150\" font-size=\"28\" fill=\"#fff\" text-anchor=\"middle\" font-family=\"monospace\">' +\n  'IMAGE LAYER</text></svg>'"
+            },
+            {
+                "name": "template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "'<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n  '<ng-template #content></ng-template>' +\n  '</art-map-plate>'"
+            },
+            {
+                "name": "tipSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new TooltipSettings().setShow(() => true)"
+            },
+            {
+                "name": "Toolbar",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-story-drawing-toolbar></art-story-drawing-toolbar></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+            },
+            {
+                "name": "translucent",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new TileLayerSettings()\n  .setUrl('https://basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png')\n  .setOpacity(0.8)"
+            },
+            {
+                "name": "TranslucentBasemap",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(6).setOsmOpacity(0.3),\n  } as any,\n  render: (args: any) => ({ props: args, template }),\n}"
+            },
+            {
+                "name": "zoomSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "new ZoomControlSettings().setZoomInLabel('+').setZoomOutLabel('−')"
             }
         ],
-        "functions": [],
+        "functions": [
+            {
+                "name": "points",
+                "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "count",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "returnType": "MarkerModel[]",
+                "jsdoctags": [
+                    {
+                        "name": "count",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
         "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -139,7 +723,18 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<MapPlateComponent>",
-                "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MapPlateComponent>",
+                "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -148,6 +743,70 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts": [
+                {
+                    "name": "ClickTooltip",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n    tipSettings,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-tooltip [settings]=\"tipSettings\" [contentRef]=\"tipContent\">' +\n      '<ng-template #tipContent><div class=\"story-tooltip\">Map clicked</div></ng-template>' +\n      '</art-tooltip>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Tooltips/Tooltip',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [TooltipComponent],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "tipSettings",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new TooltipSettings().setShow(() => true)"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts": [
+                {
+                    "name": "ClusteredPoints",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n    clusterSettings,\n    markers: points(80),\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-cluster-layer [settings]=\"clusterSettings\">' +\n      '<art-markers [layerName]=\"clusterSettings.name\" [markers]=\"markers\"></art-markers>' +\n      '</art-cluster-layer>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "clusterSettings",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new ClusterLayerSettings()\n  .setName('clusters')\n  .setDistance(45)\n  .setStyle((features: any[]) => MarkerStyleHelper.circle(features.length > 1 ? 18 : 10, '#fff', '#1976d2'))"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Layers/Cluster',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [ClusterLayerComponent, MarkersComponent],\n    }),\n  ],\n}"
+                }
+            ],
             "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts": [
                 {
                     "name": "CustomMarker",
@@ -157,7 +816,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  ...Primary,\r\n  args: {\r\n    ...Primary.args,\r\n    layerSettings: new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.fromSvg(markerSvg)),\r\n  } as any,\r\n}"
+                    "defaultValue": "{\n  ...Primary,\n  args: {\n    ...Primary.args,\n    layerSettings: new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.fromSvg(markerSvg)),\n  } as any,\n}"
                 },
                 {
                     "name": "layerSettings",
@@ -187,7 +846,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"28\" viewBox=\"0 0 21 28\">' +\r\n                    <path data-name=\"pin green\" d=\"M-18.7-9.292a10.112 10.112 0 0 0-10-10.2 10.112 10.112 0 0 0-10 10.2C-38.7-1.3-29.642 6.95-29.256 7.3a.825.825 0 0 0 .554.214.831.831 0 0 0 .554-.212c.386-.348 9.446-8.6 9.446-16.59\" transform=\"translate(39.202 19.99)\" style=\"fill:#fff;stroke:#ff00a0\"/>' +\r\n                </svg>`"
+                    "defaultValue": "`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"28\" viewBox=\"0 0 21 28\">' +\n                    <path data-name=\"pin green\" d=\"M-18.7-9.292a10.112 10.112 0 0 0-10-10.2 10.112 10.112 0 0 0-10 10.2C-38.7-1.3-29.642 6.95-29.256 7.3a.825.825 0 0 0 .554.214.831.831 0 0 0 .554-.212c.386-.348 9.446-8.6 9.446-16.59\" transform=\"translate(39.202 19.99)\" style=\"fill:#fff;stroke:#ff00a0\"/>' +\n                </svg>`"
                 },
                 {
                     "name": "meta",
@@ -197,7 +856,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<MapPlateComponent>",
-                    "defaultValue": "{\r\n  title: 'MarkersComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [MarkersComponent, FeatureLayerComponent],\r\n    }),\r\n  ],\r\n  argTypes: {},\r\n}"
+                    "defaultValue": "{\n  title: 'Features/Markers',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MarkersComponent, FeatureLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
                 },
                 {
                     "name": "Primary",
@@ -207,7 +866,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    markers,\r\n    layerSettings,\r\n  } as any,\r\n  play: async ({ canvas }: any) => {},\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template:\r\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\r\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\r\n      '         </art-feature-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    settings: settings,\n    markers,\n    layerSettings,\n  } as any,\n  play: async ({ canvas }: any) => {},\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <art-feature-layer [settings]=\"layerSettings\">\\n' +\n      '            <art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>\\n' +\n      '         </art-feature-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
                 },
                 {
                     "name": "settings",
@@ -217,7 +876,175 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                    "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts": [
+                {
+                    "name": "CustomZoomButtons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n    zoomSettings,\n    layerSettings,\n    markers: [new MarkerModel(-1.8, 30.5, 'marker1')],\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-map-control-zoom [settings]=\"zoomSettings\"></art-map-control-zoom>' +\n      '<art-feature-layer [settings]=\"layerSettings\">' +\n      '<art-markers [layerName]=\"layerSettings.name\" [markers]=\"markers\"></art-markers>' +\n      '</art-feature-layer>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "layerSettings",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new FeatureLayerSettings().setStyle((s) => MarkerStyleHelper.circle(10, '#fff', '#1976d2'))"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Controls/Zoom Control',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [MapControlZoomComponent, FeatureLayerComponent, MarkersComponent],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "zoomSettings",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new ZoomControlSettings().setZoomInLabel('+').setZoomOutLabel('−')"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts": [
+                {
+                    "name": "darkBasemap",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new TileLayerSettings().setUrl('https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png')"
+                },
+                {
+                    "name": "DarkBasemap",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9).setOsmOpacity(0),\n    layerSettings: darkBasemap,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-tile-layer [settings]=\"layerSettings\"></art-tile-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "LabelsOverOsm",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9),\n    layerSettings: translucent,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-tile-layer [settings]=\"layerSettings\"></art-tile-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Layers/Tile',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [TileLayerComponent],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "translucent",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new TileLayerSettings()\n  .setUrl('https://basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png')\n  .setOpacity(0.8)"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts": [
+                {
+                    "name": "grayscale",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new RasterTileLayerSettings()\n  .setUrl('https://tile.openstreetmap.org/{z}/{x}/{y}.png')\n  .setOpacity(0.9)\n  .setOperation((sources: any) => {\n    const src: ImageData = sources[0];\n    const result = new ImageData(src.width, src.height);\n    for (let i = 0; i < src.data.length; i += 4) {\n      const v = (src.data[i] + src.data[i + 1] + src.data[i + 2]) / 3;\n      result.data[i] = v;\n      result.data[i + 1] = v;\n      result.data[i + 2] = v;\n      result.data[i + 3] = src.data[i + 3];\n    }\n    return result;\n  })"
+                },
+                {
+                    "name": "GrayscaleOsm",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9).setOsmOpacity(0),\n    layerSettings: grayscale,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-raster-tile-layer [settings]=\"layerSettings\"></art-raster-tile-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Layers/Raster Tile',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [RasterTileLayerComponent],\n    }),\n  ],\n}"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts": [
+                {
+                    "name": "ImageOverlay",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(7),\n    layerSettings: overlay,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-image-layer [settings]=\"layerSettings\"></art-image-layer></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Layers/Image',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [ImageLayerComponent],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "overlay",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new ImageLayerSettings()\n  .setUrl('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg))\n  .setExtent([29.5, -3.2, 31.5, -0.4])\n  .setOpacity(0.8)"
+                },
+                {
+                    "name": "svg",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "'<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\">' +\n  '<rect width=\"400\" height=\"300\" fill=\"#22364f\"/>' +\n  '<text x=\"200\" y=\"150\" font-size=\"28\" fill=\"#fff\" text-anchor=\"middle\" font-family=\"monospace\">' +\n  'IMAGE LAYER</text></svg>'"
                 }
             ],
             "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts": [
@@ -229,7 +1056,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new GeotiffTileLayerSettings()\r\n  .setUrl('')\r\n  .setOpacity(1)\r\n  .setNodata(255)\r\n  .setNormalize(false)\r\n  .setStyle({\r\n    color: [\r\n      'case',\r\n      ['<=', ['band', 1], 0],\r\n      [1, 0.05, 0.1, 0],\r\n      ['<=', ['band', 1], 240],\r\n      [0.9, 0.4, 0.5, 255],\r\n      [0, 0, 0, 0],\r\n    ],\r\n  })"
+                    "defaultValue": "new GeotiffTileLayerSettings()\n  .setUrl('')\n  .setOpacity(1)\n  .setNodata(255)\n  .setNormalize(false)\n  .setStyle({\n    color: [\n      'case',\n      ['<=', ['band', 1], 0],\n      [1, 0.05, 0.1, 0],\n      ['<=', ['band', 1], 240],\n      [0.9, 0.4, 0.5, 255],\n      [0, 0, 0, 0],\n    ],\n  })"
                 },
                 {
                     "name": "meta",
@@ -239,7 +1066,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<MapPlateComponent>",
-                    "defaultValue": "{\r\n  title: 'GeotiffTileLayerComponent',\r\n  component: MapPlateComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [GeotiffTileLayerComponent],\r\n    }),\r\n  ],\r\n  argTypes: {},\r\n}"
+                    "defaultValue": "{\n  title: 'Layers/GeoTIFF',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [GeotiffTileLayerComponent],\n    }),\n  ],\n  argTypes: {},\n}"
                 },
                 {
                     "name": "Primary",
@@ -249,7 +1076,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    settings: settings,\r\n    layerSettings,\r\n  } as any,\r\n  render: (args: any) => ({\r\n    props: args,\r\n    template:\r\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\r\n      '\\n' +\r\n      '      </art-map-plate>\\n' +\r\n      '      <ng-template #map>\\n' +\r\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\r\n      '         </lib-geotiff-tile-layer>\\n' +\r\n      '      </ng-template>',\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    settings: settings,\n    layerSettings,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"map\">\\n' +\n      '\\n' +\n      '      </art-map-plate>\\n' +\n      '      <ng-template #map>\\n' +\n      '         <lib-geotiff-tile-layer [settings]=\"layerSettings\">\\n' +\n      '         </lib-geotiff-tile-layer>\\n' +\n      '      </ng-template>',\n  }),\n}"
                 },
                 {
                     "name": "settings",
@@ -259,20 +1086,191 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "new MapSettings()\r\n  .setCenter([30, -2])\r\n  .setZoom(8)\r\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                    "defaultValue": "new MapSettings()\n  .setCenter([30, -2])\n  .setZoom(8)\n  .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false })"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts": [
+                {
+                    "name": "layerSettings",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "new FeatureLayerSettings().setStyle(\n  new Style({\n    fill: new Fill({ color: 'rgba(255, 160, 0, 0.25)' }),\n    stroke: new Stroke({ color: '#ff8c00', width: 2 }),\n  }),\n)"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Features/Polygons',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [FeatureLayerComponent, PolygonsComponent],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "polygon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "(rings: number[][][], id: string) => PolygonModel.fromGeoJson(id, JSON.stringify({ type: 'Polygon', coordinates: rings }))"
+                },
+                {
+                    "name": "polygons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n  polygon([[[30, -2], [31.5, -2], [31.5, -1], [30, -1], [30, -2]]], 'alpha'),\n  polygon([[[30.4, -3], [32, -3], [32, -2.4], [30.4, -2.4], [30.4, -3]]], 'beta'),\n]"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([31, -2.5]).setZoom(8),\n    layerSettings,\n    polygons,\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content>' +\n      '<art-feature-layer [settings]=\"layerSettings\">' +\n      '<art-polygons [layerName]=\"layerSettings.name\" [polygons]=\"polygons\"></art-polygons>' +\n      '</art-feature-layer>' +\n      '</ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts": [
+                {
+                    "name": "LockedInteractions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings()\n      .setCenter([30.5, -1.8])\n      .setZoom(9)\n      .setInteractionSettings({ altShiftDragRotate: false, pinchRotate: false, doubleClickZoom: false }),\n  } as any,\n  render: (args: any) => ({ props: args, template }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Map Plate/Map Plate',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({})],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(9),\n  } as any,\n  render: (args: any) => ({ props: args, template }),\n}"
+                },
+                {
+                    "name": "template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "'<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n  '<ng-template #content></ng-template>' +\n  '</art-map-plate>'"
+                },
+                {
+                    "name": "TranslucentBasemap",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(6).setOsmOpacity(0.3),\n  } as any,\n  render: (args: any) => ({ props: args, template }),\n}"
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts": [
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MapPlateComponent>",
+                    "defaultValue": "{\n  title: 'Features/Drawing',\n  component: MapPlateComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [DrawingToolbarComponent],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Toolbar",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    settings: new MapSettings().setCenter([30.5, -1.8]).setZoom(8),\n  } as any,\n  render: (args: any) => ({\n    props: args,\n    template:\n      '<art-map-plate [settings]=\"settings\" [contentRef]=\"content\">' +\n      '<ng-template #content><art-story-drawing-toolbar></art-story-drawing-toolbar></ng-template>' +\n      '</art-map-plate>',\n  }),\n}"
                 }
             ]
         },
-        "groupedFunctions": {},
+        "groupedFunctions": {
+            "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts": [
+                {
+                    "name": "points",
+                    "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "count",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "MarkerModel[]",
+                    "jsdoctags": [
+                        {
+                            "name": "count",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts": [
+            "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "rawtype": "StoryObj<MapPlateComponent>",
-                    "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                    "file": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -286,6 +1284,110 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<MapPlateComponent>",
                     "file": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MapPlateComponent>",
+                    "file": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -303,6 +1405,95 @@
         "count": 0,
         "status": "low",
         "files": [
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomZoomButtons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "layerSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "zoomSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/controls/map-control-zoom/map-control-zoom.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DrawingToolbarComponent",
+                "coveragePercent": 14,
+                "coverageCount": "1/7",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Toolbar",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/drawing/drawing.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
             {
                 "filePath": "projects/maps-components/src/map/map-plate/features/markers/markers.component.stories.ts",
                 "type": "variable",
@@ -384,6 +1575,116 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "layerSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "polygon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "polygons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/features/polygons/polygons.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "points",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ClusteredPoints",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "clusterSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/cluster-layer/cluster-layer.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -425,6 +1726,256 @@
             },
             {
                 "filePath": "projects/maps-components/src/map/map-plate/layers/geotiff-tile-layer/geotiff-tile-layer.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ImageOverlay",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "overlay",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "svg",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/image-layer/image-layer.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "grayscale",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GrayscaleOsm",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/raster-tile/raster-tile-layer.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "darkBasemap",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DarkBasemap",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LabelsOverOsm",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "translucent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/layers/tile-layer/tile-layer.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LockedInteractions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TranslucentBasemap",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/map-plate.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ClickTooltip",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "tipSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/maps-components/src/map/map-plate/tooltips/tooltip/tooltip.component.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
