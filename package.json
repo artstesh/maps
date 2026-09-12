@@ -30,9 +30,8 @@
     "markers"
   ],
   "module": "dist/fesm2022/maps-components.mjs",
-  "main": "dist/esm2022/public-api.mjs",
-  "types": "dist/public-api.d.ts",
-  "typings": "dist/index.d.ts",
+  "types": "dist/types/maps-components.d.ts",
+  "typings": "dist/types/maps-components.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artstesh/maps.git"
