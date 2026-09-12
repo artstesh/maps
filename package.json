@@ -107,5 +107,18 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./dist/types/maps-components.d.ts",
+      "default": "./dist/fesm2022/maps-components.mjs"
+    },
+    "./src/map": {
+      "types": "./dist/types/maps-components-src-map.d.ts",
+      "default": "./dist/fesm2022/maps-components-src-map.mjs"
+    }
   }
 }
