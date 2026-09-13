@@ -1,5 +1,5 @@
 import { PostboyCallbackMessage, PostboyExecutor } from '@artstesh/postboy';
-import { Dictionary } from '@artstesh/collections';
+import { Dictionary } from '../../models';
 import { IIdentified } from '../../models/i-identified';
 
 /**

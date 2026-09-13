@@ -17,7 +17,7 @@ import { IIdentified } from '../models/i-identified';
 import { MapConstants } from '../models/map.constants';
 import { FilterFeaturesInAreaExecutor } from '../messages/executors/filter-features-in-area.executor';
 import { Geometry } from 'ol/geom';
-import { Dictionary } from '@artstesh/collections';
+import { Dictionary } from '../models';
 import { RemoveImageLayerCommand } from '../messages/commands/remove-image-layer.command';
 import { AddImageLayerCommand } from '../messages/commands/add-image-layer.command';
 import { AddRasterTileCommand } from '../messages/commands/add-raster-tile-command';
