@@ -1,7 +1,7 @@
 import { PostboyCallbackMessage } from '@artstesh/postboy';
 import Style from 'ol/style/Style';
 import { IIdentified } from '../../models/i-identified';
-import { Dictionary } from '@artstesh/collections';
+import { Dictionary } from '../../models';
 import { DrawingType } from '../../models';
 
 /**

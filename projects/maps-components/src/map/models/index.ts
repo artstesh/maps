@@ -7,3 +7,4 @@ export * from './feature-format.enum';
 export * from './map-control';
 export * from './map.constants';
 export * from './map-position.model';
+export * from './dictionary';
