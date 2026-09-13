@@ -1,7 +1,7 @@
 import { PostboyCallbackMessage } from '@artstesh/postboy';
 import { Geometry } from 'ol/geom';
 import { IIdentified } from '../../models/i-identified';
-import { Dictionary } from '@artstesh/collections';
+import { Dictionary } from '../../models';
 
 /**
  * Class representing a query to get features within a specified geographical area.

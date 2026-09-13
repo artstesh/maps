@@ -42,14 +42,12 @@
     "@angular/core": "^20.0.0",
     "ol-geocoder": "^4.0.0",
     "ol": "^10.0.0",
-    "@artstesh/postboy": "^3.4.0",
-    "@artstesh/collections": "^1.0.0"
+    "@artstesh/postboy": "^3.4.0"
   },
   "devDependencies": {
     "@angular/common": "20.3.31",
     "@angular/compiler": "20.3.31",
     "@angular/core": "20.3.31",
-    "@artstesh/collections": "1.0.4",
     "@artstesh/postboy": "3.4.2",
     "ol": "10.7.2",
     "ol-geocoder": "4.3.3",
