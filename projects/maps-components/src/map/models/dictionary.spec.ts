@@ -53,7 +53,9 @@ describe('#map-models Dictionary', () => {
     dic.put('b', 7);
     dic.put('c', 3);
     //
-    should().number(dic.find((v) => v > 5)!).equals(7);
+    should()
+      .number(dic.find((v) => v > 5)!)
+      .equals(7);
     should().true(dic.find((v) => v > 100) === null);
   });
 
