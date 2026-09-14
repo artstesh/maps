@@ -23,7 +23,7 @@ type Story = StoryObj<MapPlateComponent>;
 // Deterministic pseudo-random points around the center so the story is stable.
 function points(count: number): MarkerModel[] {
   let seed = 42;
-  const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
   const markers: MarkerModel[] = [];
   for (let i = 0; i < count; i++) {
     markers.push(new MarkerModel(-2 + (rnd() - 0.5) * 3, 30.5 + (rnd() - 0.5) * 4, 'point-' + i));
